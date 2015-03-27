@@ -1,0 +1,51 @@
+//
+//  SignupViewController.m
+//  spalor
+//
+//  Created by Manish on 09/02/15.
+//  Copyright (c) 2015 Self. All rights reserved.
+//
+
+#import "SignupViewController.h"
+
+@interface SignupViewController ()
+
+@end
+
+@implementation SignupViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (IBAction)signup:(id)sender {
+    
+//    BOOL authenticated = [[NSUserDefaults standardUserDefaults] boolForKey:@"AUTHENTICATED"];
+//    
+//    if(!authenticated)  // authenticated---> BOOL Value assign True only if Login Success
+//    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+        self.navigationController.navigationBarHidden=YES;
+        [self.navigationController pushViewController:obj animated:YES];
+//    }
+}
+
+@end
