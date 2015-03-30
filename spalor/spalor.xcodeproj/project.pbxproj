@@ -14,6 +14,7 @@
 		132BD2B41A88877F007F5D89 /* FBAudienceNetwork.README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 132BD1991A88877E007F5D89 /* FBAudienceNetwork.README.txt */; };
 		132BD2B51A88877F007F5D89 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 132BD19A1A88877E007F5D89 /* LICENSE */; };
 		132BD2B61A88877F007F5D89 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 132BD19B1A88877E007F5D89 /* README.txt */; };
+		1331FE7A1AC53B1000BEF382 /* AllReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1331FE791AC53B1000BEF382 /* AllReviewsViewController.m */; };
 		134D307A1ABD74EA009516C7 /* FilterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D30791ABD74EA009516C7 /* FilterDetailViewController.m */; };
 		135B4C7C1A7F84DD00B64F30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 135B4C7B1A7F84DD00B64F30 /* main.m */; };
 		135B4C7F1A7F84DD00B64F30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 135B4C7E1A7F84DD00B64F30 /* AppDelegate.m */; };
@@ -30,6 +31,10 @@
 		13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA57401AB8370D00811025 /* StoryCommentCell.m */; };
 		13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA57431AB83BAF00811025 /* MerchantDetailViewController.m */; };
 		13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CD99EE1A834091005AB1F4 /* LoginViewController.m */; };
+		13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB41AC53B9600BE38D7 /* RateViewController.m */; };
+		13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */; };
+		13E30DBC1AC573A000BE38D7 /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */; };
+		13E4DC511AC95942003355C0 /* FavoriteMerchantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */; };
 		13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EBA44C1AB960F3009E8AC3 /* FilterViewController.m */; };
 		13FAE22A1AB1966C00A6540D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FAE2291AB1966C00A6540D /* AddressBook.framework */; };
 		13FAE22C1AB1967100A6540D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FAE22B1AB1967100A6540D /* AssetsLibrary.framework */; };
@@ -66,6 +71,8 @@
 		132BD1991A88877E007F5D89 /* FBAudienceNetwork.README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBAudienceNetwork.README.txt; sourceTree = "<group>"; };
 		132BD19A1A88877E007F5D89 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		132BD19B1A88877E007F5D89 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		1331FE781AC53B1000BEF382 /* AllReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllReviewsViewController.h; path = Home/AllReviewsViewController.h; sourceTree = "<group>"; };
+		1331FE791AC53B1000BEF382 /* AllReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllReviewsViewController.m; path = Home/AllReviewsViewController.m; sourceTree = "<group>"; };
 		134D30781ABD74EA009516C7 /* FilterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterDetailViewController.h; path = Filter/FilterDetailViewController.h; sourceTree = "<group>"; };
 		134D30791ABD74EA009516C7 /* FilterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterDetailViewController.m; path = Filter/FilterDetailViewController.m; sourceTree = "<group>"; };
 		135B4C761A7F84DD00B64F30 /* spalor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spalor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +103,15 @@
 		13BA57431AB83BAF00811025 /* MerchantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantDetailViewController.m; path = Home/MerchantDetailViewController.m; sourceTree = "<group>"; };
 		13CD99ED1A834091005AB1F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
 		13CD99EE1A834091005AB1F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
+		13E30DB31AC53B9600BE38D7 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateViewController.h; path = Home/RateViewController.h; sourceTree = "<group>"; };
+		13E30DB41AC53B9600BE38D7 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateViewController.m; path = Home/RateViewController.m; sourceTree = "<group>"; };
+		13E30DB51AC53B9600BE38D7 /* ReportErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportErrorViewController.h; path = Home/ReportErrorViewController.h; sourceTree = "<group>"; };
+		13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportErrorViewController.m; path = Home/ReportErrorViewController.m; sourceTree = "<group>"; };
+		13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkHelper.m; path = Network/NetworkHelper.m; sourceTree = "<group>"; };
+		13E30DBB1AC573A000BE38D7 /* NetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkHelper.h; path = Network/NetworkHelper.h; sourceTree = "<group>"; };
+		13E30DBF1AC9215E00BE38D7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		13E4DC4F1AC95942003355C0 /* FavoriteMerchantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteMerchantsViewController.h; path = Favorite/FavoriteMerchantsViewController.h; sourceTree = "<group>"; };
+		13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteMerchantsViewController.m; path = Favorite/FavoriteMerchantsViewController.m; sourceTree = "<group>"; };
 		13EBA44B1AB960F3009E8AC3 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterViewController.h; path = Filter/FilterViewController.h; sourceTree = "<group>"; };
 		13EBA44C1AB960F3009E8AC3 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterViewController.m; path = Filter/FilterViewController.m; sourceTree = "<group>"; };
 		13FAE2291AB1966C00A6540D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -203,10 +219,11 @@
 		135B4C781A7F84DD00B64F30 /* spalor */ = {
 			isa = PBXGroup;
 			children = (
+				13E30DB91AC5736900BE38D7 /* Network Utility */,
 				13EBA44A1AB96009009E8AC3 /* Filter */,
 				13BA57381AB8350E00811025 /* Extensions */,
 				136747B11AADB9910039CCCC /* Deals */,
-				136747B01AADB98A0039CCCC /* Finder */,
+				136747B01AADB98A0039CCCC /* Favorite */,
 				136747AF1AADB9840039CCCC /* Nearby */,
 				136747AE1AADB9720039CCCC /* Home */,
 				136747AA1AADB1F60039CCCC /* Profile */,
@@ -228,6 +245,7 @@
 			children = (
 				135B4C7A1A7F84DD00B64F30 /* Info.plist */,
 				135B4C7B1A7F84DD00B64F30 /* main.m */,
+				13E30DBF1AC9215E00BE38D7 /* Constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -269,6 +287,12 @@
 				13BA57401AB8370D00811025 /* StoryCommentCell.m */,
 				13BA57421AB83BAF00811025 /* MerchantDetailViewController.h */,
 				13BA57431AB83BAF00811025 /* MerchantDetailViewController.m */,
+				1331FE781AC53B1000BEF382 /* AllReviewsViewController.h */,
+				1331FE791AC53B1000BEF382 /* AllReviewsViewController.m */,
+				13E30DB31AC53B9600BE38D7 /* RateViewController.h */,
+				13E30DB41AC53B9600BE38D7 /* RateViewController.m */,
+				13E30DB51AC53B9600BE38D7 /* ReportErrorViewController.h */,
+				13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -280,11 +304,13 @@
 			name = Nearby;
 			sourceTree = "<group>";
 		};
-		136747B01AADB98A0039CCCC /* Finder */ = {
+		136747B01AADB98A0039CCCC /* Favorite */ = {
 			isa = PBXGroup;
 			children = (
+				13E4DC4F1AC95942003355C0 /* FavoriteMerchantsViewController.h */,
+				13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */,
 			);
-			name = Finder;
+			name = Favorite;
 			sourceTree = "<group>";
 		};
 		136747B11AADB9910039CCCC /* Deals */ = {
@@ -316,6 +342,15 @@
 				132BD1921A88867E007F5D89 /* SignupViewController.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		13E30DB91AC5736900BE38D7 /* Network Utility */ = {
+			isa = PBXGroup;
+			children = (
+				13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */,
+				13E30DBB1AC573A000BE38D7 /* NetworkHelper.h */,
+			);
+			name = "Network Utility";
 			sourceTree = "<group>";
 		};
 		13EBA44A1AB96009009E8AC3 /* Filter */ = {
@@ -434,21 +469,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13E4DC511AC95942003355C0 /* FavoriteMerchantsViewController.m in Sources */,
 				13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */,
 				13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */,
+				1331FE7A1AC53B1000BEF382 /* AllReviewsViewController.m in Sources */,
 				13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */,
 				13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */,
 				137ABA511AC1537E00540CF2 /* DealsViewController.m in Sources */,
 				135B4C7F1A7F84DD00B64F30 /* AppDelegate.m in Sources */,
+				13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */,
 				137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */,
 				135B4C821A7F84DD00B64F30 /* spalor.xcdatamodeld in Sources */,
 				135B4C7C1A7F84DD00B64F30 /* main.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
+				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
 				13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */,
 				132BD1931A88867E007F5D89 /* SignupViewController.m in Sources */,
 				134D307A1ABD74EA009516C7 /* FilterDetailViewController.m in Sources */,
+				13E30DBC1AC573A000BE38D7 /* NetworkHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
