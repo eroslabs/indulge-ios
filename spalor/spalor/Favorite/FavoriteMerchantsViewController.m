@@ -46,10 +46,10 @@
 {
     NSInteger numOfRows = 0;
 
-    if(section == 1){
+    if(section == 0){
         numOfRows = 1;
     }
-    else if(section == 2){
+    else if(section == 1){
         numOfRows = 1;
     }
     else{
@@ -59,14 +59,33 @@
     return numOfRows;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"My Looks", @"My Looks");
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"My Deals", @"My Deals");
+            break;
+            // ...
+        default:
+            sectionName = @"My Merchants";
+            break;
+    }
+    return sectionName;
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger heightOfRow = 0;
     
-    if(indexPath.section == 1){
+    if(indexPath.section == 0){
         heightOfRow = 150;
     }
-    else if(indexPath.section == 2){
+    else if(indexPath.section == 1){
         heightOfRow = 150;
     }
     else{
@@ -82,12 +101,12 @@
     NSString *reuseId = @"";
     UITableViewCell *cell;
     
-    if(indexPath.section == 1){
+    if(indexPath.section == 0){
         reuseId = @"MyLooksCell";
         cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
 
     }
-    else if(indexPath.section == 2){
+    else if(indexPath.section == 1){
         reuseId = @"MyDealsCell";
         cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
 
@@ -103,7 +122,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"detailSegue" sender:self];
+    //[self performSegueWithIdentifier:@"detailSegue" sender:self];
     
 }
 
