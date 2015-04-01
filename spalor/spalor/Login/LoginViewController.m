@@ -21,8 +21,13 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     self.loginView = [[FBLoginView alloc] initWithReadPermissions:
-     @[@"public_profile", @"email", @"user_friends"]];
+                      @[@"public_profile", @"email", @"user_friends"]];
     
     self.loginView.center = self.view.center;
     
@@ -31,6 +36,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     self.loginView.delegate = self;
     
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    
     signIn.shouldFetchGooglePlusUser = YES;
     //signIn.shouldFetchGoogleUserEmail = YES;  // Uncomment to get the user's email
     
@@ -43,7 +49,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     
     // Optional: declare signIn.actions, see "app activities"
     signIn.delegate = self;
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +82,8 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 }
 
 -(void)loggedIn{
+
+    //Send data via login API
     
     BOOL authenticated = [[NSUserDefaults standardUserDefaults] boolForKey:@"AUTHENTICATED"];
 
@@ -94,6 +102,14 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth
                    error: (NSError *) error {
     NSLog(@"Received error %@ and auth object %@",error, auth);
+    if (error) {
+        //Show Error Alert
+    }
+    else{
+        
+        [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
+
+    }
 }
 
 // Call method when user information has been fetched

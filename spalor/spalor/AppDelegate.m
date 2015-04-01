@@ -60,21 +60,23 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    BOOL wasHandled = YES;
     
-    if ([[url absoluteString] rangeOfString:kClientId].location == NSNotFound)
+    NSLog(@"url string %@",[url absoluteString]);
+    
+    if ([[url absoluteString] rangeOfString:kClientId].location != NSNotFound)
     {
         // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
-        BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+       wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
         // You can add your app-specific url handling code here if needed
-        return wasHandled;
     }
     else
     {
-        return [GPPURLHandler handleURL:url
-                      sourceApplication:sourceApplication
-                             annotation:annotation];
+        wasHandled = [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+
     }
-    return YES;
+    
+    return wasHandled;
     
 }
 

@@ -7,6 +7,8 @@
 //
 
 #import "ProfileViewController.h"
+#import <GooglePlus/GooglePlus.h>
+#import <GoogleOpenSource/GoogleOpenSource.h>
 
 @interface ProfileViewController ()
 
@@ -28,6 +30,27 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)logout:(id)sender{
+    UINavigationController *navigationController = (UINavigationController *)[self.tabBarController parentViewController];
+    [navigationController popToRootViewControllerAnimated:YES];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
+
+    [[GPPSignIn sharedInstance] signOut];
+
+    FBSession* session = [FBSession activeSession];
+    [session closeAndClearTokenInformation];
+    [session close];
+    [FBSession setActiveSession:nil];
+    
+    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray* facebookCookies = [cookies cookiesForURL:[NSURL         URLWithString:@"https://facebook.com/"]];
+    
+    for (NSHTTPCookie* cookie in facebookCookies) {
+        [cookies deleteCookie:cookie];
+    }
 }
 
 /*

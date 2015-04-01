@@ -13,5 +13,5 @@
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (strong, nonatomic) IBOutlet FBLoginView *loginView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-
+-(IBAction)logout:(id)sender;
 @end
