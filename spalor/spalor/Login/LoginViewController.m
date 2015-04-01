@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <GooglePlus/GooglePlus.h>
+#import "UIImage+ImageEffects.h"
 
 @interface LoginViewController ()
 
@@ -20,6 +21,8 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
     
     
 }

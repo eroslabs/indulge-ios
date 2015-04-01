@@ -7,6 +7,7 @@
 //
 
 #import "SignupViewController.h"
+#import "UIImage+ImageEffects.h"
 
 @interface SignupViewController ()
 
@@ -17,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
+    self.profilebackgroundView.alpha = 0.5;
+    self.profilebackgroundView.layer.cornerRadius = 40;
+    self.profilebackgroundView.clipsToBounds = YES;
+    self.profileImageView.layer.cornerRadius = 40;
+    self.profileImageView.clipsToBounds = YES;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,17 +44,57 @@
 */
 
 - (IBAction)signup:(id)sender {
-    
-//    BOOL authenticated = [[NSUserDefaults standardUserDefaults] boolForKey:@"AUTHENTICATED"];
-//    
-//    if(!authenticated)  // authenticated---> BOOL Value assign True only if Login Success
-//    {
+
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         self.navigationController.navigationBarHidden=YES;
         [self.navigationController pushViewController:obj animated:YES];
-//    }
+}
+
+-(IBAction)showImagePickerOptionsActionSheet:(id)sender{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick Image From"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Camera", @"Gallery", nil];
+    [actionSheet showInView:self.view];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    NSLog(@"Index = %d - Title = %@", buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
+    
+    //0 is camera and 1 is gallery
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    
+    
+    
+    if (buttonIndex == 0) {
+        //Camera
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+
+    }
+    else if(buttonIndex == 1){
+        // Gallery
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+    }
+    else{
+        return;
+    }
+    
+
+    [self presentViewController:picker animated:YES completion:NULL];
+
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    self.profileImageView.image = chosenImage;
+    [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

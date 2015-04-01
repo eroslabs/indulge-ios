@@ -15,6 +15,7 @@
 - (UIImage *)applyExtraLightEffect;
 - (UIImage *)applyDarkEffect;
 - (UIImage *)applyTintEffectWithColor:(UIColor *)tintColor;
+- (UIImage *)applyCustomEffectWithWhite:(CGFloat)white andAlpha:(CGFloat)alpha;
 - (UIImage *)applyBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage;
 
 @end

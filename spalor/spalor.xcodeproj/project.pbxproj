@@ -101,6 +101,7 @@
 		136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 136747AC1AADB2C50039CCCC /* ProfileViewController.m */; };
 		137ABA511AC1537E00540CF2 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137ABA501AC1537E00540CF2 /* DealsViewController.m */; };
 		137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137ABA531AC1539900540CF2 /* DealDetailsViewController.m */; };
+		13B56F121ACBEE8F00A95EA7 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B56F111ACBEE8F00A95EA7 /* background@2x.png */; };
 		13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */; };
 		13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573D1AB8367E00811025 /* ParallaxHeaderView.m */; };
 		13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA57401AB8370D00811025 /* StoryCommentCell.m */; };
@@ -243,6 +244,7 @@
 		137ABA501AC1537E00540CF2 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealsViewController.m; path = Deals/DealsViewController.m; sourceTree = "<group>"; };
 		137ABA521AC1539900540CF2 /* DealDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealDetailsViewController.h; path = Deals/DealDetailsViewController.h; sourceTree = "<group>"; };
 		137ABA531AC1539900540CF2 /* DealDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealDetailsViewController.m; path = Deals/DealDetailsViewController.m; sourceTree = "<group>"; };
+		13B56F111ACBEE8F00A95EA7 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		13BA57391AB835A100811025 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Extensions/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Extensions/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		13BA573C1AB8367E00811025 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Home/ParallaxHeaderView.h; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 		1337EDB71ACBD34400F31D14 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				13B56F111ACBEE8F00A95EA7 /* background@2x.png */,
 				1337EDB81ACBD35D00F31D14 /* Final Assets */,
 			);
 			name = Resources;
@@ -692,6 +695,7 @@
 				1337EE1C1ACBD35D00F31D14 /* merchant-deal-services@2x.png in Resources */,
 				1337EE421ACBD35D00F31D14 /* registration-age-active@2x.png in Resources */,
 				1337EE301ACBD35D00F31D14 /* merchant-pt@2x.png in Resources */,
+				13B56F121ACBEE8F00A95EA7 /* background@2x.png in Resources */,
 				1337EE3E1ACBD35D00F31D14 /* navbar-me-active@2x.png in Resources */,
 				1337EE401ACBD35D00F31D14 /* navbar-nearby-active@2x.png in Resources */,
 				1337EE361ACBD35D00F31D14 /* merchant-share@2x.png in Resources */,

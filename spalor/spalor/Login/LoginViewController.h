@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
 @property (retain, nonatomic) IBOutlet GPPSignInButton *signInButton;
 @property (strong, nonatomic) IBOutlet FBLoginView *loginView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 

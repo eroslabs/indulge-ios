@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SignupViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UIView *profilebackgroundView;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+-(IBAction)showImagePickerOptionsActionSheet:(id)sender;
 @end

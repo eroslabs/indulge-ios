@@ -100,6 +100,12 @@
 @implementation UIImage (ImageEffects)
 
 
+- (UIImage *)applyCustomEffectWithWhite:(CGFloat)white andAlpha:(CGFloat)alpha
+{
+    UIColor *tintColor = [UIColor colorWithWhite:white alpha:alpha];
+    return [self applyBlurWithRadius:3 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+}
+
 - (UIImage *)applySubtleEffect
 {
     UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];
