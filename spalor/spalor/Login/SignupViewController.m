@@ -8,9 +8,13 @@
 
 #import "SignupViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "FormInputCell.h"
 
-@interface SignupViewController ()
-
+@interface SignupViewController (){
+    NSArray *dataSourceArray;
+    NSArray *imagesArray;
+    NSInteger selected;
+}
 @end
 
 @implementation SignupViewController
@@ -25,7 +29,9 @@
     self.profileImageView.layer.cornerRadius = 40;
     self.profileImageView.clipsToBounds = YES;
     
-    
+    selected = -1;
+    dataSourceArray = @[@"Full Name",@"Email",@"Mobile Number",@"Password",@"Confirm Password",@"Age",@"Gender"];
+    imagesArray = @[@"registration-profile",@"registration-email",@"registration-mobile",@"registration-password",@"registration-password",@"registration-age",@"registration-gender"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,14 +49,7 @@
 }
 */
 
-- (IBAction)signup:(id)sender {
 
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-        self.navigationController.navigationBarHidden=YES;
-        [self.navigationController pushViewController:obj animated:YES];
-}
 
 -(IBAction)showImagePickerOptionsActionSheet:(id)sender{
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick Image From"
@@ -95,6 +94,81 @@
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     self.profileImageView.image = chosenImage;
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark -
+#pragma mark UITableViewDatasource
+
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numOfRows = 9;
+    return numOfRows;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 73;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row<7){
+        FormInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"formCell"];
+
+        //cell.textLabel.text = @"Sample";
+        cell.cellIconImageView.image = [UIImage imageNamed:@""];
+        
+        cell.cellInputTextField.placeholder = dataSourceArray[indexPath.row];
+        cell.cellInputTextField.tag = indexPath.row;
+        cell.cellInputTextField.delegate = self;
+        if (indexPath.row == selected) {
+            cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",imagesArray[indexPath.row]]];
+
+        }
+        else{
+            cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",imagesArray[indexPath.row]]];
+
+        }
+        return cell;
+
+    }
+    else{
+        
+        if(indexPath.row == 7){
+            FormInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RefCodeCell"];
+            cell.cellNameLabel.text = @"Ref. Code";
+            return cell;
+
+        }
+        else{
+            FormInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AcceptTermsCell"];
+            cell.cellNameLabel.text = @"Accept Terms and Conditions";
+            return cell;
+        }
+    }
+    
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+ 
+    selected = textField.tag;
+    [self.tableView reloadData];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    selected = -1;
+    [self.tableView reloadData];
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

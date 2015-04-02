@@ -74,14 +74,17 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 
     BOOL authenticated = [[NSUserDefaults standardUserDefaults] boolForKey:@"AUTHENTICATED"];
     
-    if(!authenticated)  // authenticated---> BOOL Value assign True only if Login Success
+    if(authenticated)  // authenticated---> BOOL Value assign True only if Login Success
     {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         self.navigationController.navigationBarHidden=YES;
         [self.navigationController pushViewController:obj animated:YES];
     }
+    else {
+        // Show Login email id fields
+    }
+    
 }
 
 -(void)loggedIn{

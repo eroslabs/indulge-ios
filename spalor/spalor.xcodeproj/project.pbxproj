@@ -14,6 +14,9 @@
 		132BD2B41A88877F007F5D89 /* FBAudienceNetwork.README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 132BD1991A88877E007F5D89 /* FBAudienceNetwork.README.txt */; };
 		132BD2B51A88877F007F5D89 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 132BD19A1A88877E007F5D89 /* LICENSE */; };
 		132BD2B61A88877F007F5D89 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 132BD19B1A88877E007F5D89 /* README.txt */; };
+		133008E91ACD15EE009FFC77 /* FormInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 133008E81ACD15EE009FFC77 /* FormInputCell.m */; };
+		133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 133008EB1ACD172C009FFC77 /* EmailLoginViewController.m */; };
+		133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 133008EE1ACD1F41009FFC77 /* ForgotPasswordViewController.m */; };
 		1331FE7A1AC53B1000BEF382 /* AllReviewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1331FE791AC53B1000BEF382 /* AllReviewsViewController.m */; };
 		1337EE041ACBD35D00F31D14 /* filter-both-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1337EDB91ACBD35D00F31D14 /* filter-both-active@2x.png */; };
 		1337EE051ACBD35D00F31D14 /* filter-both@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1337EDBA1ACBD35D00F31D14 /* filter-both@2x.png */; };
@@ -147,6 +150,12 @@
 		132BD1991A88877E007F5D89 /* FBAudienceNetwork.README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBAudienceNetwork.README.txt; sourceTree = "<group>"; };
 		132BD19A1A88877E007F5D89 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		132BD19B1A88877E007F5D89 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		133008E71ACD15EE009FFC77 /* FormInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormInputCell.h; path = Extensions/FormInputCell.h; sourceTree = "<group>"; };
+		133008E81ACD15EE009FFC77 /* FormInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormInputCell.m; path = Extensions/FormInputCell.m; sourceTree = "<group>"; };
+		133008EA1ACD172C009FFC77 /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailLoginViewController.h; path = Login/EmailLoginViewController.h; sourceTree = "<group>"; };
+		133008EB1ACD172C009FFC77 /* EmailLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailLoginViewController.m; path = Login/EmailLoginViewController.m; sourceTree = "<group>"; };
+		133008ED1ACD1F41009FFC77 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordViewController.h; path = Login/ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		133008EE1ACD1F41009FFC77 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordViewController.m; path = Login/ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		1331FE781AC53B1000BEF382 /* AllReviewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllReviewsViewController.h; path = Home/AllReviewsViewController.h; sourceTree = "<group>"; };
 		1331FE791AC53B1000BEF382 /* AllReviewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllReviewsViewController.m; path = Home/AllReviewsViewController.m; sourceTree = "<group>"; };
 		1337EDB91ACBD35D00F31D14 /* filter-both-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-both-active@2x.png"; sourceTree = "<group>"; };
@@ -574,6 +583,8 @@
 			children = (
 				13BA57391AB835A100811025 /* UIImage+ImageEffects.h */,
 				13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */,
+				133008E71ACD15EE009FFC77 /* FormInputCell.h */,
+				133008E81ACD15EE009FFC77 /* FormInputCell.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -585,6 +596,10 @@
 				13CD99EE1A834091005AB1F4 /* LoginViewController.m */,
 				132BD1911A88867E007F5D89 /* SignupViewController.h */,
 				132BD1921A88867E007F5D89 /* SignupViewController.m */,
+				133008EA1ACD172C009FFC77 /* EmailLoginViewController.h */,
+				133008EB1ACD172C009FFC77 /* EmailLoginViewController.m */,
+				133008ED1ACD1F41009FFC77 /* ForgotPasswordViewController.h */,
+				133008EE1ACD1F41009FFC77 /* ForgotPasswordViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -799,13 +814,16 @@
 				137ABA511AC1537E00540CF2 /* DealsViewController.m in Sources */,
 				135B4C7F1A7F84DD00B64F30 /* AppDelegate.m in Sources */,
 				13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */,
+				133008E91ACD15EE009FFC77 /* FormInputCell.m in Sources */,
 				137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */,
+				133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */,
 				135B4C821A7F84DD00B64F30 /* spalor.xcdatamodeld in Sources */,
 				135B4C7C1A7F84DD00B64F30 /* main.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
 				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
+				133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */,
 				13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */,
 				132BD1931A88867E007F5D89 /* SignupViewController.m in Sources */,
 				134D307A1ABD74EA009516C7 /* FilterDetailViewController.m in Sources */,
