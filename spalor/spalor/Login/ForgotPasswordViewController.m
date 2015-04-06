@@ -30,7 +30,7 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
+    //self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
 
 }
 

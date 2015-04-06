@@ -10,4 +10,6 @@
 
 @interface EmailLoginViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
+-(IBAction)goBack:(id)sender;
 @end

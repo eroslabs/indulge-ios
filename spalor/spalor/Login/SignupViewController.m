@@ -164,17 +164,18 @@
 {
  
     selected = textField.tag;
+    NSLog(@"selected %d",selected);
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView reloadData];
     return YES;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    
-    selected = -1;
-    [self.tableView reloadData];
-    [textField resignFirstResponder];
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    
+//    selected = -1;
+//    [self.tableView reloadData];
+//    [textField resignFirstResponder];
+//    return YES;
+//}
 
 @end
