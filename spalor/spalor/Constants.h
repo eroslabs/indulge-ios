@@ -19,5 +19,6 @@
 #define TIMEOUTINTERVAL 60
 #define INDULGE_URL @"http://api.indulge.com"
 #define INDULGE_API_VERSION 1.0
+#define INDULGE_API_VERSION_STRING @"1.0"
 
 #endif

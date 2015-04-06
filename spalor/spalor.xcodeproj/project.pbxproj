@@ -114,6 +114,16 @@
 		13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */; };
 		13E30DBC1AC573A000BE38D7 /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */; };
 		13E4DC511AC95942003355C0 /* FavoriteMerchantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */; };
+		13E530721AD256480046EAEB /* NSData+NSData_AES256.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E530711AD256480046EAEB /* NSData+NSData_AES256.m */; };
+		13E5307F1AD25CD10046EAEB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 13E530741AD25CD10046EAEB /* .gitignore */; };
+		13E530801AD25CD10046EAEB /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E530761AD25CD10046EAEB /* AESCrypt.m */; };
+		13E530811AD25CD10046EAEB /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 13E530771AD25CD10046EAEB /* LICENSE */; };
+		13E530821AD25CD10046EAEB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E530791AD25CD10046EAEB /* NSData+Base64.m */; };
+		13E530831AD25CD10046EAEB /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E5307B1AD25CD10046EAEB /* NSData+CommonCrypto.m */; };
+		13E530841AD25CD10046EAEB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E5307D1AD25CD10046EAEB /* NSString+Base64.m */; };
+		13E530851AD25CD10046EAEB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 13E5307E1AD25CD10046EAEB /* README.md */; };
+		13E530871AD299B30046EAEB /* divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E530861AD299B30046EAEB /* divider@2x.png */; };
+		13E9B6941AD2AA5D006DE3D8 /* Profilepic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E9B6931AD2AA5D006DE3D8 /* Profilepic@2x.png */; };
 		13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EBA44C1AB960F3009E8AC3 /* FilterViewController.m */; };
 		13FAE22A1AB1966C00A6540D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FAE2291AB1966C00A6540D /* AddressBook.framework */; };
 		13FAE22C1AB1967100A6540D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FAE22B1AB1967100A6540D /* AssetsLibrary.framework */; };
@@ -273,6 +283,21 @@
 		13E30DBF1AC9215E00BE38D7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		13E4DC4F1AC95942003355C0 /* FavoriteMerchantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteMerchantsViewController.h; path = Favorite/FavoriteMerchantsViewController.h; sourceTree = "<group>"; };
 		13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteMerchantsViewController.m; path = Favorite/FavoriteMerchantsViewController.m; sourceTree = "<group>"; };
+		13E530701AD256480046EAEB /* NSData+NSData_AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NSData_AES256.h"; path = "Extensions/NSData+NSData_AES256.h"; sourceTree = "<group>"; };
+		13E530711AD256480046EAEB /* NSData+NSData_AES256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+NSData_AES256.m"; path = "Extensions/NSData+NSData_AES256.m"; sourceTree = "<group>"; };
+		13E530741AD25CD10046EAEB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		13E530751AD25CD10046EAEB /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
+		13E530761AD25CD10046EAEB /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
+		13E530771AD25CD10046EAEB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		13E530781AD25CD10046EAEB /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		13E530791AD25CD10046EAEB /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		13E5307A1AD25CD10046EAEB /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		13E5307B1AD25CD10046EAEB /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		13E5307C1AD25CD10046EAEB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		13E5307D1AD25CD10046EAEB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		13E5307E1AD25CD10046EAEB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		13E530861AD299B30046EAEB /* divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "divider@2x.png"; sourceTree = "<group>"; };
+		13E9B6931AD2AA5D006DE3D8 /* Profilepic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Profilepic@2x.png"; sourceTree = "<group>"; };
 		13EBA44B1AB960F3009E8AC3 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterViewController.h; path = Filter/FilterViewController.h; sourceTree = "<group>"; };
 		13EBA44C1AB960F3009E8AC3 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterViewController.m; path = Filter/FilterViewController.m; sourceTree = "<group>"; };
 		13FAE2291AB1966C00A6540D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -370,6 +395,8 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				13E9B6931AD2AA5D006DE3D8 /* Profilepic@2x.png */,
+				13E530861AD299B30046EAEB /* divider@2x.png */,
 				1337EDB91ACBD35D00F31D14 /* filter-both-active@2x.png */,
 				1337EDBA1ACBD35D00F31D14 /* filter-both@2x.png */,
 				1337EDBB1ACBD35D00F31D14 /* filter-female-active@2x.png */,
@@ -585,6 +612,8 @@
 				13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */,
 				133008E71ACD15EE009FFC77 /* FormInputCell.h */,
 				133008E81ACD15EE009FFC77 /* FormInputCell.m */,
+				13E530701AD256480046EAEB /* NSData+NSData_AES256.h */,
+				13E530711AD256480046EAEB /* NSData+NSData_AES256.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -607,10 +636,30 @@
 		13E30DB91AC5736900BE38D7 /* Network Utility */ = {
 			isa = PBXGroup;
 			children = (
+				13E530731AD25CD10046EAEB /* AESCrypt-ObjC-master */,
 				13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */,
 				13E30DBB1AC573A000BE38D7 /* NetworkHelper.h */,
 			);
 			name = "Network Utility";
+			sourceTree = "<group>";
+		};
+		13E530731AD25CD10046EAEB /* AESCrypt-ObjC-master */ = {
+			isa = PBXGroup;
+			children = (
+				13E530741AD25CD10046EAEB /* .gitignore */,
+				13E530751AD25CD10046EAEB /* AESCrypt.h */,
+				13E530761AD25CD10046EAEB /* AESCrypt.m */,
+				13E530771AD25CD10046EAEB /* LICENSE */,
+				13E530781AD25CD10046EAEB /* NSData+Base64.h */,
+				13E530791AD25CD10046EAEB /* NSData+Base64.m */,
+				13E5307A1AD25CD10046EAEB /* NSData+CommonCrypto.h */,
+				13E5307B1AD25CD10046EAEB /* NSData+CommonCrypto.m */,
+				13E5307C1AD25CD10046EAEB /* NSString+Base64.h */,
+				13E5307D1AD25CD10046EAEB /* NSString+Base64.m */,
+				13E5307E1AD25CD10046EAEB /* README.md */,
+			);
+			name = "AESCrypt-ObjC-master";
+			path = "Network/AESCrypt-ObjC-master";
 			sourceTree = "<group>";
 		};
 		13EBA44A1AB96009009E8AC3 /* Filter */ = {
@@ -707,6 +756,7 @@
 			files = (
 				1337EE2F1ACBD35D00F31D14 /* merchant-pt-deal@2x.png in Resources */,
 				1337EE351ACBD35D00F31D14 /* merchant-share-active@2x.png in Resources */,
+				13E530871AD299B30046EAEB /* divider@2x.png in Resources */,
 				1337EE1C1ACBD35D00F31D14 /* merchant-deal-services@2x.png in Resources */,
 				1337EE421ACBD35D00F31D14 /* registration-age-active@2x.png in Resources */,
 				1337EE301ACBD35D00F31D14 /* merchant-pt@2x.png in Resources */,
@@ -764,11 +814,13 @@
 				1337EE441ACBD35D00F31D14 /* registration-email-active@2x.png in Resources */,
 				1337EE4C1ACBD35D00F31D14 /* registration-photo@2x.png in Resources */,
 				1337EE4E1ACBD35D00F31D14 /* registration-profile@2x.png in Resources */,
+				13E530811AD25CD10046EAEB /* LICENSE in Resources */,
 				1337EE251ACBD35D00F31D14 /* merchant-listing-deal@2x.png in Resources */,
 				1337EE3C1ACBD35D00F31D14 /* navbar-home-active@2x.png in Resources */,
 				1337EE3D1ACBD35D00F31D14 /* navbar-home@2x.png in Resources */,
 				1337EE4A1ACBD35D00F31D14 /* registration-password-active@2x.png in Resources */,
 				1337EE191ACBD35D00F31D14 /* Icon in Resources */,
+				13E5307F1AD25CD10046EAEB /* .gitignore in Resources */,
 				1337EE371ACBD35D00F31D14 /* merchant-time@2x.png in Resources */,
 				1337EE161ACBD35D00F31D14 /* header-search@2x.png in Resources */,
 				1337EE491ACBD35D00F31D14 /* registration-mobile@2x.png in Resources */,
@@ -787,6 +839,7 @@
 				1337EE0F1ACBD35D00F31D14 /* header-popularity-active@2x.png in Resources */,
 				1337EE0A1ACBD35D00F31D14 /* filter-male@2x.png in Resources */,
 				1337EE4D1ACBD35D00F31D14 /* registration-profile-active@2x.png in Resources */,
+				13E9B6941AD2AA5D006DE3D8 /* Profilepic@2x.png in Resources */,
 				1337EE2C1ACBD35D00F31D14 /* merchant-nail-deal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -812,9 +865,13 @@
 				13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */,
 				13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */,
 				137ABA511AC1537E00540CF2 /* DealsViewController.m in Sources */,
+				13E530721AD256480046EAEB /* NSData+NSData_AES256.m in Sources */,
 				135B4C7F1A7F84DD00B64F30 /* AppDelegate.m in Sources */,
 				13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */,
 				133008E91ACD15EE009FFC77 /* FormInputCell.m in Sources */,
+				13E530831AD25CD10046EAEB /* NSData+CommonCrypto.m in Sources */,
+				13E530821AD25CD10046EAEB /* NSData+Base64.m in Sources */,
+				13E530851AD25CD10046EAEB /* README.md in Sources */,
 				137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */,
 				133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */,
 				135B4C821A7F84DD00B64F30 /* spalor.xcdatamodeld in Sources */,
@@ -822,10 +879,12 @@
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
 				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,
+				13E530841AD25CD10046EAEB /* NSString+Base64.m in Sources */,
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
 				133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */,
 				13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */,
 				132BD1931A88867E007F5D89 /* SignupViewController.m in Sources */,
+				13E530801AD25CD10046EAEB /* AESCrypt.m in Sources */,
 				134D307A1ABD74EA009516C7 /* FilterDetailViewController.m in Sources */,
 				13E30DBC1AC573A000BE38D7 /* NetworkHelper.m in Sources */,
 			);

@@ -24,9 +24,9 @@
     // Do any additional setup after loading the view.
     self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
     self.profilebackgroundView.alpha = 0.5;
-    self.profilebackgroundView.layer.cornerRadius = 40;
+    self.profilebackgroundView.layer.cornerRadius = 50;
     self.profilebackgroundView.clipsToBounds = YES;
-    self.profileImageView.layer.cornerRadius = 40;
+    self.profileImageView.layer.cornerRadius = 50;
     self.profileImageView.clipsToBounds = YES;
     
     selected = -1;
@@ -49,7 +49,9 @@
 }
 */
 
-
+-(IBAction)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(IBAction)showImagePickerOptionsActionSheet:(id)sender{
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick Image From"
@@ -124,10 +126,13 @@
         cell.cellInputTextField.delegate = self;
         if (indexPath.row == selected) {
             cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",imagesArray[indexPath.row]]];
+            cell.cellInputTextField.textColor = [UIColor colorWithRed:0.4431f green:0.3725f blue:0.3450f alpha:1.0f];
 
         }
         else{
             cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@.png",imagesArray[indexPath.row]]];
+            cell.cellInputTextField.textColor = [UIColor colorWithRed:0.8667f green:0.7960f blue:0.7411f alpha:1.0f];
+
 
         }
         return cell;
@@ -159,6 +164,7 @@
 {
  
     selected = textField.tag;
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView reloadData];
     return YES;
 }

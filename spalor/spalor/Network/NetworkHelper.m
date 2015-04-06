@@ -8,6 +8,8 @@
 
 #import "NetworkHelper.h"
 #import "Constants.h"
+#import "NSData+NSData_AES256.h"
+#import "AESCrypt.h"
 
 @interface NetworkHelper()
 @property(nonatomic, strong)NSOperationQueue *queueManager;
@@ -25,7 +27,8 @@
     return _sharedClient;
 }
 
-const NSUInteger NUMBER_OF_CHARS = 32;
+const NSUInteger NUMBER_OF_CHARS = 9;
+NSString *AESKey =@"ER0SLABSC01NDULG3";
 
 NSString * APIRequestID()
 {
@@ -38,6 +41,23 @@ NSString * APIRequestID()
     }
     
     return [ NSString stringWithCharacters:characters length:NUMBER_OF_CHARS ] ;
+}
+
+
+-(NSURLRequest *)formRequestwithemail:(NSString *)emailId{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:INDULGE_URL]];
+    NSString *token = APIRequestID();
+    [request setValue:token forHTTPHeaderField:@"token"];
+    [request setValue:emailId forHTTPHeaderField:@"email"];
+    
+    NSString *auth = [NSString stringWithFormat:@"%@%@",token,emailId];
+    NSString *encryptedAuth = [AESCrypt encrypt:auth password:AESKey];
+
+    DLog(@"AESCrypt %@ %@",encryptedAuth,[AESCrypt decrypt:encryptedAuth password:AESKey]);
+    
+    [request setValue:encryptedAuth forHTTPHeaderField:@"auth"];
+    [request setValue:INDULGE_API_VERSION_STRING forHTTPHeaderField:@"version"];
+    return nil;
 }
 
 - (void)getArrayFromPutURL:(NSString *)url parmeters:(NSDictionary *)dicParams completionHandler:(void (^)(id response, NSString *url, NSError *error))block {

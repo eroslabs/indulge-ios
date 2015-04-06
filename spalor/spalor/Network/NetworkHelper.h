@@ -10,7 +10,7 @@
 
 @interface NetworkHelper : NSObject
 + (NetworkHelper *)sharedInstance;
-
+- (NSURLRequest *)formRequestwithemail:(NSString *)emailId;
 - (void)getArrayFromPostURL:(NSString *)url parmeters:(NSDictionary *)dicParams completionHandler:(void (^)( id response, NSString *url, NSError *error))block;
 - (void)getArrayFromPostURL:(NSString *)url completionHandler:(void (^)(id response, NSString *url, NSError *error))block;
 - (void)getArrayFromGetUrl:(NSString *)url completionHandler:(void (^)(id response, NSString *url, NSError *error))block;

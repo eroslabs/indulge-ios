@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "NetworkHelper.h"
 
 @interface HomeViewController ()
 
@@ -20,7 +21,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    //[[NetworkHelper sharedInstance] formRequestwithemail:@"vikas@eroslabs.co"];
+}
 
 #pragma mark -
 #pragma mark UITableViewDatasource

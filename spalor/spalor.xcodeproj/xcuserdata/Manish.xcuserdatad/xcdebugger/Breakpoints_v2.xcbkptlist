@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "spalor/Login/SignupViewController.m"
-            timestampString = "449665739.796684"
+            filePath = "spalor/Network/NetworkHelper.m"
+            timestampString = "449999587.132114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "-textFieldShouldReturn:"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-formRequestwithemail:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

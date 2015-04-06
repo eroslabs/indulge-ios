@@ -22,7 +22,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
+    //self.backgroundImageView.image = [self.backgroundImageView.image applyCustomEffectWithWhite:0.5 andAlpha:0.3];
     
     
 }
@@ -52,6 +52,9 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     
     // Optional: declare signIn.actions, see "app activities"
     signIn.delegate = self;
+    
+    self.loginButton.layer.cornerRadius = 2.0f;
+    self.loginButton.clipsToBounds = YES;
 
 }
 

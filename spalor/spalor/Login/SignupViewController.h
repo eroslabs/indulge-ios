@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 -(IBAction)showImagePickerOptionsActionSheet:(id)sender;
+-(IBAction)goBack:(id)sender;
 @end
