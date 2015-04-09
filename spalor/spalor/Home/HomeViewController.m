@@ -65,7 +65,7 @@
         return 62;
     }
     else{
-        return 152;
+        return 160;
     }
     return 0;
 }
@@ -86,22 +86,29 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    if(!merchantListing){
-        UILabel *myLabel = [[UILabel alloc] init];
-        myLabel.frame = CGRectMake(20, 0, tableView.frame.size.width, 20);
-        myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
-        myLabel.text = @"Suggested Searches";
-        
-        UIView *headerView = [[UIView alloc] init];
-        headerView.backgroundColor = [UIColor colorWithRed:0.9254f green:0.9254f blue:0.9254f alpha:1.0f];
-        [headerView addSubview:myLabel];
-        
-        return headerView;
-    }
     
-    return nil;
+    UILabel *myLabel = [[UILabel alloc] init];
+    myLabel.frame = CGRectMake(20, 0, tableView.frame.size.width, 20);
+    myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
+    myLabel.text = @"Suggested Searches";
+    
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithRed:0.9254f green:0.9254f blue:0.9254f alpha:1.0f];
+    [headerView addSubview:myLabel];
+    
+    return headerView;
     
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if(merchantListing){
+        return 0.0f;
+    }
+    else{
+        return 20.0f;
+    }
+}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"detailSegue" sender:self];

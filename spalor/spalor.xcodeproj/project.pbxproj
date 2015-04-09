@@ -133,6 +133,9 @@
 		13E9B6981AD3CF46006DE3D8 /* Location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E9B6961AD3CF46006DE3D8 /* Location@2x.png */; };
 		13E9B69A1AD3D0F5006DE3D8 /* Homepage-imgae@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E9B6991AD3D0F5006DE3D8 /* Homepage-imgae@2x.png */; };
 		13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13EBA44C1AB960F3009E8AC3 /* FilterViewController.m */; };
+		13EC416D1AD683C6001FEDD7 /* merchant-categories-bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EC416C1AD683C6001FEDD7 /* merchant-categories-bar@2x.png */; };
+		13EC416F1AD68693001FEDD7 /* merchant-location-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EC416E1AD68693001FEDD7 /* merchant-location-button@2x.png */; };
+		13EC41711AD69031001FEDD7 /* home-banner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13EC41701AD69031001FEDD7 /* home-banner@2x.png */; };
 		13F087711AD5561200D6E467 /* image@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 13F087701AD5561200D6E467 /* image@2x.jpg */; };
 		13FAE22A1AB1966C00A6540D /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FAE2291AB1966C00A6540D /* AddressBook.framework */; };
 		13FAE22C1AB1967100A6540D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13FAE22B1AB1967100A6540D /* AssetsLibrary.framework */; };
@@ -317,6 +320,9 @@
 		13E9B6991AD3D0F5006DE3D8 /* Homepage-imgae@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Homepage-imgae@2x.png"; sourceTree = "<group>"; };
 		13EBA44B1AB960F3009E8AC3 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterViewController.h; path = Filter/FilterViewController.h; sourceTree = "<group>"; };
 		13EBA44C1AB960F3009E8AC3 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterViewController.m; path = Filter/FilterViewController.m; sourceTree = "<group>"; };
+		13EC416C1AD683C6001FEDD7 /* merchant-categories-bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-categories-bar@2x.png"; sourceTree = "<group>"; };
+		13EC416E1AD68693001FEDD7 /* merchant-location-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-location-button@2x.png"; sourceTree = "<group>"; };
+		13EC41701AD69031001FEDD7 /* home-banner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-banner@2x.png"; sourceTree = "<group>"; };
 		13F087701AD5561200D6E467 /* image@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "image@2x.jpg"; sourceTree = "<group>"; };
 		13FAE2291AB1966C00A6540D /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		13FAE22B1AB1967100A6540D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -413,6 +419,7 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				13EC416E1AD68693001FEDD7 /* merchant-location-button@2x.png */,
 				1398EE7B1AD649CB0037B793 /* merchant-rupee4@2x.png */,
 				1398EE7C1AD649CB0037B793 /* merchant-rupee3@2x.png */,
 				1398EE7D1AD649CB0037B793 /* merchant-rupee2@2x.png */,
@@ -455,6 +462,7 @@
 				1337EDD51ACBD35D00F31D14 /* merchant-face@2x.png */,
 				1337EDD61ACBD35D00F31D14 /* merchant-hair-deal@2x.png */,
 				1337EDD71ACBD35D00F31D14 /* merchant-hair@2x.png */,
+				13EC416C1AD683C6001FEDD7 /* merchant-categories-bar@2x.png */,
 				1337EDD81ACBD35D00F31D14 /* merchant-listing-call@2x.png */,
 				1337EDD91ACBD35D00F31D14 /* merchant-listing-deal-active@2x.png */,
 				1337EDDA1ACBD35D00F31D14 /* merchant-listing-deal@2x.png */,
@@ -468,6 +476,7 @@
 				1337EDE21ACBD35D00F31D14 /* merchant-nail@2x.png */,
 				1337EDE31ACBD35D00F31D14 /* merchant-price@2x.png */,
 				1337EDE41ACBD35D00F31D14 /* merchant-pt-deal@2x.png */,
+				13EC41701AD69031001FEDD7 /* home-banner@2x.png */,
 				1337EDE51ACBD35D00F31D14 /* merchant-pt@2x.png */,
 				1337EDE61ACBD35D00F31D14 /* merchant-removal-deal@2x.png */,
 				1337EDE71ACBD35D00F31D14 /* merchant-removal@2x.png */,
@@ -817,6 +826,7 @@
 				1337EE181ACBD35D00F31D14 /* header_distance-active-up@2x.png in Resources */,
 				135B4C8A1A7F84DD00B64F30 /* Images.xcassets in Resources */,
 				1337EE2B1ACBD35D00F31D14 /* merchant-massage@2x.png in Resources */,
+				13EC41711AD69031001FEDD7 /* home-banner@2x.png in Resources */,
 				1337EE171ACBD35D00F31D14 /* header-share@2x.png in Resources */,
 				1398EE801AD649CB0037B793 /* merchant-rupee3@2x.png in Resources */,
 				1337EE3B1ACBD35D00F31D14 /* navbar-favourites@2x.png in Resources */,
@@ -832,6 +842,7 @@
 				1337EE201ACBD35D00F31D14 /* merchant-face@2x.png in Resources */,
 				1337EE131ACBD35D00F31D14 /* header-rupee-active-down@2x.png in Resources */,
 				1337EE411ACBD35D00F31D14 /* navbar-nearby@2x.png in Resources */,
+				13EC416D1AD683C6001FEDD7 /* merchant-categories-bar@2x.png in Resources */,
 				1337EE0C1ACBD35D00F31D14 /* header-distance-up@2x.png in Resources */,
 				1337EE2A1ACBD35D00F31D14 /* merchant-massage-deal.png in Resources */,
 				1337EE291ACBD35D00F31D14 /* merchant-makeup@2x.png in Resources */,
@@ -859,6 +870,7 @@
 				13E5307F1AD25CD10046EAEB /* .gitignore in Resources */,
 				1337EE371ACBD35D00F31D14 /* merchant-time@2x.png in Resources */,
 				1337EE161ACBD35D00F31D14 /* header-search@2x.png in Resources */,
+				13EC416F1AD68693001FEDD7 /* merchant-location-button@2x.png in Resources */,
 				1337EE491ACBD35D00F31D14 /* registration-mobile@2x.png in Resources */,
 				1337EE481ACBD35D00F31D14 /* registration-mobile-active@2x.png in Resources */,
 				1337EE311ACBD35D00F31D14 /* merchant-removal-deal@2x.png in Resources */,
