@@ -9,17 +9,29 @@
 #import "EmailLoginViewController.h"
 #import "FormInputCell.h"
 #import "UIImage+ImageEffects.h"
+#import "NetworkHelper.h"
 
 @implementation EmailLoginViewController
 #pragma mark -
 
 - (IBAction)signup:(id)sender {
+
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/confirm/1" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"dealId":@"1"} completionHandler:^(id response, NSString *url, NSError *error){
     
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-    self.navigationController.navigationBarHidden=YES;
-    [self.navigationController pushViewController:obj animated:YES];
+//    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
+        
+        if (error == nil && response!=nil) {
+            
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"response Dict %@",responseDict);
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+            self.navigationController.navigationBarHidden=YES;
+            [self.navigationController pushViewController:obj animated:YES];
+        }
+    }];
+    
 }
 
 

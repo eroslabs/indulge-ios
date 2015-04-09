@@ -9,8 +9,9 @@
 #import "HomeViewController.h"
 #import "NetworkHelper.h"
 
-@interface HomeViewController ()
-
+@interface HomeViewController (){
+    BOOL merchantListing;
+}
 @end
 
 @implementation HomeViewController
@@ -24,6 +25,29 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     //[[NetworkHelper sharedInstance] formRequestwithemail:@"vikas@eroslabs.co"];
+    merchantListing = YES;
+    [self setupRecomendedButttons];
+}
+
+-(void)setupRecomendedButttons{
+    self.recommededButton1.layer.cornerRadius = 4.0f;
+    self.recommededButton2.layer.cornerRadius = 4.0f;
+    self.recommededButton3.layer.cornerRadius = 4.0f;
+    self.recommededButton4.layer.cornerRadius = 4.0f;
+    self.recommededButton5.layer.cornerRadius = 4.0f;
+
+    self.recommededButton1.clipsToBounds = YES;
+    self.recommededButton2.clipsToBounds = YES;
+    self.recommededButton3.clipsToBounds = YES;
+    self.recommededButton4.clipsToBounds = YES;
+    self.recommededButton5.clipsToBounds = YES;
+    
+    [self.recommededButton1 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+    [self.recommededButton2 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+    [self.recommededButton3 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+    [self.recommededButton4 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+    [self.recommededButton5 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
+
 }
 
 #pragma mark -
@@ -37,15 +61,46 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    return 150;
+    if (!merchantListing) {
+        return 62;
+    }
+    else{
+        return 152;
+    }
+    return 0;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyIdentifier"];
-    //cell.textLabel.text = @"Sample";
+    NSString *identifier = nil;
+    
+    if(!merchantListing){
+        identifier = @"SuggestedCellIdentifier";
+    }
+    else{
+        identifier = @"MerchantIdentifier";
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    if(!merchantListing){
+        UILabel *myLabel = [[UILabel alloc] init];
+        myLabel.frame = CGRectMake(20, 0, tableView.frame.size.width, 20);
+        myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
+        myLabel.text = @"Suggested Searches";
+        
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor colorWithRed:0.9254f green:0.9254f blue:0.9254f alpha:1.0f];
+        [headerView addSubview:myLabel];
+        
+        return headerView;
+    }
+    
+    return nil;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -75,11 +75,10 @@
 
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
 
+-(IBAction)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark -
 #pragma mark UITableViewDatasource

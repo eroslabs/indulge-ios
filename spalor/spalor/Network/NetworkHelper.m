@@ -44,8 +44,8 @@ NSString * APIRequestID()
 }
 
 
--(NSURLRequest *)formRequestwithemail:(NSString *)emailId{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:INDULGE_URL]];
+-(NSURLRequest *)formRequestwithemail:(NSString *)emailId andURLString:(NSString *)urlString{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
     NSString *token = APIRequestID();
     [request setValue:token forHTTPHeaderField:@"token"];
     [request setValue:emailId forHTTPHeaderField:@"email"];
@@ -57,8 +57,10 @@ NSString * APIRequestID()
     
     [request setValue:encryptedAuth forHTTPHeaderField:@"auth"];
     [request setValue:INDULGE_API_VERSION_STRING forHTTPHeaderField:@"version"];
-    return nil;
+    return request;
 }
+
+
 
 - (void)getArrayFromPutURL:(NSString *)url parmeters:(NSDictionary *)dicParams completionHandler:(void (^)(id response, NSString *url, NSError *error))block {
     url = [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
@@ -176,16 +178,20 @@ NSString * APIRequestID()
 
 - (void)getArrayFromGetUrl:(NSString *)url withParameters:(NSDictionary *)parameters completionHandler:(void (^)(id response, NSString *url, NSError *error))block {
     url = [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-
-    NSDictionary *tokenData = [[NSUserDefaults standardUserDefaults] objectForKey:@"USER_DATA"];
-    NSDictionary *sessionDict = tokenData[@"server_session"];
-    NSDictionary *payloadDict = [sessionDict objectForKey:@"session"];
-    NSString *authToken = [sessionDict objectForKey:@"auth_token"];
     
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?_request_id=%@&_auth_token=%@&_api_version_id=%@",INDULGE_URL,url,APIRequestID(),authToken,INDULGE_API_VERSION];
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?",INDULGE_URL,url];
     
+    int index = 0;
     for (NSString *key in [parameters allKeys]) {
-        [urlString appendString:[NSString stringWithFormat:@"&%@=%@",key,parameters[key]]];
+        if (index == 0) {
+            [urlString appendString:[NSString stringWithFormat:@"%@=%@",key,parameters[key]]];
+
+        }
+        else{
+            [urlString appendString:[NSString stringWithFormat:@"&%@=%@",key,parameters[key]]];
+
+        }
+        index++;
     }
     
     NSURL *URL = [NSURL URLWithString:urlString];

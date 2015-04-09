@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <GoogleOpenSource/GoogleOpenSource.h>
 #import <GooglePlus/GooglePlus.h>
+#import "NetworkHelper.h"
 #import "UIImage+ImageEffects.h"
 
 @interface LoginViewController ()
@@ -79,6 +80,8 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     
     if(authenticated)  // authenticated---> BOOL Value assign True only if Login Success
     {
+        
+        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         self.navigationController.navigationBarHidden=YES;
