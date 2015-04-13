@@ -8,10 +8,9 @@
 
 #import "HomeViewController.h"
 #import "NetworkHelper.h"
+#import "UIImage+ImageEffects.h"
 
-@interface HomeViewController (){
-    BOOL merchantListing;
-}
+@interface HomeViewController ()
 @end
 
 @implementation HomeViewController
@@ -25,9 +24,35 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     //[[NetworkHelper sharedInstance] formRequestwithemail:@"vikas@eroslabs.co"];
-    merchantListing = YES;
     [self setupRecomendedButttons];
+    
+    [self searchStateOn:NO];
 }
+
+-(void)searchStateOn:(BOOL)onState{
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        self.locationIconImageView.alpha = !onState;
+        self.locationLabel.alpha = !onState;
+        self.headerTitleLabel.alpha = !onState;
+        self.bottomView.alpha = !onState;
+        self.recommededButton1.alpha = !onState;
+        self.recommededButton2.alpha = !onState;
+        self.recommededButton3.alpha = !onState;
+        self.recommededButton4.alpha = !onState;
+        self.recommededButton5.alpha = !onState;
+        
+        self.goBackFromSearchButton.alpha = onState;
+        self.locationSearchBackgroundImageView.alpha = onState;
+        self.locationSearchTextField.alpha = onState;
+        self.tableView.alpha = onState;
+
+    }];
+    
+    
+}
+
+
 
 -(void)setupRecomendedButttons{
     self.recommededButton1.layer.cornerRadius = 4.0f;
@@ -42,12 +67,11 @@
     self.recommededButton4.clipsToBounds = YES;
     self.recommededButton5.clipsToBounds = YES;
     
-    [self.recommededButton1 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-    [self.recommededButton2 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-    [self.recommededButton3 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-    [self.recommededButton4 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-    [self.recommededButton5 setBackgroundImage:[UIImage imageNamed:@"button.png"] forState:UIControlStateNormal];
-
+    CGRect oldFrame = self.searchButton.frame;
+    CGRect newFrame = oldFrame;
+    newFrame.origin.x = 14;
+    newFrame.origin.y = self.filterButton.frame.origin.y;
+    self.searchButton.frame = newFrame;
 }
 
 #pragma mark -
@@ -61,25 +85,13 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!merchantListing) {
-        return 62;
-    }
-    else{
-        return 160;
-    }
-    return 0;
+    return 62;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = nil;
-    
-    if(!merchantListing){
-        identifier = @"SuggestedCellIdentifier";
-    }
-    else{
-        identifier = @"MerchantIdentifier";
-    }
+    NSString *identifier =  @"SuggestedCellIdentifier";
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     return cell;
 }
@@ -101,18 +113,54 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if(merchantListing){
-        return 0.0f;
-    }
-    else{
-        return 20.0f;
-    }
+
+    return 20.0f;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"detailSegue" sender:self];
+    [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
 
+}
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //START THE ANIMATION HERE
+    [self searchStateOn:YES];
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+
+    if (textField.text.length>0) {
+        [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
+    }
+    else{
+        [self searchStateOn:NO];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if(self.searchButton.hidden){
+        [self searchStateOn:YES];
+    }
+    
+    return YES;
+}
+
+#pragma mark - User Actions
+
+-(IBAction)search:(id)sender{
+    [self searchStateOn:YES];
+}
+
+-(IBAction)goBackFromSearch:(id)sender{
+    [self.searchTextField resignFirstResponder];
+    [self searchStateOn:NO];
 }
 
 
