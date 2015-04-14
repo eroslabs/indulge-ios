@@ -200,7 +200,8 @@ NSString * APIRequestID()
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
     [request setHTTPMethod:@"GET"];
     
-    
+    [request setValue: @"application/json" forHTTPHeaderField:@"accept"];
+
     if(!self.queueManager) {
         self.queueManager = [NSOperationQueue new];
     }

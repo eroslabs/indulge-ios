@@ -15,6 +15,10 @@
 		132BD2B41A88877F007F5D89 /* FBAudienceNetwork.README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 132BD1991A88877E007F5D89 /* FBAudienceNetwork.README.txt */; };
 		132BD2B51A88877F007F5D89 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 132BD19A1A88877E007F5D89 /* LICENSE */; };
 		132BD2B61A88877F007F5D89 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 132BD19B1A88877E007F5D89 /* README.txt */; };
+		132C9F0E1ADCF79800EB5F3F /* Merchant.m in Sources */ = {isa = PBXBuildFile; fileRef = 132C9F0D1ADCF79800EB5F3F /* Merchant.m */; };
+		132C9F111ADCF7B200EB5F3F /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 132C9F101ADCF7B200EB5F3F /* Location.m */; };
+		132C9F141ADCF81700EB5F3F /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 132C9F131ADCF81700EB5F3F /* Schedule.m */; };
+		132C9F171ADCF82500EB5F3F /* Services.m in Sources */ = {isa = PBXBuildFile; fileRef = 132C9F161ADCF82500EB5F3F /* Services.m */; };
 		133008E91ACD15EE009FFC77 /* FormInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 133008E81ACD15EE009FFC77 /* FormInputCell.m */; };
 		133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 133008EB1ACD172C009FFC77 /* EmailLoginViewController.m */; };
 		133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 133008EE1ACD1F41009FFC77 /* ForgotPasswordViewController.m */; };
@@ -184,6 +188,14 @@
 		132BD1991A88877E007F5D89 /* FBAudienceNetwork.README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FBAudienceNetwork.README.txt; sourceTree = "<group>"; };
 		132BD19A1A88877E007F5D89 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		132BD19B1A88877E007F5D89 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		132C9F0C1ADCF79800EB5F3F /* Merchant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Merchant.h; path = Models/Merchant.h; sourceTree = "<group>"; };
+		132C9F0D1ADCF79800EB5F3F /* Merchant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Merchant.m; path = Models/Merchant.m; sourceTree = "<group>"; };
+		132C9F0F1ADCF7B200EB5F3F /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Models/Location.h; sourceTree = "<group>"; };
+		132C9F101ADCF7B200EB5F3F /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = Models/Location.m; sourceTree = "<group>"; };
+		132C9F121ADCF81700EB5F3F /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Schedule.h; path = Models/Schedule.h; sourceTree = "<group>"; };
+		132C9F131ADCF81700EB5F3F /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Schedule.m; path = Models/Schedule.m; sourceTree = "<group>"; };
+		132C9F151ADCF82500EB5F3F /* Services.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Services.h; sourceTree = "<group>"; };
+		132C9F161ADCF82500EB5F3F /* Services.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Services.m; sourceTree = "<group>"; };
 		133008E71ACD15EE009FFC77 /* FormInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FormInputCell.h; path = Extensions/FormInputCell.h; sourceTree = "<group>"; };
 		133008E81ACD15EE009FFC77 /* FormInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FormInputCell.m; path = Extensions/FormInputCell.m; sourceTree = "<group>"; };
 		133008EA1ACD172C009FFC77 /* EmailLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailLoginViewController.h; path = Login/EmailLoginViewController.h; sourceTree = "<group>"; };
@@ -431,6 +443,21 @@
 			path = FacebookSDK;
 			sourceTree = "<group>";
 		};
+		132C9F091ADCF45C00EB5F3F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				132C9F0C1ADCF79800EB5F3F /* Merchant.h */,
+				132C9F0D1ADCF79800EB5F3F /* Merchant.m */,
+				132C9F0F1ADCF7B200EB5F3F /* Location.h */,
+				132C9F101ADCF7B200EB5F3F /* Location.m */,
+				132C9F121ADCF81700EB5F3F /* Schedule.h */,
+				132C9F131ADCF81700EB5F3F /* Schedule.m */,
+				132C9F151ADCF82500EB5F3F /* Services.h */,
+				132C9F161ADCF82500EB5F3F /* Services.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		1337EDB71ACBD34400F31D14 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +595,7 @@
 		135B4C781A7F84DD00B64F30 /* spalor */ = {
 			isa = PBXGroup;
 			children = (
+				132C9F091ADCF45C00EB5F3F /* Models */,
 				1337EDB71ACBD34400F31D14 /* Resources */,
 				13E30DB91AC5736900BE38D7 /* Network Utility */,
 				13EBA44A1AB96009009E8AC3 /* Filter */,
@@ -956,6 +984,7 @@
 				13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */,
 				13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */,
 				1331FE7A1AC53B1000BEF382 /* AllReviewsViewController.m in Sources */,
+				132C9F111ADCF7B200EB5F3F /* Location.m in Sources */,
 				13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */,
 				13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */,
 				1347FD8E1ADBCC03007EF73D /* NearbyViewController.m in Sources */,
@@ -963,6 +992,7 @@
 				13E530721AD256480046EAEB /* NSData+NSData_AES256.m in Sources */,
 				135B4C7F1A7F84DD00B64F30 /* AppDelegate.m in Sources */,
 				13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */,
+				132C9F171ADCF82500EB5F3F /* Services.m in Sources */,
 				138960791ADBBE4D005685E7 /* MerchantListViewController.m in Sources */,
 				133008E91ACD15EE009FFC77 /* FormInputCell.m in Sources */,
 				13E530831AD25CD10046EAEB /* NSData+CommonCrypto.m in Sources */,
@@ -973,8 +1003,10 @@
 				135B4C821A7F84DD00B64F30 /* spalor.xcdatamodeld in Sources */,
 				135B4C7C1A7F84DD00B64F30 /* main.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
+				132C9F141ADCF81700EB5F3F /* Schedule.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
 				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,
+				132C9F0E1ADCF79800EB5F3F /* Merchant.m in Sources */,
 				13E530841AD25CD10046EAEB /* NSString+Base64.m in Sources */,
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
 				133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */,

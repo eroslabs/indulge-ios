@@ -27,6 +27,19 @@
     [self setupRecomendedButttons];
     
     [self searchStateOn:NO];
+    
+    //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/getMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"point":@"34.5,34.5",@"page":@"0,distance,asc"} completionHandler:^(id response, NSString *url, NSError *error){
+        if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+        }
+        else{
+            NSLog(@"error %@",[error localizedDescription]);
+        }
+    }];
 }
 
 -(void)searchStateOn:(BOOL)onState{

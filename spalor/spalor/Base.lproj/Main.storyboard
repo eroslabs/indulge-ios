@@ -1357,16 +1357,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yef-n5-V2k" userLabel="Filter View">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yef-n5-V2k" userLabel="Filter View">
                                 <rect key="frame" x="0.0" y="60" width="600" height="46"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5i0-1U-VqD">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5i0-1U-VqD">
                                         <rect key="frame" x="24" y="8" width="43" height="30"/>
                                         <state key="normal" title="Filter1">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ru2-7h-xCO">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ru2-7h-xCO">
                                         <rect key="frame" x="102" y="8" width="43" height="30"/>
                                         <state key="normal" title="Filter2">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1385,12 +1385,9 @@
                                         </state>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="14S-iE-7jM" firstAttribute="baseline" secondItem="Q0B-rE-1kv" secondAttribute="baseline" id="HmV-YK-zay"/>
-                                    <constraint firstItem="5i0-1U-VqD" firstAttribute="leading" secondItem="Yef-n5-V2k" secondAttribute="leading" constant="24" id="Ikl-LM-VHL"/>
-                                    <constraint firstAttribute="trailing" secondItem="14S-iE-7jM" secondAttribute="trailing" constant="21" id="N55-nh-a5Z"/>
-                                    <constraint firstItem="14S-iE-7jM" firstAttribute="top" secondItem="Yef-n5-V2k" secondAttribute="topMargin" id="SqB-Tk-gU5"/>
                                     <constraint firstItem="Ru2-7h-xCO" firstAttribute="leading" secondItem="5i0-1U-VqD" secondAttribute="trailing" constant="35" id="VSg-kW-Gjh"/>
                                     <constraint firstItem="Ru2-7h-xCO" firstAttribute="baseline" secondItem="Q0B-rE-1kv" secondAttribute="baseline" id="aL4-m6-Rd7"/>
                                     <constraint firstItem="Ru2-7h-xCO" firstAttribute="baseline" secondItem="5i0-1U-VqD" secondAttribute="baseline" id="jtb-Lf-LWR"/>
@@ -1518,12 +1515,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Xva-Ke-wy5" firstAttribute="trailing" secondItem="Yef-n5-V2k" secondAttribute="trailing" id="4wR-6N-0XK"/>
+                            <constraint firstAttribute="trailing" secondItem="Yef-n5-V2k" secondAttribute="trailing" id="7g3-n4-QJr"/>
                             <constraint firstItem="Xva-Ke-wy5" firstAttribute="bottom" secondItem="N0Y-Rn-08h" secondAttribute="top" id="9Xr-oO-hrW"/>
                             <constraint firstItem="Xva-Ke-wy5" firstAttribute="leading" secondItem="RaM-0e-wdP" secondAttribute="leading" id="KwY-SL-1eL"/>
-                            <constraint firstAttribute="bottom" secondItem="Yef-n5-V2k" secondAttribute="bottom" constant="494" id="fuL-Tq-LC3"/>
+                            <constraint firstItem="Yef-n5-V2k" firstAttribute="leading" secondItem="RaM-0e-wdP" secondAttribute="leading" id="T5V-ey-fag"/>
+                            <constraint firstItem="N0Y-Rn-08h" firstAttribute="top" secondItem="Yef-n5-V2k" secondAttribute="bottom" constant="445" id="Usc-G1-dcp"/>
                             <constraint firstAttribute="trailing" secondItem="Xva-Ke-wy5" secondAttribute="trailing" id="lJw-44-HCZ"/>
                             <constraint firstItem="Xva-Ke-wy5" firstAttribute="top" secondItem="Yef-n5-V2k" secondAttribute="bottom" constant="7" id="mBg-En-qEg"/>
-                            <constraint firstItem="Yef-n5-V2k" firstAttribute="top" secondItem="RaM-0e-wdP" secondAttribute="topMargin" constant="60" id="xoU-gn-0ho"/>
+                            <constraint firstItem="Yef-n5-V2k" firstAttribute="top" secondItem="RaM-0e-wdP" secondAttribute="topMargin" constant="60" id="n6N-kA-Bfa"/>
                             <constraint firstItem="Xva-Ke-wy5" firstAttribute="leading" secondItem="Yef-n5-V2k" secondAttribute="leading" id="y1g-hY-eZb"/>
                         </constraints>
                         <variation key="default">
