@@ -7,8 +7,12 @@
 //
 
 #import "MerchantListViewController.h"
+#import "Merchant.h"
+#import "NetworkHelper.h"
 
-@interface MerchantListViewController ()
+@interface MerchantListViewController (){
+    NSArray *arrayOfMerchants;
+}
 
 @end
 
@@ -17,6 +21,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+//    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/getMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"point":@"34.5,34.5",@"page":@"0,distance,asc"} completionHandler:^(id response, NSString *url, NSError *error){
+//        if (!error) {
+//            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+//            
+//            NSLog(@"response string %@",responseDict);
+//        
+//            arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
+//            
+//            NSLog(@"array of merchants %@",arrayOfMerchants);
+//
+//        }
+//        else{
+//            NSLog(@"error %@",[error localizedDescription]);
+//        }
+//    }];
+
+}
+
+-(NSArray *)captureAllMerchantsFromResponseDict:(NSDictionary *)dictionary{
+   
+    NSArray *resultArray = dictionary[@"result"];
+    NSMutableArray *merchantArray = [NSMutableArray new];
+    
+    for (NSDictionary *merchantDict in resultArray) {
+        
+        Merchant *merchant = [[Merchant alloc] init];
+        [merchant readFromDictionary:merchantDict];
+        
+        NSLog(@"merchant %@",merchant);
+        
+        [merchantArray addObject:merchant];
+    }
+    
+    return merchantArray;
 }
 
 - (void)didReceiveMemoryWarning {

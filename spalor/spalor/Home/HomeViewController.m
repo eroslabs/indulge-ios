@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "NetworkHelper.h"
 #import "UIImage+ImageEffects.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface HomeViewController ()
 @end
@@ -30,16 +31,6 @@
     
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
     
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/getMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"point":@"34.5,34.5",@"page":@"0,distance,asc"} completionHandler:^(id response, NSString *url, NSError *error){
-        if (!error) {
-            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
-            
-            NSLog(@"response string %@",responseDict);
-        }
-        else{
-            NSLog(@"error %@",[error localizedDescription]);
-        }
-    }];
 }
 
 -(void)searchStateOn:(BOOL)onState{
@@ -59,10 +50,13 @@
         self.locationSearchBackgroundImageView.alpha = onState;
         self.locationSearchTextField.alpha = onState;
         self.tableView.alpha = onState;
-
+        if (onState) {
+            self.backgroundImageView.image = [UIImage imageNamed:@"Homepage-image1.png"];
+        }
+        else{
+            self.backgroundImageView.image = [UIImage imageNamed:@"Homepage-image.png"];
+        }
     }];
-    
-    
 }
 
 
@@ -104,7 +98,6 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier =  @"SuggestedCellIdentifier";
-
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     return cell;
 }

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MerchantListViewController : UIViewController
+@property (nonatomic , strong) NSString *searchText;
 -(IBAction)goBackToSearch:(id)sender;
 @end

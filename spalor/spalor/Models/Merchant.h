@@ -44,4 +44,7 @@
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSMutableArray *servicesArray;
 
+//Methods
+- (void)readFromDictionary:(NSDictionary *)dictionary;
+
 @end
