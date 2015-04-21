@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Self. All rights reserved.
 //
 
-#import "Services.h"
+#import "MerchantService.h"
 
-@implementation Services
+@implementation MerchantService
 
 @end

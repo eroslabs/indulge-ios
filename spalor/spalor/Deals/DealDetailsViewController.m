@@ -24,14 +24,65 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Table Datasource and Delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numOfRows = 7;
+    return numOfRows;
 }
-*/
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 160;
+    
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier;
+    switch (indexPath.row) {
+        case 0:
+            identifier = @"dealCellIdentifier";
+            break;
+        case 1:
+            identifier = @"socialCellIdentifier";
+            break;
+        case 2:
+            identifier = @"redeemCellIdentifier";
+            break;
+        case 3:
+            identifier = @"timingCellIdentifier";
+            break;
+        case 4:
+            identifier = @"priceRangeCell";
+            break;
+        case 5:
+            identifier = @"recomendedCellIdentifier";
+            break;
+        case 6:
+            identifier = @"extraServicesCellIdentifier";
+            break;
+        default:
+            break;
+    }
+    
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    return cell;
+}
+
+
+#pragma mark - User Actions
+
+-(IBAction)goBackToSearch:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)redeemDeal:(id)sender{
+    
+}
+
+
 
 @end

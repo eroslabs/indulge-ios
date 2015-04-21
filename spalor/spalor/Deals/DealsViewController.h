@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DealsViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UITableView *tableview;
 @end

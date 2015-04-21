@@ -1,0 +1,137 @@
+{
+    result =     (
+                {
+            acFacility = "<null>";
+            address = "<null>";
+            ccAccepted = 1;
+            certification = "<null>";
+            city = asd;
+            country = INDIA;
+            createdDate = 1427719898000;
+            email = "vikas31121978@gmail.com";
+            establishment = "<null>";
+            experience = "<null>";
+            genderSupport = "<null>";
+            geo =             {
+                lat = "28.9";
+                lon = "23.4";
+            };
+            homeService = 1;
+            id = 7;
+            image = "6\\ab.jpg";
+            images =             (
+            );
+            landmark = das;
+            lat = "28.9";
+            lng = "23.4";
+            locality = "<null>";
+            menus = "<null>";
+            merchantType = "<null>";
+            name = abc;
+            passPhrase = "<null>";
+            phone = 9811435036;
+            phones =             (
+                                {
+                    createdDate = "<null>";
+                    id = 6;
+                    merchantId = "<null>";
+                    phone = 435435345;
+                    status = 1;
+                    type = H;
+                    updatedDate = "<null>";
+                },
+                                {
+                    createdDate = "<null>";
+                    id = 7;
+                    merchantId = "<null>";
+                    phone = 9811435036;
+                    status = 1;
+                    type = O;
+                    updatedDate = "<null>";
+                }
+            );
+            pincode = 201012;
+            profileComplete = 0;
+            rating = 2;
+            schedule =             {
+                closingTime = "20:30";
+                createdDate = "<null>";
+                id = 7;
+                merchantId = "<null>";
+                openingTime = "08:30";
+                status = 1;
+                updatedDate = "<null>";
+                weekSchedule = 1100110;
+            };
+            separateRateCard = 1;
+            serviceRadius = 10;
+            services =             (
+                                {
+                    createdDate = "<null>";
+                    description = "<null>";
+                    id = 3;
+                    image = vikas;
+                    merchantId = "<null>";
+                    name = massage;
+                    price = 20;
+                    serviceId = 1;
+                    status = 1;
+                    updatedDate = "<null>";
+                },
+                                {
+                    createdDate = "<null>";
+                    description = "<null>";
+                    id = 4;
+                    image = vikas;
+                    merchantId = "<null>";
+                    name = massage;
+                    price = 20;
+                    serviceId = 1;
+                    status = 1;
+                    updatedDate = "<null>";
+                },
+                                {
+                    createdDate = "<null>";
+                    description = "<null>";
+                    id = 5;
+                    image = vikas;
+                    merchantId = "<null>";
+                    name = massage;
+                    price = 20;
+                    serviceId = 1;
+                    status = 1;
+                    updatedDate = "<null>";
+                },
+                                {
+                    createdDate = "<null>";
+                    description = "<null>";
+                    id = 6;
+                    image = vikas;
+                    merchantId = "<null>";
+                    name = massage;
+                    price = 20;
+                    serviceId = 1;
+                    status = 1;
+                    updatedDate = "<null>";
+                },
+                                {
+                    createdDate = "<null>";
+                    description = "<null>";
+                    id = "<null>";
+                    image = "6\\ab.jpg";
+                    merchantId = "<null>";
+                    name = "<null>";
+                    price = "<null>";
+                    serviceId = "<null>";
+                    status = "<null>";
+                    updatedDate = "<null>";
+                }
+            );
+            software = sdasda;
+            state = Delhi;
+            status = 1;
+            updatedDate = 1429002870000;
+        }
+    );
+    status = 1;
+}

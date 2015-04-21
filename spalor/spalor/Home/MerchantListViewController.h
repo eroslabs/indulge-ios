@@ -10,5 +10,9 @@
 
 @interface MerchantListViewController : UIViewController
 @property (nonatomic , strong) NSString *searchText;
+@property (nonatomic , weak) IBOutlet UITableView *tableview;
+@property (nonatomic , weak) IBOutlet UIView *loaderContainerView;
+@property (nonatomic , weak) IBOutlet UILabel *totalCountLabel;
+
 -(IBAction)goBackToSearch:(id)sender;
 @end

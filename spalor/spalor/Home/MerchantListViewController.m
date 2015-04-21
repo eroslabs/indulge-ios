@@ -9,9 +9,13 @@
 #import "MerchantListViewController.h"
 #import "Merchant.h"
 #import "NetworkHelper.h"
+#import "MerchantListCell.h"
+#import "FeSpinnerTenDot.h"
+#import "UIColor+flat.h"
 
 @interface MerchantListViewController (){
     NSArray *arrayOfMerchants;
+    FeSpinnerTenDot *spinner;
 }
 
 @end
@@ -22,21 +26,103 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/getMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"point":@"34.5,34.5",@"page":@"0,distance,asc"} completionHandler:^(id response, NSString *url, NSError *error){
-//        if (!error) {
-//            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
-//            
-//            NSLog(@"response string %@",responseDict);
-//        
-//            arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
-//            
-//            NSLog(@"array of merchants %@",arrayOfMerchants);
-//
-//        }
-//        else{
-//            NSLog(@"error %@",[error localizedDescription]);
-//        }
-//    }];
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:YES];
+    [self.loaderContainerView addSubview:spinner];
+    self.loaderContainerView.hidden = NO;
+    //self.view.backgroundColor = [UIColor colorWithHexCode:@"#019875"];
+    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
+    
+//    [self searchForNewMerchants];
+//    [self pickUpLocallyStoredMerchantResponse];
+
+}
+
+-(void)searchForNewMerchants{
+    
+    //Sort - Rating Distance popularity price
+    /*
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/loadCategories" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
+        
+        if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+        }
+    }];
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/loadSearches" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
+        
+        if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+        }
+    }];
+     */
+    
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"lat":@"28.9",@"lon":@"23.4",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"}  completionHandler:^(id response, NSString *url, NSError *error){
+        
+            if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+                
+            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"MerchantResponse"];
+            
+                
+            NSLog(@"response Data %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"MerchantResponse"]);
+
+            if (responseDict) {
+                arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
+            }
+            
+            NSLog(@"array of merchants %@",arrayOfMerchants);
+            
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [spinner dismiss];
+                    self.totalCountLabel.text = [NSString stringWithFormat:@"%d Items",arrayOfMerchants.count];
+                    self.loaderContainerView.hidden = YES;
+                    [self.tableview reloadData];
+                });
+        }
+        else{
+            NSLog(@"error %@",[error localizedDescription]);
+        }
+    }];
+     
+    
+
+}
+
+-(void)pickUpLocallyStoredMerchantResponse{
+    NSData *response = [[NSUserDefaults standardUserDefaults] objectForKey:@"MerchantResponse"];
+    
+    NSError *error = nil;
+    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+    
+    NSLog(@"response string %@",responseDict);
+    
+    
+    
+    //          NSLog(@"response Dict %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"MerchantResponse"]
+    
+    
+    if(error) {  //Handle error
+        NSLog(@"error %@",[error localizedDescription]);
+        
+    }
+    else{
+        NSLog(@"response string %@",responseDict);
+        
+        if (responseDict) {
+            arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
+        }
+        
+        NSLog(@"array of merchants %@",arrayOfMerchants);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableview reloadData];
+        });
+    }
 
 }
 
@@ -50,9 +136,15 @@
         Merchant *merchant = [[Merchant alloc] init];
         [merchant readFromDictionary:merchantDict];
         
-        NSLog(@"merchant %@",merchant);
+        
+        
+        NSLog(@"merchant %@",merchant.name);
         
         [merchantArray addObject:merchant];
+        
+        //Double up merchants for now
+        [merchantArray addObject:merchant];
+
     }
     
     return merchantArray;
@@ -67,7 +159,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = 10;
+    NSInteger numOfRows = arrayOfMerchants.count;
     return numOfRows;
 }
 
@@ -80,8 +172,32 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier =  @"MerchantIdentifier";
+    Merchant *merchant = arrayOfMerchants[indexPath.row];
+    MerchantListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    cell.nameLabel.text = merchant.name;
+    cell.addressLabel.text = (merchant.address)?merchant.address:@"Sample Address";
+    cell.averageRating.text = merchant.rating;;
+    cell.distanceLabel.text = @"500 m";// Need to calculate this at runtime
+    cell.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
+    cell.backgroundImageView.image = [UIImage imageNamed:@"image.png"];
+    cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];
+    [cell.callButton setImage:[UIImage imageNamed:@"merchant-listing-call.png"] forState:UIControlStateNormal];
+    [cell.shareButton setImage:[UIImage imageNamed:@"merchant-share.png"] forState:UIControlStateNormal];
+    [cell.favoriteButton setImage:[UIImage imageNamed:@"merchant-listing-favourite.png"] forState:UIControlStateNormal];
+    [cell.dealsButton setImage:[UIImage imageNamed:@"merchant-listing-deal.png"] forState:UIControlStateNormal];
+
+    cell.serviceCategorybackgroundImageView.image = [UIImage imageNamed:@"merchant-categories-bar.png"];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    cell.serviceCategoryImageView1.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView2.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView3.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView4.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView5.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView6.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView7.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView8.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView9.image = [UIImage imageNamed:@"merchant-massage.png"];
+
     return cell;
 }
 

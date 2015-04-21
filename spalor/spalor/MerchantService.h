@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Services : NSObject
-@property (nonatomic, strong) NSString *description;
+@interface MerchantService : NSObject
+@property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *serviceId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *price;
+@property (nonatomic, strong) NSString *image;
 @end

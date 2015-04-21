@@ -1,17 +1,15 @@
 //
-//  Merchant.m
+//  Deal.m
 //  spalor
 //
-//  Created by Manish on 14/04/15.
+//  Created by Manish on 20/04/15.
 //  Copyright (c) 2015 Self. All rights reserved.
 //
 
-#import "Merchant.h"
+#import "Deal.h"
 #import <objc/runtime.h>
 
-
-
-@implementation Merchant
+@implementation Deal
 
 - (NSArray *)allPropertyNames
 {
@@ -51,13 +49,6 @@
                 location.lon = [dictionary[key] objectForKey:@"lon"];
                 [self setValue:location forKey:key];
             }
-            else if ([key isEqualToString:@"schedule"]) {
-                Schedule *schedule = [[Schedule alloc] init];
-                schedule.openingTime = [dictionary[key] objectForKey:@"openingTime"];
-                schedule.closingTime = [dictionary[key] objectForKey:@"closingTime"];
-                schedule.weekSchedule = [dictionary[key] objectForKey:@"weekSchedule"];
-                [self setValue:schedule forKey:key];
-            }
             else if ([key isEqualToString:@"services"]) {
                 self.services = [[NSMutableArray alloc] init];
                 for (NSDictionary *service in dictionary[key]){
@@ -74,7 +65,6 @@
             }
             else{
                 [self setValue:dictionary[key] forKey:key];
-
             }
         }
     }

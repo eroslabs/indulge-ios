@@ -7,9 +7,13 @@
 //
 
 #import "DealsViewController.h"
+#import "NetworkHelper.h"
+#import "DealListCell.h"
+#import "Deal.h"
 
-@interface DealsViewController ()
-
+@interface DealsViewController (){
+    NSArray *arrayOfDeals;
+}
 @end
 
 @implementation DealsViewController
@@ -17,7 +21,57 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:@{@"s":@"abc"} completionHandler:^(id response, NSString *url, NSError *error){
+        
+        //    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:@{@"s":@"abc"} completionHandler:^(id response, NSString *url, NSError *error){
+        
+        //    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/getMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"point":@"34.5,34.5",@"page":@"0,distance,asc"} completionHandler:^(id response, NSString *url, NSError *error){
+        if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+            
+            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"DealResponse"];
+
+            
+            if (responseDict) {
+                arrayOfDeals = [self captureAllMerchantsFromResponseDict:responseDict];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableview reloadData];
+            });
+            
+        }
+        else{
+            NSLog(@"error %@",[error localizedDescription]);
+        }
+    }];
+
 }
+
+
+-(NSArray *)captureAllMerchantsFromResponseDict:(NSDictionary *)dictionary{
+    
+    NSArray *resultArray = dictionary[@"result"];
+    NSMutableArray *dealArray = [NSMutableArray new];
+    
+    for (NSDictionary *dealDict in resultArray) {
+        
+        Deal *deal = [[Deal alloc] init];
+        [deal readFromDictionary:dealDict];
+        
+        NSLog(@"deal %@",deal.name);
+        
+        [dealArray addObject:deal];
+        
+    }
+    
+    return dealArray;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -28,7 +82,7 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = 10;
+    NSInteger numOfRows = arrayOfDeals.count;
     return numOfRows;
 }
 
@@ -41,8 +95,21 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier =  @"DealCellIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    Deal *deal = arrayOfDeals[indexPath.row];
+    DealListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    cell.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
+    //Left cap is the space you dont wanna stretch on the left side and right side of the image
+    int leftCap = 30;
+    //Left cap is the space you dont wanna stretch on the top side and bottom side of the image
+    int topCap = 20;
+    //this will only stretch the inner side of the image
+    cell.backgroundImageView.image = [cell.backgroundImageView.image stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap];
+
+    cell.nameLabel.text = deal.name;
+    cell.addressLabel.text = deal.address;
+    cell.distanceLabel.text = @"500 m";
+    cell.averageRating.text = deal.rating;
+    cell.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
     return cell;
 }
 

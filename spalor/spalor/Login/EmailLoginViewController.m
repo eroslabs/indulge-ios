@@ -16,19 +16,22 @@
 
 - (IBAction)signup:(id)sender {
 
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/confirm/1" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"dealId":@"1"} completionHandler:^(id response, NSString *url, NSError *error){
+ //   [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/confirm/1" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"dealId":@"1"} completionHandler:^(id response, NSString *url, NSError *error){
     
-//    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
         
         if (error == nil && response!=nil) {
+            dispatch_async (dispatch_get_main_queue(), ^{
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+                NSLog(@"response Dict %@",responseDict);
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+                self.navigationController.navigationBarHidden=YES;
+                [self.navigationController pushViewController:obj animated:YES];
+            });
+
             
-            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-            NSLog(@"response Dict %@",responseDict);
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-            self.navigationController.navigationBarHidden=YES;
-            [self.navigationController pushViewController:obj animated:YES];
         }
     }];
     

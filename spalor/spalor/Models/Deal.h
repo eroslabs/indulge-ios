@@ -1,8 +1,8 @@
 //
-//  Merchant.h
+//  Deal.h
 //  spalor
 //
-//  Created by Manish on 14/04/15.
+//  Created by Manish on 20/04/15.
 //  Copyright (c) 2015 Self. All rights reserved.
 //
 
@@ -11,37 +11,27 @@
 #import "Schedule.h"
 #import "MerchantService.h"
 
-@interface Merchant : NSObject
-
+@interface Deal : NSObject
 //Attributes
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *ccAccepted;
-@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *flatOff;
 @property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *genderSupport;
-@property (nonatomic, strong) NSString *homeServices;
 @property (nonatomic, strong) NSString *merchantid;
 @property (nonatomic, strong) NSString *image;
-@property (nonatomic, strong) NSString *landmark;
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *pincode;
 @property (nonatomic, strong) NSString *rating;
-@property (nonatomic, strong) NSString *separateRateCard;
-@property (nonatomic, strong) NSString *serviceRadius;
-@property (nonatomic, strong) NSString *software;
-@property (nonatomic, strong) NSString *state;
-@property (nonatomic, strong) NSString *street;
-@property (nonatomic, strong) NSString *unitNumber;
+@property (nonatomic, strong) NSString *validTill;
+@property (nonatomic, strong) NSString *percentOff;
+@property (nonatomic, strong) NSString *amountOff;
 
-//Images
-@property (nonatomic, strong) NSArray *merchantImageUrls;
-@property (nonatomic, strong) NSArray *rateCardImageUrls;
 
 //Relations
 @property (nonatomic, strong) Location *geo;
-@property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 
 //Methods

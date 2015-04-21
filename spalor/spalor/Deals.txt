@@ -1,0 +1,145 @@
+{
+    result =     (
+                {
+            city = asd;
+            confirmed = 2;
+            country = INDIA;
+            createdDate = 1427791338000;
+            days = 1100111;
+            description = sadsadasdsa;
+            flatOff = 20;
+            genderSupport = 2;
+            geo =             {
+                lat = "28.9";
+                lon = "23.4";
+            };
+            homeService = 1;
+            id = 1;
+            landmark = das;
+            lat = "28.9";
+            lng = "23.4";
+            locality = "<null>";
+            merchantId = 7;
+            name = abc;
+            percentOff = 10;
+            phone = 9811435036;
+            pincode = 201012;
+            rating = "2.0";
+            recurring = "<null>";
+            redemption = 3;
+            serviceRadius = 10;
+            services =             (
+                                {
+                    dealId = 1;
+                    id = 1;
+                    image = vikas;
+                    name = massage;
+                    serviceId = 1;
+                },
+                                {
+                    dealId = 1;
+                    id = 2;
+                    image = ff;
+                    name = cutting;
+                    serviceId = 2;
+                },
+                                {
+                    dealId = "<null>";
+                    id = 1;
+                    image = "<null>";
+                    name = "<null>";
+                    serviceId = "<null>";
+                }
+            );
+            status = "<null>";
+            updatedDate = 1427791338000;
+            validFrom = 1418236200000;
+            validTill = 1435084200000;
+        },
+                {
+            city = asd;
+            confirmed = 1;
+            country = INDIA;
+            createdDate = 1427791657000;
+            days = 1100111;
+            description = sadsadasdsa;
+            flatOff = 20;
+            genderSupport = 2;
+            geo =             {
+                lat = "28.9";
+                lon = "23.4";
+            };
+            homeService = 1;
+            id = 2;
+            landmark = das;
+            lat = "28.9";
+            lng = "23.4";
+            locality = "<null>";
+            merchantId = 7;
+            name = abc;
+            percentOff = 10;
+            phone = 9811435036;
+            pincode = 201012;
+            rating = "2.0";
+            recurring = "<null>";
+            redemption = 0;
+            serviceRadius = 10;
+            services =             (
+                                {
+                    dealId = "<null>";
+                    id = 2;
+                    image = "<null>";
+                    name = "<null>";
+                    serviceId = "<null>";
+                }
+            );
+            status = "<null>";
+            updatedDate = 1427791657000;
+            validFrom = 1418236200000;
+            validTill = 1448389800000;
+        },
+                {
+            city = asd;
+            confirmed = 0;
+            country = INDIA;
+            createdDate = 1427793055000;
+            days = 1100111;
+            description = sadsadasdsa;
+            flatOff = 20;
+            genderSupport = 2;
+            geo =             {
+                lat = "28.9";
+                lon = "23.4";
+            };
+            homeService = 1;
+            id = 3;
+            landmark = das;
+            lat = "28.9";
+            lng = "23.4";
+            locality = "<null>";
+            merchantId = 7;
+            name = abc;
+            percentOff = 10;
+            phone = 9811435036;
+            pincode = 201012;
+            rating = "2.0";
+            recurring = "<null>";
+            redemption = 0;
+            serviceRadius = 10;
+            services =             (
+                                {
+                    dealId = "<null>";
+                    id = 3;
+                    image = "<null>";
+                    name = "<null>";
+                    serviceId = "<null>";
+                }
+            );
+            status = "<null>";
+            updatedDate = 1427793055000;
+            validFrom = 1418236200000;
+            validTill = 1440009000000;
+        }
+    );
+    status = 1;
+}
