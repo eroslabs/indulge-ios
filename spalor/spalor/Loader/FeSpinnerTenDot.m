@@ -105,7 +105,7 @@
     {
         _backgroundBlur = [[FXBlurView alloc] initWithFrame:_containerView.bounds];
         _backgroundBlur.blurRadius = 40;
-        _backgroundBlur.tintColor = [UIColor colorWithHexCode:@"#32ce55"];
+        _backgroundBlur.tintColor = [UIColor colorWithHexCode:@"#EFEFF4"];
         _backgroundBlur.dynamic = NO;
         [_backgroundBlur.layer displayIfNeeded];
         
@@ -116,7 +116,7 @@
     else
     {
         _backgroundStatic = [[UIView alloc] initWithFrame:_containerView.bounds];
-        _backgroundStatic.backgroundColor = [UIColor colorWithHexCode:@"#32ce55"];
+        _backgroundStatic.backgroundColor = [UIColor colorWithHexCode:@"#EFEFF4"];
     }
 
 }
@@ -128,7 +128,7 @@
     UIView *centerDot = [[UIView alloc] initWithFrame:CGRectMake(center.x, center.y, 20, 20)];
     centerDot.clipsToBounds = YES;
     centerDot.layer.cornerRadius = centerDot.bounds.size.height /2;
-    centerDot.backgroundColor = [UIColor whiteColor];
+    centerDot.backgroundColor = [UIColor colorWithHexCode:@"715f58"];
     centerDot.center = center;
     
     [self addSubview:centerDot];

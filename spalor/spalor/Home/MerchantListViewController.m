@@ -26,14 +26,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:YES];
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
     //self.view.backgroundColor = [UIColor colorWithHexCode:@"#019875"];
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
-    
-//    [self searchForNewMerchants];
-//    [self pickUpLocallyStoredMerchantResponse];
+   //    [self pickUpLocallyStoredMerchantResponse];
 
 }
 
