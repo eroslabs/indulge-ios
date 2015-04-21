@@ -9,6 +9,7 @@
 #import "MerchantDetailViewController.h"
 #import "ParallaxHeaderView.h"
 #import "StoryCommentCell.h"
+#import "RateView.h"
 
 @interface MerchantDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -57,6 +58,19 @@
     headerView.headerTitleLabel.text = self.story[@"story"];
     
     [self.mainTableView setTableHeaderView:headerView];
+    
+    
+    /*
+     
+     self.rateView.notSelectedImage = [UIImage imageNamed:@"kermit_empty.png"];
+     self.rateView.halfSelectedImage = [UIImage imageNamed:@"kermit_half.png"];
+     self.rateView.fullSelectedImage = [UIImage imageNamed:@"kermit_full.png"];
+     self.rateView.rating = 3.5;
+     self.rateView.editable = NO;
+     self.rateView.maxRating = 5;
+     self.rateView.delegate = self;
+     
+     */
 
 }
 
