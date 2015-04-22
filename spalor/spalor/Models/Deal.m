@@ -54,6 +54,7 @@
                 for (NSDictionary *service in dictionary[key]){
                     MerchantService *merchantService = [[MerchantService alloc] init];
                     merchantService.serviceId = service[@"id"];
+                    merchantService.categoryId = service[@"categoryId"];
                     merchantService.desc = service[@"description"];
                     merchantService.price = service[@"price"];
                     merchantService.image = service[@"image"];

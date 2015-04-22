@@ -22,18 +22,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self searchForNewDeals];
+}
+
+-(void)searchForNewDeals{
     [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:@{@"s":@"abc"} completionHandler:^(id response, NSString *url, NSError *error){
         
-        //    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:@{@"s":@"abc"} completionHandler:^(id response, NSString *url, NSError *error){
-        
-        //    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/getMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"point":@"34.5,34.5",@"page":@"0,distance,asc"} completionHandler:^(id response, NSString *url, NSError *error){
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
             NSLog(@"response string %@",responseDict);
             
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"DealResponse"];
-
+            
             
             if (responseDict) {
                 arrayOfDeals = [self captureAllMerchantsFromResponseDict:responseDict];

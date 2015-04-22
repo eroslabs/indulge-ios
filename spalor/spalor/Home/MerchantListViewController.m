@@ -12,6 +12,7 @@
 #import "MerchantListCell.h"
 #import "FeSpinnerTenDot.h"
 #import "UIColor+flat.h"
+#import "LocationHelper.h"
 
 @interface MerchantListViewController (){
     NSArray *arrayOfMerchants;
@@ -26,12 +27,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    //self.view.backgroundColor = [UIColor colorWithHexCode:@"#019875"];
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
-   //    [self pickUpLocallyStoredMerchantResponse];
 
 }
 
@@ -57,8 +58,30 @@
     }];
      */
     
+    if(![[LocationHelper sharedInstance] checkPermission]){
+        //Show location manager not enabled screen
+        return;
+    }
     
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:@{@"s":@"abc",@"hs":@"1",@"services":@"1,2,3,4,5",@"lat":@"28.9",@"lon":@"23.4",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"}  completionHandler:^(id response, NSString *url, NSError *error){
+    CLLocation *myLocation = [[LocationHelper sharedInstance] getCurrentLocation];
+    
+    if(!myLocation){
+        [self performSelector:@selector(searchForNewMerchants) withObject:nil afterDelay:2.0f];
+    }
+    
+    NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
+    
+    
+    NSLog(@"filter Dict %@",filterDict);
+    
+    NSMutableDictionary *paramDict = [NSMutableDictionary new];
+    
+    [paramDict addEntriesFromDictionary:@{@"s":self.searchText}];
+    [paramDict addEntriesFromDictionary:filterDict];
+    [paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+    
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:paramDict  completionHandler:^(id response, NSString *url, NSError *error){
         
             if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
@@ -78,7 +101,7 @@
             
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [spinner dismiss];
-                    self.totalCountLabel.text = [NSString stringWithFormat:@"%d Items",arrayOfMerchants.count];
+                    self.totalCountLabel.text = [NSString stringWithFormat:@"%lu Items",(unsigned long)arrayOfMerchants.count];
                     self.loaderContainerView.hidden = YES;
                     [self.tableview reloadData];
                 });

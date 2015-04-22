@@ -66,6 +66,7 @@
                     merchantService.desc = service[@"description"];
                     merchantService.price = service[@"price"];
                     merchantService.image = service[@"image"];
+                    merchantService.categoryId = service[@"categoryId"];
                     [self.services addObject:merchantService];
                 }
             }

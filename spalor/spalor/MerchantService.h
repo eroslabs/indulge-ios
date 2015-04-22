@@ -11,6 +11,7 @@
 @interface MerchantService : NSObject
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *serviceId;
+@property (nonatomic, strong) NSString *categoryId;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *price;
 @property (nonatomic, strong) NSString *image;

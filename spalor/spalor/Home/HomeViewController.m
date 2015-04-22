@@ -10,8 +10,12 @@
 #import "NetworkHelper.h"
 #import "UIImage+ImageEffects.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MerchantListViewController.h"
+#import "LocationHelper.h"
 
-@interface HomeViewController ()
+@interface HomeViewController (){
+    NSString *searchText;
+}
 @end
 
 @implementation HomeViewController
@@ -28,6 +32,8 @@
     [self setupRecomendedButttons];
     
     [self searchStateOn:NO];
+    
+    [[LocationHelper sharedInstance] startLocationManager];
     
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
     
@@ -134,6 +140,7 @@
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     //START THE ANIMATION HERE
     [self searchStateOn:YES];
+    textField.text = @"";
     return YES;
 }
 
@@ -141,9 +148,11 @@
     [textField resignFirstResponder];
 
     if (textField.text.length>0) {
-        [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
+        searchText = textField.text;
+        [self performSegueWithIdentifier:@"ShowMerchantList" sender:nil];
     }
     else{
+        textField.text = @"Enter service, location , merchant";
         [self searchStateOn:NO];
     }
     return YES;
@@ -166,7 +175,18 @@
 
 -(IBAction)goBackFromSearch:(id)sender{
     [self.searchTextField resignFirstResponder];
+    self.searchTextField.text = @"Enter service, location , merchant";
     [self searchStateOn:NO];
+}
+
+#pragma mark - Segue 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"ShowMerchantList"]) {
+        
+        MerchantListViewController *controller = (MerchantListViewController *)segue.destinationViewController;
+        controller.searchText  = searchText;
+    }
 }
 
 
