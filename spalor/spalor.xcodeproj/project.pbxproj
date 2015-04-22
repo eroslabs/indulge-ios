@@ -113,6 +113,9 @@
 		137ABA511AC1537E00540CF2 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137ABA501AC1537E00540CF2 /* DealsViewController.m */; };
 		137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137ABA531AC1539900540CF2 /* DealDetailsViewController.m */; };
 		137FFBC31ADE407800C77706 /* deal-coupon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 137FFBC21ADE407800C77706 /* deal-coupon@2x.png */; };
+		1388A19F1AE79D5100E330C1 /* border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1388A19E1AE79D5100E330C1 /* border@2x.png */; };
+		1388A1A41AE7C47700E330C1 /* ServiceCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1388A1A31AE7C47700E330C1 /* ServiceCategory.m */; };
+		1388A1A71AE7C49A00E330C1 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 1388A1A61AE7C49A00E330C1 /* Service.m */; };
 		1388A9DA1AE680DF00852B30 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1388A9D91AE680DF00852B30 /* RateView.m */; };
 		138960791ADBBE4D005685E7 /* MerchantListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138960781ADBBE4D005685E7 /* MerchantListViewController.m */; };
 		13958F491AD7FCE700231794 /* filter-rating-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */; };
@@ -318,6 +321,11 @@
 		137ABA521AC1539900540CF2 /* DealDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealDetailsViewController.h; path = Deals/DealDetailsViewController.h; sourceTree = "<group>"; };
 		137ABA531AC1539900540CF2 /* DealDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealDetailsViewController.m; path = Deals/DealDetailsViewController.m; sourceTree = "<group>"; };
 		137FFBC21ADE407800C77706 /* deal-coupon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deal-coupon@2x.png"; sourceTree = "<group>"; };
+		1388A19E1AE79D5100E330C1 /* border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border@2x.png"; sourceTree = "<group>"; };
+		1388A1A21AE7C47700E330C1 /* ServiceCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceCategory.h; path = Models/ServiceCategory.h; sourceTree = "<group>"; };
+		1388A1A31AE7C47700E330C1 /* ServiceCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceCategory.m; path = Models/ServiceCategory.m; sourceTree = "<group>"; };
+		1388A1A51AE7C49A00E330C1 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Service.h; path = Models/Service.h; sourceTree = "<group>"; };
+		1388A1A61AE7C49A00E330C1 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Service.m; path = Models/Service.m; sourceTree = "<group>"; };
 		1388A9D81AE680DF00852B30 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateView.h; path = Rating/RateView.h; sourceTree = "<group>"; };
 		1388A9D91AE680DF00852B30 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateView.m; path = Rating/RateView.m; sourceTree = "<group>"; };
 		138960771ADBBE4D005685E7 /* MerchantListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantListViewController.h; path = Home/MerchantListViewController.h; sourceTree = "<group>"; };
@@ -503,6 +511,10 @@
 				13A073051AE4F04300754317 /* MerchantDeal.m */,
 				13A0730A1AE5099100754317 /* Deal.h */,
 				13A0730B1AE5099100754317 /* Deal.m */,
+				1388A1A21AE7C47700E330C1 /* ServiceCategory.h */,
+				1388A1A31AE7C47700E330C1 /* ServiceCategory.m */,
+				1388A1A51AE7C49A00E330C1 /* Service.h */,
+				1388A1A61AE7C49A00E330C1 /* Service.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -521,6 +533,7 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1388A19E1AE79D5100E330C1 /* border@2x.png */,
 				137FFBC21ADE407800C77706 /* deal-coupon@2x.png */,
 				1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */,
 				13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */,
@@ -941,6 +954,7 @@
 				1337EE2F1ACBD35D00F31D14 /* merchant-pt-deal@2x.png in Resources */,
 				1337EE351ACBD35D00F31D14 /* merchant-share-active@2x.png in Resources */,
 				13E530871AD299B30046EAEB /* registration-divider@2x.png in Resources */,
+				1388A19F1AE79D5100E330C1 /* border@2x.png in Resources */,
 				1337EE1C1ACBD35D00F31D14 /* merchant-deal-services@2x.png in Resources */,
 				1337EE421ACBD35D00F31D14 /* registration-age-active@2x.png in Resources */,
 				1337EE301ACBD35D00F31D14 /* merchant-pt@2x.png in Resources */,
@@ -1092,9 +1106,11 @@
 				133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */,
 				135B4C7C1A7F84DD00B64F30 /* main.m in Sources */,
 				13A0730C1AE5099100754317 /* Deal.m in Sources */,
+				1388A1A41AE7C47700E330C1 /* ServiceCategory.m in Sources */,
 				13A073091AE508D100754317 /* DealListCell.m in Sources */,
 				13E67C431AE4D63200F96A36 /* MerchantListCell.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
+				1388A1A71AE7C49A00E330C1 /* Service.m in Sources */,
 				132C9F141ADCF81700EB5F3F /* Schedule.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
 				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,

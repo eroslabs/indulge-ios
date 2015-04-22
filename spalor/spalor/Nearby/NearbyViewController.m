@@ -7,8 +7,11 @@
 //
 
 #import "NearbyViewController.h"
+#import "MerchantListViewController.h"
 
-@interface NearbyViewController ()
+@interface NearbyViewController (){
+    NSString *searchText;
+}
 
 @end
 
@@ -22,22 +25,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - TextField Delegate
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    //START THE ANIMATION HERE
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    
-    if (textField.text.length>0) {
-        [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
-    }
-    return YES;
 }
 
 
@@ -86,8 +73,44 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
+    [self performSegueWithIdentifier:@"ShowMerchantList" sender:nil];
     
+}
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //START THE ANIMATION HERE
+    textField.text = @"";
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    if (textField.text.length>0) {
+        searchText = textField.text;
+        [self performSegueWithIdentifier:@"ShowMerchantList" sender:nil];
+    }
+    else{
+        textField.text = @"Enter service, location , merchant";
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    return YES;
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"ShowMerchantList"]) {
+        
+        MerchantListViewController *controller = (MerchantListViewController *)segue.destinationViewController;
+        controller.searchText  = searchText;
+    }
 }
 
 
