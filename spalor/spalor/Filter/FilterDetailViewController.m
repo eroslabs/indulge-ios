@@ -8,10 +8,14 @@
 
 #import "FilterDetailViewController.h"
 #import "UIColor+flat.h"
+#import "ServiceCategory.h"
+#import "Service.h"
 
 @interface FilterDetailViewController (){
     int selectedCategory;
     NSMutableArray *selectedServicesArray;
+    NSMutableString *selectedServiceids;
+
 }
 
 @end
@@ -22,8 +26,62 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     selectedServicesArray = [NSMutableArray new];
+    selectedServiceids = [[NSMutableString alloc] initWithString:@""];
+
+    selectedCategory = 0;
+    
+    NSMutableDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
+    [selectedServiceids appendFormat:filterDict[@"services"]];
+    
+    [self setAllCategories];
     [self hideSelectedServicesView];
 }
+
+-(void)setAllCategories{
+    
+    int index = 0;
+    int lastX = 10;
+    NSArray *selectedServiceIdsArray = [selectedServiceids componentsSeparatedByString:@","];
+
+    for (ServiceCategory *category in self.arrayOfCategories) {
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [button setTitle:(category.name)?category.name:@"BLANK" forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",category.name]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",category.name]] forState:UIControlStateSelected];
+
+        button.frame = CGRectMake(lastX+button.frame.size.width+10,self.allCategoriesScrollView.bounds.origin.y,50,52);
+        lastX += button.frame.size.width + 20;
+        button.tag = index;
+        index++;
+        [button addTarget:self action:@selector(changeSelectedCategory:) forControlEvents:UIControlEventTouchUpInside];
+        self.allCategoriesScrollView.contentSize = CGSizeMake(lastX+button.frame.size.width+10, self.allCategoriesScrollView.contentSize.height);
+        [self.allCategoriesScrollView addSubview:button];
+        
+        int serviceIndex = 0;
+        for (Service *service in category.services) {
+            
+            if ([selectedServiceIdsArray containsObject:service.serviceId]) {
+                int tag = (button.tag+1)*10+serviceIndex;
+                selectedCategory = button.tag;
+                NSLog(@"putting %@ as selected",service.name);
+                
+                [self createandAddServiceButtonforServiceName:tag andIndex:serviceIndex];
+            }
+            
+            index++;
+        }
+    }
+
+}
+
+-(void)changeSelectedCategory:(UIButton *)button{
+    selectedCategory = button.tag;
+    button.selected = !button.selected;
+    [self.tableview reloadData];
+}
+
 
 -(void)hideSelectedServicesView{
     if(selectedServicesArray.count == 0){
@@ -57,6 +115,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(IBAction)save:(id)sender{
+    NSMutableDictionary *filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
+    [filterDict addEntriesFromDictionary:@{@"services":selectedServiceids}];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:filterDict forKey:@"filterDict"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
 -(IBAction)selectCategory:(UIButton *)sender{
     selectedCategory = sender.tag;
     [self.tableview reloadData];
@@ -68,7 +137,10 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = selectedCategory * 5;
+    
+    ServiceCategory *category = self.arrayOfCategories[selectedCategory];
+    NSLog(@"category %@ %d",category.name,category.services.count);
+    NSInteger numOfRows = category.services.count;
     return numOfRows;
 }
 
@@ -82,8 +154,10 @@
     NSString *identifier =  @"servicesCellIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.textLabel.text = [NSString stringWithFormat:@"service %d",selectedCategory*10+indexPath.row+1];
-    cell.tag = selectedCategory*10+indexPath.row+1;
+    ServiceCategory *category = self.arrayOfCategories[selectedCategory];
+    Service *service = category.services[indexPath.row];
+    cell.textLabel.text = service.name;
+    cell.tag = (selectedCategory+1)*10+indexPath.row;
     return cell;
 }
 
@@ -93,22 +167,42 @@
     //Put in selected service view
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    [self createandAddServiceButtonforServiceName:cell.tag];
-    
-}
-
--(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag{
-    
-    if([selectedServicesArray containsObject:@(serviceTag)]){
+    if([selectedServicesArray containsObject:@(cell.tag)]){
         return;
     }
     
+    [self createandAddServiceButtonforServiceName:cell.tag andIndexPath:indexPath];
+    
+}
+
+-(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndexPath:(NSIndexPath *)indexPath{
+    
+    [self createandAddServiceButtonforServiceName:serviceTag andIndex:indexPath.row];
+
+}
+
+-(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndex:(int)index{
     [selectedServicesArray addObject:@(serviceTag)];
     
     [self hideSelectedServicesView];
     
+    ServiceCategory *category = self.arrayOfCategories[selectedCategory];
+    Service *service = category.services[index];
+    
+    if ([selectedServiceids rangeOfString:service.serviceId].location==NSNotFound) {
+        if (selectedServiceids.length == 0) {
+            [selectedServiceids appendFormat:service.serviceId];
+            
+        }
+        else
+            [selectedServiceids appendFormat:[NSString stringWithFormat:@",%@",service.serviceId]];
+
+    }
+    
     UIButton *serviceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [serviceButton setTitle:[NSString stringWithFormat:@"Service %d X",serviceTag] forState:UIControlStateNormal];
+    [serviceButton setTitle:[NSString stringWithFormat:@"   %@   X   ",service.name] forState:UIControlStateNormal];
+
+    serviceButton.titleLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
     serviceButton.layer.borderWidth = 3.0f;
     [serviceButton.layer setBorderColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]].CGColor];
     [serviceButton sizeToFit];
@@ -122,7 +216,7 @@
         newFrame.origin.y = self.selectedServicesScrollView.bounds.origin.y+20;
         //newFrame.size.width += 20;
         serviceButton.frame = newFrame;
-
+        
     }
     else{
         UIButton *lastButton = [self buttonWithHighestTaginScrollView:self.selectedServicesScrollView];
@@ -132,7 +226,7 @@
         CGRect newFrame = serviceButton.frame;
         
         newFrame.origin.x = frame.origin.x+frame.size.width+20;
-
+        
         newFrame.origin.y = self.selectedServicesScrollView.bounds.origin.y+20;
         
         //newFrame.size.width += 20;
@@ -147,13 +241,6 @@
     [self.selectedServicesScrollView addSubview:serviceButton];
     
     self.selectedServicesScrollView.contentSize = CGSizeMake(serviceButton.frame.origin.x+serviceButton.frame.size.width, self.selectedServicesScrollView.contentSize.height);
-
-
-
-    //[self.selectedServicesScrollView scrollRectToVisible:serviceButton.frame animated:YES];
-    //CGPoint bottomOffset = CGPointMake( self.selectedServicesScrollView.contentSize.width - self.selectedServicesScrollView.bounds.size.width,0);
-    //[self.selectedServicesScrollView setContentOffset:bottomOffset animated:YES];
-
 }
 
 -(void)removeThisService:(UIButton *)sender{

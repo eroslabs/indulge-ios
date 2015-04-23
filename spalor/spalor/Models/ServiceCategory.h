@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString *desc;
 
 //Relation
-@property (nonatomic, strong) NSMutableArray *servicesArray;
+@property (nonatomic, strong) NSMutableArray *services;
 
 - (void)readFromDictionary:(NSDictionary *)dictionary;
 @end

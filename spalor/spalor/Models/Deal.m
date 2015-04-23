@@ -39,7 +39,7 @@
     
     for (NSString *key in allProps){
         
-        NSLog(@"KEY %@",key);
+        //NSLog(@"KEY %@",key);
         
         if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
             

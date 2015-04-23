@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <GooglePlus/GooglePlus.h>
+#import "NetworkHelper.h"
 static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes3738a.apps.googleusercontent.com";
 
 @interface AppDelegate ()
@@ -25,12 +26,36 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [FBProfilePictureView class];
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]){
-        [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"1",@"services":@"1,2,3,4,5",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"} forKey:@"filterDict"];
+        [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"1",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"} forKey:@"filterDict"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        [self loadCategories];
     }
     return YES;
 }
+
+-(void)loadCategories{
+    
+    //    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/suggestMerchant" withParameters:@{@"s":@"abc"} completionHandler:^(id response, NSString *url, NSError *error){
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/loadCategories" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
+        if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+            
+            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"CategoryUpdateDate"];
+        }
+        else{
+            NSLog(@"error %@",[error localizedDescription]);
+        }
+        
+    }];
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

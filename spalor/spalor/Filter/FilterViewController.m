@@ -9,6 +9,7 @@
 #import "FilterViewController.h"
 #import "NetworkHelper.h"
 #import "ServiceCategory.h"
+#import "FilterDetailViewController.h"
 
 @interface FilterViewController (){
     NSArray *arrayOfCategories;
@@ -25,7 +26,48 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    [self loadCategories];
+    [self pickCategoriesFromLocalStorage];
+}
+
+-(NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    return [difference day];
+}
+
+-(void)pickCategoriesFromLocalStorage{
+    NSError *error = nil;
+    NSData *categoryData = [[NSUserDefaults standardUserDefaults] objectForKey:@"CategoryResponse"];
+    NSDate *date1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"CategoryUpdateDate"];
+    NSDate *date2 = [NSDate date];
+    
+    NSInteger days = [self daysBetweenDate:date1 andDate:date2];
+    
+    if (days>=10) {
+        [self loadCategories];
+        return;
+    }
+    
+    NSDictionary *categoryDict = [NSJSONSerialization JSONObjectWithData:categoryData options:NSJSONReadingAllowFragments error:&error];
+    
+    if (categoryDict && !error) {
+        arrayOfCategories = [self captureAllServicesandCategoriesFromResponseDict:categoryDict];
+    }
+    else{
+        [self loadCategories];
+    }
 }
 
 
@@ -41,6 +83,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
             
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"CategoryUpdateDate"];
             
             if (responseDict) {
                 arrayOfCategories = [self captureAllServicesandCategoriesFromResponseDict:responseDict];
@@ -69,12 +112,12 @@
         ServiceCategory *category = [[ServiceCategory alloc] init];
         [category readFromDictionary:categoryDict];
         
-        NSLog(@"category %@",category.name);
+        //NSLog(@"category %@ %d",category.name,category.services.count);
         
-        for(Service *service in category){
-            NSLog(@"service %@",service.name);
-        }
-        
+//        for(Service *service in category.services){
+//            NSLog(@"service %@",service.name);
+//        }
+//        
         [categoryArray addObject:category];
         
     }
@@ -117,6 +160,16 @@
 
 -(IBAction)closeFilter:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"ShowFilterDetail"]) {
+        
+        FilterDetailViewController *controller = (FilterDetailViewController *)segue.destinationViewController;
+        controller.arrayOfCategories  = arrayOfCategories;
+    }
 }
 
 

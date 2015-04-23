@@ -40,7 +40,7 @@
     
     for (NSString *key in allProps){
         
-        NSLog(@"KEY %@",key);
+        //NSLog(@"KEY %@",key);
         
         if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
             
@@ -51,11 +51,14 @@
                 self.desc = dictionary[key];
             }
             else if ([key isEqualToString:@"services"]) {
-                self.servicesArray = [[NSMutableArray alloc] init];
+                
+                NSLog(@"Services %@",dictionary[key]);
+                
+                self.services = [[NSMutableArray alloc] init];
                 for (NSDictionary *service in dictionary[key]){
                     Service *merchantService = [[Service alloc] init];
                     [merchantService readFromDictionary:service];
-                    [self.servicesArray addObject:merchantService];
+                    [self.services addObject:merchantService];
                 }
             }
             else if (![dictionary[key] isKindOfClass:[NSString class]]) {
@@ -67,5 +70,9 @@
         }
     }
 }
+
+#pragma mark - Segue
+
+
 
 @end

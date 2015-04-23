@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FilterDetailViewController : UIViewController
+@property NSArray *arrayOfCategories;
 @property (nonatomic, weak) IBOutlet UIScrollView *selectedServicesScrollView;
+@property (nonatomic, weak) IBOutlet UIScrollView *allCategoriesScrollView;
+
 @property (nonatomic, weak) IBOutlet UIView *allCategoriesView;
 @property (nonatomic, weak) IBOutlet UITableView *tableview;
 @end

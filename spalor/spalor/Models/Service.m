@@ -38,23 +38,23 @@
     
     for (NSString *key in allProps){
         
-        NSLog(@"KEY %@",key);
+        //NSLog(@"KEY %@",key);
         
-        if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
+        //if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
             
-            if([key isEqualToString:@"id"]){
-                self.categoryId = dictionary[key];
+            if([key isEqualToString:@"serviceId"] && ![dictionary[@"id"] isMemberOfClass:[NSNull class]]){
+                self.serviceId = [dictionary[@"id"] stringValue];
             }
-            else if([key isEqualToString:@"description"]){
-                self.desc = dictionary[key];
+            else if([key isEqualToString:@"desc"] && ![dictionary[@"desc"] isMemberOfClass:[NSNull class]]){
+                self.desc = dictionary[@"description"];
             }
-            else if (![dictionary[key] isKindOfClass:[NSString class]]) {
+            else if (![dictionary[key] isKindOfClass:[NSString class]] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];
             }
             else{
                 [self setValue:dictionary[key] forKey:key];
             }
-        }
+       // }
     }
 }
 

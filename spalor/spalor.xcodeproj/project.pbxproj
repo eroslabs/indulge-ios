@@ -143,6 +143,20 @@
 		13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA57401AB8370D00811025 /* StoryCommentCell.m */; };
 		13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA57431AB83BAF00811025 /* MerchantDetailViewController.m */; };
 		13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CD99EE1A834091005AB1F4 /* LoginViewController.m */; };
+		13CE68A11AE8DF150085C7B0 /* hair-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68931AE8DF150085C7B0 /* hair-active@2x.png */; };
+		13CE68A21AE8DF150085C7B0 /* Makeup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68941AE8DF150085C7B0 /* Makeup@2x.png */; };
+		13CE68A31AE8DF150085C7B0 /* hair@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68951AE8DF150085C7B0 /* hair@2x.png */; };
+		13CE68A41AE8DF150085C7B0 /* nails@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68961AE8DF150085C7B0 /* nails@2x.png */; };
+		13CE68A51AE8DF150085C7B0 /* massage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68971AE8DF150085C7B0 /* massage@2x.png */; };
+		13CE68A61AE8DF150085C7B0 /* haircut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68981AE8DF150085C7B0 /* haircut@2x.png */; };
+		13CE68A71AE8DF150085C7B0 /* gym@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68991AE8DF150085C7B0 /* gym@2x.png */; };
+		13CE68A81AE8DF150085C7B0 /* face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689A1AE8DF150085C7B0 /* face@2x.png */; };
+		13CE68A91AE8DF150085C7B0 /* hair-acitve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689B1AE8DF150085C7B0 /* hair-acitve@2x.png */; };
+		13CE68AA1AE8DF150085C7B0 /* face-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689C1AE8DF150085C7B0 /* face-active@2x.png */; };
+		13CE68AB1AE8DF150085C7B0 /* makeup-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689D1AE8DF150085C7B0 /* makeup-active@2x.png */; };
+		13CE68AC1AE8DF150085C7B0 /* massage-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689E1AE8DF150085C7B0 /* massage-active@2x.png */; };
+		13CE68AD1AE8DF150085C7B0 /* haircut-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689F1AE8DF150085C7B0 /* haircut-active@2x.png */; };
+		13CE68AE1AE8DF150085C7B0 /* Gym-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68A01AE8DF150085C7B0 /* Gym-active.png */; };
 		13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB41AC53B9600BE38D7 /* RateViewController.m */; };
 		13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */; };
 		13E30DBC1AC573A000BE38D7 /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */; };
@@ -367,6 +381,20 @@
 		13BA57431AB83BAF00811025 /* MerchantDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantDetailViewController.m; path = Home/MerchantDetailViewController.m; sourceTree = "<group>"; };
 		13CD99ED1A834091005AB1F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
 		13CD99EE1A834091005AB1F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
+		13CE68931AE8DF150085C7B0 /* hair-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hair-active@2x.png"; sourceTree = "<group>"; };
+		13CE68941AE8DF150085C7B0 /* Makeup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Makeup@2x.png"; sourceTree = "<group>"; };
+		13CE68951AE8DF150085C7B0 /* hair@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hair@2x.png"; sourceTree = "<group>"; };
+		13CE68961AE8DF150085C7B0 /* nails@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nails@2x.png"; sourceTree = "<group>"; };
+		13CE68971AE8DF150085C7B0 /* massage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "massage@2x.png"; sourceTree = "<group>"; };
+		13CE68981AE8DF150085C7B0 /* haircut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haircut@2x.png"; sourceTree = "<group>"; };
+		13CE68991AE8DF150085C7B0 /* gym@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gym@2x.png"; sourceTree = "<group>"; };
+		13CE689A1AE8DF150085C7B0 /* face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face@2x.png"; sourceTree = "<group>"; };
+		13CE689B1AE8DF150085C7B0 /* hair-acitve@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hair-acitve@2x.png"; sourceTree = "<group>"; };
+		13CE689C1AE8DF150085C7B0 /* face-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-active@2x.png"; sourceTree = "<group>"; };
+		13CE689D1AE8DF150085C7B0 /* makeup-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "makeup-active@2x.png"; sourceTree = "<group>"; };
+		13CE689E1AE8DF150085C7B0 /* massage-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "massage-active@2x.png"; sourceTree = "<group>"; };
+		13CE689F1AE8DF150085C7B0 /* haircut-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haircut-active@2x.png"; sourceTree = "<group>"; };
+		13CE68A01AE8DF150085C7B0 /* Gym-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gym-active.png"; sourceTree = "<group>"; };
 		13E30DB31AC53B9600BE38D7 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateViewController.h; path = Home/RateViewController.h; sourceTree = "<group>"; };
 		13E30DB41AC53B9600BE38D7 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateViewController.m; path = Home/RateViewController.m; sourceTree = "<group>"; };
 		13E30DB51AC53B9600BE38D7 /* ReportErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportErrorViewController.h; path = Home/ReportErrorViewController.h; sourceTree = "<group>"; };
@@ -533,6 +561,20 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				13CE68931AE8DF150085C7B0 /* hair-active@2x.png */,
+				13CE68941AE8DF150085C7B0 /* Makeup@2x.png */,
+				13CE68951AE8DF150085C7B0 /* hair@2x.png */,
+				13CE68961AE8DF150085C7B0 /* nails@2x.png */,
+				13CE68971AE8DF150085C7B0 /* massage@2x.png */,
+				13CE68981AE8DF150085C7B0 /* haircut@2x.png */,
+				13CE68991AE8DF150085C7B0 /* gym@2x.png */,
+				13CE689A1AE8DF150085C7B0 /* face@2x.png */,
+				13CE689B1AE8DF150085C7B0 /* hair-acitve@2x.png */,
+				13CE689C1AE8DF150085C7B0 /* face-active@2x.png */,
+				13CE689D1AE8DF150085C7B0 /* makeup-active@2x.png */,
+				13CE689E1AE8DF150085C7B0 /* massage-active@2x.png */,
+				13CE689F1AE8DF150085C7B0 /* haircut-active@2x.png */,
+				13CE68A01AE8DF150085C7B0 /* Gym-active.png */,
 				1388A19E1AE79D5100E330C1 /* border@2x.png */,
 				137FFBC21ADE407800C77706 /* deal-coupon@2x.png */,
 				1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */,
@@ -955,6 +997,8 @@
 				1337EE351ACBD35D00F31D14 /* merchant-share-active@2x.png in Resources */,
 				13E530871AD299B30046EAEB /* registration-divider@2x.png in Resources */,
 				1388A19F1AE79D5100E330C1 /* border@2x.png in Resources */,
+				13CE68A81AE8DF150085C7B0 /* face@2x.png in Resources */,
+				13CE68AB1AE8DF150085C7B0 /* makeup-active@2x.png in Resources */,
 				1337EE1C1ACBD35D00F31D14 /* merchant-deal-services@2x.png in Resources */,
 				1337EE421ACBD35D00F31D14 /* registration-age-active@2x.png in Resources */,
 				1337EE301ACBD35D00F31D14 /* merchant-pt@2x.png in Resources */,
@@ -967,7 +1011,9 @@
 				13E9B6981AD3CF46006DE3D8 /* Location@2x.png in Resources */,
 				1337EE111ACBD35D00F31D14 /* header-rating-active@2x.png in Resources */,
 				131536381AD5211C00AF9195 /* merchant-default-button@2x.png in Resources */,
+				13CE68A51AE8DF150085C7B0 /* massage@2x.png in Resources */,
 				1347FD8B1ADBC96F007EF73D /* header-back-white@2x.png in Resources */,
+				13CE68A41AE8DF150085C7B0 /* nails@2x.png in Resources */,
 				13958F4B1AD7FCE700231794 /* filter-cost-selected@2x.png in Resources */,
 				1337EE051ACBD35D00F31D14 /* filter-both@2x.png in Resources */,
 				1337EE0E1ACBD35D00F31D14 /* header-filter@2x.png in Resources */,
@@ -975,6 +1021,8 @@
 				1337EE321ACBD35D00F31D14 /* merchant-removal@2x.png in Resources */,
 				13958F4D1AD7FCE700231794 /* filter-cost@2x.png in Resources */,
 				1337EE1F1ACBD35D00F31D14 /* merchant-face-deal@2x.png in Resources */,
+				13CE68A31AE8DF150085C7B0 /* hair@2x.png in Resources */,
+				13CE68A61AE8DF150085C7B0 /* haircut@2x.png in Resources */,
 				1337EE2D1ACBD35D00F31D14 /* merchant-nail@2x.png in Resources */,
 				1337EE3A1ACBD35D00F31D14 /* navbar-favourites-active@2x.png in Resources */,
 				1337EE141ACBD35D00F31D14 /* header-rupee-active-up@2x.png in Resources */,
@@ -982,6 +1030,7 @@
 				1337EE3F1ACBD35D00F31D14 /* navbar-me@2x.png in Resources */,
 				1337EE1A1ACBD35D00F31D14 /* merchant-call@2x.png in Resources */,
 				1337EE211ACBD35D00F31D14 /* merchant-hair-deal@2x.png in Resources */,
+				13CE68AD1AE8DF150085C7B0 /* haircut-active@2x.png in Resources */,
 				1337EE1E1ACBD35D00F31D14 /* merchant-edit@2x.png in Resources */,
 				137FFBC31ADE407800C77706 /* deal-coupon@2x.png in Resources */,
 				1337EE151ACBD35D00F31D14 /* header-rupee_up@2x.png in Resources */,
@@ -991,8 +1040,10 @@
 				132BD2B41A88877F007F5D89 /* FBAudienceNetwork.README.txt in Resources */,
 				1337EE091ACBD35D00F31D14 /* filter-male-active@2x.png in Resources */,
 				1337EE181ACBD35D00F31D14 /* header_distance-active-up@2x.png in Resources */,
+				13CE68A11AE8DF150085C7B0 /* hair-active@2x.png in Resources */,
 				135B4C8A1A7F84DD00B64F30 /* Images.xcassets in Resources */,
 				1337EE2B1ACBD35D00F31D14 /* merchant-massage@2x.png in Resources */,
+				13CE68A91AE8DF150085C7B0 /* hair-acitve@2x.png in Resources */,
 				13EC41711AD69031001FEDD7 /* home-banner@2x.png in Resources */,
 				1337EE171ACBD35D00F31D14 /* header-share@2x.png in Resources */,
 				1398EE801AD649CB0037B793 /* merchant-rupee3@2x.png in Resources */,
@@ -1001,6 +1052,7 @@
 				1337EE081ACBD35D00F31D14 /* filter-gender@2x.png in Resources */,
 				1337EE121ACBD35D00F31D14 /* header-rating@2x.png in Resources */,
 				1337EE0B1ACBD35D00F31D14 /* header-back@2x.png in Resources */,
+				13CE68A21AE8DF150085C7B0 /* Makeup@2x.png in Resources */,
 				1398EE7F1AD649CB0037B793 /* merchant-rupee4@2x.png in Resources */,
 				1337EE1D1ACBD35D00F31D14 /* merchant-distance@2x.png in Resources */,
 				1337EE471ACBD35D00F31D14 /* registration-gender@2x.png in Resources */,
@@ -1017,6 +1069,7 @@
 				1337EE2A1ACBD35D00F31D14 /* merchant-massage-deal.png in Resources */,
 				1337EE291ACBD35D00F31D14 /* merchant-makeup@2x.png in Resources */,
 				13E67C401AE4CD6B00F96A36 /* Deals.txt in Resources */,
+				13CE68AE1AE8DF150085C7B0 /* Gym-active.png in Resources */,
 				1337EE281ACBD35D00F31D14 /* merchant-makeup-deal@2x.png in Resources */,
 				1337EE431ACBD35D00F31D14 /* registration-age@2x.png in Resources */,
 				1337EE391ACBD35D00F31D14 /* navbar-deals@2x.png in Resources */,
@@ -1045,8 +1098,10 @@
 				1337EE371ACBD35D00F31D14 /* merchant-time@2x.png in Resources */,
 				1337EE161ACBD35D00F31D14 /* header-search@2x.png in Resources */,
 				13EC416F1AD68693001FEDD7 /* merchant-location@2x.png in Resources */,
+				13CE68A71AE8DF150085C7B0 /* gym@2x.png in Resources */,
 				1337EE491ACBD35D00F31D14 /* registration-mobile@2x.png in Resources */,
 				1337EE481ACBD35D00F31D14 /* registration-mobile-active@2x.png in Resources */,
+				13CE68AC1AE8DF150085C7B0 /* massage-active@2x.png in Resources */,
 				1337EE311ACBD35D00F31D14 /* merchant-removal-deal@2x.png in Resources */,
 				1337EE341ACBD35D00F31D14 /* merchant-service@2x.png in Resources */,
 				13FAE2421AB196E500A6540D /* GooglePlus.bundle in Resources */,
@@ -1059,6 +1114,7 @@
 				1337EE461ACBD35D00F31D14 /* registration-gender-active@2x.png in Resources */,
 				1337EE041ACBD35D00F31D14 /* filter-both-active@2x.png in Resources */,
 				1337EE261ACBD35D00F31D14 /* merchant-listing-favourite-active@2x.png in Resources */,
+				13CE68AA1AE8DF150085C7B0 /* face-active@2x.png in Resources */,
 				1337EE0F1ACBD35D00F31D14 /* header-popularity-active@2x.png in Resources */,
 				1337EE0A1ACBD35D00F31D14 /* filter-male@2x.png in Resources */,
 				1337EE4D1ACBD35D00F31D14 /* registration-profile-active@2x.png in Resources */,
