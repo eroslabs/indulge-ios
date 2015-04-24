@@ -13,7 +13,7 @@
 
 @interface FilterDetailViewController (){
     int selectedCategory;
-    NSMutableArray *selectedServicesArray;
+    NSMutableDictionary *selectedServicesDictionary;
     NSMutableString *selectedServiceids;
 
 }
@@ -25,17 +25,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    selectedServicesArray = [NSMutableArray new];
+    selectedServicesDictionary = [NSMutableDictionary new];
     selectedServiceids = [[NSMutableString alloc] initWithString:@""];
 
     selectedCategory = 0;
-    
+
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     NSMutableDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
     [selectedServiceids appendFormat:filterDict[@"services"]];
     
     [self setAllCategories];
     [self hideSelectedServicesView];
 }
+
 
 -(void)setAllCategories{
     
@@ -54,7 +59,6 @@
         button.frame = CGRectMake(lastX+button.frame.size.width+10,self.allCategoriesScrollView.bounds.origin.y,50,52);
         lastX += button.frame.size.width + 20;
         button.tag = index;
-        index++;
         [button addTarget:self action:@selector(changeSelectedCategory:) forControlEvents:UIControlEventTouchUpInside];
         self.allCategoriesScrollView.contentSize = CGSizeMake(lastX+button.frame.size.width+10, self.allCategoriesScrollView.contentSize.height);
         [self.allCategoriesScrollView addSubview:button];
@@ -63,15 +67,16 @@
         for (Service *service in category.services) {
             
             if ([selectedServiceIdsArray containsObject:service.serviceId]) {
-                int tag = (button.tag+1)*10+serviceIndex;
-                selectedCategory = button.tag;
-                NSLog(@"putting %@ as selected",service.name);
+                int tag = service.serviceId.integerValue;
+                NSLog(@"putting %@ as selected for category %d",service.name,index);
                 
-                [self createandAddServiceButtonforServiceName:tag andIndex:serviceIndex];
+                [self createandAddServiceButtonforServiceName:tag andIndex:serviceIndex fromCategory:index];
             }
             
-            index++;
+            serviceIndex++;
         }
+        index++;
+
     }
 
 }
@@ -84,7 +89,7 @@
 
 
 -(void)hideSelectedServicesView{
-    if(selectedServicesArray.count == 0){
+    if(selectedServicesDictionary.count == 0){
         //Move everything up and hide selected services view
         if(!self.selectedServicesScrollView.hidden){
             self.selectedServicesScrollView.hidden = YES;
@@ -157,7 +162,7 @@
     ServiceCategory *category = self.arrayOfCategories[selectedCategory];
     Service *service = category.services[indexPath.row];
     cell.textLabel.text = service.name;
-    cell.tag = (selectedCategory+1)*10+indexPath.row;
+    cell.tag = service.serviceId.integerValue;
     return cell;
 }
 
@@ -167,9 +172,8 @@
     //Put in selected service view
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    if([selectedServicesArray containsObject:@(cell.tag)]){
-        return;
-    }
+    NSArray *serviceTags = [selectedServicesDictionary allKeys];
+    
     
     [self createandAddServiceButtonforServiceName:cell.tag andIndexPath:indexPath];
     
@@ -177,17 +181,20 @@
 
 -(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndexPath:(NSIndexPath *)indexPath{
     
-    [self createandAddServiceButtonforServiceName:serviceTag andIndex:indexPath.row];
+    [self createandAddServiceButtonforServiceName:serviceTag andIndex:indexPath.row fromCategory:selectedCategory];
 
 }
 
--(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndex:(int)index{
-    [selectedServicesArray addObject:@(serviceTag)];
+-(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndex:(int)index fromCategory:(int)categoryIndex{
+    
+    ServiceCategory *category = self.arrayOfCategories[categoryIndex];
+    Service *service = category.services[index];
+    int currentTotalButtons = [self numberOfbuttonsinScrollView:self.selectedServicesScrollView];
+
+    [selectedServicesDictionary addEntriesFromDictionary:@{[@(serviceTag) stringValue]:@(currentTotalButtons)}];
     
     [self hideSelectedServicesView];
     
-    ServiceCategory *category = self.arrayOfCategories[selectedCategory];
-    Service *service = category.services[index];
     
     if ([selectedServiceids rangeOfString:service.serviceId].location==NSNotFound) {
         if (selectedServiceids.length == 0) {
@@ -207,7 +214,6 @@
     [serviceButton.layer setBorderColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]].CGColor];
     [serviceButton sizeToFit];
     serviceButton.titleLabel.textColor = [UIColor colorWithHexCode:@"45B09E"];
-    int currentTotalButtons = [self numberOfbuttonsinScrollView:self.selectedServicesScrollView];
     
     if(currentTotalButtons == 0){
         
@@ -234,7 +240,7 @@
         serviceButton.frame = newFrame;
     }
     
-    serviceButton.tag = serviceTag;
+    serviceButton.tag = currentTotalButtons;
     
     [serviceButton addTarget:self action:@selector(removeThisService:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -263,7 +269,32 @@
         }
     }
     
-    [selectedServicesArray removeObject:@(sender.tag)];
+    NSArray *allKeys = selectedServicesDictionary.allKeys;
+    
+    NSString *keyToRemove = nil;
+    
+    selectedServiceids = [NSMutableString stringWithString:@""];
+    for(NSString *serviceHashKey in allKeys){
+        if([selectedServicesDictionary[serviceHashKey] isEqualToNumber:@(touchedButtonTag)]){
+            keyToRemove = serviceHashKey;
+        }
+        else{
+            if ([selectedServiceids rangeOfString:serviceHashKey].location==NSNotFound) {
+                if (selectedServiceids.length == 0) {
+                    [selectedServiceids appendFormat:serviceHashKey];
+                    
+                }
+                else
+                    [selectedServiceids appendFormat:[NSString stringWithFormat:@",%@",serviceHashKey]];
+                
+            }
+
+        }
+    }
+    
+    if(keyToRemove)
+        [selectedServicesDictionary removeObjectForKey:keyToRemove];
+    
     
     //Finally remove from superview
     [sender removeFromSuperview];

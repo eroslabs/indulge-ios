@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Merchant.h"
 
 @interface MerchantDetailViewController : UIViewController
+@property (nonatomic,strong) Merchant *merchant;
 -(IBAction)goBack:(id)sender;
 @end

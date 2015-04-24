@@ -9,10 +9,14 @@
 #import "DealsViewController.h"
 #import "NetworkHelper.h"
 #import "DealListCell.h"
+#import "DealDetailsViewController.h"
 #import "Deal.h"
+#import "FeSpinnerTenDot.h"
 
 @interface DealsViewController (){
     NSArray *arrayOfDeals;
+    Deal *selectedDeal;
+    FeSpinnerTenDot *spinner;
 }
 @end
 
@@ -26,11 +30,17 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+    [self.loaderContainerView addSubview:spinner];
+    self.loaderContainerView.hidden = NO;
+    [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+    
     [self searchForNewDeals];
 }
 
 -(void)searchForNewDeals{
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:@{@"s":@"abc"} completionHandler:^(id response, NSString *url, NSError *error){
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:@{@"s":@"venus"} completionHandler:^(id response, NSString *url, NSError *error){
         
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
@@ -45,6 +55,8 @@
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                [spinner dismiss];
+                self.loaderContainerView.hidden = YES;
                 [self.tableview reloadData];
             });
             
@@ -55,6 +67,37 @@
     }];
 
 }
+
+-(void)pickUpLocallyStoredMerchantResponse{
+    NSData *response = [[NSUserDefaults standardUserDefaults] objectForKey:@"DealResponse"];
+    
+    NSError *error = nil;
+    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+    
+    NSLog(@"response string %@",responseDict);
+    
+
+    
+    if(error) {  //Handle error
+        NSLog(@"error %@",[error localizedDescription]);
+        
+    }
+    else{
+        NSLog(@"response string %@",responseDict);
+        
+        if (responseDict) {
+            arrayOfDeals = [self captureAllMerchantsFromResponseDict:responseDict];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner dismiss];
+            self.loaderContainerView.hidden = YES;
+            [self.tableview reloadData];
+        });
+    }
+    
+}
+
 
 
 -(NSArray *)captureAllMerchantsFromResponseDict:(NSDictionary *)dictionary{
@@ -122,6 +165,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    selectedDeal = arrayOfDeals[indexPath.row];
     [self performSegueWithIdentifier:@"showDealDetails" sender:self];
     
 }
@@ -132,6 +176,15 @@
 
 }
 
+#pragma mark - segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ShowFilterDetail"]) {
+        
+        DealDetailsViewController *controller = (DealDetailsViewController *)segue.destinationViewController;
+        controller.deal  = selectedDeal;
+    }
+}
 
 
 @end

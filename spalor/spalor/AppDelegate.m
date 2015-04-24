@@ -25,7 +25,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [FBLoginView class];
     [FBProfilePictureView class];
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]){
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]){
         [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"1",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"} forKey:@"filterDict"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];

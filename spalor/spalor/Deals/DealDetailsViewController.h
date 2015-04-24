@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deal.h"
 
 @interface DealDetailsViewController : UIViewController
+@property (nonatomic, strong) Deal *deal;
 @end

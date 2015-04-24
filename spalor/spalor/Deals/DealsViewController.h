@@ -10,4 +10,6 @@
 
 @interface DealsViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UITableView *tableview;
+@property (nonatomic, weak) IBOutlet UIView *loaderContainerView;
+
 @end

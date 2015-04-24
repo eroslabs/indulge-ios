@@ -13,10 +13,12 @@
 #import "FeSpinnerTenDot.h"
 #import "UIColor+flat.h"
 #import "LocationHelper.h"
+#import "MerchantDetailViewController.h"
 
 @interface MerchantListViewController (){
     NSArray *arrayOfMerchants;
     FeSpinnerTenDot *spinner;
+    Merchant *selectedMerchant;
 }
 
 @end
@@ -76,9 +78,9 @@
     
     NSMutableDictionary *paramDict = [NSMutableDictionary new];
     
-    [paramDict addEntriesFromDictionary:@{@"s":self.searchText}];
-    [paramDict addEntriesFromDictionary:filterDict];
-    [paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+    [paramDict addEntriesFromDictionary:@{@"s":@"venus"}];
+    //[paramDict addEntriesFromDictionary:filterDict];
+    //[paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
     
     
     [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:paramDict  completionHandler:^(id response, NSString *url, NSError *error){
@@ -162,9 +164,6 @@
         NSLog(@"merchant %@",merchant.name);
         
         [merchantArray addObject:merchant];
-        
-        //Double up merchants for now
-        [merchantArray addObject:merchant];
 
     }
     
@@ -226,7 +225,8 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"detailSegue" sender:self];
+    selectedMerchant = arrayOfMerchants[indexPath.row];
+    [self performSegueWithIdentifier:@"showDetail" sender:self];
     
 }
 
@@ -235,6 +235,15 @@
 
 -(IBAction)goBackToSearch:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showDetail"]){
+        MerchantDetailViewController *controller = (MerchantDetailViewController *)segue.destinationViewController;
+        controller.merchant = selectedMerchant;
+    }
 }
 
 @end
