@@ -10,5 +10,8 @@
 #import "Deal.h"
 
 @interface DealExtraServicesCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *extraservicesLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *extraServicesImageView;
+
 -(DealExtraServicesCell *)setupCellWithDeal:(Deal *)deal;
 @end

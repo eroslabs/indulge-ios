@@ -10,4 +10,12 @@
 
 @implementation MerchantInfoCell
 
+-(MerchantInfoCell *)setupWithMerchant:(Merchant *)merchant{
+    self.nameLabel.text = merchant.name;
+    self.addressLabel.text = merchant.address;
+    self.averageRatingLabel.text = merchant.rating;
+    self.distanceLabel.text = @"500 m";
+    self.profileImageView.image = [UIImage imageNamed:@""];
+    return self;
+}
 @end

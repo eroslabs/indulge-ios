@@ -10,6 +10,10 @@
 #import "Merchant.h"
 
 @interface MerchantDealCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *amountOffLabel;
+@property (nonatomic, weak) IBOutlet UILabel *servicesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *validTillLabel;
+@property (nonatomic, weak) IBOutlet UIButton *redeemButton;
 -(MerchantDealCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

@@ -9,5 +9,9 @@
 #import "DealTimingCell.h"
 
 @implementation DealTimingCell
+-(DealTimingCell *)setupCellWithDeal:(Deal *)deal{
+    //self.daysLabel.text = deal.
+    return self;
+}
 
 @end

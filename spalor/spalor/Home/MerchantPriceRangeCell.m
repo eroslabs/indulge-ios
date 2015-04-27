@@ -9,5 +9,8 @@
 #import "MerchantPriceRangeCell.h"
 
 @implementation MerchantPriceRangeCell
-
+-(MerchantPriceRangeCell *)setupWithMerchant:(Merchant *)merchant{
+    self.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
+    return self;
+}
 @end

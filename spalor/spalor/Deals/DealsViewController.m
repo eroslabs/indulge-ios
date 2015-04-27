@@ -146,12 +146,12 @@
     Deal *deal = arrayOfDeals[indexPath.row];
     DealListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
-    //Left cap is the space you dont wanna stretch on the left side and right side of the image
-    int leftCap = 30;
-    //Left cap is the space you dont wanna stretch on the top side and bottom side of the image
-    int topCap = 20;
-    //this will only stretch the inner side of the image
-    cell.backgroundImageView.image = [cell.backgroundImageView.image stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap];
+//    //Left cap is the space you dont wanna stretch on the left side and right side of the image
+//    int leftCap = 30;
+//    //Left cap is the space you dont wanna stretch on the top side and bottom side of the image
+//    int topCap = 20;
+//    //this will only stretch the inner side of the image
+//    cell.backgroundImageView.image = [cell.backgroundImageView.image stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap];
 
     cell.nameLabel.text = deal.name;
     cell.addressLabel.text = deal.address;

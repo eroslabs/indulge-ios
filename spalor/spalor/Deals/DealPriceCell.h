@@ -10,6 +10,11 @@
 #import "Deal.h"
 
 @interface DealPriceCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UIImageView *priceRangeImageView;
+@property (nonatomic, weak) IBOutlet UILabel *deal1;
+@property (nonatomic, weak) IBOutlet UILabel *deal2;
+@property (nonatomic, weak) IBOutlet UILabel *deal3;
+
 -(DealPriceCell *)setupCellWithDeal:(Deal *)deal;
 
 @end

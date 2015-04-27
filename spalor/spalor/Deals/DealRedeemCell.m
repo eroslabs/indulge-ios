@@ -9,5 +9,8 @@
 #import "DealRedeemCell.h"
 
 @implementation DealRedeemCell
+-(DealRedeemCell *)setupCellWithDeal:(Deal *)deal{
+    return self;
+}
 
 @end

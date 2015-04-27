@@ -10,5 +10,11 @@
 #import "Merchant.h"
 
 @interface MerchantInfoCell : UITableViewCell
+@property (nonatomic,weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *addressLabel;
+@property (nonatomic, weak) IBOutlet UILabel *averageRatingLabel;
+@property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *profileImageView;
+
 -(MerchantInfoCell *)setupWithMerchant:(Merchant *)merchant;
 @end

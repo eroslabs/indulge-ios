@@ -10,6 +10,10 @@
 #import "Merchant.h"
 
 @interface MerchantScheduleCell : UITableViewCell
+@property (nonatomic,weak) IBOutlet UILabel *daysLabel;
+@property (nonatomic,weak) IBOutlet UILabel *timeLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *ratecardImageView;
+
 -(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

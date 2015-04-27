@@ -9,5 +9,7 @@
 #import "DealSocialCell.h"
 
 @implementation DealSocialCell
-
+-(DealSocialCell *)setupCellWithDeal:(Deal *)deal{
+    return self;
+}
 @end

@@ -10,6 +10,11 @@
 #import "Merchant.h"
 
 @interface MerchantSocialCell : UITableViewCell
+@property (nonatomic,weak) IBOutlet UIButton *callButton;
+@property (nonatomic,weak) IBOutlet UIButton *locationButton;
+@property (nonatomic,weak) IBOutlet UIButton *shareButton;
+@property (nonatomic,weak) IBOutlet UIButton *favoriteButton;
+
 -(MerchantSocialCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

@@ -10,6 +10,7 @@
 #import "Merchant.h"
 
 @interface MerchantErrorCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UIButton *reportErrorButton;
 -(MerchantErrorCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

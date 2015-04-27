@@ -9,5 +9,7 @@
 #import "MerchantRecommendedCell.h"
 
 @implementation MerchantRecommendedCell
-
+-(MerchantRecommendedCell *)setupWithMerchant:(Merchant *)merchant{
+    return self;
+}
 @end

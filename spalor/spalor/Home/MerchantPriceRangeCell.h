@@ -10,5 +10,10 @@
 #import "Merchant.h"
 
 @interface MerchantPriceRangeCell : UITableViewCell
+@property (nonatomic,weak) IBOutlet UIImageView *priceRangeImageView;
+@property (nonatomic,weak) IBOutlet UILabel *deal1;
+@property (nonatomic,weak) IBOutlet UILabel *deal2;
+@property (nonatomic,weak) IBOutlet UILabel *deal3;
+
 -(MerchantPriceRangeCell *)setupWithMerchant:(Merchant *)merchant;
 @end

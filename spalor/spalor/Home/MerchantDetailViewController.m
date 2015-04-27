@@ -32,6 +32,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    /*
+     
+     self.rateView.notSelectedImage = [UIImage imageNamed:@"kermit_empty.png"];
+     self.rateView.halfSelectedImage = [UIImage imageNamed:@"kermit_half.png"];
+     self.rateView.fullSelectedImage = [UIImage imageNamed:@"kermit_full.png"];
+     self.rateView.rating = 3.5;
+     self.rateView.editable = NO;
+     self.rateView.maxRating = 5;
+     self.rateView.delegate = self;
+     
+     */
+    
+    [self setTableHeaderView];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    //[(ParallaxHeaderView *)self.mainTableView.tableHeaderView layoutHeaderViewForScrollViewOffset:self.mainTableView.contentOffset];
+
+    [super viewDidAppear:animated];
+    [(ParallaxHeaderView *)self.mainTableView.tableHeaderView refreshBlurViewForNewImage];
+
+
+}
+
+
+
+#pragma mark - Table Datasource and Delegate
+
+-(void)setTableHeaderView{
     UIScrollView *headerScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.mainTableView.frame.size.width, 200)];
     
     headerScrollView.pagingEnabled = YES;
@@ -58,43 +96,8 @@
     headerView.headerTitleLabel.text = self.story[@"story"];
     
     [self.mainTableView setTableHeaderView:headerView];
-    
-    
-    /*
-     
-     self.rateView.notSelectedImage = [UIImage imageNamed:@"kermit_empty.png"];
-     self.rateView.halfSelectedImage = [UIImage imageNamed:@"kermit_half.png"];
-     self.rateView.fullSelectedImage = [UIImage imageNamed:@"kermit_full.png"];
-     self.rateView.rating = 3.5;
-     self.rateView.editable = NO;
-     self.rateView.maxRating = 5;
-     self.rateView.delegate = self;
-     
-     */
 
 }
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    //[(ParallaxHeaderView *)self.mainTableView.tableHeaderView layoutHeaderViewForScrollViewOffset:self.mainTableView.contentOffset];
-
-    [super viewDidAppear:animated];
-    [(ParallaxHeaderView *)self.mainTableView.tableHeaderView refreshBlurViewForNewImage];
-
-
-}
-
-
--(IBAction)goBack:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark - Table Datasource and Delegate
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -259,6 +262,17 @@
     }
     return cell;
 }
+
+#pragma mark - User Actions 
+
+-(IBAction)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)share:(id)sender{
+    
+}
+
 
 @end
 

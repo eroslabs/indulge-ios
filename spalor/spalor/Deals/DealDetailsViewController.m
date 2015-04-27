@@ -32,16 +32,19 @@
 }
 
 #pragma mark - Table Datasource and Delegate
+- (NSInteger)numberOfSections{
+    return 7;
+}
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = 7;
+    NSInteger numOfRows = 1;
     return numOfRows;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0:
             return 160;
             break;
@@ -71,10 +74,17 @@
     
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    switch (indexPath.section) {
+            case
+    }
+    return @"";
+}
+
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier;
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0:{
             identifier = @"dealCellIdentifier";
             DealInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];

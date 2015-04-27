@@ -9,5 +9,7 @@
 #import "MerchantScheduleCell.h"
 
 @implementation MerchantScheduleCell
-
+-(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant{
+    return self;
+}
 @end

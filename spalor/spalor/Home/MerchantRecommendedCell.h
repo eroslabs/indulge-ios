@@ -10,6 +10,8 @@
 #import "Merchant.h"
 
 @interface MerchantRecommendedCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *recommendedLabel;
+
 -(MerchantRecommendedCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

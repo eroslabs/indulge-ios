@@ -9,5 +9,7 @@
 #import "DealRecommendedCell.h"
 
 @implementation DealRecommendedCell
-
+-(DealRecommendedCell *)setupCellWithDeal:(Deal *)deal{
+    return self;
+}
 @end

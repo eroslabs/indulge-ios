@@ -10,5 +10,7 @@
 #import "Deal.h"
 
 @interface DealRecommendedCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *recommendedDealLabel;
+
 -(DealRecommendedCell *)setupCellWithDeal:(Deal *)deal;
 @end

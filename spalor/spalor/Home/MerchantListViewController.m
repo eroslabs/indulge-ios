@@ -34,7 +34,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
+    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
 
 }
 
@@ -125,11 +125,6 @@
     
     NSLog(@"response string %@",responseDict);
     
-    
-    
-    //          NSLog(@"response Dict %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"MerchantResponse"]
-    
-    
     if(error) {  //Handle error
         NSLog(@"error %@",[error localizedDescription]);
         
@@ -143,6 +138,9 @@
         
         NSLog(@"array of merchants %@",arrayOfMerchants);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner dismiss];
+            self.totalCountLabel.text = [NSString stringWithFormat:@"%lu Items",(unsigned long)arrayOfMerchants.count];
+            self.loaderContainerView.hidden = YES;
             [self.tableview reloadData];
         });
     }
@@ -158,8 +156,6 @@
         
         Merchant *merchant = [[Merchant alloc] init];
         [merchant readFromDictionary:merchantDict];
-        
-        
         
         NSLog(@"merchant %@",merchant.name);
         

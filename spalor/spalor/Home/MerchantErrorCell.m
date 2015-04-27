@@ -9,5 +9,7 @@
 #import "MerchantErrorCell.h"
 
 @implementation MerchantErrorCell
-
+-(MerchantErrorCell *)setupWithMerchant:(Merchant *)merchant{
+    return self;
+}
 @end

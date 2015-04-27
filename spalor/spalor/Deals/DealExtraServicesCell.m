@@ -9,5 +9,7 @@
 #import "DealExtraServicesCell.h"
 
 @implementation DealExtraServicesCell
-
+-(DealExtraServicesCell *)setupCellWithDeal:(Deal *)deal{
+    return self;
+}
 @end

@@ -10,6 +10,10 @@
 #import "Deal.h"
 
 @interface DealTimingCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *daysLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timingLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *rateCardImageview;
+
 -(DealTimingCell *)setupCellWithDeal:(Deal *)deal;
 
 @end

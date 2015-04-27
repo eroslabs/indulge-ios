@@ -9,5 +9,7 @@
 #import "DealPriceCell.h"
 
 @implementation DealPriceCell
-
+-(DealPriceCell *)setupCellWithDeal:(Deal *)deal{
+    return self;
+}
 @end

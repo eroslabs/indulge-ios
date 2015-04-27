@@ -9,5 +9,7 @@
 #import "MerchantExtrasCell.h"
 
 @implementation MerchantExtrasCell
-
+-(MerchantExtrasCell *)setupWithMerchant:(Merchant *)merchant{
+    return self;
+}
 @end

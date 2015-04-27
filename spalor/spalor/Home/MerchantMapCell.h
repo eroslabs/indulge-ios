@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Merchant.h"
+#import <MapKit/MapKit.h>
 
 @interface MerchantMapCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
 -(MerchantMapCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

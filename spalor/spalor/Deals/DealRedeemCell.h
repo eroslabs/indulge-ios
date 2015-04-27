@@ -10,5 +10,7 @@
 #import "Deal.h"
 
 @interface DealRedeemCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UIButton *redeemButton;
+
 -(DealRedeemCell *)setupCellWithDeal:(Deal *)deal;
 @end
