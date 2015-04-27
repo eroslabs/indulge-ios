@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deal.h"
 
 @interface DealRecommendedCell : UITableViewCell
-
+-(DealRecommendedCell *)setupCellWithDeal:(Deal *)deal;
 @end

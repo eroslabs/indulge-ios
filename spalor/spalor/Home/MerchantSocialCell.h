@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Merchant.h"
 
 @interface MerchantSocialCell : UITableViewCell
+-(MerchantSocialCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

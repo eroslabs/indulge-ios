@@ -135,6 +135,7 @@
 		1388A1A71AE7C49A00E330C1 /* Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 1388A1A61AE7C49A00E330C1 /* Service.m */; };
 		1388A9DA1AE680DF00852B30 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1388A9D91AE680DF00852B30 /* RateView.m */; };
 		138960791ADBBE4D005685E7 /* MerchantListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138960781ADBBE4D005685E7 /* MerchantListViewController.m */; };
+		138BB5301AEE0E2800177C08 /* MerchantExtrasCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */; };
 		13958F491AD7FCE700231794 /* filter-rating-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */; };
 		13958F4A1AD7FCE700231794 /* filter-popularity-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F421AD7FCE700231794 /* filter-popularity-selected@2x.png */; };
 		13958F4B1AD7FCE700231794 /* filter-cost-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F431AD7FCE700231794 /* filter-cost-selected@2x.png */; };
@@ -394,6 +395,8 @@
 		1388A9D91AE680DF00852B30 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateView.m; path = Rating/RateView.m; sourceTree = "<group>"; };
 		138960771ADBBE4D005685E7 /* MerchantListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantListViewController.h; path = Home/MerchantListViewController.h; sourceTree = "<group>"; };
 		138960781ADBBE4D005685E7 /* MerchantListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantListViewController.m; path = Home/MerchantListViewController.m; sourceTree = "<group>"; };
+		138BB52E1AEE0E2800177C08 /* MerchantExtrasCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantExtrasCell.h; path = Home/MerchantExtrasCell.h; sourceTree = "<group>"; };
+		138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantExtrasCell.m; path = Home/MerchantExtrasCell.m; sourceTree = "<group>"; };
 		13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-rating-selected@2x.png"; sourceTree = "<group>"; };
 		13958F421AD7FCE700231794 /* filter-popularity-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-popularity-selected@2x.png"; sourceTree = "<group>"; };
 		13958F431AD7FCE700231794 /* filter-cost-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-cost-selected@2x.png"; sourceTree = "<group>"; };
@@ -855,6 +858,8 @@
 				134CED841AEA6D97009C5714 /* MerchantRatingCell.m */,
 				134CED861AEA6E37009C5714 /* MerchantErrorCell.h */,
 				134CED871AEA6E37009C5714 /* MerchantErrorCell.m */,
+				138BB52E1AEE0E2800177C08 /* MerchantExtrasCell.h */,
+				138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1269,6 +1274,7 @@
 				132C9F0E1ADCF79800EB5F3F /* Merchant.m in Sources */,
 				134CED791AEA6CEF009C5714 /* MerchantPriceRangeCell.m in Sources */,
 				13E530841AD25CD10046EAEB /* NSString+Base64.m in Sources */,
+				138BB5301AEE0E2800177C08 /* MerchantExtrasCell.m in Sources */,
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
 				133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */,
 				134CED821AEA6D80009C5714 /* MerchantMapCell.m in Sources */,

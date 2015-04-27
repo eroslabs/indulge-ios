@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deal.h"
 
 @interface DealTimingCell : UITableViewCell
+-(DealTimingCell *)setupCellWithDeal:(Deal *)deal;
 
 @end

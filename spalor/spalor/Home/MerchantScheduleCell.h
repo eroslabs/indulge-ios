@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Merchant.h"
 
 @interface MerchantScheduleCell : UITableViewCell
+-(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant;
 
 @end

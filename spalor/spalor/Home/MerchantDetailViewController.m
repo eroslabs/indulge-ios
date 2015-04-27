@@ -10,6 +10,16 @@
 #import "ParallaxHeaderView.h"
 #import "StoryCommentCell.h"
 #import "RateView.h"
+#import "MerchantInfoCell.h"
+#import "MerchantSocialCell.h"
+#import "MerchantScheduleCell.h"
+#import "MerchantPriceRangeCell.h"
+#import "MerchantRecommendedCell.h"
+#import "MerchantDealCell.h"
+#import "MerchantMapCell.h"
+#import "MerchantRatingCell.h"
+#import "MerchantExtrasCell.h"
+#import "MerchantErrorCell.h"
 
 @interface MerchantDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -137,36 +147,77 @@
 {
     NSString *identifier;
     switch (indexPath.row) {
-        case 0:
+        case 0:{
             identifier = @"InfoCell";
+            MerchantInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 1:
+        }
+        case 1:{
             identifier = @"SocialCell";
+            MerchantSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 2:
+        }
+        case 2:{
             identifier = @"ScheduleCell";
+            MerchantScheduleCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 3:
+        }
+        case 3:{
             identifier = @"PriceRangeCell";
+            MerchantPriceRangeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 4:
+        }
+        case 4:{
             identifier = @"RecommendedCell";
+            MerchantRecommendedCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
+
             break;
-        case 5:
+        }
+        case 5:{
             identifier = @"DealCell";
+            MerchantDealCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 6:
+        }
+        case 6:{
             identifier = @"MapCell";
+            MerchantMapCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 7:
+        }
+        case 7:{
             identifier = @"RatingCell";
+            MerchantRatingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 8:
+        }
+        case 8:{
             identifier = @"ExtrasCell";
+            MerchantExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
-        case 9:
+        }
+        case 9:{
             identifier = @"ErrorCell";
+            MerchantErrorCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupWithMerchant:self.merchant];
+            return cell;
             break;
+        }
         default:
             break;
     }

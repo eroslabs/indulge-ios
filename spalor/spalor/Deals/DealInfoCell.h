@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deal.h"
 
 @interface DealInfoCell : UITableViewCell
-
+-(DealInfoCell *)setupCellWithDeal:(Deal *)deal;
 @end

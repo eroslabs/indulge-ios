@@ -7,6 +7,13 @@
 //
 
 #import "DealDetailsViewController.h"
+#import "DealInfoCell.h"
+#import "DealSocialCell.h"
+#import "DealRedeemCell.h"
+#import "DealTimingCell.h"
+#import "DealPriceCell.h"
+#import "DealRecommendedCell.h"
+#import "DealExtraServicesCell.h"
 
 @interface DealDetailsViewController ()
 
@@ -68,34 +75,60 @@
 {
     NSString *identifier;
     switch (indexPath.row) {
-        case 0:
+        case 0:{
             identifier = @"dealCellIdentifier";
+            DealInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
-        case 1:
+        }
+        case 1:{
             identifier = @"socialCellIdentifier";
+            DealSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
-        case 2:
+        }
+        case 2:{
             identifier = @"redeemCellIdentifier";
+            DealRedeemCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
-        case 3:
+        }
+        case 3:{
             identifier = @"timingCellIdentifier";
+            DealTimingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
-        case 4:
+        }
+        case 4:{
             identifier = @"priceRangeCell";
+            DealPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
-        case 5:
+        }
+        case 5:{
             identifier = @"recomendedCellIdentifier";
+            DealRecommendedCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
-        case 6:
+        }
+        case 6:{
             identifier = @"extraServicesCellIdentifier";
+            DealExtraServicesCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell = [cell setupCellWithDeal:self.deal];
+            return cell;
             break;
+        }
         default:
             break;
     }
     
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    return cell;
+    return nil;
 }
 
 
