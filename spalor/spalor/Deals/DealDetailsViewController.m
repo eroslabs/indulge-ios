@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"Selected Deal %@",self.deal.name);
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,18 +35,18 @@
 
 #pragma mark - Table Datasource and Delegate
 - (NSInteger)numberOfSections{
-    return 7;
+    return 1;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = 1;
+    NSInteger numOfRows = 7;
     return numOfRows;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    switch (indexPath.section) {
+    switch (indexPath.row) {
         case 0:
             return 160;
             break;
@@ -74,17 +76,11 @@
     
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    switch (indexPath.section) {
-            case
-    }
-    return @"";
-}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier;
-    switch (indexPath.section) {
+    switch (indexPath.row) {
         case 0:{
             identifier = @"dealCellIdentifier";
             DealInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -149,9 +145,34 @@
 }
 
 -(IBAction)redeemDeal:(id)sender{
-    
+    [self hideRedeemConfirmation:NO];
 }
 
+-(IBAction)acceptRedeem:(id)sender{
+    //Push Segue
+}
+
+-(IBAction)rejectRedeem:(id)sender{
+    [self hideRedeemConfirmation:YES];
+
+}
+
+-(void)hideRedeemConfirmation:(BOOL)hidden{
+
+    [UIView animateWithDuration:0.3 animations:^{
+        if (!hidden) {
+            self.overlayView.alpha = 0.8;
+            self.acceptRejectView.alpha = 1;
+            self.redeemTextView.alpha = 1;
+        }
+        else{
+            self.overlayView.alpha = 0;
+            self.acceptRejectView.alpha = 0;
+            self.redeemTextView.alpha = 0;
+            
+        }
+    }];
+}
 
 
 @end

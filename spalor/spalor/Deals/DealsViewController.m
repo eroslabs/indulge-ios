@@ -34,7 +34,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
     
     [self searchForNewDeals];
 }
@@ -179,7 +179,7 @@
 #pragma mark - segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"ShowFilterDetail"]) {
+    if([segue.identifier isEqualToString:@"showDealDetails"]) {
         
         DealDetailsViewController *controller = (DealDetailsViewController *)segue.destinationViewController;
         controller.deal  = selectedDeal;
