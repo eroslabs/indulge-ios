@@ -39,6 +39,19 @@
     
     NSArray *allProps = [self allPropertyNames];
     
+    //if (![allProps containsObject:@"reviews"]) {
+        //Add a dummy review
+        
+        NSDictionary *dummyReview = @{@"userId":@"1",@"merchantId":@"1",@"text":@"This is a good review",@"rating":@"3.5",@"name":@"manish"};
+        self.reviews = [[NSMutableArray alloc] init];
+        //for (NSDictionary *reviewObject in dictionary[key]){
+            Review *review = [[Review alloc] init];
+            [review readFromDictionary:dummyReview];
+        NSLog(@"review %@ %@ %@ %@ %@",review.name,review.userId,review.merchantId,review.rating,review.text);
+            [self.reviews addObject:review];
+        //}
+    //}
+    
     for (NSString *key in allProps){
         
         //NSLog(@"KEY %@",key);
@@ -69,6 +82,14 @@
                     merchantService.categoryId = service[@"categoryId"];
                     [self.services addObject:merchantService];
                 }
+            }
+            else if ([key isEqualToString:@"reviews"]) {
+//                self.reviews = [[NSMutableArray alloc] init];
+//                for (NSDictionary *reviewObject in dictionary[key]){
+//                    Review *review = [[Review alloc] init];
+//                    [review readFromDictionary:reviewObject];
+//                    [self.reviews addObject:review];
+//                }
             }
             else if (![dictionary[key] isKindOfClass:[NSString class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];

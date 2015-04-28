@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AllReviewsViewController : UIViewController
-
+@property NSArray *arrayOfReviews;
 @end

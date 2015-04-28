@@ -10,6 +10,7 @@
 #import "Location.h"
 #import "Schedule.h"
 #import "MerchantService.h"
+#import "Review.h"
 
 @interface Merchant : NSObject
 
@@ -43,6 +44,8 @@
 @property (nonatomic, strong) Location *geo;
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
+@property (nonatomic, strong) NSMutableArray *reviews;
+
 
 //Methods
 - (void)readFromDictionary:(NSDictionary *)dictionary;

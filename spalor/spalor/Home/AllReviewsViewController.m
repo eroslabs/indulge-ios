@@ -7,6 +7,8 @@
 //
 
 #import "AllReviewsViewController.h"
+#import "MerchantRatingCell.h"
+#import "Review.h"
 
 @interface AllReviewsViewController ()
 
@@ -24,14 +26,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - Table Datasource and Delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numOfRows = self.arrayOfReviews.count;
+    return numOfRows;
 }
-*/
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 92;
+    
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MerchantRatingCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ratingCell"];
+    Review *review = self.arrayOfReviews[indexPath.row];
+    cell = [cell setupWithMerchantReview:review];
+    return cell;
+}
+
+
+#pragma mark - User Actions 
+
+-(IBAction)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

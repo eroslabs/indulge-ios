@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Merchant.h"
+#import "Review.h"
 #import "RateView.h"
 
 @interface MerchantRatingCell : UITableViewCell
@@ -16,6 +16,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *ratingLabel;
 @property (nonatomic, weak) IBOutlet RateView *rateView;
 
--(MerchantRatingCell *)setupWithMerchant:(Merchant *)merchant;
-
+-(MerchantRatingCell *)setupWithMerchantReview:(Review *)merchant;
+-(MerchantRatingCell *)setupWithMerchantwithNoReviews;
 @end

@@ -20,6 +20,7 @@
 #import "MerchantRatingCell.h"
 #import "MerchantExtrasCell.h"
 #import "MerchantErrorCell.h"
+#import "AllReviewsViewController.h"
 
 @interface MerchantDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -130,7 +131,7 @@
             return 100;
             break;
         case 7:
-            return 63;
+            return 92;
             break;
         case 8:
             return 63;
@@ -203,7 +204,10 @@
         case 7:{
             identifier = @"RatingCell";
             MerchantRatingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
+            if (self.merchant.reviews.count == 0)
+                cell = [cell setupWithMerchantwithNoReviews];
+            else
+                cell = [cell setupWithMerchantReview:self.merchant.reviews[0]];
             return cell;
             break;
         }
@@ -225,9 +229,27 @@
             break;
     }
     
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    return cell;
+    return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 7) {
+        // Open Reviews Segue
+        
+        //Commented if for testing
+        //if (self.merchant.reviews.count > 0)
+            [self performSegueWithIdentifier:@"AllReviews" sender:nil];
+    }
+    else if (indexPath.row == 9){
+        //Open Error segue
+        [self performSegueWithIdentifier:@"ReportError" sender:nil];
+
+    }
+    else if (indexPath.row == 0){
+        //Open Rating Segue
+        [self performSegueWithIdentifier:@"Rate" sender:nil];
+        
+    }
 }
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -239,6 +261,16 @@
 }
 
 #pragma mark -
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"AllReviews"]) {
+        AllReviewsViewController *controller = (AllReviewsViewController *)segue.destinationViewController;
+        controller.arrayOfReviews = self.merchant.reviews;
+    }
+}
+
+
 #pragma mark UISCrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -250,18 +282,6 @@
     }
 }
 
-
-- (UITableViewCell *)customCellForIndex:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = nil;
-    NSString * detailId = kCellIdentifier;
-    cell = [self.mainTableView dequeueReusableCellWithIdentifier:detailId];
-    if (!cell)
-    {
-        cell = [StoryCommentCell storyCommentCellForTableWidth:self.mainTableView.frame.size.width];
-    }
-    return cell;
-}
 
 #pragma mark - User Actions 
 
