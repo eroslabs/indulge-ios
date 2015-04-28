@@ -15,6 +15,7 @@
 //Attributes
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *ccAccepted;
+@property (nonatomic, strong) NSString *dealId;
 @property (nonatomic, strong) NSString *flatOff;
 @property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSString *email;

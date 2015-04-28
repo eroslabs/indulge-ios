@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AddNewLookViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UIButton *addNewLookButton;
 @end

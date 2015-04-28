@@ -14,8 +14,14 @@
 #import "DealPriceCell.h"
 #import "DealRecommendedCell.h"
 #import "DealExtraServicesCell.h"
+#import "NetworkHelper.h"
+#import "FeSpinnerTenDot.h"
+#import "RedeemDealViewController.h"
 
-@interface DealDetailsViewController ()
+@interface DealDetailsViewController (){
+    FeSpinnerTenDot *spinner;
+    NSString *couponCode;
+}
 
 @end
 
@@ -149,7 +155,56 @@
 }
 
 -(IBAction)acceptRedeem:(id)sender{
-    //Push Segue
+    // Send Redeem Request
+    // then
+    // Push Segue
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.overlayView withBlur:NO];
+    [self.overlayView addSubview:spinner];
+    [spinner showWhileExecutingSelector:@selector(confirmDealRequest) onTarget:self withObject:nil];
+}
+
+-(void)confirmDealRequest{
+    
+    if (!self.deal.dealId) {
+        [spinner dismiss];
+        [spinner removeFromSuperview];
+        //Show Error Alert
+        UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Redeem Error" message:@"Unable to redeem right now please come back later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [redeemError show];
+        
+        //Temporary Push Segue
+        couponCode = @"A123456789";
+        [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+        return;
+    }
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/confirm/1" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"dealId":self.deal.dealId} completionHandler:^(id response, NSString *url, NSError *error){
+        if (error == nil && response!=nil) {
+            dispatch_async (dispatch_get_main_queue(), ^{
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+                NSLog(@"response Dict %@",responseDict);
+                [spinner dismiss];
+                [spinner removeFromSuperview];
+                //Push Segue
+                couponCode = @"A123456789";
+                [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+            });
+        }
+        else{
+            dispatch_async (dispatch_get_main_queue(), ^{
+                [spinner dismiss];
+                [spinner removeFromSuperview];
+                //Show Error Alert
+                UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Redeem Error" message:@"Unable to redeem right now please come back later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [redeemError show];
+                
+                //Temporary Push Segue
+                couponCode = @"A123456789";
+                [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+            });
+            
+        }
+    }];
 }
 
 -(IBAction)rejectRedeem:(id)sender{
@@ -172,6 +227,15 @@
             
         }
     }];
+}
+
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"RedeemDeal"]) {
+        RedeemDealViewController *controller = (RedeemDealViewController *)[segue destinationViewController];
+        controller.couponCode = couponCode;
+    }
 }
 
 

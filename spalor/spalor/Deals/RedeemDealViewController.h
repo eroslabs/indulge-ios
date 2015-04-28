@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RedeemDealViewController : UIViewController
+@property NSString *couponCode;
 @property (nonatomic, weak) IBOutlet UILabel *couponCodeLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *couponQRCodeImageView;
 
