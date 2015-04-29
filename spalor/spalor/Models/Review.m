@@ -10,6 +10,29 @@
 #import <objc/objc-runtime.h>
 
 @implementation Review
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.userId = [decoder decodeObjectForKey:@"userId"];
+        self.merchantId = [decoder decodeObjectForKey:@"merchantId"];
+        self.text = [decoder decodeObjectForKey:@"text"];
+        self.rating = [decoder decodeObjectForKey:@"rating"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    
+    [encoder encodeObject:_userId forKey:@"userId"];
+    [encoder encodeObject:_merchantId forKey:@"merchantId"];
+    [encoder encodeObject:_text forKey:@"text"];
+    [encoder encodeObject:_rating forKey:@"rating"];
+    [encoder encodeObject:_name forKey:@"name"];
+    
+}
+
 - (NSArray *)allPropertyNames
 {
     unsigned count;

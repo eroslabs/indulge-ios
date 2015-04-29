@@ -78,7 +78,7 @@
     
     NSMutableDictionary *paramDict = [NSMutableDictionary new];
     
-    [paramDict addEntriesFromDictionary:@{@"s":@"venus"}];
+    [paramDict addEntriesFromDictionary:@{@"s":self.searchText}];
     //[paramDict addEntriesFromDictionary:filterDict];
     //[paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
     

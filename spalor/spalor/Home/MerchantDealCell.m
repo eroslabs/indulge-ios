@@ -7,9 +7,9 @@
 //
 
 #import "MerchantDealCell.h"
-
+#import "MerchantDeal.h"
 @implementation MerchantDealCell
--(MerchantDealCell *)setupWithMerchant:(Merchant *)merchant{
+-(MerchantDealCell *)setupWithMerchant:(MerchantDeal *)merchantDeal{
     self.amountOffLabel.text = @"500 Rs Off";
     self.servicesLabel.text = @"X Y Z";
     self.validTillLabel.text = @"Valid Till X Y Z";

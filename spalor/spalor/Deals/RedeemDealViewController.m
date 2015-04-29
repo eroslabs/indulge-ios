@@ -14,6 +14,8 @@
     [super viewDidLoad];
     self.couponCodeLabel.text = self.couponCode;
     self.couponQRCodeImageView.image = [self generateQRCodeWithString:self.couponCode scale:1.0f];
+   
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{

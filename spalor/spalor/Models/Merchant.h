@@ -11,8 +11,9 @@
 #import "Schedule.h"
 #import "MerchantService.h"
 #import "Review.h"
+#import "MerchantDeal.h"
 
-@interface Merchant : NSObject
+@interface Merchant : NSObject<NSCoding>
 
 //Attributes
 @property (nonatomic, strong) NSString *name;
@@ -45,6 +46,7 @@
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSMutableArray *reviews;
+@property (nonatomic, strong) NSMutableArray *deals;
 
 
 //Methods

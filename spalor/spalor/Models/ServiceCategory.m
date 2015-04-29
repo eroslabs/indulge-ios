@@ -12,6 +12,29 @@
 
 @implementation ServiceCategory
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.validTill = [decoder decodeObjectForKey:@"validTill"];
+        self.categoryId = [decoder decodeObjectForKey:@"categoryId"];
+        self.image = [decoder decodeObjectForKey:@"image"];
+        self.desc = [decoder decodeObjectForKey:@"desc"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.services = [decoder decodeObjectForKey:@"services"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    
+    [encoder encodeObject:_validTill forKey:@"validTill"];
+    [encoder encodeObject:_categoryId forKey:@"categoryId"];
+    [encoder encodeObject:_image forKey:@"image"];
+    [encoder encodeObject:_desc forKey:@"desc"];
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_services forKey:@"services"];
+
+}
+
 - (NSArray *)allPropertyNames
 {
     unsigned count;

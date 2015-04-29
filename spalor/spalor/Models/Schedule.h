@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Schedule : NSObject
+@interface Schedule : NSObject<NSCoding>
 @property (nonatomic, strong) NSString *closingTime;
 @property (nonatomic, strong) NSString *openingTime;
 @property (nonatomic, strong) NSString *weekSchedule;

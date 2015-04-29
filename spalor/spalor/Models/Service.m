@@ -10,6 +10,29 @@
 #import <objc/objc-runtime.h>
 
 @implementation Service
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.serviceId = [decoder decodeObjectForKey:@"serviceId"];
+        self.categoryId = [decoder decodeObjectForKey:@"categoryId"];
+        self.image = [decoder decodeObjectForKey:@"image"];
+        self.desc = [decoder decodeObjectForKey:@"desc"];
+        self.name = [decoder decodeObjectForKey:@"name"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    
+    [encoder encodeObject:_serviceId forKey:@"serviceId"];
+    [encoder encodeObject:_categoryId forKey:@"categoryId"];
+    [encoder encodeObject:_image forKey:@"image"];
+    [encoder encodeObject:_desc forKey:@"desc"];
+    [encoder encodeObject:_name forKey:@"name"];
+    
+}
+
 - (NSArray *)allPropertyNames
 {
     unsigned count;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Service.h"
 
-@interface ServiceCategory : NSObject
+@interface ServiceCategory : NSObject<NSCoding>
 //Attributes
 @property (nonatomic, strong) NSString *categoryId;
 @property (nonatomic, strong) NSString *image;

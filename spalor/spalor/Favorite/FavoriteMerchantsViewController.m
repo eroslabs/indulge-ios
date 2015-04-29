@@ -7,8 +7,17 @@
 //
 
 #import "FavoriteMerchantsViewController.h"
+#import "MyLookbookCell.h"
+#import "MyDealsCell.h"
+#import "MyServiceProviderCell.h"
+#import "Merchant.h"
+#import "Deal.h"
 
-@interface FavoriteMerchantsViewController ()
+@interface FavoriteMerchantsViewController (){
+    NSArray *myLookBookImagesArray;
+    NSArray *myDealsImagesArray;
+    NSArray *myMerchantsArray;
+}
 
 @end
 
@@ -17,7 +26,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    myLookBookImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"MyLookBookImages"];
+    myDealsImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsImages"];
+    myMerchantsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"MyMerchantsArray"];
+    [self.tableView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -38,6 +58,8 @@
 #pragma mark UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    
     NSInteger numOfSections = 3;
     return numOfSections;
 }
@@ -47,13 +69,13 @@
     NSInteger numOfRows = 0;
 
     if(section == 0){
-        numOfRows = 1;
+        numOfRows = (myLookBookImagesArray.count)?1:0;//This is the favorite looks
     }
     else if(section == 1){
-        numOfRows = 1;
+        numOfRows = (myDealsImagesArray.count)?1:0;//This is deals
     }
     else{
-        numOfRows = 10;//This is your favorite Merchants
+        numOfRows = myMerchantsArray.count;//This is your favorite Merchants
     }
     
     return numOfRows;
@@ -65,14 +87,14 @@
     switch (section)
     {
         case 0:
-            sectionName = NSLocalizedString(@"My Looks", @"My Looks");
+            sectionName = NSLocalizedString(@"My Lookbook", @"My Lookbook");
             break;
         case 1:
             sectionName = NSLocalizedString(@"My Deals", @"My Deals");
             break;
             // ...
         default:
-            sectionName = @"My Merchants";
+            sectionName = @"My service Provider";
             break;
     }
     return sectionName;
@@ -83,7 +105,7 @@
     NSInteger heightOfRow = 0;
     
     if(indexPath.section == 0){
-        heightOfRow = 150;
+        heightOfRow = 60;
     }
     else if(indexPath.section == 1){
         heightOfRow = 150;
@@ -99,26 +121,33 @@
 {
     
     NSString *reuseId = @"";
-    UITableViewCell *cell;
     
     if(indexPath.section == 0){
         reuseId = @"MyLooksCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        MyLookbookCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        [cell setupCellWithMyLooksImagesArray:myLookBookImagesArray];
+        return cell;
 
     }
     else if(indexPath.section == 1){
         reuseId = @"MyDealsCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        MyDealsCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        [cell setupCellWithMyDealImagesArray:myDealsImagesArray];
+        return cell;
 
     }
     else{
         reuseId = @"MyServiceProviderCell";//This is your favorite Merchants
-        cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        MyServiceProviderCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+        Merchant *myMerchant = [NSKeyedUnarchiver unarchiveObjectWithData:myMerchantsArray[indexPath.row]];
+        NSLog(@"myMerchant %@",myMerchant.name);
+        [cell setupCellWithMerchant:myMerchant];
+        return cell;
 
     }
 
     //cell.textLabel.text = @"Sample";
-    return cell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Service : NSObject
+@interface Service : NSObject<NSCoding>
 @property (nonatomic, strong) NSString *serviceId;
 @property (nonatomic, strong) NSString *categoryId;
 

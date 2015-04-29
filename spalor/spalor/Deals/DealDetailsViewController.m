@@ -21,6 +21,7 @@
 @interface DealDetailsViewController (){
     FeSpinnerTenDot *spinner;
     NSString *couponCode;
+    UIImage *snapShotOfCell;
 }
 
 @end
@@ -82,6 +83,17 @@
     
 }
 
+-(UIImage *)snapShotOfView:(UIView *)viewToRender{
+    UIGraphicsBeginImageContextWithOptions(viewToRender.bounds.size, NO, [UIScreen mainScreen].scale);
+    
+    [viewToRender drawViewHierarchyInRect:viewToRender.bounds afterScreenUpdates:YES];
+    
+    // old style [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -91,6 +103,9 @@
             identifier = @"dealCellIdentifier";
             DealInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupCellWithDeal:self.deal];
+            if (!snapShotOfCell) {
+                snapShotOfCell = [self snapShotOfView:cell.contentView];
+            }
             return cell;
             break;
         }
@@ -174,6 +189,15 @@
         
         //Temporary Push Segue
         couponCode = @"A123456789";
+        NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsArray"]];
+        NSMutableArray *myDealsImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsImagesArray"]];
+        [myDealsImagesArray addObject: UIImagePNGRepresentation(snapShotOfCell)];
+        NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
+        [myDealsArray addObject:dealData];
+        [[NSUserDefaults standardUserDefaults] setObject:myDealsImagesArray forKey:@"MyDealsImagesArray"];
+        [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:@"MyDealsArray"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
         [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
         return;
     }
@@ -187,6 +211,14 @@
                 [spinner removeFromSuperview];
                 //Push Segue
                 couponCode = @"A123456789";
+                NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsArray"]];
+                NSMutableArray *myDealsImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsImagesArray"]];
+                [myDealsImagesArray addObject: UIImagePNGRepresentation(snapShotOfCell)];
+                NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
+                [myDealsArray addObject:dealData];
+                [[NSUserDefaults standardUserDefaults] setObject:myDealsImagesArray forKey:@"MyDealsImagesArray"];
+                [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:@"MyDealsArray"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
             });
         }

@@ -162,8 +162,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
- 
-    selected = textField.tag;
+     selected = textField.tag;
     NSLog(@"selected %d",selected);
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.tableView reloadData];

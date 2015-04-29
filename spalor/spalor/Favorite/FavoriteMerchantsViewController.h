@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FavoriteMerchantsViewController : UIViewController
-
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @end

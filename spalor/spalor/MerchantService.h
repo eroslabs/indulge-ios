@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MerchantService : NSObject
+@interface MerchantService : NSObject<NSCoding>
 @property (nonatomic, strong) NSString *desc;
 @property (nonatomic, strong) NSString *serviceId;
 @property (nonatomic, strong) NSString *categoryId;

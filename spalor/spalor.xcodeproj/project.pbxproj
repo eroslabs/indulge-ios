@@ -11,6 +11,9 @@
 		132275581AEF94E300F5D77F /* star_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132275551AEF94E300F5D77F /* star_empty@2x.png */; };
 		132275591AEF94E300F5D77F /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132275561AEF94E300F5D77F /* star@2x.png */; };
 		1322755A1AEF94E300F5D77F /* star_half@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132275571AEF94E300F5D77F /* star_half@2x.png */; };
+		1322755D1AEFA01F00F5D77F /* MyLookbookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1322755C1AEFA01F00F5D77F /* MyLookbookCell.m */; };
+		132275601AEFA03700F5D77F /* MyDealsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1322755F1AEFA03700F5D77F /* MyDealsCell.m */; };
+		132275631AEFA04E00F5D77F /* MyServiceProviderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */; };
 		1324E2071AE7823100C2FEBB /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1324E2061AE7823100C2FEBB /* LocationHelper.m */; };
 		132BD1931A88867E007F5D89 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 132BD1921A88867E007F5D89 /* SignupViewController.m */; };
 		132BD2B11A88877F007F5D89 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132BD1961A88877E007F5D89 /* Bolts.framework */; };
@@ -240,6 +243,12 @@
 		132275551AEF94E300F5D77F /* star_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_empty@2x.png"; sourceTree = "<group>"; };
 		132275561AEF94E300F5D77F /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		132275571AEF94E300F5D77F /* star_half@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_half@2x.png"; sourceTree = "<group>"; };
+		1322755B1AEFA01F00F5D77F /* MyLookbookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLookbookCell.h; path = Favorite/MyLookbookCell.h; sourceTree = "<group>"; };
+		1322755C1AEFA01F00F5D77F /* MyLookbookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLookbookCell.m; path = Favorite/MyLookbookCell.m; sourceTree = "<group>"; };
+		1322755E1AEFA03700F5D77F /* MyDealsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDealsCell.h; path = Favorite/MyDealsCell.h; sourceTree = "<group>"; };
+		1322755F1AEFA03700F5D77F /* MyDealsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDealsCell.m; path = Favorite/MyDealsCell.m; sourceTree = "<group>"; };
+		132275611AEFA04E00F5D77F /* MyServiceProviderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyServiceProviderCell.h; path = Favorite/MyServiceProviderCell.h; sourceTree = "<group>"; };
+		132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyServiceProviderCell.m; path = Favorite/MyServiceProviderCell.m; sourceTree = "<group>"; };
 		1324E2051AE7823100C2FEBB /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationHelper.h; path = LocationHelper/LocationHelper.h; sourceTree = "<group>"; };
 		1324E2061AE7823100C2FEBB /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationHelper.m; path = LocationHelper/LocationHelper.m; sourceTree = "<group>"; };
 		132BD1911A88867E007F5D89 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = Login/SignupViewController.h; sourceTree = "<group>"; };
@@ -907,6 +916,12 @@
 			children = (
 				13E4DC4F1AC95942003355C0 /* FavoriteMerchantsViewController.h */,
 				13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */,
+				1322755B1AEFA01F00F5D77F /* MyLookbookCell.h */,
+				1322755C1AEFA01F00F5D77F /* MyLookbookCell.m */,
+				1322755E1AEFA03700F5D77F /* MyDealsCell.h */,
+				1322755F1AEFA03700F5D77F /* MyDealsCell.m */,
+				132275611AEFA04E00F5D77F /* MyServiceProviderCell.h */,
+				132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */,
 			);
 			name = Favorite;
 			sourceTree = "<group>";
@@ -1302,12 +1317,14 @@
 				1388A1A41AE7C47700E330C1 /* ServiceCategory.m in Sources */,
 				134CED6A1AEA68DE009C5714 /* DealRecommendedCell.m in Sources */,
 				13A073091AE508D100754317 /* DealListCell.m in Sources */,
+				132275631AEFA04E00F5D77F /* MyServiceProviderCell.m in Sources */,
 				13E67C431AE4D63200F96A36 /* MerchantListCell.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				1388A1A71AE7C49A00E330C1 /* Service.m in Sources */,
 				132C9F141ADCF81700EB5F3F /* Schedule.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
 				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,
+				132275601AEFA03700F5D77F /* MyDealsCell.m in Sources */,
 				134CED881AEA6E37009C5714 /* MerchantErrorCell.m in Sources */,
 				134CED5B1AEA67F3009C5714 /* DealInfoCell.m in Sources */,
 				134CED731AEA6C6E009C5714 /* MerchantSocialCell.m in Sources */,
@@ -1325,6 +1342,7 @@
 				13E530801AD25CD10046EAEB /* AESCrypt.m in Sources */,
 				13A073061AE4F04300754317 /* MerchantDeal.m in Sources */,
 				134CED6D1AEA68F2009C5714 /* DealExtraServicesCell.m in Sources */,
+				1322755D1AEFA01F00F5D77F /* MyLookbookCell.m in Sources */,
 				1324E2071AE7823100C2FEBB /* LocationHelper.m in Sources */,
 				139B4C751AE621A70079F992 /* FXBlurView.m in Sources */,
 				137B94121AEE60D100BCB1E4 /* RedeemDealViewController.m in Sources */,

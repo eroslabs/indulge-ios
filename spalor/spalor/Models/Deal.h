@@ -11,7 +11,7 @@
 #import "Schedule.h"
 #import "MerchantService.h"
 
-@interface Deal : NSObject
+@interface Deal : NSObject<NSCoding>
 //Attributes
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *ccAccepted;

@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MerchantDeal : NSObject
-@property (nonatomic, strong) NSString *description;
-@property (nonatomic, strong) NSString *categoryId;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *price;
+@interface MerchantDeal : NSObject<NSCoding>
+@property (nonatomic, strong) NSString *amountOff;
+@property (nonatomic, strong) NSString *services;
+@property (nonatomic, strong) NSString *validTill;
 @end

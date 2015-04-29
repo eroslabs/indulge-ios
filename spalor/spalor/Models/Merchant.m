@@ -13,6 +13,61 @@
 
 @implementation Merchant
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        self.name = [decoder decodeObjectForKey:@"name"];
+        self.ccAccepted = [decoder decodeObjectForKey:@"ccAccepted"];
+        self.city = [decoder decodeObjectForKey:@"city"];
+        self.country = [decoder decodeObjectForKey:@"country"];
+        self.email = [decoder decodeObjectForKey:@"email"];
+        self.address = [decoder decodeObjectForKey:@"address"];
+        self.genderSupport = [decoder decodeObjectForKey:@"genderSupport"];
+        self.homeServices = [decoder decodeObjectForKey:@"homeServices"];
+        self.merchantid = [decoder decodeObjectForKey:@"merchantid"];
+        self.image = [decoder decodeObjectForKey:@"image"];
+        self.pincode = [decoder decodeObjectForKey:@"pincode"];
+        self.phone = [decoder decodeObjectForKey:@"phone"];
+        self.rating = [decoder decodeObjectForKey:@"rating"];
+        self.separateRateCard = [decoder decodeObjectForKey:@"separateRateCard"];
+        self.serviceRadius = [decoder decodeObjectForKey:@"serviceRadius"];
+        self.software = [decoder decodeObjectForKey:@"software"];
+        self.state = [decoder decodeObjectForKey:@"state"];
+        self.unitNumber = [decoder decodeObjectForKey:@"unitNumber"];
+        self.merchantImageUrls = [decoder decodeObjectForKey:@"merchantImageUrls"];
+        self.geo = [decoder decodeObjectForKey:@"geo"];
+        self.schedule = [decoder decodeObjectForKey:@"schedule"];
+        self.services = [decoder decodeObjectForKey:@"services"];
+        self.reviews = [decoder decodeObjectForKey:@"reviews"];
+        self.deals = [decoder decodeObjectForKey:@"deals"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    
+    [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_ccAccepted forKey:@"ccAccepted"];
+    [encoder encodeObject:_city forKey:@"city"];
+    [encoder encodeObject:_country forKey:@"country"];
+    [encoder encodeObject:_email forKey:@"email"];
+    [encoder encodeObject:_address forKey:@"address"];
+    [encoder encodeObject:_genderSupport forKey:@"genderSupport"];
+    [encoder encodeObject:_homeServices forKey:@"homeServices"];
+    [encoder encodeObject:_merchantid forKey:@"merchantid"];
+    [encoder encodeObject:_pincode forKey:@"pincode"];
+    [encoder encodeObject:_rating forKey:@"rating"];
+    [encoder encodeObject:_separateRateCard forKey:@"separateRateCard"];
+    [encoder encodeObject:_serviceRadius forKey:@"serviceRadius"];
+    [encoder encodeObject:_software forKey:@"software"];
+    [encoder encodeObject:_unitNumber forKey:@"unitNumber"];
+    [encoder encodeObject:_merchantImageUrls forKey:@"merchantImageUrls"];
+    [encoder encodeObject:_geo forKey:@"geo"];
+    [encoder encodeObject:_schedule forKey:@"schedule"];
+    [encoder encodeObject:_services forKey:@"services"];
+    [encoder encodeObject:_reviews forKey:@"reviews"];
+    [encoder encodeObject:_deals forKey:@"deals"];
+}
+
 - (NSArray *)allPropertyNames
 {
     unsigned count;
@@ -83,6 +138,17 @@
                     [self.services addObject:merchantService];
                 }
             }
+            else if ([key isEqualToString:@"deals"]) {
+                self.deals = [[NSMutableArray alloc] init];
+                for (NSDictionary *dealObject in dictionary[key]){
+                    MerchantDeal *deal = [[MerchantDeal alloc] init];
+                    deal.amountOff = dealObject[@"amountOff"];
+                    deal.services = dealObject[@"services"];
+                    deal.validTill = dealObject[@"validTill"];
+                    [self.deals addObject:deal];
+                }
+            }
+
             else if ([key isEqualToString:@"reviews"]) {
 //                self.reviews = [[NSMutableArray alloc] init];
 //                for (NSDictionary *reviewObject in dictionary[key]){
