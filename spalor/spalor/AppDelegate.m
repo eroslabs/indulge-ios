@@ -11,6 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <GooglePlus/GooglePlus.h>
 #import "NetworkHelper.h"
+#import "UIColor+flat.h"
 static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes3738a.apps.googleusercontent.com";
 
 @interface AppDelegate ()
@@ -25,13 +26,37 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [FBLoginView class];
     [FBProfilePictureView class];
     
+    
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]){
         [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"1",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"} forKey:@"filterDict"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self loadCategories];
     }
+    
+    [self setTabbarItems];
     return YES;
+}
+
+-(void)setTabbarItems{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UITabBarController *tabBarController=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+
+    UITabBar *tabBar = tabBarController.tabBar;
+    
+    UITabBarItem *item0 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *item1 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *item2 = [tabBar.items objectAtIndex:2];
+    UITabBarItem *item3 = [tabBar.items objectAtIndex:3];
+    UITabBarItem *item4 = [tabBar.items objectAtIndex:4];
+
+    [UITabBarItem.appearance setTitleTextAttributes:@{
+                                                      NSForegroundColorAttributeName : [UIColor whiteColor] }     forState:UIControlStateSelected];
+
+    [item0 setSelectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
+    [item0 setImage:[UIImage imageNamed:@"navbar-home.png"]];
+
+    tabBarController.selectedIndex=0;
 }
 
 -(void)loadCategories{

@@ -140,7 +140,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (searching)?40:160;
+    return (searching)?40:170;
     
 }
 
