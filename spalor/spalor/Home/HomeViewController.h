@@ -10,6 +10,7 @@
 
 @interface HomeViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (weak, nonatomic) IBOutlet UIButton *recommededButton1;
 @property (weak, nonatomic) IBOutlet UIButton *recommededButton2;
 @property (weak, nonatomic) IBOutlet UIButton *recommededButton3;

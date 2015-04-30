@@ -17,6 +17,7 @@
     NSArray *myLookBookImagesArray;
     NSArray *myDealsImagesArray;
     NSArray *myMerchantsArray;
+    NSArray *myDealsArray;
 }
 
 @end
@@ -32,9 +33,10 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    myLookBookImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"MyLookBookImages"];
-    myDealsImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsImages"];
-    myMerchantsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"MyMerchantsArray"];
+    myLookBookImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE];
+    myDealsImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSIMAGESSTORE];
+    myDealsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE];
+    myMerchantsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE];
     [self.tableView reloadData];
 }
 
@@ -108,7 +110,7 @@
         heightOfRow = 60;
     }
     else if(indexPath.section == 1){
-        heightOfRow = 150;
+        heightOfRow = 152;
     }
     else{
         heightOfRow = 100;//This is your favorite Merchants
@@ -132,7 +134,7 @@
     else if(indexPath.section == 1){
         reuseId = @"MyDealsCell";
         MyDealsCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-        [cell setupCellWithMyDealImagesArray:myDealsImagesArray];
+        [cell setupCellWithMyDealArray:myDealsArray];
         return cell;
 
     }

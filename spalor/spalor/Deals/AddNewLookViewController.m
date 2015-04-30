@@ -67,9 +67,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     [self.addNewLookButton setImage:chosenImage forState:UIControlStateNormal];
-    NSMutableArray *myLookBookImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyLookBookImages"]];
+    NSMutableArray *myLookBookImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE]];
     [myLookBookImagesArray addObject: UIImagePNGRepresentation(chosenImage)];
-    [[NSUserDefaults standardUserDefaults] setObject:myLookBookImagesArray forKey:@"MyLookBookImages"];
+    NSLog(@"myLookbook array count %d",myLookBookImagesArray.count);
+    [[NSUserDefaults standardUserDefaults] setObject:myLookBookImagesArray forKey:MYLOOKBOOKSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

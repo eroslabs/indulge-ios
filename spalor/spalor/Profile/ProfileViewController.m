@@ -36,6 +36,11 @@
     UINavigationController *navigationController = (UINavigationController *)[self.tabBarController parentViewController];
     [navigationController popToRootViewControllerAnimated:YES];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYDEALSIMAGESSTORE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYDEALSSTORE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYMERCHANTSSTORE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOOKBOOKSTORE];
+    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
 
     [[GPPSignIn sharedInstance] signOut];

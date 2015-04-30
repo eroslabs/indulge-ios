@@ -294,10 +294,10 @@
 }
 
 -(IBAction)favorite:(id)sender{
-    NSMutableArray *myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyMerchantsArray"]];
+    NSMutableArray *myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
     NSData *myEncodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:self.merchant];
     [myMerchantsArray addObject:myEncodedMerchant];
-    [[NSUserDefaults standardUserDefaults] setObject:myMerchantsArray forKey:@"MyMerchantsArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:myMerchantsArray forKey:MYMERCHANTSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

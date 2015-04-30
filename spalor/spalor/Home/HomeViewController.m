@@ -15,6 +15,8 @@
 
 @interface HomeViewController (){
     NSString *searchText;
+    NSMutableArray *data;
+    BOOL searching;
 }
 @end
 
@@ -29,6 +31,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     //[[NetworkHelper sharedInstance] formRequestwithemail:@"vikas@eroslabs.co"];
+    searching = NO;
+    data = [NSMutableArray new];
     [self setupRecomendedButttons];
     
     [self searchStateOn:NO];
@@ -92,19 +96,28 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = 10;
+    NSInteger numOfRows = (searching)?data.count:10;
     return numOfRows;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 62;
+    return 40;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier =  @"SuggestedCellIdentifier";
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (searching) {
+        cell.textLabel.text = data[indexPath.row];
+    }
+    else{
+        cell.textLabel.text = @"Suggested Search";
+    }
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir Next Regular" size:11.0f];
+
     return cell;
 }
 
@@ -114,6 +127,7 @@
     UILabel *myLabel = [[UILabel alloc] init];
     myLabel.frame = CGRectMake(20, 0, tableView.frame.size.width, 20);
     myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
+    
     myLabel.text = @"Suggested Searches";
     
     UIView *headerView = [[UIView alloc] init];
@@ -131,7 +145,13 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (searching) {
+        searchText = cell.textLabel.text;
+    }
+    if (searchText.length > 0) {
+        [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
+    }
 
 }
 
@@ -162,6 +182,32 @@
     
     if(self.searchButton.hidden){
         [self searchStateOn:YES];
+        
+    }
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+
+    if (newString.length > 0) {
+        [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/suggestMerchant" withParameters:@{@"s":newString} completionHandler:^(id response, NSString *url, NSError *error) {
+            if (!error) {
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+                
+                NSLog(@"response string %@",responseDict);
+            
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    searching = YES;
+                    data = responseDict[@"result"];
+                    [self.tableView reloadData];
+ 
+                });
+            }
+            //return data;
+            
+        }];
+
+    }
+    else{
+        searching = NO;
+        [self.tableView reloadData];
     }
     
     return YES;
@@ -188,6 +234,15 @@
         controller.searchText  = searchText;
     }
 }
+
+
+#pragma mark - AutoDelegate
+
+-(void)didSelectText:(NSString *)text{
+    //Perform segue with search text
+}
+
+
 
 
 @end

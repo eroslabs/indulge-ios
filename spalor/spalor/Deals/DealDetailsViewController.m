@@ -103,9 +103,6 @@
             identifier = @"dealCellIdentifier";
             DealInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupCellWithDeal:self.deal];
-            if (!snapShotOfCell) {
-                snapShotOfCell = [self snapShotOfView:cell.contentView];
-            }
             return cell;
             break;
         }
@@ -158,6 +155,18 @@
     return nil;
 }
 
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath{
+//    if (snapShotOfCell == nil && indexPath.row == 0) {
+//        snapShotOfCell = [self snapShotOfView:cell.contentView];
+//    }
+
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if (snapShotOfCell == nil && indexPath.row == 0) {
+//        snapShotOfCell = [self snapShotOfView:cell.vi];
+//    }
+}
 
 #pragma mark - User Actions
 
@@ -189,13 +198,11 @@
         
         //Temporary Push Segue
         couponCode = @"A123456789";
-        NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsArray"]];
-        NSMutableArray *myDealsImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsImagesArray"]];
-        [myDealsImagesArray addObject: UIImagePNGRepresentation(snapShotOfCell)];
+        NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+        self.deal.couponCode = couponCode;
         NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
         [myDealsArray addObject:dealData];
-        [[NSUserDefaults standardUserDefaults] setObject:myDealsImagesArray forKey:@"MyDealsImagesArray"];
-        [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:@"MyDealsArray"];
+        [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
         [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
@@ -211,13 +218,12 @@
                 [spinner removeFromSuperview];
                 //Push Segue
                 couponCode = @"A123456789";
-                NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsArray"]];
-                NSMutableArray *myDealsImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:@"MyDealsImagesArray"]];
-                [myDealsImagesArray addObject: UIImagePNGRepresentation(snapShotOfCell)];
+                NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+                self.deal.couponCode = couponCode;
+
                 NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
                 [myDealsArray addObject:dealData];
-                [[NSUserDefaults standardUserDefaults] setObject:myDealsImagesArray forKey:@"MyDealsImagesArray"];
-                [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:@"MyDealsArray"];
+                [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
             });

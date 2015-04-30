@@ -17,6 +17,9 @@
     NSArray *arrayOfDeals;
     Deal *selectedDeal;
     FeSpinnerTenDot *spinner;
+    NSString *searchText;
+    BOOL searching;
+    NSArray *data;
 }
 @end
 
@@ -31,12 +34,13 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
-    [self.loaderContainerView addSubview:spinner];
-    self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
+    if (arrayOfDeals.count == 0) {
+        spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+        [self.loaderContainerView addSubview:spinner];
+        self.loaderContainerView.hidden = NO;
+        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+    }
     
-    [self searchForNewDeals];
 }
 
 -(void)searchForNewDeals{
@@ -130,35 +134,43 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = arrayOfDeals.count;
+    NSInteger numOfRows = (searching)?data.count:arrayOfDeals.count;
     return numOfRows;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 160;
+    return (searching)?40:160;
     
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier =  @"DealCellIdentifier";
-    Deal *deal = arrayOfDeals[indexPath.row];
-    DealListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
-//    //Left cap is the space you dont wanna stretch on the left side and right side of the image
-//    int leftCap = 30;
-//    //Left cap is the space you dont wanna stretch on the top side and bottom side of the image
-//    int topCap = 20;
-//    //this will only stretch the inner side of the image
-//    cell.backgroundImageView.image = [cell.backgroundImageView.image stretchableImageWithLeftCapWidth:leftCap topCapHeight:topCap];
+    if (searching) {
+        NSString *identifier =  @"SuggestedCellIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        cell.textLabel.text = data[indexPath.row];
+        return cell;
 
-    cell.nameLabel.text = deal.name;
-    cell.addressLabel.text = deal.address;
-    cell.distanceLabel.text = @"500 m";
-    cell.averageRating.text = deal.rating;
-    cell.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
-    return cell;
+    }
+    else{
+        NSString *identifier =  @"DealCellIdentifier";
+        Deal *deal = arrayOfDeals[indexPath.row];
+        DealListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        cell.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
+        
+        cell.nameLabel.text = deal.name;
+        cell.addressLabel.text = deal.address;
+        cell.distanceLabel.text = @"500 m";
+        cell.averageRating.text = deal.rating;
+        cell.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
+        return cell;
+    }
+    
+    return nil;
+    
+    
 }
 
 
@@ -185,6 +197,61 @@
         controller.deal  = selectedDeal;
     }
 }
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    //START THE ANIMATION HERE
+    textField.text = @"";
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    if (textField.text.length>0) {
+        searchText = textField.text;
+    }
+    else{
+        textField.text = @"Enter service, location , merchant";
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (newString.length > 0) {
+        searching = YES;
+        [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/suggestMerchant" withParameters:@{@"s":newString} completionHandler:^(id response, NSString *url, NSError *error) {
+            if (!error) {
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+                
+                NSLog(@"response string %@",responseDict);
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    searching = YES;
+                    data = responseDict[@"result"];
+                    self.tableview.backgroundColor = [UIColor whiteColor];
+                    [self.tableview reloadData];
+                    
+                });
+            }
+            //return data;
+            
+        }];
+        
+    }
+    else{
+        searching = NO;
+        self.tableview.backgroundColor = [UIColor clearColor];
+        [self.tableview reloadData];
+    }
+    
+    return YES;
+}
+
 
 
 @end

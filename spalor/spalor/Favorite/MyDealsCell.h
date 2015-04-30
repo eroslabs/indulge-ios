@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MyDealsCell : UITableViewCell
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property NSArray *dataArray;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 -(void)setupCellWithMyDealImagesArray:(NSArray *)imagesArray;
+-(void)setupCellWithMyDealArray:(NSArray *)dataArray;
 @end

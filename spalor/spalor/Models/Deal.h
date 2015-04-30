@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString *validTill;
 @property (nonatomic, strong) NSString *percentOff;
 @property (nonatomic, strong) NSString *amountOff;
+@property (nonatomic, strong) NSString *couponCode;
 
 
 //Relations
