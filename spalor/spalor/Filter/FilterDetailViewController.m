@@ -128,6 +128,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:filterDict forKey:@"filterDict"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 
 }
 

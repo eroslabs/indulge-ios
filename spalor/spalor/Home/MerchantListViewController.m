@@ -28,13 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
+    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
 
 }
 
@@ -62,6 +59,10 @@
     
     if(![[LocationHelper sharedInstance] checkPermission]){
         //Show location manager not enabled screen
+        UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"Location Disabled!" message:@"Please enable location to get the restults" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [noLocationAlert show];
+        [spinner dismiss];
+        self.loaderContainerView.hidden = YES;
         return;
     }
     
@@ -90,13 +91,14 @@
             
             NSLog(@"response string %@",responseDict);
                 
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"MerchantResponse"];
-            
-                
-            NSLog(@"response Data %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"MerchantResponse"]);
-
             if (responseDict) {
                 arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
+                if (arrayOfMerchants.count>0) {
+                    
+                    //Only put if there was no error
+                    [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"MerchantResponse"];
+                    
+                }
             }
             
             NSLog(@"array of merchants %@",arrayOfMerchants);
@@ -192,8 +194,18 @@
     MerchantListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     cell.nameLabel.text = merchant.name;
     cell.addressLabel.text = (merchant.address)?merchant.address:@"Sample Address";
-    cell.averageRating.text = merchant.rating;;
-    cell.distanceLabel.text = @"500 m";// Need to calculate this at runtime
+    cell.averageRating.text = merchant.rating;
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:merchant.geo.lat.floatValue longitude:merchant.geo.lon.floatValue];
+    CGFloat distance = [[LocationHelper sharedInstance] distanceInmeteresFrom:location];
+    if(distance == -1.0){
+        cell.distanceLabel.hidden = YES;
+        cell.distancebackgroundImageView.hidden = YES;
+        
+    }
+    else{
+        cell.distanceLabel.text = [NSString stringWithFormat:@"%f",distance];
+        cell.distancebackgroundImageView.hidden = NO;
+    }
     cell.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
     cell.backgroundImageView.image = [UIImage imageNamed:@"image.png"];
     cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];

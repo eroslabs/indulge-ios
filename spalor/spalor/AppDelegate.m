@@ -12,6 +12,8 @@
 #import <GooglePlus/GooglePlus.h>
 #import "NetworkHelper.h"
 #import "UIColor+flat.h"
+#import "LocationHelper.h"
+
 static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes3738a.apps.googleusercontent.com";
 
 @interface AppDelegate ()
@@ -26,9 +28,9 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [FBLoginView class];
     [FBProfilePictureView class];
     
-    
+
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]){
-        [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"1",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"} forKey:@"filterDict"];
+        [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"0",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500",@"gender":@"2"} forKey:@"filterDict"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self loadCategories];
@@ -53,8 +55,11 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     [UITabBarItem.appearance setTitleTextAttributes:@{
                                                       NSForegroundColorAttributeName : [UIColor whiteColor] }     forState:UIControlStateSelected];
 
-    [item0 setSelectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
-    [item0 setImage:[UIImage imageNamed:@"navbar-home.png"]];
+    item0 = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage imageNamed:@"navbar-home.png"] selectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
+    item1 = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage imageNamed:@"navbar-home.png"] selectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
+    item2 = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage imageNamed:@"navbar-home.png"] selectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
+    item3 = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage imageNamed:@"navbar-home.png"] selectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
+    item4 = [[UITabBarItem alloc] initWithTitle:@"Home" image:[UIImage imageNamed:@"navbar-home.png"] selectedImage:[UIImage imageNamed:@"navbar-home-active.png"]];
 
     tabBarController.selectedIndex=0;
 }
@@ -100,6 +105,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     [FBAppEvents activateApp];
+    [[LocationHelper sharedInstance] startLocationManager];
 
     BOOL authenticated = [[NSUserDefaults standardUserDefaults] boolForKey:@"AUTHENTICATED"];
     

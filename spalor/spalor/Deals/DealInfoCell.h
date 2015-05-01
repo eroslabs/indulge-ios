@@ -18,6 +18,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *shareButton;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
+@property (nonatomic, weak) IBOutlet UIImageView *locationimageview;
 
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *serviceCategoryImageView1;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NearbyViewController : UIViewController
+@interface NearbyViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundOverlayView;

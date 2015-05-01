@@ -75,7 +75,7 @@
             }
             else if ([key isEqualToString:@"services"]) {
                 
-                NSLog(@"Services %@",dictionary[key]);
+                //NSLog(@"Services %@",dictionary[key]);
                 
                 self.services = [[NSMutableArray alloc] init];
                 for (NSDictionary *service in dictionary[key]){

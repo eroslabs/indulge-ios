@@ -19,5 +19,6 @@
 - (NSArray *)deviceLocationArray;
 - (CLLocation *)getCurrentLocation;
 - (void)updateMyLocationtoServer;
+- (CLLocationDistance)distanceInmeteresFrom:(CLLocation *)location;
 @end
 

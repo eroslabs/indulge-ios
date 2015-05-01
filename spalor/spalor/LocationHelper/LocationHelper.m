@@ -52,6 +52,7 @@
                 [self startUpdatingLocation];
                 
             }
+            
         }
         else{
             [self startUpdatingLocation];
@@ -59,6 +60,7 @@
         }
         
     }
+    
 }
 
 - (void)stopLocationManager {
@@ -122,10 +124,20 @@
     }
 }
 
+- (CGFloat)distanceInmeteresFrom:(CLLocation *)location{
+    CLLocation *currentlocation = [self getCurrentLocation];
+    if (currentlocation) {
+        CLLocationDistance distance = [location distanceFromLocation:currentlocation];
+        return distance;
+    }
+    return -1.0;
+}
+
 
 -(void)dealloc{
     self.delegate = nil;
 }
+
 
 
 

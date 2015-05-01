@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MerchantListViewController.h"
 #import "LocationHelper.h"
+#import "SuggestedTableViewCell.h"
 
 @interface HomeViewController (){
     NSString *searchText;
@@ -37,7 +38,6 @@
     
     [self searchStateOn:NO];
     
-    [[LocationHelper sharedInstance] startLocationManager];
     
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
     
@@ -109,14 +109,14 @@
 {
     NSString *identifier =  @"SuggestedCellIdentifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    SuggestedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (searching) {
-        cell.textLabel.text = data[indexPath.row];
+        cell.searchLabel.text = data[indexPath.row];
     }
     else{
-        cell.textLabel.text = @"Suggested Search";
+        cell.searchLabel.text = @"Suggested Search";
     }
-    cell.textLabel.font = [UIFont fontWithName:@"Avenir Next Regular" size:11.0f];
+    cell.searchLabel.font = [UIFont fontWithName:@"Avenir Next Regular" size:11.0f];
 
     return cell;
 }
@@ -145,12 +145,12 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    SuggestedTableViewCell *cell = (SuggestedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     if (searching) {
-        searchText = cell.textLabel.text;
+        searchText = cell.searchLabel.text;
     }
     if (searchText.length > 0) {
-        [self performSegueWithIdentifier:@"SHOWMERCHANTDETAIL" sender:nil];
+        [self performSegueWithIdentifier:@"ShowMerchantList" sender:nil];
     }
 
 }
@@ -231,7 +231,7 @@
     if([segue.identifier isEqualToString:@"ShowMerchantList"]) {
         
         MerchantListViewController *controller = (MerchantListViewController *)segue.destinationViewController;
-        controller.searchText  = searchText;
+        controller.searchText  = [searchText stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
     }
 }
 

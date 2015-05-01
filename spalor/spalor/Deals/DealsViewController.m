@@ -12,6 +12,8 @@
 #import "DealDetailsViewController.h"
 #import "Deal.h"
 #import "FeSpinnerTenDot.h"
+#import "SuggestedTableViewCell.h"
+#import "LocationHelper.h"
 
 @interface DealsViewController (){
     NSArray *arrayOfDeals;
@@ -28,38 +30,74 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    searchText = @"";
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+    [self.loaderContainerView addSubview:spinner];
+    self.loaderContainerView.hidden = NO;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
+    searching = NO;
     if (arrayOfDeals.count == 0) {
-        spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
-        [self.loaderContainerView addSubview:spinner];
-        self.loaderContainerView.hidden = NO;
         [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
     }
     
 }
 
 -(void)searchForNewDeals{
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:@{@"s":@"venus"} completionHandler:^(id response, NSString *url, NSError *error){
+    
+    if(![[LocationHelper sharedInstance] checkPermission]){
+        //Show location manager not enabled screen
+        UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"Location Disabled!" message:@"Please enable location to get the restults" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [noLocationAlert show];
+        [spinner dismiss];
+        self.loaderContainerView.hidden = YES;
+        return;
+    }
+    
+    CLLocation *myLocation = [[LocationHelper sharedInstance] getCurrentLocation];
+    
+    if(!myLocation){
+        [self performSelector:@selector(searchForNewDeals) withObject:nil afterDelay:2.0f];
+        return;
+    }
+    
+    NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
+    
+    
+    NSLog(@"filter Dict %@",filterDict);
+    
+    NSMutableDictionary *paramDict = [NSMutableDictionary new];
+    
+    [paramDict addEntriesFromDictionary:@{@"s":searchText}];
+    [paramDict addEntriesFromDictionary:filterDict];
+    //[paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:paramDict completionHandler:^(id response, NSString *url, NSError *error){
         
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
             NSLog(@"response string %@",responseDict);
             
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"DealResponse"];
             
             
             if (responseDict) {
                 arrayOfDeals = [self captureAllMerchantsFromResponseDict:responseDict];
+                if (arrayOfDeals.count>0) {
+                   
+                    //Only put if there was no error
+                    [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"DealResponse"];
+
+                }
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [spinner dismiss];
+                searching = NO;
                 self.loaderContainerView.hidden = YES;
                 [self.tableview reloadData];
             });
@@ -149,8 +187,8 @@
     if (searching) {
         NSString *identifier =  @"SuggestedCellIdentifier";
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        cell.textLabel.text = data[indexPath.row];
+        SuggestedTableViewCell *cell = (SuggestedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        cell.searchLabel.text = data[indexPath.row];
         return cell;
 
     }
@@ -162,7 +200,17 @@
         
         cell.nameLabel.text = deal.name;
         cell.addressLabel.text = deal.address;
-        cell.distanceLabel.text = @"500 m";
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:deal.geo.lat.floatValue longitude:deal.geo.lon.floatValue];
+        CGFloat distance = [[LocationHelper sharedInstance] distanceInmeteresFrom:location];
+        if(distance == -1.0){
+            cell.distanceLabel.hidden = YES;
+            cell.distanceBackgroundImageView.hidden = YES;
+            
+        }
+        else{
+            cell.distanceLabel.text = [NSString stringWithFormat:@"%f",distance];
+            cell.distanceBackgroundImageView.hidden = NO;
+        }
         cell.averageRating.text = deal.rating;
         cell.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
         return cell;
@@ -177,8 +225,15 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    selectedDeal = arrayOfDeals[indexPath.row];
-    [self performSegueWithIdentifier:@"showDealDetails" sender:self];
+    if (searching) {
+        SuggestedTableViewCell *cell = (SuggestedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        searchText = [cell.searchLabel.text stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
+        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+    }
+    else{
+        selectedDeal = arrayOfDeals[indexPath.row];
+        [self performSegueWithIdentifier:@"showDealDetails" sender:self];
+    }
     
 }
 
@@ -210,7 +265,7 @@
     [textField resignFirstResponder];
     
     if (textField.text.length>0) {
-        searchText = textField.text;
+        searchText = [textField.text stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
     }
     else{
         textField.text = @"Enter service, location , merchant";
