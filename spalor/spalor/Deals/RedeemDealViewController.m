@@ -58,5 +58,10 @@
     }
 }
 
+#pragma mark - User Actions 
+
+-(IBAction)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

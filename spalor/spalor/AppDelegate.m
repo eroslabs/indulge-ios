@@ -13,7 +13,7 @@
 #import "NetworkHelper.h"
 #import "UIColor+flat.h"
 #import "LocationHelper.h"
-
+#import "CustomTabbarController.h"
 static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes3738a.apps.googleusercontent.com";
 
 @interface AppDelegate ()
@@ -36,13 +36,12 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         [self loadCategories];
     }
     
-    [self setTabbarItems];
     return YES;
 }
 
 -(void)setTabbarItems{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController *tabBarController=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+    CustomTabbarController *tabBarController=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
 
     UITabBar *tabBar = tabBarController.tabBar;
     
@@ -113,7 +112,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+        CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         UINavigationController *navigationController=(UINavigationController *)((AppDelegate *)[[UIApplication sharedApplication] delegate]).window.rootViewController;
         navigationController.navigationBarHidden=YES;
         [navigationController pushViewController:obj animated:NO];

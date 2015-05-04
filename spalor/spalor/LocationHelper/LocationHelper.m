@@ -32,9 +32,9 @@
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
     if(status == kCLAuthorizationStatusDenied){
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"locationEnabled"];
+        //Show status
     }
-    else{
-
+    else if(status != kCLAuthorizationStatusNotDetermined){
         [self startUpdatingLocation];
     }
 }
@@ -45,11 +45,21 @@
         self.distanceFilter = 100;
         self.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         self.delegate = self;
+        
+        NSLog(@"authorization status %d",[CLLocationManager authorizationStatus]);
+        
         if(IS_OS_8_OR_LATER) {
             if ([self respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-                [self requestWhenInUseAuthorization];
-                [self startMonitoringSignificantLocationChanges];
-                [self startUpdatingLocation];
+                if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+                    [self requestWhenInUseAuthorization];
+                }
+                else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
+                    [self startUpdatingLocation];
+
+                }
+                else{
+                    //location monitoring denied
+                }
                 
             }
             

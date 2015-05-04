@@ -41,7 +41,7 @@
     
     searching = NO;
     if (arrayOfDeals.count == 0) {
-        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+        [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
     }
     
 }

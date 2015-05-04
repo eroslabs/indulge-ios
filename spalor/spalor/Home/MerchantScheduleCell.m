@@ -10,6 +10,9 @@
 
 @implementation MerchantScheduleCell
 -(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant{
+    self.daysLabel.text = merchant.schedule.weekSchedule;
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ to %@",merchant.schedule.openingTime,merchant.schedule.closingTime];
+    self.ratecardImageView = [UIImage imageNamed:@""];
     return self;
 }
 @end

@@ -10,6 +10,7 @@
 #import "FormInputCell.h"
 #import "UIImage+ImageEffects.h"
 #import "NetworkHelper.h"
+#import "CustomTabbarController.h"
 
 @implementation EmailLoginViewController
 #pragma mark -
@@ -36,7 +37,7 @@
  
 */ 
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+    CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
     self.navigationController.navigationBarHidden=YES;
     [self.navigationController pushViewController:obj animated:YES];
     
