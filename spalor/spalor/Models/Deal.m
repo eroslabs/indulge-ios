@@ -13,11 +13,8 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        NSString *string = [decoder decodeObjectForKey:@"validTill"];
-        if ([string length] > 3) {
-            string = [string substringToIndex:[string length] - 3];
-        }
-        self.validTill = string;
+    
+        self.validTill = [decoder decodeObjectForKey:@"validTill"];
         self.name = [decoder decodeObjectForKey:@"name"];
         self.image = [decoder decodeObjectForKey:@"image"];
         self.ccAccepted = [decoder decodeObjectForKey:@"ccAccepted"];
@@ -115,6 +112,15 @@
                     merchantService.image = service[@"image"];
                     [self.services addObject:merchantService];
                 }
+            }
+            else if([key isEqualToString:@"validTill"]){
+                NSString *string = [dictionary[key] stringValue];
+                if ([string length] > 3) {
+                    string = [string substringToIndex:[string length] - 3];
+                }
+                [self setValue:string forKey:key];
+
+
             }
             else if (![dictionary[key] isKindOfClass:[NSString class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];

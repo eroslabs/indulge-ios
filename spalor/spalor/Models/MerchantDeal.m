@@ -13,11 +13,8 @@
     if (self = [super init]) {
         self.amountOff = [decoder decodeObjectForKey:@"amountOff"];
         self.services = [decoder decodeObjectForKey:@"services"];
-        NSString *string = [decoder decodeObjectForKey:@"validTill"];
-        if ([string length] > 3) {
-            string = [string substringToIndex:[string length] - 3];
-        }
-        self.validTill = string;
+        
+        self.validTill = [decoder decodeObjectForKey:@"validTill"];
     }
     return self;
 }

@@ -144,7 +144,7 @@
                     MerchantDeal *deal = [[MerchantDeal alloc] init];
                     deal.amountOff = dealObject[@"amountOff"];
                     deal.services = dealObject[@"services"];
-                    NSString *string = dealObject[@"validTill"];
+                    NSString *string = [dealObject[@"validTill"] stringValue];
                     if ([string length] > 3) {
                         string = [string substringToIndex:[string length] - 3];
                     }

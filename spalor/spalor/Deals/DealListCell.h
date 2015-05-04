@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Deal;
 
 @interface DealListCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
@@ -31,5 +32,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *serviceCategoryImageView8;
 @property (nonatomic, weak) IBOutlet UIImageView *serviceCategoryImageView9;
 
+-(DealListCell *)setupCellWithDeal:(Deal *)deal;
 
 @end

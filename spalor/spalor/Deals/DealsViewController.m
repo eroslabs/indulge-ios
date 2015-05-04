@@ -152,7 +152,7 @@
         Deal *deal = [[Deal alloc] init];
         [deal readFromDictionary:dealDict];
         
-        NSLog(@"deal %@",deal.name);
+        //NSLog(@"deal %@",deal.name);
         
         [dealArray addObject:deal];
         
@@ -216,7 +216,7 @@
         
         
         double unixTimeStamp = [deal.validTill doubleValue];
-        NSLog(@"unix time stamp %f",unixTimeStamp);
+        NSLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);
         
         NSTimeInterval _interval=unixTimeStamp;
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];

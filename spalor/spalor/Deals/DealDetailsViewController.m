@@ -7,7 +7,7 @@
 //
 
 #import "DealDetailsViewController.h"
-#import "DealInfoCell.h"
+#import "DealListCell.h"
 #import "DealSocialCell.h"
 #import "DealRedeemCell.h"
 #import "DealTimingCell.h"
@@ -58,16 +58,16 @@
             return 160;
             break;
         case 1:
-            return 63;
+            return 90;
             break;
         case 2:
             return 63;
             break;
         case 3:
-            return 160;
+            return 100;
             break;
         case 4:
-            return 160;
+            return 80;
             break;
         case 5:
             return 63;
@@ -100,8 +100,8 @@
     NSString *identifier;
     switch (indexPath.row) {
         case 0:{
-            identifier = @"dealCellIdentifier";
-            DealInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            identifier = @"DealCellIdentifier";
+            DealListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupCellWithDeal:self.deal];
             return cell;
             break;
