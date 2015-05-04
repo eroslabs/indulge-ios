@@ -10,7 +10,49 @@
 
 @implementation MerchantScheduleCell
 -(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant{
-    self.daysLabel.text = merchant.schedule.weekSchedule;
+    NSString *weekSchedule = merchant.schedule.weekSchedule;
+    NSMutableString *finalWeekString = [[NSMutableString alloc] initWithString:@""];
+    [weekSchedule enumerateSubstringsInRange:[weekSchedule rangeOfString:weekSchedule]
+                                  options:NSStringEnumerationByComposedCharacterSequences
+                               usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                   if([substring isEqualToString:@"1"]){
+                                       switch(substringRange.location){
+                                           case 0:
+                                               //Sunday
+                                               [finalWeekString appendFormat:@"M "];
+                                               break;
+                                           case 1:
+                                               [finalWeekString appendFormat:@"T "];
+
+                                               break;
+                                           case 2:
+                                               [finalWeekString appendFormat:@"W "];
+
+                                               break;
+                                           case 3:
+                                               [finalWeekString appendFormat:@"Th "];
+
+                                               break;
+                                           case 4:
+                                               [finalWeekString appendFormat:@"F "];
+
+                                               break;
+                                           case 5:
+                                               [finalWeekString appendFormat:@"Sa "];
+
+                                               break;
+                                           case 6:
+                                               [finalWeekString appendFormat:@"Su "];
+
+                                               break;
+                                           default:
+                                               break;
+                                               
+                                       }
+                                   }
+                               }] ;
+
+    self.daysLabel.text = finalWeekString;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ to %@",merchant.schedule.openingTime,merchant.schedule.closingTime];
     self.ratecardImageView = [UIImage imageNamed:@""];
     return self;

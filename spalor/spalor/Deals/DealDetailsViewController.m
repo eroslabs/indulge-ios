@@ -174,6 +174,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(IBAction)call:(id)sender{
+    NSString *cleanedString = [[self.deal.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+    [[UIApplication sharedApplication] openURL:telURL];
+}
+
 -(IBAction)redeemDeal:(id)sender{
     [self hideRedeemConfirmation:NO];
 }

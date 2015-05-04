@@ -15,5 +15,5 @@
 @property (nonatomic, weak) IBOutlet UILabel *validTillLabel;
 @property (nonatomic, weak) IBOutlet UIButton *redeemButton;
 -(MerchantDealCell *)setupWithMerchant:(Merchant *)merchant;
-
+-(MerchantDealCell *)setupWitDefault;
 @end

@@ -212,7 +212,20 @@
             cell.distanceBackgroundImageView.hidden = NO;
         }
         cell.averageRating.text = deal.rating;
-        cell.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
+        cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.amountOff];
+        
+        
+        double unixTimeStamp = [deal.validTill doubleValue];
+        NSLog(@"unix time stamp %f",unixTimeStamp);
+        
+        NSTimeInterval _interval=unixTimeStamp;
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+        NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+        [_formatter setLocale:[NSLocale currentLocale]];
+        [_formatter setDateFormat:@"dd.MM.yyyy"];
+        NSString *validTilldate=[_formatter stringFromDate:date];
+        
+        cell.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
         return cell;
     }
     

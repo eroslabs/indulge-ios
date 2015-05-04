@@ -14,6 +14,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, weak) IBOutlet UILabel *amountOffLabel;
+@property (nonatomic, weak) IBOutlet UILabel *validTillLabel;
 
 @property (nonatomic, weak) IBOutlet UIButton *shareButton;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;

@@ -20,7 +20,7 @@
     self.userName.text = review.name;
     self.ratingLabel.text = review.text;
     self.userImageView.hidden = NO;
-    self.userImageView.image = [UIImage imageNamed:@""];
+    self.userImageView.image = [UIImage imageNamed:@"12.png"];
     return self;
 }
 

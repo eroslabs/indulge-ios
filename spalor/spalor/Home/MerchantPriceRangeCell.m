@@ -7,10 +7,20 @@
 //
 
 #import "MerchantPriceRangeCell.h"
+#import "MerchantService.h"
 
 @implementation MerchantPriceRangeCell
 -(MerchantPriceRangeCell *)setupWithMerchant:(Merchant *)merchant{
     self.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
+    for(int i = 0 ;i < merchant.services.count ; i++){
+        MerchantService *service = merchant.services[i];
+        if(i==0)
+            self.deal1.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
+        if(i==1)
+            self.deal2.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
+        if(i==2)
+            self.deal3.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
+    }
     return self;
 }
 @end

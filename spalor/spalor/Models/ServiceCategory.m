@@ -14,7 +14,11 @@
 
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        self.validTill = [decoder decodeObjectForKey:@"validTill"];
+        NSString *string = [decoder decodeObjectForKey:@"validTill"];
+        if ([string length] > 3) {
+            string = [string substringToIndex:[string length] - 3];
+        }
+        self.validTill = string;
         self.categoryId = [decoder decodeObjectForKey:@"categoryId"];
         self.image = [decoder decodeObjectForKey:@"image"];
         self.desc = [decoder decodeObjectForKey:@"desc"];

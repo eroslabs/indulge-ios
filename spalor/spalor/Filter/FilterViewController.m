@@ -32,12 +32,33 @@
     [self pickCategoriesFromLocalStorage];
 }
 
+-(void)setSelectedServicesString{
+    NSMutableString *selectedServiceNames = [[NSMutableString alloc] initWithString:@""];
+    NSArray *selectedServiceIdsArray = [filterDict[@"services"] componentsSeparatedByString:@","];
+
+    for (ServiceCategory *category in arrayOfCategories) {
+        
+        for (Service *service in category.services) {
+            
+            if ([selectedServiceIdsArray containsObject:service.serviceId]) {
+                [selectedServiceNames appendFormat:service.name];
+                [selectedServiceNames appendFormat:@" "];
+            }
+        }
+    }
+    
+    if(selectedServiceNames.length > 0){
+        self.filterLabel.text = selectedServiceNames;
+    }
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
     NSLog(@"filterDict %@",filterDict);
     
     [self setFilterButtonStates];
+    [self setSelectedServicesString];
 }
 
 -(void)setFilterButtonStates{
@@ -162,7 +183,7 @@
     
     if (days>=10) {
         [self loadCategories];
-        return;
+        //return;
     }
     
     NSDictionary *categoryDict = [NSJSONSerialization JSONObjectWithData:categoryData options:NSJSONReadingAllowFragments error:&error];
@@ -189,18 +210,20 @@
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
             
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"CategoryUpdateDate"];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+
             if (responseDict) {
                 arrayOfCategories = [self captureAllServicesandCategoriesFromResponseDict:responseDict];
             }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
               //  [self.tableview reloadData];
             });
             
         }
         else{
             NSLog(@"error %@",[error localizedDescription]);
+            //Pick locally stored categories
+            
         }
 
     }];

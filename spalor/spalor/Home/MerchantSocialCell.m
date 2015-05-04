@@ -13,4 +13,6 @@
 -(MerchantSocialCell *)setupWithMerchant:(Merchant *)merchant{
     return self;
 }
+
+
 @end

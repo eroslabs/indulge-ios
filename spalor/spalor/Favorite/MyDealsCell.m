@@ -68,7 +68,16 @@
     cell.couponCodeLabel.text = deal.couponCode;
     cell.merchantNameLabel.text = deal.name;
     cell.merchantServicesLabel.text = @"ABC servces";
-    cell.validTillLabel.text = deal.validTill;
+    
+    double unixTimeStamp = [deal.validTill doubleValue];
+    NSTimeInterval _interval=unixTimeStamp;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+    [_formatter setLocale:[NSLocale currentLocale]];
+    [_formatter setDateFormat:@"dd.MM.yyyy"];
+    NSString *validTilldate=[_formatter stringFromDate:date];
+    
+    cell.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
     cell.discountLabel.text = (deal.amountOff)?deal.amountOff:deal.percentOff;
     
     return cell;

@@ -88,10 +88,7 @@
 // called when a new view is selected by the user (but not programatically)
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.2];
-    item
-    [UIView commitAnimations];
+    
 }
 
 

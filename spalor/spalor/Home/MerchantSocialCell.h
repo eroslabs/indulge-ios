@@ -16,5 +16,4 @@
 @property (nonatomic,weak) IBOutlet UIButton *favoriteButton;
 
 -(MerchantSocialCell *)setupWithMerchant:(Merchant *)merchant;
-
 @end

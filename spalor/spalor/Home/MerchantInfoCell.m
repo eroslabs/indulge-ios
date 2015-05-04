@@ -26,7 +26,7 @@
         self.distanceLabel.text = [NSString stringWithFormat:@"%f",distance];
 
     }
-    self.profileImageView.image = [UIImage imageNamed:@""];
+    self.profileImageView.image = [UIImage imageNamed:@"12.png"];
     return self;
 }
 @end

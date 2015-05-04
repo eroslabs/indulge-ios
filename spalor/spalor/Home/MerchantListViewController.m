@@ -225,7 +225,7 @@
     cell.serviceCategoryImageView7.image = [UIImage imageNamed:@"merchant-massage.png"];
     cell.serviceCategoryImageView8.image = [UIImage imageNamed:@"merchant-massage.png"];
     cell.serviceCategoryImageView9.image = [UIImage imageNamed:@"merchant-massage.png"];
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

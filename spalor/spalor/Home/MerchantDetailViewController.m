@@ -85,10 +85,18 @@
         [headerScrollView addSubview:imageView];
     }
     
-    headerScrollView.showsVerticalScrollIndicator = NO;
-    
-    
-    headerScrollView.contentSize = CGSizeMake(4*headerScrollView.frame.size.width,headerScrollView.frame.size.height);
+    //Add top header info image view
+//    UIImage *infoImage = [UIImage imageNamed:@"12.png"];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.center.x-infoImage.size.width/2,headerScrollView.frame.size.height-20, infoImage.size.width, infoImage.size.height)];
+//    imageView.image = infoImage;
+//    imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    imageView.clipsToBounds = NO;
+//    [headerScrollView addSubview:imageView];
+//    headerScrollView.clipsToBounds = NO;
+//    headerScrollView.showsVerticalScrollIndicator = NO;
+//    
+//    
+//    headerScrollView.contentSize = CGSizeMake(4*headerScrollView.frame.size.width,headerScrollView.frame.size.height);
     
     
     ParallaxHeaderView *headerView = [ParallaxHeaderView parallaxHeaderViewWithSubView:headerScrollView];
@@ -97,6 +105,7 @@
     headerView.headerTitleLabel.text = self.story[@"story"];
     
     [self.mainTableView setTableHeaderView:headerView];
+    
 
 }
 
@@ -113,7 +122,7 @@
             return 160;
             break;
         case 1:
-            return 63;
+            return 79;
             break;
         case 2:
             return 100;
@@ -125,7 +134,7 @@
             return 60;
             break;
         case 5:
-            return 100;
+            return 93;
             break;
         case 6:
             return 100;
@@ -155,6 +164,7 @@
             identifier = @"InfoCell";
             MerchantInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
             break;
         }
@@ -162,6 +172,8 @@
             identifier = @"SocialCell";
             MerchantSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -169,6 +181,8 @@
             identifier = @"ScheduleCell";
             MerchantScheduleCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -176,6 +190,8 @@
             identifier = @"PriceRangeCell";
             MerchantPriceRangeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -183,6 +199,8 @@
             identifier = @"RecommendedCell";
             MerchantRecommendedCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
 
             break;
@@ -190,7 +208,14 @@
         case 5:{
             identifier = @"DealCell";
             MerchantDealCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
+            if(self.merchant.deals.count>0){
+                cell = [cell setupWithMerchant:self.merchant.deals[0]];
+            }
+            else{
+                cell = [cell setupWitDefault];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -198,6 +223,8 @@
             identifier = @"MapCell";
             MerchantMapCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -208,6 +235,9 @@
                 cell = [cell setupWithMerchantwithNoReviews];
             else
                 cell = [cell setupWithMerchantReview:self.merchant.reviews[0]];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -215,6 +245,8 @@
             identifier = @"ExtrasCell";
             MerchantExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -222,6 +254,8 @@
             identifier = @"ErrorCell";
             MerchantErrorCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             return cell;
             break;
         }
@@ -291,6 +325,12 @@
 
 -(IBAction)share:(id)sender{
     
+}
+
+-(IBAction)call:(id)sender{
+    NSString *cleanedString = [[self.merchant.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+    [[UIApplication sharedApplication] openURL:telURL];
 }
 
 -(IBAction)favorite:(id)sender{
