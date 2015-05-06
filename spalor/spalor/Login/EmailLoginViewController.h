@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EmailLoginViewController : UIViewController
+@interface EmailLoginViewController : UIViewController{
+    NSString *userName;
+    NSString *pass;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 -(IBAction)goBack:(id)sender;

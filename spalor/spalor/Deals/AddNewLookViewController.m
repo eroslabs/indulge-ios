@@ -7,6 +7,7 @@
 //
 
 #import "AddNewLookViewController.h"
+#import "User.h"
 
 @implementation AddNewLookViewController
 
@@ -69,7 +70,13 @@
     [self.addNewLookButton setImage:chosenImage forState:UIControlStateNormal];
     NSMutableArray *myLookBookImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE]];
     [myLookBookImagesArray addObject: UIImagePNGRepresentation(chosenImage)];
-    NSLog(@"myLookbook array count %d",myLookBookImagesArray.count);
+
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    user.looks = [NSString stringWithFormat:@"%lu",(unsigned long)myLookBookImagesArray.count];
+    NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+    
     [[NSUserDefaults standardUserDefaults] setObject:myLookBookImagesArray forKey:MYLOOKBOOKSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [picker dismissViewControllerAnimated:YES completion:NULL];

@@ -11,17 +11,18 @@
 @implementation MerchantDeal
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
-        self.amountOff = [decoder decodeObjectForKey:@"amountOff"];
+        self.flatOff = [decoder decodeObjectForKey:@"flatOff"];
         self.services = [decoder decodeObjectForKey:@"services"];
-        
+        self.percentOff = [decoder decodeObjectForKey:@"percentOff"];
+
         self.validTill = [decoder decodeObjectForKey:@"validTill"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    
-    [encoder encodeObject:_amountOff forKey:@"amountOff"];
+    [encoder encodeObject:_percentOff forKey:@"percentOff"];
+    [encoder encodeObject:_flatOff forKey:@"flatOff"];
     [encoder encodeObject:_services forKey:@"services"];
     [encoder encodeObject:_validTill forKey:@"validTill"];
     

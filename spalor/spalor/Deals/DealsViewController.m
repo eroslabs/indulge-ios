@@ -41,7 +41,7 @@
     
     searching = NO;
     if (arrayOfDeals.count == 0) {
-        [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
+        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
     }
     
 }
@@ -59,10 +59,7 @@
     
     CLLocation *myLocation = [[LocationHelper sharedInstance] getCurrentLocation];
     
-    if(!myLocation){
-        [self performSelector:@selector(searchForNewDeals) withObject:nil afterDelay:2.0f];
-        return;
-    }
+   
     
     NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
     
@@ -73,7 +70,9 @@
     
     [paramDict addEntriesFromDictionary:@{@"s":searchText}];
     [paramDict addEntriesFromDictionary:filterDict];
-    //[paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+    if(myLocation){
+        [paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+    }
 
     
     [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchDeals" withParameters:paramDict completionHandler:^(id response, NSString *url, NSError *error){
@@ -189,6 +188,8 @@
         
         SuggestedTableViewCell *cell = (SuggestedTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
         cell.searchLabel.text = data[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
 
     }
@@ -212,7 +213,7 @@
             cell.distanceBackgroundImageView.hidden = NO;
         }
         cell.averageRating.text = deal.rating;
-        cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.amountOff];
+        cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
         
         
         double unixTimeStamp = [deal.validTill doubleValue];
@@ -224,7 +225,8 @@
         [_formatter setLocale:[NSLocale currentLocale]];
         [_formatter setDateFormat:@"dd.MM.yyyy"];
         NSString *validTilldate=[_formatter stringFromDate:date];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         cell.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
         return cell;
     }

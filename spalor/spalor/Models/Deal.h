@@ -28,12 +28,12 @@
 @property (nonatomic, strong) NSString *rating;
 @property (nonatomic, strong) NSString *validTill;
 @property (nonatomic, strong) NSString *percentOff;
-@property (nonatomic, strong) NSString *amountOff;
 @property (nonatomic, strong) NSString *couponCode;
 
 
 //Relations
 @property (nonatomic, strong) Location *geo;
+@property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 
 //Methods

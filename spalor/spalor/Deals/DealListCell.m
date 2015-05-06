@@ -28,8 +28,19 @@
         
     }
     self.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
-    self.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
+    self.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
     
+    double unixTimeStamp = [deal.validTill doubleValue];
+    NSLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);
+    
+    NSTimeInterval _interval=unixTimeStamp;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
+    [_formatter setLocale:[NSLocale currentLocale]];
+    [_formatter setDateFormat:@"dd.MM.yyyy"];
+    NSString *validTilldate=[_formatter stringFromDate:date];
+    
+    self.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
     return self;
 }
 @end

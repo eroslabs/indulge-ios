@@ -7,7 +7,7 @@
 //
 
 #import "Review.h"
-#import <objc/objc-runtime.h>
+#import <objc/runtime.h>
 
 @implementation Review
 

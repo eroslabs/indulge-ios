@@ -95,6 +95,11 @@
     
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
+    //logic here
+    [self.searchTextField resignFirstResponder];
+}
+
 #pragma mark - TextField Delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{

@@ -104,21 +104,21 @@
         self.button6.selected = NO;
     }
     
-    if ([filterDict[@"gender"] isEqualToString:@"0"]) {
+    if ([filterDict[@"gs"] isEqualToString:@"0"]) {
         self.button7.selected = YES;
     }
     else{
         self.button7.selected = NO;
     }
     
-    if ([filterDict[@"gender"] isEqualToString:@"1"]) {
+    if ([filterDict[@"gs"] isEqualToString:@"1"]) {
         self.button8.selected = YES;
     }
     else{
         self.button8.selected = NO;
     }
     
-    if ([filterDict[@"gender"] isEqualToString:@"2"]) {
+    if ([filterDict[@"gs"] isEqualToString:@"2"]) {
         self.button9.selected = YES;
     }
     else{
@@ -318,19 +318,19 @@
 
             
         case 7:{
-            [filterDict addEntriesFromDictionary:@{@"gender":@"0"}];
+            [filterDict addEntriesFromDictionary:@{@"gs":@"0"}];
             break;
         }
 
             
         case 8:{
-            [filterDict addEntriesFromDictionary:@{@"gender":@"1"}];
+            [filterDict addEntriesFromDictionary:@{@"gs":@"1"}];
             break;
         
         }
             
         case 9:{
-            [filterDict addEntriesFromDictionary:@{@"gender":@"2"}];
+            [filterDict addEntriesFromDictionary:@{@"gs":@"2"}];
             break;
             
         }

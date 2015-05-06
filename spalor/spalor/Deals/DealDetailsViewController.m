@@ -17,6 +17,7 @@
 #import "NetworkHelper.h"
 #import "FeSpinnerTenDot.h"
 #import "RedeemDealViewController.h"
+#import "User.h"
 
 @interface DealDetailsViewController (){
     FeSpinnerTenDot *spinner;
@@ -208,6 +209,13 @@
         self.deal.couponCode = couponCode;
         NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
         [myDealsArray addObject:dealData];
+        
+        NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+        User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+        user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
+        NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+        [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+        
         [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
         [[NSUserDefaults standardUserDefaults] synchronize];
 
@@ -215,7 +223,7 @@
         return;
     }
     
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/confirm/1" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"dealId":self.deal.dealId} completionHandler:^(id response, NSString *url, NSError *error){
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:[NSString stringWithFormat:@"user/redeem/%@",self.deal.dealId] withParameters:@{@"userEmail":@"manish@eroslabs.co"} completionHandler:^(id response, NSString *url, NSError *error){
         if (error == nil && response!=nil) {
             dispatch_async (dispatch_get_main_queue(), ^{
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
@@ -223,14 +231,24 @@
                 [spinner dismiss];
                 [spinner removeFromSuperview];
                 //Push Segue
-                couponCode = @"A123456789";
+                couponCode = responseDict[@"coupon"];
                 NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
                 self.deal.couponCode = couponCode;
 
                 NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
                 [myDealsArray addObject:dealData];
+                NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+                User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+                user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
+                NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+                [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
+                NSLog(@"saving deal %@ %@",self.deal.name,self.deal.couponCode);
                 [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                [self hideRedeemConfirmation:YES];
+
                 [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
             });
         }
@@ -241,10 +259,11 @@
                 //Show Error Alert
                 UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Redeem Error" message:@"Unable to redeem right now please come back later" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                 [redeemError show];
-                
-                //Temporary Push Segue
-                couponCode = @"A123456789";
-                [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+                [self hideRedeemConfirmation:YES];
+
+//                //Temporary Push Segue
+//                couponCode = @"A123456789";
+//                [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
             });
             
         }

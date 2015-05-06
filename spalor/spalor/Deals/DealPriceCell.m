@@ -13,6 +13,8 @@
 -(DealPriceCell *)setupCellWithDeal:(Deal *)deal{
     for(int i = 0 ;i < deal.services.count ; i++){
         MerchantService *service = deal.services[i];
+        NSLog(@"service %@ %.2%f",service.name,service.price.floatValue);
+
         if(i==0)
             self.deal1.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
         if(i==1)

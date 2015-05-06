@@ -11,36 +11,61 @@
 #import "UIImage+ImageEffects.h"
 #import "NetworkHelper.h"
 #import "CustomTabbarController.h"
+#import "User.h"
+
 
 @implementation EmailLoginViewController
 #pragma mark -
 
 - (IBAction)signup:(id)sender {
-/*
 
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
-        
-        if (error == nil && response!=nil) {
-            dispatch_async (dispatch_get_main_queue(), ^{
-                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-                NSLog(@"response Dict %@",responseDict);
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-                self.navigationController.navigationBarHidden=YES;
-                [self.navigationController pushViewController:obj animated:YES];
-            });
 
+    //if (userName.length>0 && pass.length>0) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
             
-        }
-    }];
- 
-*/ 
+            if (error == nil && response!=nil) {
+                dispatch_async (dispatch_get_main_queue(), ^{
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+                    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
+                    NSLog(@"response Dict %@",responseDict);
+                    NSDictionary *userDict = responseDict[@"user"];
+                    if(userDict){
+                        User *user = [[User alloc] init];
+                        [user readFromDictionary:userDict];
+                        NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:user];
+                        [[NSUserDefaults standardUserDefaults] setObject:userData forKey:MYUSERSTORE];
+
+                    }
+                    
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+                    self.navigationController.navigationBarHidden=YES;
+                    [self.navigationController pushViewController:obj animated:YES];
+                });
+                
+                
+            }
+            else{
+                dispatch_async (dispatch_get_main_queue(), ^{
+                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+                    UIAlertView *erroralert = [[UIAlertView alloc] initWithTitle:@"Login Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [erroralert show];
+                });
+            }
+        }];
+
+   // }
+    
+/*
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
     self.navigationController.navigationBarHidden=YES;
     [self.navigationController pushViewController:obj animated:YES];
-    
+ */
 }
 
 
@@ -82,17 +107,41 @@
     if(indexPath.row == 0){
         cell.cellInputTextField.placeholder = @"USERNAME";
         cell.cellIconImageView.image = [UIImage imageNamed:@"registration-profile.png"];
+        cell.cellInputTextField.returnKeyType = UIReturnKeyNext;
+        cell.cellInputTextField.tag = -1;
+        cell.cellInputTextField.delegate = self;
 
     }
     else{
         cell.cellInputTextField.placeholder = @"PASSWORD";
         cell.cellIconImageView.image = [UIImage imageNamed:@"registration-mobile.png"];
+        cell.cellInputTextField.returnKeyType = UIReturnKeyGo;
+        cell.cellInputTextField.tag = -2;
+
+        cell.cellInputTextField.delegate = self;
+
     }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
 }
+
+#pragma mark - UITextField Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField.tag == -1) {
+        userName = textField.text;
+        [textField resignFirstResponder];
+    }
+    else if(textField.tag == -2){
+        pass = textField.text;
+        [textField resignFirstResponder];
+        [self signup:nil];
+    }
+    return YES;
+}
+
 @end

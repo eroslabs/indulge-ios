@@ -27,7 +27,7 @@
         
     }
     self.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
-    self.amountOffLabel.text = (deal.percentOff)?deal.percentOff:deal.amountOff;
+    self.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
     
     return self;
 }

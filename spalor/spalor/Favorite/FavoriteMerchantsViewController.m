@@ -15,7 +15,6 @@
 
 @interface FavoriteMerchantsViewController (){
     NSArray *myLookBookImagesArray;
-    NSArray *myDealsImagesArray;
     NSArray *myMerchantsArray;
     NSArray *myDealsArray;
 }
@@ -34,7 +33,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     myLookBookImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE];
-    myDealsImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSIMAGESSTORE];
     myDealsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE];
     myMerchantsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE];
     [self.tableView reloadData];
@@ -74,7 +72,7 @@
         numOfRows = (myLookBookImagesArray.count)?1:0;//This is the favorite looks
     }
     else if(section == 1){
-        numOfRows = (myDealsImagesArray.count)?1:0;//This is deals
+        numOfRows = (myDealsArray.count)?1:0;//This is deals
     }
     else{
         numOfRows = myMerchantsArray.count;//This is your favorite Merchants

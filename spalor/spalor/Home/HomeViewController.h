@@ -34,6 +34,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UITextField *locationSearchTextField;
 
+@property (weak, nonatomic) IBOutlet UIImageView *dealImageView1;
+@property (weak, nonatomic) IBOutlet UIImageView *dealImageView2;
+@property (weak, nonatomic) IBOutlet UIImageView *dealImageView3;
+@property (weak, nonatomic) IBOutlet UIImageView *dealImageView4;
+
+
 -(IBAction)goBackFromSearch:(id)sender;
+-(IBAction)showSearchWithKeyWord:(id)sender;
 
 @end

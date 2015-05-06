@@ -7,8 +7,12 @@
 //
 
 #import "RateViewController.h"
+#import "User.h"
+#import "Review.h"
 
-@interface RateViewController ()
+@interface RateViewController (){
+    Review *currentReview;
+}
 
 @end
 
@@ -22,6 +26,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 /*
@@ -38,6 +47,16 @@
 
 -(IBAction)goBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)submitReview:(id)sender{
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    [user.arrayOfReviews addObject:currentReview];
+    user.reviews = [NSString stringWithFormat:@"%lu",(unsigned long)user.arrayOfReviews.count];
+    NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+
 }
 
 @end

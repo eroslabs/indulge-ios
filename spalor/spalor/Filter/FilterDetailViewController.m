@@ -164,7 +164,9 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     ServiceCategory *category = self.arrayOfCategories[selectedCategory];
     Service *service = category.services[indexPath.row];
-    cell.textLabel.text = service.name;
+    if (service.name) {
+        cell.textLabel.text = service.name;
+    }
     cell.tag = service.serviceId.integerValue;
     return cell;
 }

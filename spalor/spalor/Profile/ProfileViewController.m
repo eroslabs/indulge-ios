@@ -9,8 +9,13 @@
 #import "ProfileViewController.h"
 #import <GooglePlus/GooglePlus.h>
 #import <GoogleOpenSource/GoogleOpenSource.h>
+#import "NetworkHelper.h"
+#import "User.h"
+#import "MerchantRatingCell.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController (){
+    User *user;
+}
 
 @end
 
@@ -19,12 +24,62 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.profilePictureView.clipsToBounds = YES;
+    self.profilePictureView.layer.cornerRadius = self.profilePictureView.frame.size.width/2;
+    self.profilePictureView.backgroundColor = [UIColor darkGrayColor];
+    self.profilePictureView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.profilePictureView.layer.borderWidth = 2.0f;
     
-    self.loginView = [[FBLoginView alloc] initWithReadPermissions:
-                      @[@"public_profile", @"email", @"user_friends"]];
-    
-    self.loginView.center = self.view.center;
+    [self downLoadMyImage];
+}
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    
+    self.nameLabel.text = user.name;
+    self.emailLabel.text = user.mail;
+    
+    NSDate *birthdate = [NSDate dateWithTimeIntervalSince1970:[user.dob doubleValue]];
+    NSInteger ageinYears = [self ageFromBirthday:birthdate];
+    
+    self.ageandGenderLabel.text = [NSString stringWithFormat:@"%.0ld, %@",(long)ageinYears,user.gender];
+    
+    self.reviewsLabel.text = user.reviews;
+    self.looksLabel.text = user.looks;
+    self.merchantsLabel.text = user.merchants;
+    self.dealsLabel.text = user.deals;
+}
+
+- (NSInteger)ageFromBirthday:(NSDate *)birthdate {
+    NSDate *today = [NSDate date];
+    NSDateComponents *ageComponents = [[NSCalendar currentCalendar]
+                                       components:NSYearCalendarUnit
+                                       fromDate:birthdate
+                                       toDate:today
+                                       options:0];
+    return ageComponents.year;
+}
+
+-(void)downLoadMyImage{
+    
+    if(self.profilePictureView.image){
+        return;
+    }
+    
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/resource/user/2" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
+        if(!error && response){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage *image = [UIImage imageWithData:response];
+                self.profilePictureView.image = image;
+            });
+       
+        }
+        else{
+            NSLog(@"error %@",[error localizedDescription]);
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,7 +95,8 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYDEALSSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYMERCHANTSSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOOKBOOKSTORE];
-    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYUSERSTORE];
+
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
 
     [[GPPSignIn sharedInstance] signOut];
@@ -58,74 +114,37 @@
     }
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark -
+#pragma mark UITableViewDatasource
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-// Call method when user information has been fetched
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user {
-    self.profilePictureView.profileID = user.id;
-    self.nameLabel.text = user.name;
-    
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numOfRows = user.arrayOfReviews.count;
+    return numOfRows;
 }
 
-
-
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    self.profilePictureView.profileID = nil;
-    //self.statusLabel.text= @"You're not logged in!";
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
 }
 
-// Handle possible errors that can occur during login
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
-    NSString *alertMessage, *alertTitle;
-    
-    // If the user should perform an action outside of you app to recover,
-    // the SDK will provide a message for the user, you just need to surface it.
-    // This conveniently handles cases like Facebook password change or unverified Facebook accounts.
-    if ([FBErrorUtility shouldNotifyUserForError:error]) {
-        alertTitle = @"Facebook error";
-        alertMessage = [FBErrorUtility userMessageForError:error];
-        
-        // This code will handle session closures that happen outside of the app
-        // You can take a look at our error handling guide to know more about it
-        // https://developers.facebook.com/docs/ios/errors
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
-        alertTitle = @"Session Error";
-        alertMessage = @"Your current session is no longer valid. Please log in again.";
-        
-        // If the user has cancelled a login, we will do nothing.
-        // You can also choose to show the user a message if cancelling login will result in
-        // the user not being able to complete a task they had initiated in your app
-        // (like accessing FB-stored information or posting to Facebook)
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-        NSLog(@"user cancelled login");
-        
-        // For simplicity, this sample handles other errors with a generic message
-        // You can checkout our error handling guide for more detailed information
-        // https://developers.facebook.com/docs/ios/errors
-    } else {
-        alertTitle  = @"Something went wrong";
-        alertMessage = @"Please try again later.";
-        NSLog(@"Unexpected error:%@", error);
-    }
-    
-    if (alertMessage) {
-        [[[UIAlertView alloc] initWithTitle:alertTitle
-                                    message:alertMessage
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-    }
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier =  @"ReviewCell";
+    Review *review = user.arrayOfReviews[indexPath.row];
+    MerchantRatingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    cell.userName.text = review.name;
+    cell.ratingLabel.text = review.text;
+    cell.rateView.hidden = NO;
+    cell.rateView.notSelectedImage = [UIImage imageNamed:@"star_empty.png"];
+    cell.rateView.halfSelectedImage = [UIImage imageNamed:@"star_half.png"];
+    cell.rateView.fullSelectedImage = [UIImage imageNamed:@"star.png"];
+    cell.rateView.rating = review.rating.floatValue;
+    return cell;
 }
+
+
+
 
 
 @end

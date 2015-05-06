@@ -14,12 +14,20 @@
     self.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
     for(int i = 0 ;i < merchant.services.count ; i++){
         MerchantService *service = merchant.services[i];
+        CGFloat priceValue = 0;
+        if (![service.price isKindOfClass:[NSNull class]]) {
+            priceValue = service.price.floatValue;
+
+        }
+        
+        NSLog(@"service %@ %.2f",service.name,priceValue);
+
         if(i==0)
-            self.deal1.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
+            self.deal1.text = [NSString stringWithFormat:@"%@ at %.2f",service.name,priceValue];
         if(i==1)
-            self.deal2.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
+            self.deal2.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, priceValue];
         if(i==2)
-            self.deal3.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, service.price.floatValue];
+            self.deal3.text = [NSString stringWithFormat:@"%@ at %.2f",service.name, priceValue];
     }
     return self;
 }

@@ -9,6 +9,7 @@
 #import "MyDealsCell.h"
 #import "MyDealCollectionViewCell.h"
 #import "Deal.h"
+#import "MerchantService.h"
 
 @implementation MyDealsCell
 //-(void)setupCellWithMyDealImagesArray:(NSArray *)imagesArray{
@@ -60,6 +61,8 @@
     
     Deal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
+    NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
+    
     static NSString *cellIdentifier = @"myDealsCell";
     
     MyDealCollectionViewCell *cell = (MyDealCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -67,7 +70,12 @@
     cell.backgroundImageView.image = [UIImage imageNamed:@"favourite-coupon.png"];
     cell.couponCodeLabel.text = deal.couponCode;
     cell.merchantNameLabel.text = deal.name;
-    cell.merchantServicesLabel.text = @"ABC servces";
+    NSMutableString *servicesString = [[NSMutableString alloc] initWithString:@""];
+    for(MerchantService *service in deal.services){
+        [servicesString appendFormat:service.name];
+        [servicesString appendFormat:@", "];
+    }
+    cell.merchantServicesLabel.text = servicesString;
     
     double unixTimeStamp = [deal.validTill doubleValue];
     NSTimeInterval _interval=unixTimeStamp;
@@ -78,8 +86,8 @@
     NSString *validTilldate=[_formatter stringFromDate:date];
     
     cell.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
-    cell.discountLabel.text = (deal.amountOff)?deal.amountOff:deal.percentOff;
-    
+    cell.discountLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
+
     return cell;
     
 }

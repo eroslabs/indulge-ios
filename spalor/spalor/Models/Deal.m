@@ -31,9 +31,10 @@
         self.pincode = [decoder decodeObjectForKey:@"pincode"];
         self.rating = [decoder decodeObjectForKey:@"rating"];
         self.percentOff = [decoder decodeObjectForKey:@"percentOff"];
-        self.amountOff = [decoder decodeObjectForKey:@"amountOff"];
+        self.flatOff = [decoder decodeObjectForKey:@"flatOff"];
         self.geo = [decoder decodeObjectForKey:@"geo"];
-
+        self.schedule = [decoder decodeObjectForKey:@"schedule"];
+        self.couponCode = [decoder decodeObjectForKey:@"couponcode"];
     }
     return self;
 }
@@ -57,9 +58,10 @@
     [encoder encodeObject:_pincode forKey:@"pincode"];
     [encoder encodeObject:_rating forKey:@"rating"];
     [encoder encodeObject:_percentOff forKey:@"percentOff"];
-    [encoder encodeObject:_amountOff forKey:@"amountOff"];
+    [encoder encodeObject:_flatOff forKey:@"flatOff"];
     [encoder encodeObject:_geo forKey:@"geo"];
-
+    [encoder encodeObject:_schedule forKey:@"schedule"];
+    [encoder encodeObject:_couponCode forKey:@"couponcode"];
 }
 
 - (NSArray *)allPropertyNames
@@ -91,9 +93,11 @@
     for (NSString *key in allProps){
         
         //NSLog(@"KEY %@",key);
+        if ([key isEqualToString:@"dealId"]) {
+            [self setValue:dictionary[@"id"] forKey:key];
+        }
         
         if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
-            
             if ([key isEqualToString:@"geo"]) {
                 Location *location = [[Location alloc] init];
                 location.lat = [dictionary[key] objectForKey:@"lat"];
@@ -112,6 +116,13 @@
                     merchantService.image = service[@"image"];
                     [self.services addObject:merchantService];
                 }
+            }
+            else if ([key isEqualToString:@"schedule"]) {
+                Schedule *schedule = [[Schedule alloc] init];
+                schedule.openingTime = [dictionary[key] objectForKey:@"openingTime"];
+                schedule.closingTime = [dictionary[key] objectForKey:@"closingTime"];
+                schedule.weekSchedule = [dictionary[key] objectForKey:@"weekSchedule"];
+                [self setValue:schedule forKey:key];
             }
             else if([key isEqualToString:@"validTill"]){
                 NSString *string = [dictionary[key] stringValue];

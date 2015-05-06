@@ -31,7 +31,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
+    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
 
 }
 
@@ -68,9 +68,6 @@
     
     CLLocation *myLocation = [[LocationHelper sharedInstance] getCurrentLocation];
     
-    if(!myLocation){
-        [self performSelector:@selector(searchForNewMerchants) withObject:nil afterDelay:2.0f];
-    }
     
     NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
     
@@ -80,8 +77,11 @@
     NSMutableDictionary *paramDict = [NSMutableDictionary new];
     
     [paramDict addEntriesFromDictionary:@{@"s":self.searchText}];
-    //[paramDict addEntriesFromDictionary:filterDict];
-    //[paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+    [paramDict addEntriesFromDictionary:filterDict];
+    if(myLocation){
+        [paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
+    }
+
     
     
     [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:paramDict  completionHandler:^(id response, NSString *url, NSError *error){

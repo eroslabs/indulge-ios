@@ -36,8 +36,15 @@
     
     [self searchStateOn:NO];
     
+    self.dealImageView1.layer.cornerRadius = 10.0f;
+    self.dealImageView2.layer.cornerRadius = 10.0f;
+    self.dealImageView3.layer.cornerRadius = 10.0f;
+    self.dealImageView4.layer.cornerRadius = 10.0f;
+    self.dealImageView1.clipsToBounds = YES;
+    self.dealImageView2.clipsToBounds = YES;
+    self.dealImageView3.clipsToBounds = YES;
+    self.dealImageView4.clipsToBounds = YES;
 
-    
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
     
 }
@@ -153,13 +160,19 @@
     }
 
 }
+- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
+    //logic here
+    [self.searchTextField resignFirstResponder];
+}
 
 #pragma mark - TextField Delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     //START THE ANIMATION HERE
     [self searchStateOn:YES];
-    textField.text = @"";
+    if ([textField.text isEqualToString:@"Enter service, location , merchant"]) {
+        textField.text = @"";
+    }
     return YES;
 }
 
@@ -224,7 +237,36 @@
     [self searchStateOn:NO];
 }
 
-#pragma mark - Segue 
+-(IBAction)showSearchWithKeyWord:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    if ([senderButton isEqual:self.recommededButton1]) {
+        searchText = @"Hair";
+
+    }
+    if ([senderButton isEqual:self.recommededButton2]) {
+        searchText = @"Salon";
+        
+    }
+    if ([senderButton isEqual:self.recommededButton3]) {
+        searchText = @"Spa";
+        
+    }
+    if ([senderButton isEqual:self.recommededButton4]) {
+        searchText = @"Message";
+        
+    }
+    if ([senderButton isEqual:self.recommededButton5]) {
+        searchText = @"Makeup";
+        
+    }
+    
+    self.searchTextField.text = searchText;
+    [self performSegueWithIdentifier:@"ShowMerchantList" sender:nil];
+
+
+}
+
+#pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"ShowMerchantList"]) {

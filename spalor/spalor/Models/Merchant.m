@@ -132,6 +132,7 @@
                     MerchantService *merchantService = [[MerchantService alloc] init];
                     merchantService.serviceId = service[@"id"];
                     merchantService.desc = service[@"description"];
+                    merchantService.name = service[@"name"];
                     merchantService.price = service[@"price"];
                     merchantService.image = service[@"image"];
                     merchantService.categoryId = service[@"categoryId"];
@@ -142,8 +143,9 @@
                 self.deals = [[NSMutableArray alloc] init];
                 for (NSDictionary *dealObject in dictionary[key]){
                     MerchantDeal *deal = [[MerchantDeal alloc] init];
-                    deal.amountOff = dealObject[@"amountOff"];
-                    deal.services = dealObject[@"services"];
+                    deal.flatOff = dealObject[@"flatOff"];
+                    deal.percentOff = dealObject[@"percentOff"];
+                    deal.services = [dealObject[@"service"] objectForKey:@"description"];
                     NSString *string = [dealObject[@"validTill"] stringValue];
                     if ([string length] > 3) {
                         string = [string substringToIndex:[string length] - 3];
