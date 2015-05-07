@@ -35,7 +35,10 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"localFilterDict"]];
+    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
+    
+    NSLog(@"local filter %@",localFilterDict);
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -43,7 +46,7 @@
     
     searching = NO;
     if (arrayOfDeals.count == 0) {
-        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+        [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
     }
     
 }
@@ -199,7 +202,9 @@
 
 -(BOOL)isDealPassedFromLocalFilter:(Deal *)deal{
     
-    for (NSString *key in localFilterDict) {
+    for (NSString *key in [localFilterDict allKeys]) {
+        NSLog(@"key %@ %@",key,localFilterDict[key]);
+        
         if([key isEqualToString:@"opennow"]){
             if ([localFilterDict[key] isEqual:@(1)]) {
                 if (![deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
@@ -214,8 +219,19 @@
             
         }
         if([key isEqualToString:@"3.5+"]){
-            if (deal.rating.floatValue<3.5) {
-                return NO;
+            
+            NSLog(@"deal rating %f",deal.rating.floatValue);
+            
+            if ([localFilterDict[key] isEqual:@(1)]) {
+                //
+                if (deal.rating.floatValue<3.5) {
+                    return NO;
+                }
+            }
+            else{
+                if (deal.rating.floatValue>3.5) {
+                    return NO;
+                }
             }
         }
         if([key isEqualToString:@"gender"]){
@@ -372,7 +388,25 @@
             break;
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:@"localFilterDict"];
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    
+    
+    NSMutableArray *newDealArray = [NSMutableArray new];
+    
+    for (Deal *deal in arrayOfDeals) {
+        BOOL check = [self isDealPassedFromLocalFilter:deal];
+        
+        if (check) {
+            [newDealArray addObject:deal];
+        }
+    }
+    
+    arrayOfDeals = newDealArray;
+    [self.tableview reloadData];
+    
+    
 }
 
 #pragma mark - segue

@@ -47,7 +47,7 @@
     self.dealImageView4.clipsToBounds = YES;
 
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
-    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"localFilterDict"]];
+    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
 }
 
 -(void)searchStateOn:(BOOL)onState{
@@ -256,7 +256,8 @@
             break;
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:@"localFilterDict"];
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

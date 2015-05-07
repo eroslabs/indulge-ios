@@ -15,6 +15,7 @@
 #define MYDEALSIMAGESSTORE @"MyDealsImagesArray"
 #define MYMERCHANTSSTORE @"MyMerchantsArray"
 #define MYUSERSTORE @"MyMerchantsArray"
+#define MYLOCALFILTERSTORE @"MyLocalFilterStore"
 
 
 #ifdef __IPHONE_8_0

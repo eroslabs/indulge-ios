@@ -38,6 +38,7 @@
         self.couponCode = [decoder decodeObjectForKey:@"couponcode"];
         self.homeService = [decoder decodeObjectForKey:@"homeService"];
         self.distanceFromCurrentLocation = [decoder decodeObjectForKey:@"distanceFromCurrentLocation"];
+        self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
     }
     return self;
 }
@@ -66,6 +67,7 @@
     [encoder encodeObject:_schedule forKey:@"schedule"];
     [encoder encodeObject:_couponCode forKey:@"couponcode"];
     [encoder encodeObject:_homeService forKey:@"homeService"];
+    [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
     [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
 }
 
@@ -94,6 +96,12 @@
 - (void)readFromDictionary:(NSDictionary *)dictionary{
     
     NSArray *allProps = [self allPropertyNames];
+    
+    if (![[dictionary allKeys] containsObject:@"luxuryRating"]) {
+        int rndValue = 1 + arc4random() % (4 - 1);
+
+        self.luxuryRating = [NSString stringWithFormat:@"%d",rndValue];
+    }
     
     for (NSString *key in allProps){
         

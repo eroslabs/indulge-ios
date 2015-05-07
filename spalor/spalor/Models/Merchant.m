@@ -99,7 +99,11 @@
 - (void)readFromDictionary:(NSDictionary *)dictionary{
     
     NSArray *allProps = [self allPropertyNames];
-    
+    if (![[dictionary allKeys] containsObject:@"luxuryRating"]) {
+        int rndValue = 1 + arc4random() % (4 - 1);
+        
+        self.luxuryRating = [NSString stringWithFormat:@"%d",rndValue];
+    }
     //if (![allProps containsObject:@"reviews"]) {
         //Add a dummy review
         

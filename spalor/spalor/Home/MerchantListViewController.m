@@ -32,9 +32,9 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
+    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
 
-    localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"localFilterDict"];
+    localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
 }
 
 -(void)searchForNewMerchants{
@@ -237,7 +237,7 @@
 
 -(BOOL)isMerchantPassedFromLocalFilter:(Merchant *)merchant{
     
-    for (NSString *key in localFilterDict) {
+    for (NSString *key in [localFilterDict allKeys]) {
         if([key isEqualToString:@"opennow"]){
             if ([localFilterDict[key] isEqual:@(1)]) {
                 if (![merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
@@ -388,7 +388,21 @@
             break;
     }
     
-    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:@"localFilterDict"];
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSMutableArray *newMerchantArray = [NSMutableArray new];
+    
+    for (Merchant *merchant in arrayOfMerchants) {
+        BOOL check = [self isMerchantPassedFromLocalFilter:merchant];
+        
+        if (check) {
+            [newMerchantArray addObject:merchant];
+        }
+    }
+    
+    arrayOfMerchants = newMerchantArray;
+    [self.tableview reloadData];
 }
 
 

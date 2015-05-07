@@ -30,6 +30,7 @@
 @property (nonatomic, strong) NSString *percentOff;
 @property (nonatomic, strong) NSString *couponCode;
 @property (nonatomic, strong) NSString *homeService;
+@property (nonatomic, strong) NSString *luxuryRating;
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 
