@@ -20,6 +20,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *goBackFromSearchButton;
 @property (weak, nonatomic) IBOutlet UIButton *filterButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *filterButton1;
+@property (weak, nonatomic) IBOutlet UIButton *filterButton2;
+@property (weak, nonatomic) IBOutlet UIButton *filterButton3;
+@property (weak, nonatomic) IBOutlet UIButton *filterButton4;
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIView *backgroundOverlayView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;

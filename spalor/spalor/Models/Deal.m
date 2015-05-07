@@ -8,6 +8,7 @@
 
 #import "Deal.h"
 #import <objc/runtime.h>
+#import "LocationHelper.h"
 
 @implementation Deal
 
@@ -35,6 +36,8 @@
         self.geo = [decoder decodeObjectForKey:@"geo"];
         self.schedule = [decoder decodeObjectForKey:@"schedule"];
         self.couponCode = [decoder decodeObjectForKey:@"couponcode"];
+        self.homeService = [decoder decodeObjectForKey:@"homeService"];
+        self.distanceFromCurrentLocation = [decoder decodeObjectForKey:@"distanceFromCurrentLocation"];
     }
     return self;
 }
@@ -62,6 +65,8 @@
     [encoder encodeObject:_geo forKey:@"geo"];
     [encoder encodeObject:_schedule forKey:@"schedule"];
     [encoder encodeObject:_couponCode forKey:@"couponcode"];
+    [encoder encodeObject:_homeService forKey:@"homeService"];
+    [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
 }
 
 - (NSArray *)allPropertyNames
@@ -102,6 +107,18 @@
                 Location *location = [[Location alloc] init];
                 location.lat = [dictionary[key] objectForKey:@"lat"];
                 location.lon = [dictionary[key] objectForKey:@"lon"];
+                
+                CLLocation *merchantlocation = [[CLLocation alloc] initWithLatitude:location.lat.floatValue longitude:location.lon.floatValue];
+                double distanceofmerchant = [[LocationHelper sharedInstance] distanceInmeteresFrom:merchantlocation];
+                
+                if(distanceofmerchant == -1.0){
+                    self.distanceFromCurrentLocation = [NSString stringWithFormat:@"0"];
+                    
+                }
+                else{
+                    self.distanceFromCurrentLocation = [NSString stringWithFormat:@"%.2f",distanceofmerchant];
+                }
+
                 [self setValue:location forKey:key];
             }
             else if ([key isEqualToString:@"services"]) {
@@ -122,6 +139,15 @@
                 schedule.openingTime = [dictionary[key] objectForKey:@"openingTime"];
                 schedule.closingTime = [dictionary[key] objectForKey:@"closingTime"];
                 schedule.weekSchedule = [dictionary[key] objectForKey:@"weekSchedule"];
+                self.weekdaysArray = [NSMutableArray new];
+                
+                for (int i=0; i < [schedule.weekSchedule length]; i++) {
+                    NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                    if ([ichar isEqualToString:@"1"]) {
+                        [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
+                    }
+                }
+
                 [self setValue:schedule forKey:key];
             }
             else if([key isEqualToString:@"validTill"]){

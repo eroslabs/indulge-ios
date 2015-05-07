@@ -8,7 +8,7 @@
 
 #import "Merchant.h"
 #import <objc/runtime.h>
-
+#import "LocationHelper.h"
 
 
 @implementation Merchant
@@ -22,7 +22,7 @@
         self.email = [decoder decodeObjectForKey:@"email"];
         self.address = [decoder decodeObjectForKey:@"address"];
         self.genderSupport = [decoder decodeObjectForKey:@"genderSupport"];
-        self.homeServices = [decoder decodeObjectForKey:@"homeServices"];
+        self.homeService = [decoder decodeObjectForKey:@"homeService"];
         self.merchantid = [decoder decodeObjectForKey:@"merchantid"];
         self.image = [decoder decodeObjectForKey:@"image"];
         self.pincode = [decoder decodeObjectForKey:@"pincode"];
@@ -39,6 +39,9 @@
         self.services = [decoder decodeObjectForKey:@"services"];
         self.reviews = [decoder decodeObjectForKey:@"reviews"];
         self.deals = [decoder decodeObjectForKey:@"deals"];
+        self.weekdaysArray = [decoder decodeObjectForKey:@"weekdaysArray"];
+        self.distanceFromCurrentLocation = [decoder decodeObjectForKey:@"distanceFromCurrentLocation"];
+        self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
     }
     return self;
 }
@@ -52,7 +55,7 @@
     [encoder encodeObject:_email forKey:@"email"];
     [encoder encodeObject:_address forKey:@"address"];
     [encoder encodeObject:_genderSupport forKey:@"genderSupport"];
-    [encoder encodeObject:_homeServices forKey:@"homeServices"];
+    [encoder encodeObject:_homeService forKey:@"homeService"];
     [encoder encodeObject:_merchantid forKey:@"merchantid"];
     [encoder encodeObject:_pincode forKey:@"pincode"];
     [encoder encodeObject:_rating forKey:@"rating"];
@@ -66,6 +69,9 @@
     [encoder encodeObject:_services forKey:@"services"];
     [encoder encodeObject:_reviews forKey:@"reviews"];
     [encoder encodeObject:_deals forKey:@"deals"];
+    [encoder encodeObject:_weekdaysArray];
+    [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
+    [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
 }
 
 - (NSArray *)allPropertyNames
@@ -117,6 +123,17 @@
                 Location *location = [[Location alloc] init];
                 location.lat = [dictionary[key] objectForKey:@"lat"];
                 location.lon = [dictionary[key] objectForKey:@"lon"];
+                CLLocation *merchantlocation = [[CLLocation alloc] initWithLatitude:location.lat.floatValue longitude:location.lon.floatValue];
+                double distanceofmerchant = [[LocationHelper sharedInstance] distanceInmeteresFrom:merchantlocation];
+                
+                if(distanceofmerchant == -1.0){
+                    self.distanceFromCurrentLocation = [NSString stringWithFormat:@"0"];
+
+                }
+                else{
+                    self.distanceFromCurrentLocation = [NSString stringWithFormat:@"%.2f",distanceofmerchant];
+                }
+                
                 [self setValue:location forKey:key];
             }
             else if ([key isEqualToString:@"schedule"]) {
@@ -124,6 +141,16 @@
                 schedule.openingTime = [dictionary[key] objectForKey:@"openingTime"];
                 schedule.closingTime = [dictionary[key] objectForKey:@"closingTime"];
                 schedule.weekSchedule = [dictionary[key] objectForKey:@"weekSchedule"];
+                
+                self.weekdaysArray = [NSMutableArray new];
+                
+                for (int i=0; i < [schedule.weekSchedule length]; i++) {
+                    NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                    if ([ichar isEqualToString:@"1"]) {
+                        [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
+                    }
+                }
+                
                 [self setValue:schedule forKey:key];
             }
             else if ([key isEqualToString:@"services"]) {

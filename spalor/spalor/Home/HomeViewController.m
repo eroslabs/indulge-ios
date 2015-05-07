@@ -17,6 +17,7 @@
 @interface HomeViewController (){
     NSString *searchText;
     NSMutableArray *data;
+    NSMutableDictionary *localFilterDict;
     BOOL searching;
 }
 @end
@@ -46,7 +47,7 @@
     self.dealImageView4.clipsToBounds = YES;
 
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
-    
+    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"localFilterDict"]];
 }
 
 -(void)searchStateOn:(BOOL)onState{
@@ -62,6 +63,11 @@
         self.recommededButton4.alpha = !onState;
         self.recommededButton5.alpha = !onState;
         
+        self.filterButton1.alpha = onState;
+        self.filterButton2.alpha = onState;
+        self.filterButton3.alpha = onState;
+        self.filterButton4.alpha = onState;
+
         self.goBackFromSearchButton.alpha = onState;
         self.locationSearchBackgroundImageView.alpha = onState;
         self.locationSearchTextField.alpha = onState;
@@ -226,6 +232,34 @@
 }
 
 #pragma mark - User Actions
+
+-(IBAction)changeLocalFilter:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    senderButton.selected = !senderButton.selected;
+    
+    BOOL selected = senderButton.selected;
+    
+    switch (senderButton.tag) {
+        case 1:
+            [localFilterDict addEntriesFromDictionary:@{@"athome":@(selected)}];
+            break;
+        case 2:
+            [localFilterDict addEntriesFromDictionary:@{@"opennow":@(selected)}];
+            break;
+        case 3:
+            [localFilterDict addEntriesFromDictionary:@{@"gender":@"male"}];
+            break;
+        case 4:
+            [localFilterDict addEntriesFromDictionary:@{@"gender":@"female"}];
+            break;
+        default:
+            break;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:@"localFilterDict"];
+}
+
+
 
 -(IBAction)search:(id)sender{
     [self searchStateOn:YES];

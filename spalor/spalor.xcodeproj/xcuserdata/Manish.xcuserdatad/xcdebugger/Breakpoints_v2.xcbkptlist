@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "spalor/Deals/DealsViewController.m"
-            timestampString = "452163589.390047"
+            timestampString = "452688414.096888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-searchForNewDeals"
             landmarkType = "5">
          </BreakpointContent>

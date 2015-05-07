@@ -16,4 +16,11 @@
 #define MYMERCHANTSSTORE @"MyMerchantsArray"
 #define MYUSERSTORE @"MyMerchantsArray"
 
+
+#ifdef __IPHONE_8_0
+#define GregorianCalendar NSCalendarIdentifierGregorian
+#else
+#define GregorianCalendar NSGregorianCalendar
+#endif
+
 #endif

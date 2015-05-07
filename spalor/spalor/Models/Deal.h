@@ -29,12 +29,15 @@
 @property (nonatomic, strong) NSString *validTill;
 @property (nonatomic, strong) NSString *percentOff;
 @property (nonatomic, strong) NSString *couponCode;
+@property (nonatomic, strong) NSString *homeService;
+@property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 
 //Relations
 @property (nonatomic, strong) Location *geo;
 @property (nonatomic, strong) Schedule *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
+@property (nonatomic, strong) NSMutableArray *weekdaysArray;
 
 //Methods
 - (void)readFromDictionary:(NSDictionary *)dictionary;

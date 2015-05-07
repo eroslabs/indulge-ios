@@ -22,6 +22,7 @@
     NSString *searchText;
     BOOL searching;
     NSArray *data;
+    NSMutableDictionary *localFilterDict;
 }
 @end
 
@@ -34,6 +35,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
+    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"localFilterDict"]];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -151,13 +153,103 @@
         Deal *deal = [[Deal alloc] init];
         [deal readFromDictionary:dealDict];
         
-        //NSLog(@"deal %@",deal.name);
+        BOOL check = [self isDealPassedFromLocalFilter:deal];
         
-        [dealArray addObject:deal];
+        if (check) {
+            [dealArray addObject:deal];
+        }
         
     }
     
+    if (dealArray.count>0) {
+        // Now Apply sorting
+        
+        BOOL ascendingDistance = NO;
+        BOOL ascendingPrice = NO;
+        
+        if ([localFilterDict[@"distance"] isEqual:@(1)]) {
+            //Ascending
+            ascendingDistance = YES;
+        }
+        
+        if ([localFilterDict[@"price"] isEqual:@(1)]) {
+            ascendingPrice = YES;
+        }
+        
+        NSSortDescriptor *distanceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distanceFromCurrentLocation"
+                                                                                 ascending:ascendingDistance
+                                                                                  selector:@selector(localizedStandardCompare:)];
+        
+        NSSortDescriptor *priceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"luxuryRating"
+                                                                              ascending:ascendingPrice
+                                                                               selector:@selector(localizedStandardCompare:)];
+        
+        dealArray = [dealArray sortedArrayUsingDescriptors:@[distanceSortDescriptor,priceSortDescriptor]];
+    }
+    
     return dealArray;
+}
+
+-(int)currentWeekday{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    int weekday = [comps weekday];
+    return weekday;
+}
+
+-(BOOL)isDealPassedFromLocalFilter:(Deal *)deal{
+    
+    for (NSString *key in localFilterDict) {
+        if([key isEqualToString:@"opennow"]){
+            if ([localFilterDict[key] isEqual:@(1)]) {
+                if (![deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    return NO;
+                }
+            }
+            if ([localFilterDict[key] isEqual:@(2)]) {
+                if ([deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    return NO;
+                }
+            }
+            
+        }
+        if([key isEqualToString:@"3.5+"]){
+            if (deal.rating.floatValue<3.5) {
+                return NO;
+            }
+        }
+        if([key isEqualToString:@"gender"]){
+            if ([localFilterDict[key] isEqualToString:@"male"]) {
+                if (![deal.genderSupport isEqualToString:@"1"]) {
+                    return NO;
+                }
+            }
+            else if ([localFilterDict[key] isEqualToString:@"female"]) {
+                if (![deal.genderSupport isEqualToString:@"0"]) {
+                    return NO;
+                }
+            }
+            else{
+                if (![deal.genderSupport isEqualToString:@"2"]) {
+                    return NO;
+                }
+            }
+        }
+        if ([key isEqualToString:@"athome"]) {
+            if ([localFilterDict[key] isEqual:@(1)]) {
+                if ([deal.homeService isEqualToString:@"0"]) {
+                    return NO;
+                }
+            }
+            if ([localFilterDict[key] isEqual:@(0)]) {
+                if ([deal.homeService isEqualToString:@"1"]) {
+                    return NO;
+                }
+            }
+        }
+    }
+    
+    return YES;
 }
 
 
@@ -201,15 +293,14 @@
         
         cell.nameLabel.text = deal.name;
         cell.addressLabel.text = deal.address;
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:deal.geo.lat.floatValue longitude:deal.geo.lon.floatValue];
-        CGFloat distance = [[LocationHelper sharedInstance] distanceInmeteresFrom:location];
-        if(distance == -1.0){
+       
+        if(deal.distanceFromCurrentLocation.floatValue == 0.0){
             cell.distanceLabel.hidden = YES;
             cell.distanceBackgroundImageView.hidden = YES;
             
         }
         else{
-            cell.distanceLabel.text = [NSString stringWithFormat:@"%f",distance];
+            cell.distanceLabel.text = deal.distanceFromCurrentLocation;
             cell.distanceBackgroundImageView.hidden = NO;
         }
         cell.averageRating.text = deal.rating;
@@ -256,6 +347,32 @@
 -(IBAction)showFilterScreen:(id)sender{
     [self performSegueWithIdentifier:@"showFilter" sender:self];
 
+}
+
+-(IBAction)changeLocalFilter:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    senderButton.selected = !senderButton.selected;
+    
+    BOOL selected = senderButton.selected;
+    
+    switch (senderButton.tag) {
+        case 1:
+            [localFilterDict addEntriesFromDictionary:@{@"opennow":@(selected)}];
+            break;
+        case 2:
+            [localFilterDict addEntriesFromDictionary:@{@"3.5+":@(selected)}];
+            break;
+        case 3:
+            [localFilterDict addEntriesFromDictionary:@{@"distance":@(selected)}];
+            break;
+        case 4:
+            [localFilterDict addEntriesFromDictionary:@{@"price":@(selected)}];
+            break;
+        default:
+            break;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:@"localFilterDict"];
 }
 
 #pragma mark - segue

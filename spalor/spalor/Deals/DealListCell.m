@@ -16,15 +16,12 @@
     self.nameLabel.text = deal.name;
     self.addressLabel.text = deal.address;
     self.averageRating.text = deal.rating;
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:deal.geo.lat.floatValue longitude:deal.geo.lon.floatValue];
-    
-    CGFloat distance = [[LocationHelper sharedInstance] distanceInmeteresFrom:location];
-    if(distance == -1.0){
+    if(deal.distanceFromCurrentLocation.floatValue == 0.0){
         self.distanceLabel.hidden = YES;
         
     }
     else{
-        self.distanceLabel.text = [NSString stringWithFormat:@"%f",distance];
+        self.distanceLabel.text = deal.distanceFromCurrentLocation;
         
     }
     self.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];

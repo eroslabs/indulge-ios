@@ -19,6 +19,7 @@
     NSArray *arrayOfMerchants;
     FeSpinnerTenDot *spinner;
     Merchant *selectedMerchant;
+    NSMutableDictionary *localFilterDict;
 }
 
 @end
@@ -33,6 +34,7 @@
     self.loaderContainerView.hidden = NO;
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
 
+    localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"localFilterDict"];
 }
 
 -(void)searchForNewMerchants{
@@ -81,8 +83,6 @@
     if(myLocation){
         [paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
     }
-
-    
     
     [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/searchMerchant" withParameters:paramDict  completionHandler:^(id response, NSString *url, NSError *error){
         
@@ -159,13 +159,139 @@
         Merchant *merchant = [[Merchant alloc] init];
         [merchant readFromDictionary:merchantDict];
         
+        BOOL check = [self isMerchantPassedFromLocalFilter:merchant];
         NSLog(@"merchant %@",merchant.name);
         
-        [merchantArray addObject:merchant];
+        if (check) {
+            [merchantArray addObject:merchant];
+        }
 
     }
     
+    if (merchantArray.count>0) {
+        // Now Apply sorting
+        
+        BOOL ascendingDistance = NO;
+        BOOL ascendingPrice = NO;
+
+        if ([localFilterDict[@"distance"] isEqual:@(1)]) {
+            //Ascending
+            ascendingDistance = YES;
+        }
+        
+        if ([localFilterDict[@"price"] isEqual:@(1)]) {
+            ascendingPrice = YES;
+        }
+        
+        NSSortDescriptor *distanceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distanceFromCurrentLocation"
+                                                                                  ascending:ascendingDistance
+                                                                                   selector:@selector(localizedStandardCompare:)];
+
+        NSSortDescriptor *priceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"luxuryRating"
+                                                                                 ascending:ascendingPrice
+                                                                                  selector:@selector(localizedStandardCompare:)];
+
+        merchantArray = [merchantArray sortedArrayUsingDescriptors:@[distanceSortDescriptor,priceSortDescriptor]];
+    }
     return merchantArray;
+}
+
+-(int)currentWeekday{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:GregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
+    int weekday = [comps weekday];
+    return weekday;
+}
+
+-(BOOL)isMerchantOpen:(Schedule *)schedule{
+    NSArray *openingArray = [schedule.openingTime componentsSeparatedByString:@":"];
+    NSString *openingHr = openingArray[0];
+    NSString *openingMin = openingArray[1];
+    
+    NSArray *closingArray = [schedule.closingTime componentsSeparatedByString:@":"];
+    NSString *closingHr = closingArray[1];
+    NSString *closingMin = closingArray[1];
+    
+    NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:GregorianCalendar];
+    NSDateComponents *dateComps = [gregorianCal components: (NSCalendarUnitHour | NSCalendarUnitMinute)
+                                                  fromDate: [NSDate date]];
+    // Then use it
+    NSInteger currentMin = [dateComps minute];
+    NSInteger currentHr = [dateComps hour];
+    
+    if (currentHr > closingHr.integerValue) {
+        return NO;
+    }
+    if (currentHr < openingHr.integerValue) {
+        return NO;
+    }
+    if (currentHr == closingHr.integerValue && currentMin > closingMin.integerValue) {
+        return NO;
+    }
+    if (currentHr == openingHr.integerValue && currentMin < openingMin.integerValue) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+-(BOOL)isMerchantPassedFromLocalFilter:(Merchant *)merchant{
+    
+    for (NSString *key in localFilterDict) {
+        if([key isEqualToString:@"opennow"]){
+            if ([localFilterDict[key] isEqual:@(1)]) {
+                if (![merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    //Check if time falls between opening and closing
+                   
+                    
+                    
+                    return NO;
+                }
+            }
+            if ([localFilterDict[key] isEqual:@(2)]) {
+                if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    return NO;
+                }
+            }
+            
+        }
+        if([key isEqualToString:@"3.5+"]){
+            if (merchant.rating.floatValue<3.5) {
+                return NO;
+            }
+        }
+        if([key isEqualToString:@"gender"]){
+            if ([localFilterDict[key] isEqualToString:@"male"]) {
+                if (![merchant.genderSupport isEqualToString:@"1"]) {
+                    return NO;
+                }
+            }
+            else if ([localFilterDict[key] isEqualToString:@"female"]) {
+                if (![merchant.genderSupport isEqualToString:@"0"]) {
+                    return NO;
+                }
+            }
+            else{
+                if (![merchant.genderSupport isEqualToString:@"2"]) {
+                    return NO;
+                }
+            }
+        }
+        if ([key isEqualToString:@"athome"]) {
+            if ([localFilterDict[key] isEqual:@(1)]) {
+                if ([merchant.homeService isEqualToString:@"0"]) {
+                    return NO;
+                }
+            }
+            if ([localFilterDict[key] isEqual:@(0)]) {
+                if ([merchant.homeService isEqualToString:@"1"]) {
+                    return NO;
+                }
+            }
+        }
+    }
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -195,15 +321,13 @@
     cell.nameLabel.text = merchant.name;
     cell.addressLabel.text = (merchant.address)?merchant.address:@"Sample Address";
     cell.averageRating.text = merchant.rating;
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:merchant.geo.lat.floatValue longitude:merchant.geo.lon.floatValue];
-    CGFloat distance = [[LocationHelper sharedInstance] distanceInmeteresFrom:location];
-    if(distance == -1.0){
+    if(merchant.distanceFromCurrentLocation.floatValue == 0.0){
         cell.distanceLabel.hidden = YES;
         cell.distancebackgroundImageView.hidden = YES;
         
     }
     else{
-        cell.distanceLabel.text = [NSString stringWithFormat:@"%f",distance];
+        cell.distanceLabel.text = merchant.distanceFromCurrentLocation;
         cell.distancebackgroundImageView.hidden = NO;
     }
     cell.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
@@ -240,6 +364,33 @@
 
 
 #pragma mark - User Actions
+
+-(IBAction)changeLocalFilter:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    senderButton.selected = !senderButton.selected;
+    
+    BOOL selected = senderButton.selected;
+    
+    switch (senderButton.tag) {
+        case 1:
+            [localFilterDict addEntriesFromDictionary:@{@"opennow":@(selected)}];
+            break;
+        case 2:
+            [localFilterDict addEntriesFromDictionary:@{@"3.5+":@(selected)}];
+            break;
+        case 3:
+            [localFilterDict addEntriesFromDictionary:@{@"distance":@(selected)}];
+            break;
+        case 4:
+            [localFilterDict addEntriesFromDictionary:@{@"price":@(selected)}];
+            break;
+        default:
+            break;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:@"localFilterDict"];
+}
+
 
 -(IBAction)goBackToSearch:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];

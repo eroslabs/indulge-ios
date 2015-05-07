@@ -23,7 +23,7 @@
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, strong) NSString *genderSupport;
-@property (nonatomic, strong) NSString *homeServices;
+@property (nonatomic, strong) NSString *homeService;
 @property (nonatomic, strong) NSString *merchantid;
 @property (nonatomic, strong) NSString *image;
 @property (nonatomic, strong) NSString *landmark;
@@ -36,6 +36,8 @@
 @property (nonatomic, strong) NSString *state;
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *unitNumber;
+@property (nonatomic, strong) NSString *luxuryRating;
+@property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 //Images
 @property (nonatomic, strong) NSArray *merchantImageUrls;
@@ -47,6 +49,7 @@
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSMutableArray *reviews;
 @property (nonatomic, strong) NSMutableArray *deals;
+@property (nonatomic, strong) NSMutableArray *weekdaysArray;
 
 
 //Methods
