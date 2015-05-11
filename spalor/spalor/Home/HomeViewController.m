@@ -36,7 +36,7 @@
     [self setupRecomendedButttons];
     
     [self searchStateOn:NO];
-    
+
     self.dealImageView1.layer.cornerRadius = 10.0f;
     self.dealImageView2.layer.cornerRadius = 10.0f;
     self.dealImageView3.layer.cornerRadius = 10.0f;
@@ -48,7 +48,38 @@
 
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
     localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
+    [self setButtonsFromLocalFilters];
+
 }
+
+-(void)setButtonsFromLocalFilters{
+    
+    if ([localFilterDict[@"athome"] isEqual:@(1)]) {
+        self.filterButton1.selected = YES;
+    }
+    else{
+        self.filterButton1.selected = NO;
+    }
+    if([localFilterDict[@"opennow"] isEqual:@(1)]){
+        self.filterButton2.selected = YES;
+    }
+    else{
+        self.filterButton2.selected = NO;
+    }
+    if([localFilterDict[@"gender"] isEqual:@"male"]){
+        self.filterButton3.selected = YES;
+    }
+    else{
+        self.filterButton3.selected = NO;
+    }
+    if([localFilterDict[@"gender"] isEqual:@"female"]){
+        self.filterButton4.selected = YES;
+    }
+    else{
+        self.filterButton4.selected = NO;
+    }
+}
+
 
 -(void)searchStateOn:(BOOL)onState{
     
@@ -241,10 +272,10 @@
     
     switch (senderButton.tag) {
         case 1:
-            [localFilterDict addEntriesFromDictionary:@{@"athome":@(selected)}];
+            [localFilterDict addEntriesFromDictionary:@{@"opennow":@(selected)}];
             break;
         case 2:
-            [localFilterDict addEntriesFromDictionary:@{@"opennow":@(selected)}];
+            [localFilterDict addEntriesFromDictionary:@{@"athome":@(selected)}];
             break;
         case 3:
             [localFilterDict addEntriesFromDictionary:@{@"gender":@"male"}];

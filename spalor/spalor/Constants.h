@@ -21,7 +21,8 @@
 #define INDULGE_API_VERSION 1.0
 #define INDULGE_API_VERSION_STRING @"1.0"
 
-
+#define INDULGE_MERCHANT_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/merchant/"
+#define INDULGE_USER_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/user/"
 
 #endif
 

@@ -11,5 +11,10 @@
 @interface DealsViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UITableView *tableview;
 @property (nonatomic, weak) IBOutlet UIView *loaderContainerView;
+@property (nonatomic, weak) IBOutlet UIButton *localFilterButton1;
+@property (nonatomic, weak) IBOutlet UIButton *localFilterButton2;
+@property (nonatomic, weak) IBOutlet UIButton *localFilterButton3;
+@property (nonatomic, weak) IBOutlet UIButton *localFilterButton4;
+
 
 @end

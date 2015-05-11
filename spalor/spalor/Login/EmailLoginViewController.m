@@ -19,7 +19,7 @@
 
 - (IBAction)signup:(id)sender {
 
-
+/*
     //if (userName.length>0 && pass.length>0) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
@@ -60,12 +60,12 @@
 
    // }
     
-/*
+*/
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
     self.navigationController.navigationBarHidden=YES;
     [self.navigationController pushViewController:obj animated:YES];
- */
+ 
 }
 
 

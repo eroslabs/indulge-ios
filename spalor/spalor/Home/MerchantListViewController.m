@@ -35,6 +35,35 @@
     [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
 
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
+    [self setButtonsFromLocalFilters];
+}
+
+-(void)setButtonsFromLocalFilters{
+    
+    if ([localFilterDict[@"opennow"] isEqual:@(1)]) {
+        self.localFilterButton1.selected = YES;
+    }
+    else{
+        self.localFilterButton1.selected = NO;
+    }
+    if([localFilterDict[@"3.5+"] isEqual:@(1)]){
+        self.localFilterButton2.selected = YES;
+    }
+    else{
+        self.localFilterButton2.selected = NO;
+    }
+    if([localFilterDict[@"distance"] isEqual:@(1)]){
+        self.localFilterButton3.selected = YES;
+    }
+    else{
+        self.localFilterButton3.selected = NO;
+    }
+    if([localFilterDict[@"price"] isEqual:@(1)]){
+        self.localFilterButton4.selected = YES;
+    }
+    else{
+        self.localFilterButton4.selected = NO;
+    }
 }
 
 -(void)searchForNewMerchants{
@@ -209,7 +238,7 @@
     NSString *openingMin = openingArray[1];
     
     NSArray *closingArray = [schedule.closingTime componentsSeparatedByString:@":"];
-    NSString *closingHr = closingArray[1];
+    NSString *closingHr = closingArray[0];
     NSString *closingMin = closingArray[1];
     
     NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:GregorianCalendar];
@@ -219,13 +248,17 @@
     NSInteger currentMin = [dateComps minute];
     NSInteger currentHr = [dateComps hour];
     
-    if (currentHr > closingHr.integerValue) {
+    NSInteger currentHrForClosingCheck = (currentHr>12)?(currentHr-12):currentHr;
+    
+    NSLog(@"current hr %d current min %d closinghr %d closing min %d openinghr %d openingmin %d",currentHr,currentMin,closingHr.integerValue,closingMin.integerValue,openingHr.integerValue,openingMin.integerValue);
+    
+    if (currentHrForClosingCheck > closingHr.integerValue) {
         return NO;
     }
     if (currentHr < openingHr.integerValue) {
         return NO;
     }
-    if (currentHr == closingHr.integerValue && currentMin > closingMin.integerValue) {
+    if (currentHrForClosingCheck == closingHr.integerValue && currentMin > closingMin.integerValue) {
         return NO;
     }
     if (currentHr == openingHr.integerValue && currentMin < openingMin.integerValue) {
@@ -240,19 +273,24 @@
     for (NSString *key in [localFilterDict allKeys]) {
         if([key isEqualToString:@"opennow"]){
             if ([localFilterDict[key] isEqual:@(1)]) {
-                if (![merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
                     //Check if time falls between opening and closing
                    
+                    if (![self isMerchantOpen:merchant.schedule]) {
+                        return NO;
+
+                    }
                     
-                    
+                }
+                else{
                     return NO;
                 }
             }
-            if ([localFilterDict[key] isEqual:@(2)]) {
-                if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-                    return NO;
-                }
-            }
+//            if ([localFilterDict[key] isEqual:@(2)]) {
+//                if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+//                    return NO;
+//                }
+//            }
             
         }
         if([key isEqualToString:@"3.5+"]){

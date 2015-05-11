@@ -96,6 +96,7 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYMERCHANTSSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOOKBOOKSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYUSERSTORE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOCALFILTERSTORE];
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
 
@@ -107,7 +108,7 @@
     [FBSession setActiveSession:nil];
     
     NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray* facebookCookies = [cookies cookiesForURL:[NSURL         URLWithString:@"https://facebook.com/"]];
+    NSArray* facebookCookies = [cookies cookiesForURL:[NSURL URLWithString:@"https://facebook.com/"]];
     
     for (NSHTTPCookie* cookie in facebookCookies) {
         [cookies deleteCookie:cookie];

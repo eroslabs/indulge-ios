@@ -38,7 +38,36 @@
     localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
     
     NSLog(@"local filter %@",localFilterDict);
+    [self setButtonsFromLocalFilters];
     
+}
+
+-(void)setButtonsFromLocalFilters{
+    
+    if ([localFilterDict[@"opennow"] isEqual:@(1)]) {
+        self.localFilterButton1.selected = YES;
+    }
+    else{
+        self.localFilterButton1.selected = NO;
+    }
+    if([localFilterDict[@"3.5+"] isEqual:@(1)]){
+        self.localFilterButton2.selected = YES;
+    }
+    else{
+        self.localFilterButton2.selected = NO;
+    }
+    if([localFilterDict[@"distance"] isEqual:@(1)]){
+        self.localFilterButton3.selected = YES;
+    }
+    else{
+        self.localFilterButton3.selected = NO;
+    }
+    if([localFilterDict[@"price"] isEqual:@(1)]){
+        self.localFilterButton4.selected = YES;
+    }
+    else{
+        self.localFilterButton4.selected = NO;
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -197,7 +226,45 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
     int weekday = [comps weekday];
+    NSLog(@"current week day %d",weekday);
+    
     return weekday;
+}
+
+
+-(BOOL)isMerchantOpen:(Schedule *)schedule{
+    NSArray *openingArray = [schedule.openingTime componentsSeparatedByString:@":"];
+    NSString *openingHr = openingArray[0];
+    NSString *openingMin = openingArray[1];
+    
+    NSArray *closingArray = [schedule.closingTime componentsSeparatedByString:@":"];
+    NSString *closingHr = closingArray[0];
+    NSString *closingMin = closingArray[1];
+    
+    NSCalendar *gregorianCal = [[NSCalendar alloc] initWithCalendarIdentifier:GregorianCalendar];
+    NSDateComponents *dateComps = [gregorianCal components: (NSCalendarUnitHour | NSCalendarUnitMinute)
+                                                  fromDate: [NSDate date]];
+    // Then use it
+    NSInteger currentMin = [dateComps minute];
+    NSInteger currentHr = [dateComps hour];
+    NSInteger currentHrForClosingCheck = (currentHr>12)?(currentHr-12):currentHr;
+
+    NSLog(@"current hr %d current min %d closinghr %d closing min %d openinghr %d openingmin %d",currentHr,currentMin,closingHr.integerValue,closingMin.integerValue,openingHr.integerValue,openingMin.integerValue);
+    
+    if (currentHrForClosingCheck > closingHr.integerValue) {
+        return NO;
+    }
+    if (currentHr < openingHr.integerValue) {
+        return NO;
+    }
+    if (currentHrForClosingCheck == closingHr.integerValue && currentMin > closingMin.integerValue) {
+        return NO;
+    }
+    if (currentHr == openingHr.integerValue && currentMin < openingMin.integerValue) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 -(BOOL)isDealPassedFromLocalFilter:(Deal *)deal{
@@ -205,17 +272,15 @@
     for (NSString *key in [localFilterDict allKeys]) {
         NSLog(@"key %@ %@",key,localFilterDict[key]);
         
-        if([key isEqualToString:@"opennow"]){
-            if ([localFilterDict[key] isEqual:@(1)]) {
-                if (![deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-                    return NO;
-                }
-            }
-            if ([localFilterDict[key] isEqual:@(2)]) {
+        if ([localFilterDict[@"opennow"] isEqual:@(1)]) {
                 if ([deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    if (![self isMerchantOpen:deal.schedule]) {
+                        return NO;
+                    }
+                }
+                else{
                     return NO;
                 }
-            }
             
         }
         if([key isEqualToString:@"3.5+"]){
@@ -391,20 +456,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
+    [self pickUpLocallyStoredMerchantResponse];
     
-    
-    NSMutableArray *newDealArray = [NSMutableArray new];
-    
-    for (Deal *deal in arrayOfDeals) {
-        BOOL check = [self isDealPassedFromLocalFilter:deal];
-        
-        if (check) {
-            [newDealArray addObject:deal];
-        }
-    }
-    
-    arrayOfDeals = newDealArray;
-    [self.tableview reloadData];
+   
     
     
 }
