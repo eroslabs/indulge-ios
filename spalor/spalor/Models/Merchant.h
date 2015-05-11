@@ -40,8 +40,8 @@
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 //Images
-@property (nonatomic, strong) NSArray *merchantImageUrls;
-@property (nonatomic, strong) NSArray *rateCardImageUrls;
+@property (nonatomic, strong) NSMutableArray *merchantImageUrls;
+@property (nonatomic, strong) NSMutableArray *rateCardImageUrls;
 
 //Relations
 @property (nonatomic, strong) Location *geo;

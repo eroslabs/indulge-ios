@@ -21,6 +21,7 @@
 #import "MerchantExtrasCell.h"
 #import "MerchantErrorCell.h"
 #import "AllReviewsViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MerchantDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -74,15 +75,37 @@
     
     headerScrollView.pagingEnabled = YES;
     
-    for(int i=0;i<4;i++){
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*headerScrollView.frame.size.width, 0, headerScrollView.frame.size.width, 200)];
-        imageView.image = [UIImage imageNamed:@"image.png"];
+    if(self.merchant.merchantImageUrls.count == 0){
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerScrollView.frame.size.width, 200)];
+        NSString *urlString = (self.merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,self.merchant.image]:[NSString stringWithFormat:@"%@6/ab.jpg",INDULGE_MERCHANT_IMAGE_BASE_URL];
+        NSURL *url = [NSURL URLWithString:urlString];
+        [imageView setImageWithURL:url
+                  placeholderImage:[UIImage imageNamed:@"image.png"] options:SDWebImageProgressiveDownload];
+
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.clipsToBounds = YES;
         
         [headerScrollView addSubview:imageView];
     }
+    else{
+        for(int i=0;i<self.merchant.merchantImageUrls.count;i++){
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*headerScrollView.frame.size.width, 0, headerScrollView.frame.size.width, 200)];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,self.merchant.merchantImageUrls[i]]];
+            
+            [imageView setImageWithURL:url
+                      placeholderImage:[UIImage imageNamed:@"image.png"]options:SDWebImageProgressiveDownload];
+            
+            imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.clipsToBounds = YES;
+            
+            [headerScrollView addSubview:imageView];
+        }
+    }
+    
+
+    
     
     //Add top header info image view
 //    UIImage *infoImage = [UIImage imageNamed:@"12.png"];
@@ -94,8 +117,10 @@
 //    headerScrollView.clipsToBounds = NO;
 //    headerScrollView.showsVerticalScrollIndicator = NO;
 //    
-//    
-//    headerScrollView.contentSize = CGSizeMake(4*headerScrollView.frame.size.width,headerScrollView.frame.size.height);
+//
+    
+    int count = (self.merchant.merchantImageUrls.count!=nil)?self.merchant.merchantImageUrls.count:1;
+    headerScrollView.contentSize = CGSizeMake(count*headerScrollView.frame.size.width,headerScrollView.frame.size.height);
     
     
     ParallaxHeaderView *headerView = [ParallaxHeaderView parallaxHeaderViewWithSubView:headerScrollView];

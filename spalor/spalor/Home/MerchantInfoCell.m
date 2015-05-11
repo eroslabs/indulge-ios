@@ -7,6 +7,7 @@
 //
 
 #import "MerchantInfoCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation MerchantInfoCell
 
@@ -23,7 +24,15 @@
         self.distanceLabel.text = merchant.distanceFromCurrentLocation;
 
     }
-    self.profileImageView.image = [UIImage imageNamed:@"12.png"];
+    
+    
+    NSString *urlString = (merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:@"%@6/ab.jpg",INDULGE_MERCHANT_IMAGE_BASE_URL];
+
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    [self.profileImageView setImageWithURL:url
+                             placeholderImage:[UIImage imageNamed:@"image.png"] options:SDWebImageProgressiveDownload];
+    
     return self;
 }
 @end

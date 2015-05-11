@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface MerchantListCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;

@@ -167,6 +167,8 @@
 		1388A9DA1AE680DF00852B30 /* RateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1388A9D91AE680DF00852B30 /* RateView.m */; };
 		138960791ADBBE4D005685E7 /* MerchantListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 138960781ADBBE4D005685E7 /* MerchantListViewController.m */; };
 		138BB5301AEE0E2800177C08 /* MerchantExtrasCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */; };
+		138CAFDA1B008C8600A708A9 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138CAFD91B008C8600A708A9 /* SDWebImage.framework */; };
+		138CAFDC1B008C9E00A708A9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138CAFDB1B008C9E00A708A9 /* ImageIO.framework */; };
 		13958F491AD7FCE700231794 /* filter-rating-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */; };
 		13958F4A1AD7FCE700231794 /* filter-popularity-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F421AD7FCE700231794 /* filter-popularity-selected@2x.png */; };
 		13958F4B1AD7FCE700231794 /* filter-cost-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F431AD7FCE700231794 /* filter-cost-selected@2x.png */; };
@@ -494,6 +496,8 @@
 		138960781ADBBE4D005685E7 /* MerchantListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantListViewController.m; path = Home/MerchantListViewController.m; sourceTree = "<group>"; };
 		138BB52E1AEE0E2800177C08 /* MerchantExtrasCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantExtrasCell.h; path = Home/MerchantExtrasCell.h; sourceTree = "<group>"; };
 		138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantExtrasCell.m; path = Home/MerchantExtrasCell.m; sourceTree = "<group>"; };
+		138CAFD91B008C8600A708A9 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
+		138CAFDB1B008C9E00A708A9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-rating-selected@2x.png"; sourceTree = "<group>"; };
 		13958F421AD7FCE700231794 /* filter-popularity-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-popularity-selected@2x.png"; sourceTree = "<group>"; };
 		13958F431AD7FCE700231794 /* filter-cost-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-cost-selected@2x.png"; sourceTree = "<group>"; };
@@ -630,10 +634,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				138CAFDC1B008C9E00A708A9 /* ImageIO.framework in Frameworks */,
 				134CED581AEA5CD7009C5714 /* MapKit.framework in Frameworks */,
 				13FAE23C1AB196A300A6540D /* UIKit.framework in Frameworks */,
 				13FAE23A1AB1969D00A6540D /* SystemConfiguration.framework in Frameworks */,
 				13FAE2381AB1969600A6540D /* Security.framework in Frameworks */,
+				138CAFDA1B008C8600A708A9 /* SDWebImage.framework in Frameworks */,
 				13FAE2361AB1968F00A6540D /* MediaPlayer.framework in Frameworks */,
 				13FAE2341AB1968900A6540D /* CoreText.framework in Frameworks */,
 				13FAE2321AB1968300A6540D /* CoreGraphics.framework in Frameworks */,
@@ -671,6 +677,8 @@
 		132BD1941A88876B007F5D89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				138CAFDB1B008C9E00A708A9 /* ImageIO.framework */,
+				138CAFD91B008C8600A708A9 /* SDWebImage.framework */,
 				134CED571AEA5CD7009C5714 /* MapKit.framework */,
 				13FAE23D1AB196B800A6540D /* GoogleOpenSource.framework */,
 				13FAE23E1AB196B800A6540D /* GooglePlus.framework */,

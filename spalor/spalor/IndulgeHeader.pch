@@ -16,6 +16,8 @@
 #define MYMERCHANTSSTORE @"MyMerchantsArray"
 #define MYUSERSTORE @"MyMerchantsArray"
 #define MYLOCALFILTERSTORE @"MyLocalFilterStore"
+#define INDULGE_MERCHANT_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/merchant/"
+#define INDULGE_USER_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/user/"
 
 
 #ifdef __IPHONE_8_0

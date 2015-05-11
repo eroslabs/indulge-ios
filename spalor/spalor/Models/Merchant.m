@@ -33,13 +33,13 @@
         self.software = [decoder decodeObjectForKey:@"software"];
         self.state = [decoder decodeObjectForKey:@"state"];
         self.unitNumber = [decoder decodeObjectForKey:@"unitNumber"];
-        self.merchantImageUrls = [decoder decodeObjectForKey:@"merchantImageUrls"];
         self.geo = [decoder decodeObjectForKey:@"geo"];
         self.schedule = [decoder decodeObjectForKey:@"schedule"];
         self.services = [decoder decodeObjectForKey:@"services"];
         self.reviews = [decoder decodeObjectForKey:@"reviews"];
         self.deals = [decoder decodeObjectForKey:@"deals"];
         self.weekdaysArray = [decoder decodeObjectForKey:@"weekdaysArray"];
+        self.merchantImageUrls = [decoder decodeObjectForKey:@"merchantImageUrls"];
         self.distanceFromCurrentLocation = [decoder decodeObjectForKey:@"distanceFromCurrentLocation"];
         self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
     }
@@ -69,6 +69,7 @@
     [encoder encodeObject:_services forKey:@"services"];
     [encoder encodeObject:_reviews forKey:@"reviews"];
     [encoder encodeObject:_deals forKey:@"deals"];
+    [encoder encodeObject:_image forKey:@"image"];
     [encoder encodeObject:_weekdaysArray];
     [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
     [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
@@ -116,6 +117,9 @@
             [self.reviews addObject:review];
         //}
     //}
+    
+    self.image = @"";
+    self.merchantImageUrls = [[NSMutableArray alloc] init];
     
     for (NSString *key in allProps){
         
@@ -193,6 +197,12 @@
 //                    [review readFromDictionary:reviewObject];
 //                    [self.reviews addObject:review];
 //                }
+            }
+            else if ([key isEqualToString:@"merchantImageUrls"]) {
+                for (NSString *imageURL in dictionary[@"images"]){
+                    [self.merchantImageUrls addObject:imageURL];
+                }
+
             }
             else if (![dictionary[key] isKindOfClass:[NSString class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];

@@ -14,6 +14,7 @@
 #import "UIColor+flat.h"
 #import "LocationHelper.h"
 #import "MerchantDetailViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MerchantListViewController (){
     NSArray *arrayOfMerchants;
@@ -36,6 +37,7 @@
 
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
     [self setButtonsFromLocalFilters];
+    
 }
 
 -(void)setButtonsFromLocalFilters{
@@ -369,7 +371,18 @@
         cell.distancebackgroundImageView.hidden = NO;
     }
     cell.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
-    cell.backgroundImageView.image = [UIImage imageNamed:@"image.png"];
+    
+    
+    NSString *urlString = (merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:@"%@6/ab.jpg",INDULGE_MERCHANT_IMAGE_BASE_URL];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+
+    NSLog(@"url %@",urlString);
+    
+    [cell.backgroundImageView setImageWithURL:url
+                      placeholderImage:[UIImage imageNamed:@"image.png"] options:SDWebImageProgressiveDownload];
+
+    
     cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];
     [cell.callButton setImage:[UIImage imageNamed:@"merchant-listing-call.png"] forState:UIControlStateNormal];
     [cell.shareButton setImage:[UIImage imageNamed:@"merchant-share.png"] forState:UIControlStateNormal];
