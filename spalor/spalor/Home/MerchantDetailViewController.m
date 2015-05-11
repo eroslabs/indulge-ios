@@ -77,10 +77,10 @@
     
     if(self.merchant.merchantImageUrls.count == 0){
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerScrollView.frame.size.width, 200)];
-        NSString *urlString = (self.merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,self.merchant.image]:[NSString stringWithFormat:@"%@6/ab.jpg",INDULGE_MERCHANT_IMAGE_BASE_URL];
+        NSString *urlString = (self.merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,self.merchant.image]:[NSString stringWithFormat:STATIC_IMAGE_SOURCE];
         NSURL *url = [NSURL URLWithString:urlString];
         [imageView setImageWithURL:url
-                  placeholderImage:[UIImage imageNamed:@"image.png"] options:SDWebImageProgressiveDownload];
+                  placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload];
 
         imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -94,7 +94,7 @@
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,self.merchant.merchantImageUrls[i]]];
             
             [imageView setImageWithURL:url
-                      placeholderImage:[UIImage imageNamed:@"image.png"]options:SDWebImageProgressiveDownload];
+                      placeholderImage:[UIImage imageNamed:@"placeholder1.png"]options:SDWebImageProgressiveDownload];
             
             imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
             imageView.contentMode = UIViewContentModeScaleAspectFill;

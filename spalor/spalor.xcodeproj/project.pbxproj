@@ -169,6 +169,8 @@
 		138BB5301AEE0E2800177C08 /* MerchantExtrasCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */; };
 		138CAFDA1B008C8600A708A9 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138CAFD91B008C8600A708A9 /* SDWebImage.framework */; };
 		138CAFDC1B008C9E00A708A9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 138CAFDB1B008C9E00A708A9 /* ImageIO.framework */; };
+		138CAFDE1B00CD7700A708A9 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 138CAFDD1B00CD7700A708A9 /* placeholder@2x.png */; };
+		138CAFE01B00CFA500A708A9 /* placeholder1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 138CAFDF1B00CFA500A708A9 /* placeholder1@2x.png */; };
 		13958F491AD7FCE700231794 /* filter-rating-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */; };
 		13958F4A1AD7FCE700231794 /* filter-popularity-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F421AD7FCE700231794 /* filter-popularity-selected@2x.png */; };
 		13958F4B1AD7FCE700231794 /* filter-cost-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F431AD7FCE700231794 /* filter-cost-selected@2x.png */; };
@@ -498,6 +500,8 @@
 		138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantExtrasCell.m; path = Home/MerchantExtrasCell.m; sourceTree = "<group>"; };
 		138CAFD91B008C8600A708A9 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		138CAFDB1B008C9E00A708A9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		138CAFDD1B00CD7700A708A9 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		138CAFDF1B00CFA500A708A9 /* placeholder1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder1@2x.png"; sourceTree = "<group>"; };
 		13958F411AD7FCE700231794 /* filter-rating-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-rating-selected@2x.png"; sourceTree = "<group>"; };
 		13958F421AD7FCE700231794 /* filter-popularity-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-popularity-selected@2x.png"; sourceTree = "<group>"; };
 		13958F431AD7FCE700231794 /* filter-cost-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-cost-selected@2x.png"; sourceTree = "<group>"; };
@@ -750,6 +754,8 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				138CAFDF1B00CFA500A708A9 /* placeholder1@2x.png */,
+				138CAFDD1B00CD7700A708A9 /* placeholder@2x.png */,
 				13C002091AFB56000021D60E /* merchant-filter-rupee-down@2x.png */,
 				13C0020A1AFB56000021D60E /* merchant-filter-rupee-up@2x.png */,
 				13C0020B1AFB56000021D60E /* merchant-filter-distance-down@2x.png */,
@@ -1313,6 +1319,7 @@
 				136399F71AF3680A006CB323 /* Filter-rupee-active2@2x.png in Resources */,
 				131536381AD5211C00AF9195 /* merchant-default-button@2x.png in Resources */,
 				136399FC1AF3680A006CB323 /* Filter-rupee-active4@2x.png in Resources */,
+				138CAFE01B00CFA500A708A9 /* placeholder1@2x.png in Resources */,
 				136399F81AF3680A006CB323 /* Filter-rupee2@2x.png in Resources */,
 				13CE68A51AE8DF150085C7B0 /* massage@2x.png in Resources */,
 				1347FD8B1ADBC96F007EF73D /* header-back-white@2x.png in Resources */,
@@ -1404,6 +1411,7 @@
 				13C1C73F1AF39C430015F71E /* merchant-3.5-active@2x.png in Resources */,
 				1337EE071ACBD35D00F31D14 /* filter-female@2x.png in Resources */,
 				137B940F1AEE5D7D00BCB1E4 /* coupon-background@2x.png in Resources */,
+				138CAFDE1B00CD7700A708A9 /* placeholder@2x.png in Resources */,
 				1337EE441ACBD35D00F31D14 /* registration-email-active@2x.png in Resources */,
 				1337EE4C1ACBD35D00F31D14 /* registration-photo@2x.png in Resources */,
 				13C002191AFB56010021D60E /* home-female-active@2x.png in Resources */,

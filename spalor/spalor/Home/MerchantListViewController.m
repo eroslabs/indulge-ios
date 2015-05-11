@@ -373,14 +373,14 @@
     cell.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
     
     
-    NSString *urlString = (merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:@"%@6/ab.jpg",INDULGE_MERCHANT_IMAGE_BASE_URL];
+    NSString *urlString = (merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:STATIC_IMAGE_SOURCE];
     
     NSURL *url = [NSURL URLWithString:urlString];
 
     NSLog(@"url %@",urlString);
     
     [cell.backgroundImageView setImageWithURL:url
-                      placeholderImage:[UIImage imageNamed:@"image.png"] options:SDWebImageProgressiveDownload];
+                      placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload];
 
     
     cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];

@@ -93,11 +93,8 @@
     
     CLLocation *myLocation = [[LocationHelper sharedInstance] getCurrentLocation];
     
-   
-    
     NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
-    
-    
+
     NSLog(@"filter Dict %@",filterDict);
     
     NSMutableDictionary *paramDict = [NSMutableDictionary new];
