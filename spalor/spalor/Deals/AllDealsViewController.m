@@ -1,50 +1,31 @@
 //
-//  MyDealsCell.m
+//  AllDealsViewController.m
 //  spalor
 //
-//  Created by Manish on 28/04/15.
+//  Created by Manish on 13/05/15.
 //  Copyright (c) 2015 Self. All rights reserved.
 //
 
-#import "MyDealsCell.h"
-#import "MyDealCollectionViewCell.h"
-#import "MyCouponCollectionViewCell.h"
+#import "AllDealsViewController.h"
 #import "Deal.h"
-#import "MerchantService.h"
+#import "MyCouponCollectionViewCell.h"
+#import "MyDealCollectionViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@implementation MyDealsCell
-//-(void)setupCellWithMyDealImagesArray:(NSArray *)imagesArray{
-//    int index = 0;
-//    
-//    for (NSData *imageData in imagesArray) {
-//        UIView *couponView = [[UIView alloc] init];
-//        UIImage *myImage = [UIImage imageWithData:imageData];
-//        NSLog(@"image data %@",imageData);
-//        UIImageView *myImageView = [[UIImageView alloc] initWithImage:myImage];
-//        myImageView.backgroundColor = [UIColor colorWithRed:index*0.055f green:index*0.055f blue:index*0.055f alpha:1];
-//        couponView.frame = CGRectMake(index*210 + 20, 20, 190, self.scrollView.frame.size.height-10);
-//        index ++;
-//
-//        myImageView.frame = CGRectMake(0, 0, 190, couponView.frame.size.height);
-//        
-//        [couponView addSubview:myImageView];
-//        index ++;
-//        [self.scrollView addSubview:myImageView];
-//    }
-//    
-//    [self.scrollView setContentSize:CGSizeMake((index)*210+20, self.scrollView.contentSize.height-10)];
-//
-//}
+@interface AllDealsViewController ()
 
--(void)setupCellWithMyDealArray:(NSArray *)dataArray{
-    self.dataArray = dataArray;
-//    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-//    [flowLayout setItemSize:CGSizeMake(290, 125)];
-//    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-//    
-//    [self.collectionView setCollectionViewLayout:flowLayout];
-    [self.collectionView reloadData];
+@end
+
+@implementation AllDealsViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Collection View DataSource and Delegate
@@ -91,7 +72,7 @@
         cell.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
         cell.discountLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
         return cell;
-
+        
     }
     else{
         NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
@@ -105,16 +86,16 @@
         NSURL *url = [NSURL URLWithString:urlString];
         
         [cell.merchantProfileImageView setImageWithURL:url
-                              placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload ];
-
+                                      placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload ];
+        
         cell.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
         cell.merchantName.text = deal.name;
         cell.merchantAddress.text = deal.address;
         cell.merchantRatingLabel.text = deal.rating;
-                
+        
         if (deal.serviceNames.length>0) {
             cell.merchantServicesLabel.text = deal.serviceNames;
-
+            
         }
         else{
             //Put category Image Views
@@ -131,11 +112,19 @@
         cell.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
         cell.discountLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
         return cell;
-
+        
     }
-
+    
     return nil;
     
+}
+
+
+
+#pragma mark - User Action
+
+-(IBAction)goBack:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

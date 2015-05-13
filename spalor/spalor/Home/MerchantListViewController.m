@@ -15,11 +15,15 @@
 #import "LocationHelper.h"
 #import "MerchantDetailViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "MerchantCategoriesDealPopupCell.h"
+#import "DealDetailsViewController.h"
+#import "MerchantServicesDealPopupCell.h"
 
 @interface MerchantListViewController (){
     NSArray *arrayOfMerchants;
     FeSpinnerTenDot *spinner;
     Merchant *selectedMerchant;
+    Deal *selecteddeal;
     NSMutableDictionary *localFilterDict;
 }
 
@@ -343,18 +347,46 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if([tableView isEqual:self.dealTableView]){
+        return selectedMerchant.deals.count;
+    }
+    
     NSInteger numOfRows = arrayOfMerchants.count;
     return numOfRows;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([tableView isEqual:self.dealTableView]){
+        return 56;
+    }
     return 160;
 
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if([tableView isEqual:self.dealTableView]){
+       //Two cells Services and Categories
+        Deal *deal = selectedMerchant.deals[indexPath.row];
+        NSString *identifier =  (deal.serviceNames.length>0)?@"ServicesIdentifier":@"CategoriesIdentifier";
+        if([identifier isEqualToString:@"ServicesIdentifier"]){
+            MerchantServicesDealPopupCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell.servicesLabel.text = deal.serviceNames;
+            cell.serviceDetailsLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% Off",deal.percentOff]:[NSString stringWithFormat:@"%@ Rs Off",deal.flatOff];
+            return cell;
+        }
+        else{
+            MerchantCategoriesDealPopupCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            NSArray *categoriesArray = [deal.categoryIds componentsSeparatedByString:@","];
+            //Set category Image Views here
+            cell.serviceDetailsLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% Off",deal.percentOff]:[NSString stringWithFormat:@"%@ Rs Off",deal.flatOff];
+            return cell;
+        }
+    }
+    
+    
     NSString *identifier =  @"MerchantIdentifier";
     Merchant *merchant = arrayOfMerchants[indexPath.row];
     MerchantListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -404,13 +436,16 @@
     return cell;
 }
 
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    selectedMerchant = arrayOfMerchants[indexPath.row];
-    [self performSegueWithIdentifier:@"showDetail" sender:self];
-    
+    if([tableView isEqual:self.dealTableView]){
+        //Show Deal Segue
+        selecteddeal = selectedMerchant.deals[indexPath.row];
+        [self performSegueWithIdentifier:@"ShowDealDetail" sender:nil];
+    }
+    else{
+        selectedMerchant = arrayOfMerchants[indexPath.row];
+        [self performSegueWithIdentifier:@"showDetail" sender:self];
+    }
 }
 
 
@@ -467,6 +502,11 @@
     if([segue.identifier isEqualToString:@"showDetail"]){
         MerchantDetailViewController *controller = (MerchantDetailViewController *)segue.destinationViewController;
         controller.merchant = selectedMerchant;
+    }
+    else{
+        DealDetailsViewController *controller = (DealDetailsViewController *)segue.destinationViewController;
+        controller.deal = selecteddeal;
+
     }
 }
 

@@ -14,6 +14,7 @@
 #import "FeSpinnerTenDot.h"
 #import "SuggestedTableViewCell.h"
 #import "LocationHelper.h"
+#import "User.h"
 
 @interface DealsViewController (){
     NSArray *arrayOfDeals;
@@ -381,6 +382,7 @@
             cell.distanceLabel.text = deal.distanceFromCurrentLocation;
             cell.distanceBackgroundImageView.hidden = NO;
         }
+        cell.favoriteButton.tag = indexPath.row;
         cell.averageRating.text = deal.rating;
         cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
         
@@ -422,6 +424,25 @@
 }
 
 #pragma mark - User Actions
+
+-(IBAction)favouriteDeal:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    int index = senderButton.tag;
+    Deal *deal = arrayOfDeals[index];
+    NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+    NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:deal];
+    [myDealsArray addObject:dealData];
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
+    NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 -(IBAction)showFilterScreen:(id)sender{
     [self performSegueWithIdentifier:@"showFilter" sender:self];
 

@@ -175,6 +175,23 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+-(IBAction)favouriteDeal:(id)sender{
+    NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+    NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
+    [myDealsArray addObject:dealData];
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
+    NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 -(IBAction)call:(id)sender{
     NSString *cleanedString = [[self.deal.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
     NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];

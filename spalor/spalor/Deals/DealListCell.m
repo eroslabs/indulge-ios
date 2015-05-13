@@ -40,4 +40,7 @@
     self.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
     return self;
 }
+
+
+
 @end

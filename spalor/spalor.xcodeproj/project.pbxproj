@@ -109,6 +109,8 @@
 		1337EE4D1ACBD35D00F31D14 /* registration-profile-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1337EE021ACBD35D00F31D14 /* registration-profile-active@2x.png */; };
 		1337EE4E1ACBD35D00F31D14 /* registration-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1337EE031ACBD35D00F31D14 /* registration-profile@2x.png */; };
 		13385DD41AF7910400E361DD /* CustomTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13385DD21AF7910400E361DD /* CustomTabbarController.m */; };
+		133887F01B01F10C0007E359 /* MerchantServicesDealPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */; };
+		133887F31B01F1250007E359 /* MerchantCategoriesDealPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 133887F21B01F1250007E359 /* MerchantCategoriesDealPopupCell.m */; };
 		1347FD8B1ADBC96F007EF73D /* header-back-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */; };
 		1347FD8E1ADBCC03007EF73D /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */; };
 		134CED581AEA5CD7009C5714 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134CED571AEA5CD7009C5714 /* MapKit.framework */; };
@@ -190,6 +192,8 @@
 		13A073061AE4F04300754317 /* MerchantDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A073051AE4F04300754317 /* MerchantDeal.m */; };
 		13A073091AE508D100754317 /* DealListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A073081AE508D100754317 /* DealListCell.m */; };
 		13A0730C1AE5099100754317 /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A0730B1AE5099100754317 /* Deal.m */; };
+		13A7BA9D1B034061004224E4 /* MyCouponCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */; };
+		13A7BAA01B0368B4004224E4 /* AllDealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */; };
 		13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */; };
 		13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573D1AB8367E00811025 /* ParallaxHeaderView.m */; };
 		13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA57401AB8370D00811025 /* StoryCommentCell.m */; };
@@ -404,6 +408,10 @@
 		1337EE031ACBD35D00F31D14 /* registration-profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registration-profile@2x.png"; sourceTree = "<group>"; };
 		13385DD21AF7910400E361DD /* CustomTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTabbarController.m; path = TabBar/CustomTabbarController.m; sourceTree = "<group>"; };
 		13385DD31AF7910400E361DD /* CustomTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTabbarController.h; path = TabBar/CustomTabbarController.h; sourceTree = "<group>"; };
+		133887EE1B01F10C0007E359 /* MerchantServicesDealPopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantServicesDealPopupCell.h; path = Home/MerchantServicesDealPopupCell.h; sourceTree = "<group>"; };
+		133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantServicesDealPopupCell.m; path = Home/MerchantServicesDealPopupCell.m; sourceTree = "<group>"; };
+		133887F11B01F1250007E359 /* MerchantCategoriesDealPopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantCategoriesDealPopupCell.h; path = Home/MerchantCategoriesDealPopupCell.h; sourceTree = "<group>"; };
+		133887F21B01F1250007E359 /* MerchantCategoriesDealPopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantCategoriesDealPopupCell.m; path = Home/MerchantCategoriesDealPopupCell.m; sourceTree = "<group>"; };
 		1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-back-white@2x.png"; sourceTree = "<group>"; };
 		1347FD8C1ADBCC03007EF73D /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NearbyViewController.h; path = Nearby/NearbyViewController.h; sourceTree = "<group>"; };
 		1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NearbyViewController.m; path = Nearby/NearbyViewController.m; sourceTree = "<group>"; };
@@ -528,6 +536,10 @@
 		13A073081AE508D100754317 /* DealListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealListCell.m; path = Deals/DealListCell.m; sourceTree = "<group>"; };
 		13A0730A1AE5099100754317 /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deal.h; path = Models/Deal.h; sourceTree = "<group>"; };
 		13A0730B1AE5099100754317 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deal.m; path = Models/Deal.m; sourceTree = "<group>"; };
+		13A7BA9B1B034061004224E4 /* MyCouponCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCouponCollectionViewCell.h; path = Favorite/MyCouponCollectionViewCell.h; sourceTree = "<group>"; };
+		13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCouponCollectionViewCell.m; path = Favorite/MyCouponCollectionViewCell.m; sourceTree = "<group>"; };
+		13A7BA9E1B0368B4004224E4 /* AllDealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllDealsViewController.h; path = Deals/AllDealsViewController.h; sourceTree = "<group>"; };
+		13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllDealsViewController.m; path = Deals/AllDealsViewController.m; sourceTree = "<group>"; };
 		13BA57391AB835A100811025 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Extensions/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Extensions/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		13BA573C1AB8367E00811025 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Home/ParallaxHeaderView.h; sourceTree = "<group>"; };
@@ -1060,6 +1072,10 @@
 				138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */,
 				136399EA1AF349B0006CB323 /* SuggestedTableViewCell.h */,
 				136399EB1AF349B0006CB323 /* SuggestedTableViewCell.m */,
+				133887EE1B01F10C0007E359 /* MerchantServicesDealPopupCell.h */,
+				133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */,
+				133887F11B01F1250007E359 /* MerchantCategoriesDealPopupCell.h */,
+				133887F21B01F1250007E359 /* MerchantCategoriesDealPopupCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1086,6 +1102,10 @@
 				132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */,
 				13D98F9E1AF20209003FE631 /* MyDealCollectionViewCell.h */,
 				13D98F9F1AF20209003FE631 /* MyDealCollectionViewCell.m */,
+				13A7BA9B1B034061004224E4 /* MyCouponCollectionViewCell.h */,
+				13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */,
+				13A7BA9E1B0368B4004224E4 /* AllDealsViewController.h */,
+				13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */,
 			);
 			name = Favorite;
 			sourceTree = "<group>";
@@ -1506,6 +1526,7 @@
 				134CED7C1AEA6D4D009C5714 /* MerchantRecommendedCell.m in Sources */,
 				13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */,
 				134CED761AEA6C8C009C5714 /* MerchantScheduleCell.m in Sources */,
+				13A7BAA01B0368B4004224E4 /* AllDealsViewController.m in Sources */,
 				132C9F171ADCF82500EB5F3F /* MerchantService.m in Sources */,
 				138960791ADBBE4D005685E7 /* MerchantListViewController.m in Sources */,
 				133008E91ACD15EE009FFC77 /* FormInputCell.m in Sources */,
@@ -1544,6 +1565,9 @@
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
 				133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */,
 				13779B761AEE66D50021795B /* AddNewLookViewController.m in Sources */,
+				133887F31B01F1250007E359 /* MerchantCategoriesDealPopupCell.m in Sources */,
+				133887F01B01F10C0007E359 /* MerchantServicesDealPopupCell.m in Sources */,
+				13A7BA9D1B034061004224E4 /* MyCouponCollectionViewCell.m in Sources */,
 				134CED821AEA6D80009C5714 /* MerchantMapCell.m in Sources */,
 				13EBA44D1AB960F3009E8AC3 /* FilterViewController.m in Sources */,
 				132BD1931A88867E007F5D89 /* SignupViewController.m in Sources */,

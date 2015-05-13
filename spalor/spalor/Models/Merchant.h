@@ -11,7 +11,7 @@
 #import "Schedule.h"
 #import "MerchantService.h"
 #import "Review.h"
-#import "MerchantDeal.h"
+#import "Deal.h"
 
 @interface Merchant : NSObject<NSCoding>
 

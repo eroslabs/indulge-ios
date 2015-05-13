@@ -39,6 +39,8 @@
         self.homeService = [decoder decodeObjectForKey:@"homeService"];
         self.distanceFromCurrentLocation = [decoder decodeObjectForKey:@"distanceFromCurrentLocation"];
         self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
+        self.serviceNames = [decoder decodeObjectForKey:@"serviceNames"];
+        self.categoryIds = [decoder decodeObjectForKey:@"categoryIds"];
     }
     return self;
 }
@@ -68,6 +70,8 @@
     [encoder encodeObject:_couponCode forKey:@"couponcode"];
     [encoder encodeObject:_homeService forKey:@"homeService"];
     [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
+    [encoder encodeObject:_categoryIds forKey:@"categoryIds"];
+    [encoder encodeObject:_serviceNames forKey:@"serviceNames"];
     [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
 }
 
@@ -164,8 +168,6 @@
                     string = [string substringToIndex:[string length] - 3];
                 }
                 [self setValue:string forKey:key];
-
-
             }
             else if (![dictionary[key] isKindOfClass:[NSString class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];

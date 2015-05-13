@@ -177,15 +177,16 @@
             else if ([key isEqualToString:@"deals"]) {
                 self.deals = [[NSMutableArray alloc] init];
                 for (NSDictionary *dealObject in dictionary[key]){
-                    MerchantDeal *deal = [[MerchantDeal alloc] init];
-                    deal.flatOff = dealObject[@"flatOff"];
-                    deal.percentOff = dealObject[@"percentOff"];
-                    deal.services = [dealObject[@"service"] objectForKey:@"description"];
-                    NSString *string = [dealObject[@"validTill"] stringValue];
-                    if ([string length] > 3) {
-                        string = [string substringToIndex:[string length] - 3];
-                    }
-                    deal.validTill = string;
+                    Deal *deal = [[Deal alloc] init];
+//                    deal.flatOff = dealObject[@"flatOff"];
+//                    deal.percentOff = dealObject[@"percentOff"];
+//                    deal.services = [dealObject[@"service"] objectForKey:@"description"];
+//                    NSString *string = [dealObject[@"validTill"] stringValue];
+//                    if ([string length] > 3) {
+//                        string = [string substringToIndex:[string length] - 3];
+//                    }
+//                    deal.validTill = string;
+                    [deal readFromDictionary:dealObject];
                     [self.deals addObject:deal];
                 }
             }

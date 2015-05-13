@@ -11,7 +11,8 @@
 @interface MerchantDeal : NSObject<NSCoding>
 @property (nonatomic, strong) NSString *flatOff;
 @property (nonatomic, strong) NSString *percentOff;
-
+@property (nonatomic, strong) NSString *dealdetails;
+@property (nonatomic, strong) NSString *categoryIds;
 @property (nonatomic, strong) NSString *services;
 @property (nonatomic, strong) NSString *validTill;
 @end

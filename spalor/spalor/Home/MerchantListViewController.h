@@ -17,5 +17,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *localFilterButton2;
 @property (nonatomic, weak) IBOutlet UIButton *localFilterButton3;
 @property (nonatomic, weak) IBOutlet UIButton *localFilterButton4;
+@property (nonatomic , weak) IBOutlet UITableView *dealTableView;
+@property (nonatomic , weak) IBOutlet UIView *dealOverlayView;
+
 -(IBAction)goBackToSearch:(id)sender;
 @end

@@ -14,8 +14,9 @@
         self.flatOff = [decoder decodeObjectForKey:@"flatOff"];
         self.services = [decoder decodeObjectForKey:@"services"];
         self.percentOff = [decoder decodeObjectForKey:@"percentOff"];
-
+        self.dealdetails = [decoder decodeObjectForKey:@"dealDetails"];
         self.validTill = [decoder decodeObjectForKey:@"validTill"];
+        self.categoryIds = [decoder decodeObjectForKey:@"categoryIds"];
     }
     return self;
 }
@@ -25,6 +26,8 @@
     [encoder encodeObject:_flatOff forKey:@"flatOff"];
     [encoder encodeObject:_services forKey:@"services"];
     [encoder encodeObject:_validTill forKey:@"validTill"];
+    [encoder encodeObject:_dealdetails forKey:@"dealDetails"];
+    [encoder encodeObject:_categoryIds forKey:@"categoryIds"];
     
 }
 @end

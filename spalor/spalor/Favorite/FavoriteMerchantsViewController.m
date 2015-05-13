@@ -12,6 +12,7 @@
 #import "MyServiceProviderCell.h"
 #import "Merchant.h"
 #import "Deal.h"
+#import "AddNewLookViewController.h"
 
 @interface FavoriteMerchantsViewController (){
     NSArray *myLookBookImagesArray;
@@ -44,15 +45,17 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    AddNewLookViewController *controller = (AddNewLookViewController *)[segue destinationViewController];
+    controller.
 }
-*/
+
 
 #pragma mark -
 #pragma mark UITableViewDatasource
