@@ -7,6 +7,7 @@
 //
 
 #import "AllMerchantsViewController.h"
+#import "MyServiceProviderCell.h"
 
 @interface AllMerchantsViewController ()
 
@@ -23,6 +24,33 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Table Datasource and Delegate
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numOfRows = self.dataArray.count;
+    return numOfRows;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *reuseId = @"MyServiceProviderCell";//This is your favorite Merchants
+    MyServiceProviderCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    Merchant *myMerchant = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataArray[indexPath.row]];
+    NSLog(@"myMerchant %@",myMerchant.name);
+    [cell setupCellWithMerchant:myMerchant];
+    return cell;
+}
+
+
+
+
 
 #pragma mark - User Actions
 

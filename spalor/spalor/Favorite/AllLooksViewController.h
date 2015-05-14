@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AllLooksViewController : UIViewController
-
+@property NSArray *dataArray;
 @end

@@ -13,6 +13,8 @@
 #import "Merchant.h"
 #import "Deal.h"
 #import "AllDealsViewController.h"
+#import "AllLooksViewController.h"
+#import "AllMerchantsViewController.h"
 
 @interface FavoriteMerchantsViewController (){
     NSArray *myLookBookImagesArray;
@@ -55,6 +57,14 @@
     if([[segue identifier] isEqualToString:@"AllDeals"]){
         AllDealsViewController *controller = (AllDealsViewController *)[segue destinationViewController];
         controller.dataArray = myDealsArray;
+    }
+    else if ([[segue identifier] isEqualToString:@"AllMerchants"]) {
+        AllMerchantsViewController *controller = (AllMerchantsViewController *)[segue destinationViewController];
+        controller.dataArray = myMerchantsArray;
+    }
+    else if ([[segue identifier] isEqualToString:@"AllLooks"]) {
+        AllLooksViewController *controller = (AllLooksViewController *)[segue destinationViewController];
+        controller.dataArray = myLookBookImagesArray;
     }
 }
 
@@ -213,16 +223,23 @@
     {
         case 0:{
             //Show all looks
+            if (myLookBookImagesArray.count>0) {
+                [self performSegueWithIdentifier:@"AllLooks" sender:nil];
+            }
             break;
         }
         case 1:{
             //Show all deals
-            [self performSegueWithIdentifier:@"AllDeals" sender:nil];
+            if (myDealsArray.count>0) {
+                [self performSegueWithIdentifier:@"AllDeals" sender:nil];
+            }
             break;
         }
-            // ...
         default:{
             //Show all service providers
+            if (myMerchantsArray.count>0) {
+                [self performSegueWithIdentifier:@"AllMerchants" sender:nil];
+            }
             break;
         }
     }

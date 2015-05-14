@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AllMerchantsViewController : UIViewController
-
+@property NSArray *dataArray;
 @end

@@ -189,6 +189,7 @@
 		139B4C751AE621A70079F992 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 139B4C721AE621A70079F992 /* FXBlurView.m */; };
 		139B4C761AE621A70079F992 /* UIColor+flat.m in Sources */ = {isa = PBXBuildFile; fileRef = 139B4C741AE621A70079F992 /* UIColor+flat.m */; };
 		139B4C791AE621C80079F992 /* FeTenDot.m in Sources */ = {isa = PBXBuildFile; fileRef = 139B4C781AE621C80079F992 /* FeTenDot.m */; };
+		139D3ABC1B04A4BA009D6198 /* MyLooksCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 139D3ABB1B04A4BA009D6198 /* MyLooksCollectionViewCell.m */; };
 		13A073061AE4F04300754317 /* MerchantDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A073051AE4F04300754317 /* MerchantDeal.m */; };
 		13A073091AE508D100754317 /* DealListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A073081AE508D100754317 /* DealListCell.m */; };
 		13A0730C1AE5099100754317 /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A0730B1AE5099100754317 /* Deal.m */; };
@@ -532,6 +533,8 @@
 		139B4C741AE621A70079F992 /* UIColor+flat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+flat.m"; path = "Loader/UIColor+flat.m"; sourceTree = "<group>"; };
 		139B4C771AE621C80079F992 /* FeTenDot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeTenDot.h; path = Loader/FeTenDot.h; sourceTree = "<group>"; };
 		139B4C781AE621C80079F992 /* FeTenDot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeTenDot.m; path = Loader/FeTenDot.m; sourceTree = "<group>"; };
+		139D3ABA1B04A4BA009D6198 /* MyLooksCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLooksCollectionViewCell.h; path = Favorite/MyLooksCollectionViewCell.h; sourceTree = "<group>"; };
+		139D3ABB1B04A4BA009D6198 /* MyLooksCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLooksCollectionViewCell.m; path = Favorite/MyLooksCollectionViewCell.m; sourceTree = "<group>"; };
 		13A073041AE4F04300754317 /* MerchantDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantDeal.h; path = Models/MerchantDeal.h; sourceTree = "<group>"; };
 		13A073051AE4F04300754317 /* MerchantDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantDeal.m; path = Models/MerchantDeal.m; sourceTree = "<group>"; };
 		13A073071AE508D100754317 /* DealListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealListCell.h; path = Deals/DealListCell.h; sourceTree = "<group>"; };
@@ -1116,6 +1119,8 @@
 				13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */,
 				13DAEAA61B0491BC001E5EB3 /* AllLooksViewController.h */,
 				13DAEAA71B0491BC001E5EB3 /* AllLooksViewController.m */,
+				139D3ABA1B04A4BA009D6198 /* MyLooksCollectionViewCell.h */,
+				139D3ABB1B04A4BA009D6198 /* MyLooksCollectionViewCell.m */,
 			);
 			name = Favorite;
 			sourceTree = "<group>";
@@ -1559,6 +1564,7 @@
 				134CED6A1AEA68DE009C5714 /* DealRecommendedCell.m in Sources */,
 				13A073091AE508D100754317 /* DealListCell.m in Sources */,
 				132275631AEFA04E00F5D77F /* MyServiceProviderCell.m in Sources */,
+				139D3ABC1B04A4BA009D6198 /* MyLooksCollectionViewCell.m in Sources */,
 				13E67C431AE4D63200F96A36 /* MerchantListCell.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				1388A1A71AE7C49A00E330C1 /* Service.m in Sources */,
