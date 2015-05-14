@@ -233,6 +233,8 @@
 		13CE68AE1AE8DF150085C7B0 /* Gym-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68A01AE8DF150085C7B0 /* Gym-active.png */; };
 		13D98FA01AF20209003FE631 /* MyDealCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D98F9F1AF20209003FE631 /* MyDealCollectionViewCell.m */; };
 		13D98FA21AF20532003FE631 /* favourite-coupon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13D98FA11AF20532003FE631 /* favourite-coupon@2x.png */; };
+		13DAEAA51B0491A7001E5EB3 /* AllMerchantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */; };
+		13DAEAA81B0491BC001E5EB3 /* AllLooksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13DAEAA71B0491BC001E5EB3 /* AllLooksViewController.m */; };
 		13E0CC331AF3A213007C4738 /* Merchant-listing-camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E0CC321AF3A213007C4738 /* Merchant-listing-camera@2x.png */; };
 		13E0CC351AF3A22C007C4738 /* Merchant-listing-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E0CC341AF3A22C007C4738 /* Merchant-listing-location.png */; };
 		13E0CC371AF3A25D007C4738 /* Merchant-listing-item-call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E0CC361AF3A25D007C4738 /* Merchant-listing-item-call@2x.png */; };
@@ -585,6 +587,10 @@
 		13D98F9E1AF20209003FE631 /* MyDealCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDealCollectionViewCell.h; path = Favorite/MyDealCollectionViewCell.h; sourceTree = "<group>"; };
 		13D98F9F1AF20209003FE631 /* MyDealCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDealCollectionViewCell.m; path = Favorite/MyDealCollectionViewCell.m; sourceTree = "<group>"; };
 		13D98FA11AF20532003FE631 /* favourite-coupon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favourite-coupon@2x.png"; sourceTree = "<group>"; };
+		13DAEAA31B0491A7001E5EB3 /* AllMerchantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllMerchantsViewController.h; path = Favorite/AllMerchantsViewController.h; sourceTree = "<group>"; };
+		13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllMerchantsViewController.m; path = Favorite/AllMerchantsViewController.m; sourceTree = "<group>"; };
+		13DAEAA61B0491BC001E5EB3 /* AllLooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllLooksViewController.h; path = Favorite/AllLooksViewController.h; sourceTree = "<group>"; };
+		13DAEAA71B0491BC001E5EB3 /* AllLooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllLooksViewController.m; path = Favorite/AllLooksViewController.m; sourceTree = "<group>"; };
 		13E0CC321AF3A213007C4738 /* Merchant-listing-camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merchant-listing-camera@2x.png"; sourceTree = "<group>"; };
 		13E0CC341AF3A22C007C4738 /* Merchant-listing-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merchant-listing-location.png"; sourceTree = "<group>"; };
 		13E0CC361AF3A25D007C4738 /* Merchant-listing-item-call@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merchant-listing-item-call@2x.png"; sourceTree = "<group>"; };
@@ -1106,6 +1112,10 @@
 				13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */,
 				13A7BA9E1B0368B4004224E4 /* AllDealsViewController.h */,
 				13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */,
+				13DAEAA31B0491A7001E5EB3 /* AllMerchantsViewController.h */,
+				13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */,
+				13DAEAA61B0491BC001E5EB3 /* AllLooksViewController.h */,
+				13DAEAA71B0491BC001E5EB3 /* AllLooksViewController.m */,
 			);
 			name = Favorite;
 			sourceTree = "<group>";
@@ -1513,6 +1523,7 @@
 				13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */,
 				1331FE7A1AC53B1000BEF382 /* AllReviewsViewController.m in Sources */,
 				134CED7F1AEA6D66009C5714 /* MerchantDealCell.m in Sources */,
+				13DAEAA81B0491BC001E5EB3 /* AllLooksViewController.m in Sources */,
 				132C9F111ADCF7B200EB5F3F /* Location.m in Sources */,
 				13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */,
 				13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */,
@@ -1578,6 +1589,7 @@
 				134CED6D1AEA68F2009C5714 /* DealExtraServicesCell.m in Sources */,
 				1322755D1AEFA01F00F5D77F /* MyLookbookCell.m in Sources */,
 				1324E2071AE7823100C2FEBB /* LocationHelper.m in Sources */,
+				13DAEAA51B0491A7001E5EB3 /* AllMerchantsViewController.m in Sources */,
 				139B4C751AE621A70079F992 /* FXBlurView.m in Sources */,
 				137B94121AEE60D100BCB1E4 /* RedeemDealViewController.m in Sources */,
 				134CED611AEA6895009C5714 /* DealRedeemCell.m in Sources */,

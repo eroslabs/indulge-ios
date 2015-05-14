@@ -10,4 +10,7 @@
 
 @interface AllDealsViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 @property NSArray *dataArray;
+@property (nonatomic, weak) IBOutlet UIButton *activeDealsButton;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet UIButton *pastDealsButton;
 @end

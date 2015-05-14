@@ -11,8 +11,13 @@
 #import "MyCouponCollectionViewCell.h"
 #import "MyDealCollectionViewCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "Deal.h"
 
-@interface AllDealsViewController ()
+@interface AllDealsViewController (){
+    BOOL showActiveDeals;
+    NSMutableArray *activeDealsArray;
+    NSMutableArray *pastDealsArray;
+}
 
 @end
 
@@ -21,6 +26,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    showActiveDeals = YES;
+    self.activeDealsButton.selected = YES;
+    self.pastDealsButton.selected = NO;
+    [self setActiveandPastDealsDataSource];
+    
+}
+
+-(void)setActiveandPastDealsDataSource{
+    activeDealsArray = [NSMutableArray new];
+    pastDealsArray = [NSMutableArray new];
+    
+    for(NSData *data in self.dataArray){
+        Deal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if(deal.validTill.length == 0){
+            //Recurring
+            [activeDealsArray addObject:deal];
+        }
+        else{
+            double timeStampFromJSON = deal.validTill.doubleValue; // or whatever from your JSON
+            double dif = timeStampFromJSON - [[NSDate date] timeIntervalSince1970];
+            NSLog(@"dif: %f", dif);
+            if(dif>0){
+                [activeDealsArray addObject:deal];
+            }
+            else{
+                [pastDealsArray addObject:deal];
+            }
+        }
+        
+    }
+    
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,7 +68,8 @@
 #pragma mark - Collection View DataSource and Delegate
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return [self.dataArray count];
+
+    return (showActiveDeals)?activeDealsArray.count:pastDealsArray.count;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -40,9 +78,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSData *data = [self.dataArray objectAtIndex:indexPath.section];
-    
-    Deal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    Deal *deal = (showActiveDeals)?activeDealsArray[indexPath.row]:pastDealsArray[indexPath.row];
     
     if(deal.couponCode.length>0){
         NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
@@ -125,6 +161,25 @@
 
 -(IBAction)goBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)switchTabsActiveorPast:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    
+    if([senderButton isEqual:self.activeDealsButton]){
+        showActiveDeals = YES;
+        self.activeDealsButton.selected = YES;
+        self.pastDealsButton.selected = NO;
+    }
+    else{
+        
+        showActiveDeals = NO;
+        self.activeDealsButton.selected = NO;
+        self.pastDealsButton.selected = YES;
+
+    }
+    
+    [self.collectionView reloadData];
 }
 
 @end

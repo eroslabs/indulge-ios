@@ -12,7 +12,7 @@
 #import "MyServiceProviderCell.h"
 #import "Merchant.h"
 #import "Deal.h"
-#import "AddNewLookViewController.h"
+#import "AllDealsViewController.h"
 
 @interface FavoriteMerchantsViewController (){
     NSArray *myLookBookImagesArray;
@@ -52,8 +52,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    AddNewLookViewController *controller = (AddNewLookViewController *)[segue destinationViewController];
-    controller.
+    if([[segue identifier] isEqualToString:@"AllDeals"]){
+        AllDealsViewController *controller = (AllDealsViewController *)[segue destinationViewController];
+        controller.dataArray = myDealsArray;
+    }
 }
 
 
@@ -61,8 +63,6 @@
 #pragma mark UITableViewDatasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    
     NSInteger numOfSections = 3;
     return numOfSections;
 }
@@ -97,7 +97,7 @@
             break;
             // ...
         default:
-            sectionName = @"My service Provider";
+            sectionName = NSLocalizedString(@"My Service Provider", @"My Service Provider"); ;
             break;
     }
     return sectionName;
@@ -156,6 +156,77 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //[self performSegueWithIdentifier:@"detailSegue" sender:self];
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    
+    NSString *sectionName;
+    
+    UIButton *viewAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [viewAllButton setTitle:@"View All" forState:UIControlStateNormal];
+    
+    switch (section)
+    {
+        case 0:{
+            sectionName = NSLocalizedString(@"My Lookbook", @"My Lookbook");
+            viewAllButton.tag = 0;
+            break;
+        }
+        case 1:{
+            sectionName = NSLocalizedString(@"My Deals", @"My Deals");
+            viewAllButton.tag = 1;
+            break;
+        }
+            // ...
+        default:{
+            sectionName = NSLocalizedString(@"My Service Provider", @"My Service Provider");
+            viewAllButton.tag = 2;
+            break;
+        }
+    }
+
+    
+    UILabel *myLabel = [[UILabel alloc] init];
+    myLabel.frame = CGRectMake(20, 5, 150, 20);
+    myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
+    
+    myLabel.text = sectionName;
+    
+    viewAllButton.frame = CGRectMake(tableView.frame.size.width - 100, 5, 100, 20);
+    viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11.0];
+    [viewAllButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [viewAllButton addTarget:self action:@selector(viewAll:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithRed:0.9254f green:0.9254f blue:0.9254f alpha:1.0f];
+    [headerView addSubview:myLabel];
+    [headerView addSubview:viewAllButton];
+    
+    return headerView;
+    
+}
+
+-(IBAction)viewAll:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    switch (senderButton.tag)
+    {
+        case 0:{
+            //Show all looks
+            break;
+        }
+        case 1:{
+            //Show all deals
+            [self performSegueWithIdentifier:@"AllDeals" sender:nil];
+            break;
+        }
+            // ...
+        default:{
+            //Show all service providers
+            break;
+        }
+    }
+
 }
 
 @end
