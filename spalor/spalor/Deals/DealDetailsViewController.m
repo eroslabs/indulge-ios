@@ -314,6 +314,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"RedeemDeal"]) {
         RedeemDealViewController *controller = (RedeemDealViewController *)[segue destinationViewController];
+        controller.deal = self.deal;
         controller.couponCode = couponCode;
     }
 }

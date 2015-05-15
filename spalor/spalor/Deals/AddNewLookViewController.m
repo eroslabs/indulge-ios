@@ -8,6 +8,7 @@
 
 #import "AddNewLookViewController.h"
 #import "User.h"
+#import "MyLook.h"
 
 @implementation AddNewLookViewController
 
@@ -69,7 +70,16 @@
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     [self.addNewLookButton setImage:chosenImage forState:UIControlStateNormal];
     NSMutableArray *myLookBookImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE]];
-    [myLookBookImagesArray addObject: UIImagePNGRepresentation(chosenImage)];
+    MyLook *look = [[MyLook alloc] init];
+    look.imageData = UIImagePNGRepresentation(chosenImage);
+    look.merchantService = self.deal.serviceNames;
+    look.merchantName = self.deal.name;
+    look.merchantAddress = self.deal.address;
+    look.merchantRating = self.deal.rating;
+    look.date = [NSDate date];
+    
+    NSData *lookData = [NSKeyedArchiver archivedDataWithRootObject:look];
+    [myLookBookImagesArray addObject: lookData];
 
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];

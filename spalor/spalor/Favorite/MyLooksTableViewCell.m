@@ -7,6 +7,7 @@
 //
 
 #import "MyLooksTableViewCell.h"
+#import "MyLook.h"
 
 @implementation MyLooksTableViewCell
 
@@ -20,4 +21,12 @@
     // Configure the view for the selected state
 }
 
+-(void)setupWithLookObject:(MyLook *)look{
+    self.merchantNameLabel.text = look.merchantName;
+    self.merchantAddressLabel.text = look.merchantAddress;
+    self.merchantRatingLabel.text = look.merchantRating;
+    self.merchantServiceLabel.text = look.merchantService;
+    self.image.image = [UIImage imageWithData:look.imageData];
+    self.dateLabel.text = look.date;
+}
 @end

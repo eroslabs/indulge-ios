@@ -7,6 +7,7 @@
 //
 
 #import "RedeemDealViewController.h"
+#import "AddNewLookViewController.h"
 
 @implementation RedeemDealViewController
 
@@ -54,7 +55,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"AddNewLook"]) {
-        //
+        AddNewLookViewController *controller = (AddNewLookViewController *)[segue destinationViewController];
+        controller.deal = self.deal;
     }
 }
 

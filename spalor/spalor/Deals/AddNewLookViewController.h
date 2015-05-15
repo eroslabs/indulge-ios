@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deal.h"
 
 @interface AddNewLookViewController : UIViewController
 @property (nonatomic, weak) IBOutlet UIButton *addNewLookButton;
+@property (nonatomic, strong) Deal *deal;
 @end

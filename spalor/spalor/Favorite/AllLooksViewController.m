@@ -7,7 +7,7 @@
 //
 
 #import "AllLooksViewController.h"
-#import "MyLooksCollectionViewCell.h"
+#import "MyLooksTableViewCell.h"
 
 @interface AllLooksViewController ()
 
@@ -26,24 +26,27 @@
 }
 
 
-#pragma mark - Collection View DataSource and Delegate
+#pragma mark - Table Datasource and Delegate
 
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
-    return self.dataArray.count;
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger numOfRows = self.dataArray.count;
+    return numOfRows;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 120;
+    
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    MyLooksCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"LooksCell" forIndexPath:indexPath];
-    cell.imageView.image = [UIImage imageWithData:self.dataArray[indexPath.row]];
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyLooksTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myLooksCell"];
+    MyLook *lookObj = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataArray[indexPath.row]];
+    [cell setupWithLookObject:lookObj];
     return cell;
 }
-
 
 
 #pragma mark - User Actions

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deal.h"
 
 @interface RedeemDealViewController : UIViewController
 @property NSString *couponCode;
+@property (nonatomic, strong) Deal *deal;
 @property (nonatomic, weak) IBOutlet UILabel *couponCodeLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *couponQRCodeImageView;
 
