@@ -360,7 +360,7 @@
     if([tableView isEqual:self.dealTableView]){
         return 56;
     }
-    return 160;
+    return 167;
 
 }
 
@@ -424,12 +424,12 @@
     cell.serviceCategorybackgroundImageView.image = [UIImage imageNamed:@"merchant-categories-bar.png"];
     
     cell.serviceCategoryImageView1.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView2.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView3.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView4.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView5.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView6.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView7.image = [UIImage imageNamed:@"merchant-massage.png"];
+    cell.serviceCategoryImageView2.image = [UIImage imageNamed:@"merchant-pt.png"];
+    cell.serviceCategoryImageView3.image = [UIImage imageNamed:@"merchant-nail.png"];
+    cell.serviceCategoryImageView4.image = [UIImage imageNamed:@"merchant-haircut-deal.png"];
+    cell.serviceCategoryImageView5.image = [UIImage imageNamed:@"merchant-makeup-deal.png"];
+    cell.serviceCategoryImageView6.image = [UIImage imageNamed:@"merchant-face.png"];
+    cell.serviceCategoryImageView7.image = [UIImage imageNamed:@"merchant-removal-deal.png"];
     cell.serviceCategoryImageView8.image = [UIImage imageNamed:@"merchant-massage.png"];
     cell.serviceCategoryImageView9.image = [UIImage imageNamed:@"merchant-massage.png"];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
