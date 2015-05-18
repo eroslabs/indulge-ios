@@ -59,4 +59,16 @@
 
 }
 
+-(IBAction)overallChanged:(id)sender{
+    
+}
+
+-(IBAction)cleanlinessChanged:(id)sender{
+    
+}
+
+-(IBAction)serviceQualityChanged:(id)sender{
+    
+}
+
 @end

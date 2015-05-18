@@ -37,7 +37,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
+    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
 
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
     [self setButtonsFromLocalFilters];

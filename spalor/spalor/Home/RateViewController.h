@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface RateViewController : UITableViewController
+@property (nonatomic, weak) IBOutlet UISlider *overallSlider;
+@property (nonatomic, weak) IBOutlet UISlider *cleanlinessSlider;
+@property (nonatomic, weak) IBOutlet UISlider *serviceQualitySlider;
+@property (nonatomic, weak) IBOutlet UITextView *commentTextView;
 
 @end
