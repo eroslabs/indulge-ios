@@ -281,12 +281,21 @@
             if ([localFilterDict[key] isEqual:@(1)]) {
                 if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
                     //Check if time falls between opening and closing
-                   
-                    if (![self isMerchantOpen:merchant.schedule]) {
-                        return NO;
-
+                    for (Schedule *schedule in merchant.schedule) {
+                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[merchant.finalWeekSchedule length]];
+                        int weekday = [self currentWeekday];
+                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
+                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                            if ([ichar isEqualToString:@"1"] && i == weekday) {
+                                if (![self isMerchantOpen:schedule]) {
+                                    return NO;
+                                    
+                                }
+                            }
+                        }
+                                      
+                        
                     }
-                    
                 }
                 else{
                     return NO;

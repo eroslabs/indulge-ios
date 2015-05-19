@@ -34,7 +34,6 @@
         self.state = [decoder decodeObjectForKey:@"state"];
         self.unitNumber = [decoder decodeObjectForKey:@"unitNumber"];
         self.geo = [decoder decodeObjectForKey:@"geo"];
-        self.schedule = [decoder decodeObjectForKey:@"schedule"];
         self.services = [decoder decodeObjectForKey:@"services"];
         self.reviews = [decoder decodeObjectForKey:@"reviews"];
         self.deals = [decoder decodeObjectForKey:@"deals"];
@@ -42,6 +41,8 @@
         self.merchantImageUrls = [decoder decodeObjectForKey:@"merchantImageUrls"];
         self.distanceFromCurrentLocation = [decoder decodeObjectForKey:@"distanceFromCurrentLocation"];
         self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
+        self.schedule = [decoder decodeObjectForKey:@"schedules"];
+        self.finalWeekSchedule = [decoder decodeObjectForKey:@"finalWeekString"];
     }
     return self;
 }
@@ -65,7 +66,6 @@
     [encoder encodeObject:_unitNumber forKey:@"unitNumber"];
     [encoder encodeObject:_merchantImageUrls forKey:@"merchantImageUrls"];
     [encoder encodeObject:_geo forKey:@"geo"];
-    [encoder encodeObject:_schedule forKey:@"schedule"];
     [encoder encodeObject:_services forKey:@"services"];
     [encoder encodeObject:_reviews forKey:@"reviews"];
     [encoder encodeObject:_deals forKey:@"deals"];
@@ -73,6 +73,8 @@
     [encoder encodeObject:_weekdaysArray];
     [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
     [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
+    [encoder encodeObject:_schedule forKey:@"schedules"];
+    [encoder encodeObject:_finalWeekSchedule forKey:@"finalWeekString"];
 }
 
 - (NSArray *)allPropertyNames
@@ -144,22 +146,31 @@
                 
                 [self setValue:location forKey:key];
             }
-            else if ([key isEqualToString:@"schedule"]) {
-                Schedule *schedule = [[Schedule alloc] init];
-                schedule.openingTime = [dictionary[key] objectForKey:@"openingTime"];
-                schedule.closingTime = [dictionary[key] objectForKey:@"closingTime"];
-                schedule.weekSchedule = [dictionary[key] objectForKey:@"weekSchedule"];
-                
+            else if ([key isEqualToString:@"finalWeekSchedule"]){
                 self.weekdaysArray = [NSMutableArray new];
                 
-                for (int i=0; i < [schedule.weekSchedule length]; i++) {
-                    NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                for (int i=0; i < [dictionary[key] length]; i++) {
+                    NSString *ichar  = [NSString stringWithFormat:@"%c", [dictionary[key] characterAtIndex:i]];
                     if ([ichar isEqualToString:@"1"]) {
                         [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
                     }
                 }
+                self.finalWeekSchedule = dictionary[@"finalWeekSchedule"];
+            }
+            else if ([key isEqualToString:@"schedule"]) {
+                                
+                self.schedule = [NSMutableArray new];
+                for (NSDictionary *scheduleObj in dictionary[key]) {
+                    Schedule *schedule = [[Schedule alloc] init];
+                    schedule.openingTime = [scheduleObj objectForKey:@"openingTime"];
+                    schedule.closingTime = [scheduleObj objectForKey:@"closingTime"];
+                    schedule.weekSchedule = [scheduleObj objectForKey:@"weekSchedule"];
+                    
+                    [self.schedule addObject:schedule];
+
+                }
                 
-                [self setValue:schedule forKey:key];
+//                [self setValue:schedule forKey:key];
             }
             else if ([key isEqualToString:@"services"]) {
                 self.services = [[NSMutableArray alloc] init];

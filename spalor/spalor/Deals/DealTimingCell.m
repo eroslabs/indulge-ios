@@ -10,7 +10,7 @@
 
 @implementation DealTimingCell
 -(DealTimingCell *)setupCellWithDeal:(Deal *)deal{
-    NSString *weekSchedule = deal.schedule.weekSchedule;
+    NSString *weekSchedule = deal.finalWeekSchedule;
     NSMutableString *finalWeekString = [[NSMutableString alloc] initWithString:@""];
     [weekSchedule enumerateSubstringsInRange:[weekSchedule rangeOfString:weekSchedule]
                                      options:NSStringEnumerationByComposedCharacterSequences
@@ -53,7 +53,22 @@
                                   }] ;
     
     self.daysLabel.text = finalWeekString;
-    self.timingLabel.text = [NSString stringWithFormat:@"%@ to %@",deal.schedule.openingTime,deal.schedule.closingTime];
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    int weekday = [comps weekday];
+    for (Schedule *schedule in deal.schedule) {
+        [schedule.weekSchedule enumerateSubstringsInRange:[weekSchedule rangeOfString:weekSchedule]
+                                                  options:NSStringEnumerationByComposedCharacterSequences
+                                               usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                                   if([substring isEqualToString:@"1"] && substringRange.location == weekday){
+                                                       self.timingLabel.text = [NSString stringWithFormat:@"%@ to %@",schedule.openingTime,schedule.closingTime];
+                                                       
+                                                   }
+                                               }] ;
+        
+    }
+
     //self.rateCardImageview.image = [UIImage imageNamed:@""];
     return self;
 }

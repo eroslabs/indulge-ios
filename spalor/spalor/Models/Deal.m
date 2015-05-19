@@ -41,6 +41,7 @@
         self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
         self.serviceNames = [decoder decodeObjectForKey:@"serviceNames"];
         self.categoryIds = [decoder decodeObjectForKey:@"categoryIds"];
+        self.finalWeekSchedule = [decoder decodeObjectForKey:@"finalWeekSchedule"];
     }
     return self;
 }
@@ -72,6 +73,7 @@
     [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
     [encoder encodeObject:_categoryIds forKey:@"categoryIds"];
     [encoder encodeObject:_serviceNames forKey:@"serviceNames"];
+    [encoder encodeObject:_finalWeekSchedule forKey:@"finalWeekSchedule"];
     [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
 }
 
@@ -146,22 +148,33 @@
                     [self.services addObject:merchantService];
                 }
             }
-            else if ([key isEqualToString:@"schedule"]) {
-                Schedule *schedule = [[Schedule alloc] init];
-                schedule.openingTime = [dictionary[key] objectForKey:@"openingTime"];
-                schedule.closingTime = [dictionary[key] objectForKey:@"closingTime"];
-                schedule.weekSchedule = [dictionary[key] objectForKey:@"weekSchedule"];
+            else if ([key isEqualToString:@"finalWeekSchedule"]){
                 self.weekdaysArray = [NSMutableArray new];
                 
-                for (int i=0; i < [schedule.weekSchedule length]; i++) {
-                    NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                for (int i=0; i < [dictionary[key] length]; i++) {
+                    NSString *ichar  = [NSString stringWithFormat:@"%c", [dictionary[key] characterAtIndex:i]];
                     if ([ichar isEqualToString:@"1"]) {
                         [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
                     }
                 }
-
-                [self setValue:schedule forKey:key];
+                self.finalWeekSchedule = dictionary[@"finalWeekSchedule"];
             }
+            else if ([key isEqualToString:@"schedule"]) {
+                
+                self.schedule = [NSMutableArray new];
+                for (NSDictionary *scheduleObj in dictionary[key]) {
+                    Schedule *schedule = [[Schedule alloc] init];
+                    schedule.openingTime = [scheduleObj objectForKey:@"openingTime"];
+                    schedule.closingTime = [scheduleObj objectForKey:@"closingTime"];
+                    schedule.weekSchedule = [scheduleObj objectForKey:@"weekSchedule"];
+                    
+                    [self.schedule addObject:schedule];
+                    
+                }
+                
+                //                [self setValue:schedule forKey:key];
+            }
+
             else if([key isEqualToString:@"validTill"]){
                 NSString *string = [dictionary[key] stringValue];
                 if ([string length] > 3) {

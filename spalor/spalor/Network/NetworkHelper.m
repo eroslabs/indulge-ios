@@ -140,22 +140,17 @@ NSString * APIRequestID()
 - (void)getArrayFromPostURL:(NSString *)url parmeters:(NSDictionary *)dicParams completionHandler:(void (^)(id response, NSString *url, NSError *error))block {
     url = [url stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
 
-    
-    NSDictionary *tokenData = [[NSUserDefaults standardUserDefaults] objectForKey:@"USER_DATA"];
-    NSDictionary *sessionDict = tokenData[@"server_session"];
-    NSDictionary *payloadDict = [sessionDict objectForKey:@"session"];
-    NSString *authToken = [sessionDict objectForKey:@"auth_token"];
-    
+    NSError *error = nil;
+
+    NSData *dataFromDict = [NSJSONSerialization dataWithJSONObject:dicParams
+                                                           options:NSJSONReadingAllowFragments
+                                                             error:&error];
+
     
     NSString *stringData = [self prepareBody:dicParams];
     NSData *data = [stringData dataUsingEncoding:NSUTF8StringEncoding];
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?_request_id=%@&_api_version_id=%@",INDULGE_URL,url,APIRequestID(),INDULGE_API_VERSION];
-    
-    DLog(@"authtoken %@",authToken);
-    
-    if (authToken.length>0) {
-        [urlString appendString:[NSString stringWithFormat:@"&_auth_token=%@",authToken]];
-    }
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?",INDULGE_URL,url];
+
     
     NSURL *URL = [NSURL URLWithString:urlString];
     DLog(@"url string %@",urlString);
@@ -163,7 +158,7 @@ NSString * APIRequestID()
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
     [request setHTTPMethod:@"POST"];
     [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody: data];
+    [request setHTTPBody: dataFromDict];
     
     if(!self.queueManager) {
         self.queueManager = [NSOperationQueue new];

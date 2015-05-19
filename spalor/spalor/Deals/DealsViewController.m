@@ -76,7 +76,7 @@
     
     searching = NO;
     if (arrayOfDeals.count == 0) {
-        [spinner showWhileExecutingSelector:@selector(pickUpLocallyStoredMerchantResponse) onTarget:self withObject:nil];
+        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
     }
     
 }
@@ -271,15 +271,37 @@
         NSLog(@"key %@ %@",key,localFilterDict[key]);
         
         if ([localFilterDict[@"opennow"] isEqual:@(1)]) {
+//                if ([deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+//                    if (![self isMerchantOpen:deal.schedule]) {
+//                        return NO;
+//                    }
+//                }
+//                else{
+//                    return NO;
+//                }
+            if ([localFilterDict[key] isEqual:@(1)]) {
                 if ([deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-                    if (![self isMerchantOpen:deal.schedule]) {
-                        return NO;
+                    //Check if time falls between opening and closing
+                    for (Schedule *schedule in deal.schedule) {
+                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[deal.finalWeekSchedule length]];
+                        int weekday = [self currentWeekday];
+                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
+                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                            if ([ichar isEqualToString:@"1"] && i == weekday) {
+                                if (![self isMerchantOpen:schedule]) {
+                                    return NO;
+                                    
+                                }
+                            }
+                        }
+                        
+                        
                     }
                 }
                 else{
                     return NO;
                 }
-            
+            }
         }
         if([key isEqualToString:@"3.5+"]){
             

@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 -(IBAction)showImagePickerOptionsActionSheet:(id)sender;
 -(IBAction)goBack:(id)sender;
+-(IBAction)signup:(id)sender;
 @end

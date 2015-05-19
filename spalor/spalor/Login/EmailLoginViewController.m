@@ -117,7 +117,6 @@
         cell.cellIconImageView.image = [UIImage imageNamed:@"registration-mobile.png"];
         cell.cellInputTextField.returnKeyType = UIReturnKeyGo;
         cell.cellInputTextField.tag = -2;
-
         cell.cellInputTextField.delegate = self;
 
     }

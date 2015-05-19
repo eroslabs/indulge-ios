@@ -33,12 +33,13 @@
 @property (nonatomic, strong) NSString *luxuryRating;
 @property (nonatomic, strong) NSString *serviceNames;
 @property (nonatomic, strong) NSString *categoryIds;
+@property (nonatomic, strong) NSString *finalWeekSchedule;
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 
 //Relations
 @property (nonatomic, strong) Location *geo;
-@property (nonatomic, strong) Schedule *schedule;
+@property (nonatomic, strong) NSMutableArray *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSMutableArray *weekdaysArray;
 

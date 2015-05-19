@@ -37,6 +37,8 @@
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *unitNumber;
 @property (nonatomic, strong) NSString *luxuryRating;
+@property (nonatomic, strong) NSString *finalWeekSchedule;
+
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 //Images
@@ -45,7 +47,7 @@
 
 //Relations
 @property (nonatomic, strong) Location *geo;
-@property (nonatomic, strong) Schedule *schedule;
+@property (nonatomic, strong) NSMutableArray *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSMutableArray *reviews;
 @property (nonatomic, strong) NSMutableArray *deals;

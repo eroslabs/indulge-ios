@@ -178,8 +178,6 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     NSArray *serviceTags = [selectedServicesDictionary allKeys];
-    
-    
     [self createandAddServiceButtonforServiceName:cell.tag andIndexPath:indexPath];
     
 }

@@ -7,10 +7,11 @@
 //
 
 #import "MerchantScheduleCell.h"
+#import "Schedule.h"
 
 @implementation MerchantScheduleCell
 -(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant{
-    NSString *weekSchedule = merchant.schedule.weekSchedule;
+    NSString *weekSchedule = merchant.finalWeekSchedule;
     NSMutableString *finalWeekString = [[NSMutableString alloc] initWithString:@""];
     [weekSchedule enumerateSubstringsInRange:[weekSchedule rangeOfString:weekSchedule]
                                   options:NSStringEnumerationByComposedCharacterSequences
@@ -53,7 +54,20 @@
                                }] ;
 
     self.daysLabel.text = finalWeekString;
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ to %@",merchant.schedule.openingTime,merchant.schedule.closingTime];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    int weekday = [comps weekday];
+    for (Schedule *schedule in merchant.schedule) {
+        [schedule.weekSchedule enumerateSubstringsInRange:[weekSchedule rangeOfString:weekSchedule]
+                                         options:NSStringEnumerationByComposedCharacterSequences
+                                      usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                          if([substring isEqualToString:@"1"] && substringRange.location == weekday){
+                                              self.timeLabel.text = [NSString stringWithFormat:@"%@ to %@",schedule.openingTime,schedule.closingTime];
+
+                                          }
+                                      }] ;
+
+    }
     self.ratecardImageView = [UIImage imageNamed:@""];
     return self;
 }
