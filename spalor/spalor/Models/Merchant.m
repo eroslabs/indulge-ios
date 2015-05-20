@@ -123,6 +123,10 @@
     self.image = @"";
     self.merchantImageUrls = [[NSMutableArray alloc] init];
     
+    if (dictionary[@"id"] && ![dictionary[@"id"] isMemberOfClass:[NSNull class]]) {
+        self.merchantid = dictionary[@"id"];
+    }
+    
     for (NSString *key in allProps){
         
         //NSLog(@"KEY %@",key);

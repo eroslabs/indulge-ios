@@ -9,9 +9,15 @@
 #import "RateViewController.h"
 #import "User.h"
 #import "Review.h"
+#import "NetworkHelper.h"
 
-@interface RateViewController (){
+@interface RateViewController ()<UITextViewDelegate>{
     Review *currentReview;
+    int overallValue;
+    int cleanlinessValue;
+    int serviceQualityValue;
+    NSString *commentText;
+    NSMutableDictionary *reviewDict;
 }
 
 @end
@@ -21,6 +27,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.commentTextView.delegate = self;
+    overallValue = (int) roundf(self.overallSlider.value);
+    cleanlinessValue = (int) roundf(self.cleanlinessSlider.value);
+    serviceQualityValue = (int) roundf(self.serviceQualitySlider.value);
+    reviewDict = [NSMutableDictionary new];
+    [reviewDict addEntriesFromDictionary:@{@"merchantId":self.merchantId}];
+    [reviewDict addEntriesFromDictionary:@{@"userId":@"8"}];
+    [reviewDict addEntriesFromDictionary:@{@"rating":@(overallValue),@"cleanlinessRating":@(cleanlinessValue),@"serviceRating":@(serviceQualityValue)}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,30 +59,69 @@
 
 #pragma mark - User Actions
 
+-(IBAction)submit:(id)sender{
+    [[NetworkHelper sharedInstance] getArrayFromPostURL:@"user/saveReview" parmeters:@{@"review":reviewDict} completionHandler:^(id response, NSString *url, NSError *error){
+        if (error == nil && response!=nil) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+            NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+            User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+            [user.arrayOfReviews addObject:currentReview];
+            user.reviews = [NSString stringWithFormat:@"%lu",(unsigned long)user.arrayOfReviews.count];
+            NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+            [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+
+        }
+    }];
+
+}
+
 -(IBAction)goBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)submitReview:(id)sender{
-    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
-    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
-    [user.arrayOfReviews addObject:currentReview];
-    user.reviews = [NSString stringWithFormat:@"%lu",(unsigned long)user.arrayOfReviews.count];
-    NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
-
-}
-
--(IBAction)overallChanged:(id)sender{
     
 }
 
--(IBAction)cleanlinessChanged:(id)sender{
-    
+-(IBAction)overallChanged:(UISlider *)sender{
+    NSLog(@"slider value = %f", sender.value);
+    overallValue = (int) roundf(sender.value);
+    [reviewDict addEntriesFromDictionary:@{@"rating":@(overallValue),@"cleanlinessRating":@(cleanlinessValue),@"serviceRating":@(serviceQualityValue)}];
+
 }
 
--(IBAction)serviceQualityChanged:(id)sender{
-    
+-(IBAction)cleanlinessChanged:(UISlider *)sender{
+    cleanlinessValue = (int) roundf(sender.value);
+    [reviewDict addEntriesFromDictionary:@{@"rating":@(overallValue),@"cleanlinessRating":@(cleanlinessValue),@"serviceRating":@(serviceQualityValue)}];
+
 }
+
+-(IBAction)serviceQualityChanged:(UISlider *)sender{
+    serviceQualityValue = (int) roundf(sender.value);
+    [reviewDict addEntriesFromDictionary:@{@"rating":@(overallValue),@"cleanlinessRating":@(cleanlinessValue),@"serviceRating":@(serviceQualityValue)}];
+
+}
+
+#pragma mark - Text View Delegate
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    if ([textView.text isEqualToString:@"Write a comment..."]) {
+        textView.text = @"";
+    }
+    return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    
+    NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    commentText = newString;
+    [reviewDict addEntriesFromDictionary:@{@"text":commentText}];
+
+    return YES;
+}
+
 
 @end

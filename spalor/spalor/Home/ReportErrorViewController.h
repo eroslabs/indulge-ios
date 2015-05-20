@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ReportErrorViewController : UITableViewController
 
+
+@interface ReportErrorViewController : UITableViewController
+@property NSString *merchantId;
+@property (nonatomic, weak)IBOutlet UIButton *wrongPhoneButton;
+@property (nonatomic, weak)IBOutlet UIButton *wrongAddressButton;
+@property (nonatomic, weak)IBOutlet UIButton *closedClosedButton;
+@property (nonatomic, weak)IBOutlet UIButton *wrongPricingButton;
+@property (nonatomic, weak)IBOutlet UITextView *detailsTextView;
 @end

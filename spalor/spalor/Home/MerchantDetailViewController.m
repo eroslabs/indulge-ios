@@ -22,6 +22,8 @@
 #import "MerchantErrorCell.h"
 #import "AllReviewsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "RateViewController.h"
+#import "ReportErrorViewController.h"
 
 @interface MerchantDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
@@ -325,6 +327,14 @@
     if ([segue.identifier isEqualToString:@"AllReviews"]) {
         AllReviewsViewController *controller = (AllReviewsViewController *)segue.destinationViewController;
         controller.arrayOfReviews = self.merchant.reviews;
+    }
+    if ([segue.identifier isEqualToString:@"Rate"]) {
+        RateViewController *controller = (RateViewController *)segue.destinationViewController;
+        controller.merchantId = self.merchant.merchantid;
+    }
+    if ([segue.identifier isEqualToString:@"ReportError"]) {
+        ReportErrorViewController  *controller = (ReportErrorViewController *)segue.destinationViewController;
+        controller.merchantId = self.merchant.merchantid;
     }
 }
 

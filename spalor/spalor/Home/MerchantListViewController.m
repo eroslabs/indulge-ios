@@ -512,10 +512,9 @@
         MerchantDetailViewController *controller = (MerchantDetailViewController *)segue.destinationViewController;
         controller.merchant = selectedMerchant;
     }
-    else{
+    else if([segue.identifier isEqualToString:@"ShowDealDetail"]){
         DealDetailsViewController *controller = (DealDetailsViewController *)segue.destinationViewController;
         controller.deal = selecteddeal;
-
     }
 }
 
