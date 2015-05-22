@@ -21,6 +21,7 @@
         self.reviews = [decoder decodeObjectForKey:@"reviews"];
         self.arrayOfReviews = [decoder decodeObjectForKey:@"arrayOfReviews"];
         self.gender = [decoder decodeObjectForKey:@"gender"];
+        self.imageData = [decoder decodeObjectForKey:@"imageData"];
     }
     return self;
 }
@@ -36,10 +37,11 @@
     [encoder encodeObject:_reviews forKey:@"reviews"];
     [encoder encodeObject:_arrayOfReviews forKey:@"arrayOfReviews"];
     [encoder encodeObject:_gender forKey:@"gender"];
+    [encoder encodeObject:_imageData forKey:@"imageData"];
 }
 
 - (void)readFromDictionary:(NSDictionary *)dictionary{
-   
+    
     NSLog(@"user Dict %@",dictionary);
     
     for(NSString *key in [dictionary allKeys]){
@@ -62,7 +64,12 @@
         if([key isEqualToString:@"name"]){
             self.name = dictionary[key];
         }
-
+        if([key isEqualToString:@"facebook"]){
+            self.facebookId = dictionary[key];
+        }
+        if([key isEqualToString:@"google"]){
+            self.googleId = dictionary[key];
+        }
         
     }
     

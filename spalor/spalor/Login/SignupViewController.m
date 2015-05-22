@@ -10,12 +10,14 @@
 #import "UIImage+ImageEffects.h"
 #import "FormInputCell.h"
 #import "NetworkHelper.h"
+#import "User.h"
 
 @interface SignupViewController (){
     NSArray *dataSourceArray;
     NSArray *imagesArray;
     NSInteger selected;
     NSMutableDictionary *userDict;
+    User *user;
 }
 @end
 
@@ -77,7 +79,16 @@
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
             NSLog(@"response string %@",responseDict);
-
+            user = [[User alloc] init];
+            user.userId = responseDict[@"user_id"];
+            user.name = userDict[@"name"];
+            user.mail = userDict[@"mail"];
+            user.dob = userDict[@"dob"];
+            user.rating = userDict[@"rating"];
+            user.mobile = userDict[@"mobile"];
+            NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+            [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }];
 }

@@ -30,7 +30,6 @@
     self.profilePictureView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.profilePictureView.layer.borderWidth = 2.0f;
     
-    [self downLoadMyImage];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -50,6 +49,9 @@
     self.looksLabel.text = user.looks;
     self.merchantsLabel.text = user.merchants;
     self.dealsLabel.text = user.deals;
+    
+    [self downLoadMyImage];
+
 }
 
 - (NSInteger)ageFromBirthday:(NSDate *)birthdate {
@@ -64,13 +66,21 @@
 
 -(void)downLoadMyImage{
     
-    if(self.profilePictureView.image){
+    if(self.profilePictureView.image || user.imageData){
+        UIImage *image = [UIImage imageWithData:user.imageData];
+        self.profilePictureView.image = image;
         return;
     }
     
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/resource/user/2" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:[NSString stringWithFormat:@"user/resource/user/%@",user.userId] withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
         if(!error && response){
+            
+            user.imageData = response;
+            NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+            [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 UIImage *image = [UIImage imageWithData:response];
                 self.profilePictureView.image = image;
             });

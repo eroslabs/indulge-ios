@@ -19,10 +19,10 @@
 
 - (IBAction)signup:(id)sender {
 
-/*
-    //if (userName.length>0 && pass.length>0) {
+
+    if (userName.length>0 && pass.length>0) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-        [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":@"manish@eroslabs.co",@"passPhrase":@"12345"} completionHandler:^(id response, NSString *url, NSError *error){
+        [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":userName,@"passPhrase":pass} completionHandler:^(id response, NSString *url, NSError *error){
             
             if (error == nil && response!=nil) {
                 dispatch_async (dispatch_get_main_queue(), ^{
@@ -36,14 +36,20 @@
                         [user readFromDictionary:userDict];
                         NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:user];
                         [[NSUserDefaults standardUserDefaults] setObject:userData forKey:MYUSERSTORE];
+                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                            CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+                            self.navigationController.navigationBarHidden=YES;
+                            [self.navigationController pushViewController:obj animated:YES];
+                        });
 
                     }
                     
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    UITabBarController *obj=[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-                    self.navigationController.navigationBarHidden=YES;
-                    [self.navigationController pushViewController:obj animated:YES];
+                    
+                    
+                    
                 });
                 
                 
@@ -58,13 +64,10 @@
             }
         }];
 
-   // }
+    }
     
-*/
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-    self.navigationController.navigationBarHidden=YES;
-    [self.navigationController pushViewController:obj animated:YES];
+
+    
  
 }
 
@@ -129,18 +132,23 @@
 }
 
 #pragma mark - UITextField Delegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField.tag == -1) {
-        userName = textField.text;
-        [textField resignFirstResponder];
+        userName = newString;
     }
     else if(textField.tag == -2){
-        pass = textField.text;
-        [textField resignFirstResponder];
-        [self signup:nil];
+        pass = newString;
     }
     return YES;
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 
 @end
