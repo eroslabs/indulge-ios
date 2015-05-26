@@ -7,11 +7,11 @@
 //
 
 #import "MerchantDealCell.h"
-#import "MerchantDeal.h"
+#import "Deal.h"
 @implementation MerchantDealCell
--(MerchantDealCell *)setupWithMerchant:(MerchantDeal *)merchantDeal{
+-(MerchantDealCell *)setupWithMerchant:(Deal *)merchantDeal{
     self.amountOffLabel.text = (merchantDeal.percentOff)?[NSString stringWithFormat:@"%@%% off",merchantDeal.percentOff]:[NSString stringWithFormat:@"%@Rs off",merchantDeal.flatOff];
-    self.servicesLabel.text = merchantDeal.services;
+    self.servicesLabel.text = [merchantDeal.serviceNames componentsJoinedByString:@","];
     double unixTimeStamp = [merchantDeal.validTill doubleValue];
     NSTimeInterval _interval=unixTimeStamp;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];

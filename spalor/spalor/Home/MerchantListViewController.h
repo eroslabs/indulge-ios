@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *localFilterButton4;
 @property (nonatomic , weak) IBOutlet UITableView *dealTableView;
 @property (nonatomic , weak) IBOutlet UIView *dealOverlayView;
-
+@property (nonatomic, weak) IBOutlet UILabel *selectedMerchantName;
+@property (nonatomic, weak) IBOutlet UILabel *selectedMerchantAddress;
 -(IBAction)goBackToSearch:(id)sender;
 @end

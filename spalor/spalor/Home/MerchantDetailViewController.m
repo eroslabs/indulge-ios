@@ -24,6 +24,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "RateViewController.h"
 #import "ReportErrorViewController.h"
+#import "DealDetailsViewController.h"
 
 @interface MerchantDetailViewController (){
     NSMutableArray *myMerchantsArray;
@@ -341,6 +342,10 @@
         ReportErrorViewController  *controller = (ReportErrorViewController *)segue.destinationViewController;
         controller.merchantId = self.merchant.merchantid;
     }
+    if([segue.identifier isEqualToString:@"ShowDealDetail"]){
+        DealDetailsViewController *controller = (DealDetailsViewController *)segue.destinationViewController;
+        controller.deal = self.merchant.deals[0];
+    }
 }
 
 
@@ -357,6 +362,10 @@
 
 
 #pragma mark - User Actions 
+
+-(IBAction)redeem:(id)sender{
+    [self performSegueWithIdentifier:@"ShowDealDetail" sender:nil];
+}
 
 -(IBAction)goBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
@@ -395,6 +404,8 @@
     [self.mainTableView reloadData];
     
 }
+
+
 
 @end
 

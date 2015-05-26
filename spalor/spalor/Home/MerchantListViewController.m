@@ -38,6 +38,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
+    self.dealOverlayView.alpha = 0;
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
     myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
@@ -413,7 +414,7 @@
     if([tableView isEqual:self.dealTableView]){
         return 56;
     }
-    return 167;
+    return 174;
 
 }
 
@@ -467,7 +468,7 @@
     [cell.backgroundImageView setImageWithURL:url
                       placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload];
 
-    
+    cell.dealsButton.selected = (merchant.deals.count)?YES:NO;
     cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];
     [cell.callButton setImage:[UIImage imageNamed:@"merchant-listing-call.png"] forState:UIControlStateNormal];
     [cell.shareButton setImage:[UIImage imageNamed:@"merchant-share.png"] forState:UIControlStateNormal];
@@ -497,6 +498,28 @@
 }
 
 #pragma mark - User Actions
+
+-(IBAction)showDealPopup:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    selectedMerchant = arrayOfMerchants[senderButton.tag];
+    if(selectedMerchant.deals.count>0){
+        self.selectedMerchantName.text = [selectedMerchant.name capitalizedString];
+        self.selectedMerchantAddress.text = [selectedMerchant.address capitalizedString];
+        [UIView animateWithDuration:0.3f animations:^{
+            self.dealOverlayView.alpha = 1;
+            [self.dealTableView reloadData];
+            
+        }];
+
+    }
+}
+
+-(IBAction)hideDealPopup:(id)sender{
+    [UIView animateWithDuration:0.3f animations:^{
+        self.dealOverlayView.alpha = 0;
+        
+    }];
+}
 
 -(IBAction)share:(id)sender{
     NSString *texttoshare = @"MY TEXT"; //this is your text string to share
