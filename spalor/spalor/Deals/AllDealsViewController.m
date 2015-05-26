@@ -129,13 +129,13 @@
         cell.merchantAddress.text = deal.address;
         cell.merchantRatingLabel.text = deal.rating;
         
-        if (deal.serviceNames.length>0) {
-            cell.merchantServicesLabel.text = deal.serviceNames;
-            
-        }
-        else{
-            //Put category Image Views
-        }
+//        if (deal.serviceNames.length>0) {
+//            cell.merchantServicesLabel.text = deal.serviceNames;
+//            
+//        }
+//        else{
+//            //Put category Image Views
+//        }
         
         double unixTimeStamp = [deal.validTill doubleValue];
         NSTimeInterval _interval=unixTimeStamp;

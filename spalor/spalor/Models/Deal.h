@@ -31,17 +31,18 @@
 @property (nonatomic, strong) NSString *couponCode;
 @property (nonatomic, strong) NSString *homeService;
 @property (nonatomic, strong) NSString *luxuryRating;
-@property (nonatomic, strong) NSString *serviceNames;
-@property (nonatomic, strong) NSString *categoryIds;
 @property (nonatomic, strong) NSString *finalWeekSchedule;
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;
-
 
 //Relations
 @property (nonatomic, strong) Location *geo;
 @property (nonatomic, strong) NSMutableArray *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSMutableArray *weekdaysArray;
+
+//Categories / Services
+@property (nonatomic, strong) NSMutableArray *categoryIds;
+@property (nonatomic, strong) NSMutableArray *serviceNames;
 
 //Methods
 - (void)readFromDictionary:(NSDictionary *)dictionary;

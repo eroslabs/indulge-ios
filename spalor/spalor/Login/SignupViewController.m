@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import "UIImage+ImageEffects.h"
+#import "CustomTabbarController.h"
 #import "FormInputCell.h"
 #import "NetworkHelper.h"
 #import "User.h"
@@ -89,6 +90,14 @@
             NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
             [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+                self.navigationController.navigationBarHidden=YES;
+                [self.navigationController pushViewController:obj animated:YES];
+            });
+
         }
     }];
 }

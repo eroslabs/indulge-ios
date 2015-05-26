@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		130818031B12F40C00F31B3E /* LoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 130818021B12F40C00F31B3E /* LoginHelper.m */; };
 		131536381AD5211C00AF9195 /* merchant-default-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 131536371AD5211C00AF9195 /* merchant-default-button@2x.png */; };
 		132275581AEF94E300F5D77F /* star_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132275551AEF94E300F5D77F /* star_empty@2x.png */; };
 		132275591AEF94E300F5D77F /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132275561AEF94E300F5D77F /* star@2x.png */; };
@@ -107,6 +108,8 @@
 		13385DD41AF7910400E361DD /* CustomTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13385DD21AF7910400E361DD /* CustomTabbarController.m */; };
 		133887F01B01F10C0007E359 /* MerchantServicesDealPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */; };
 		133887F31B01F1250007E359 /* MerchantCategoriesDealPopupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 133887F21B01F1250007E359 /* MerchantCategoriesDealPopupCell.m */; };
+		133C126A1B14799A00F5048B /* merchant-body@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 133C12681B14799A00F5048B /* merchant-body@2x.png */; };
+		133C126B1B14799A00F5048B /* merchant-body-deal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 133C12691B14799A00F5048B /* merchant-body-deal@2x.png */; };
 		1347FD8B1ADBC96F007EF73D /* header-back-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */; };
 		1347FD8E1ADBCC03007EF73D /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */; };
 		134CED581AEA5CD7009C5714 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134CED571AEA5CD7009C5714 /* MapKit.framework */; };
@@ -295,6 +298,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		130818011B12F40C00F31B3E /* LoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginHelper.h; path = Login/LoginHelper.h; sourceTree = "<group>"; };
+		130818021B12F40C00F31B3E /* LoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginHelper.m; path = Login/LoginHelper.m; sourceTree = "<group>"; };
 		131536371AD5211C00AF9195 /* merchant-default-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-default-button@2x.png"; sourceTree = "<group>"; };
 		132275551AEF94E300F5D77F /* star_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_empty@2x.png"; sourceTree = "<group>"; };
 		132275561AEF94E300F5D77F /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
@@ -411,6 +416,8 @@
 		133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantServicesDealPopupCell.m; path = Home/MerchantServicesDealPopupCell.m; sourceTree = "<group>"; };
 		133887F11B01F1250007E359 /* MerchantCategoriesDealPopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantCategoriesDealPopupCell.h; path = Home/MerchantCategoriesDealPopupCell.h; sourceTree = "<group>"; };
 		133887F21B01F1250007E359 /* MerchantCategoriesDealPopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantCategoriesDealPopupCell.m; path = Home/MerchantCategoriesDealPopupCell.m; sourceTree = "<group>"; };
+		133C12681B14799A00F5048B /* merchant-body@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-body@2x.png"; sourceTree = "<group>"; };
+		133C12691B14799A00F5048B /* merchant-body-deal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-body-deal@2x.png"; sourceTree = "<group>"; };
 		1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-back-white@2x.png"; sourceTree = "<group>"; };
 		1347FD8C1ADBCC03007EF73D /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NearbyViewController.h; path = Nearby/NearbyViewController.h; sourceTree = "<group>"; };
 		1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NearbyViewController.m; path = Nearby/NearbyViewController.m; sourceTree = "<group>"; };
@@ -780,6 +787,8 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				133C12681B14799A00F5048B /* merchant-body@2x.png */,
+				133C12691B14799A00F5048B /* merchant-body-deal@2x.png */,
 				138CAFDF1B00CFA500A708A9 /* placeholder1@2x.png */,
 				138CAFDD1B00CD7700A708A9 /* placeholder@2x.png */,
 				13C002091AFB56000021D60E /* merchant-filter-rupee-down@2x.png */,
@@ -1209,6 +1218,8 @@
 				133008EB1ACD172C009FFC77 /* EmailLoginViewController.m */,
 				133008ED1ACD1F41009FFC77 /* ForgotPasswordViewController.h */,
 				133008EE1ACD1F41009FFC77 /* ForgotPasswordViewController.m */,
+				130818011B12F40C00F31B3E /* LoginHelper.h */,
+				130818021B12F40C00F31B3E /* LoginHelper.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1398,6 +1409,7 @@
 				135B4C8A1A7F84DD00B64F30 /* Images.xcassets in Resources */,
 				1337EE2B1ACBD35D00F31D14 /* merchant-massage@2x.png in Resources */,
 				13CE68A91AE8DF150085C7B0 /* hair-acitve@2x.png in Resources */,
+				133C126B1B14799A00F5048B /* merchant-body-deal@2x.png in Resources */,
 				136399FA1AF3680A006CB323 /* Filter-rupee3@2x.png in Resources */,
 				13EC41711AD69031001FEDD7 /* home-banner@2x.png in Resources */,
 				1337EE171ACBD35D00F31D14 /* header-share@2x.png in Resources */,
@@ -1444,6 +1456,7 @@
 				13282BA61AF9EE1400D15961 /* myProfile@2x.png in Resources */,
 				1337EE451ACBD35D00F31D14 /* registration-email@2x.png in Resources */,
 				1337EE381ACBD35D00F31D14 /* navbar-deals-active@2x.png in Resources */,
+				133C126A1B14799A00F5048B /* merchant-body@2x.png in Resources */,
 				1337EE241ACBD35D00F31D14 /* merchant-listing-deal-active@2x.png in Resources */,
 				13958F4C1AD7FCE700231794 /* filter-distance@2x.png in Resources */,
 				13C1C73F1AF39C430015F71E /* merchant-3.5-active@2x.png in Resources */,
@@ -1601,6 +1614,7 @@
 				134CED6D1AEA68F2009C5714 /* DealExtraServicesCell.m in Sources */,
 				1324E2071AE7823100C2FEBB /* LocationHelper.m in Sources */,
 				13DAEAA51B0491A7001E5EB3 /* AllMerchantsViewController.m in Sources */,
+				130818031B12F40C00F31B3E /* LoginHelper.m in Sources */,
 				139B4C751AE621A70079F992 /* FXBlurView.m in Sources */,
 				137B94121AEE60D100BCB1E4 /* RedeemDealViewController.m in Sources */,
 				134CED611AEA6895009C5714 /* DealRedeemCell.m in Sources */,

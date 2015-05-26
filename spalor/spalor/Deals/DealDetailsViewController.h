@@ -13,5 +13,6 @@
 @property (nonatomic, strong) Deal *deal;
 @property (nonatomic, weak) IBOutlet UIView *overlayView;
 @property (nonatomic, weak) IBOutlet UITextView *redeemTextView;
+@property (nonatomic, weak) IBOutlet UITableView *tableview;
 @property (nonatomic, weak) IBOutlet UIView *acceptRejectView;
 @end

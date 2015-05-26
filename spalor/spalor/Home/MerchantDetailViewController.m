@@ -25,7 +25,10 @@
 #import "RateViewController.h"
 #import "ReportErrorViewController.h"
 
-@interface MerchantDetailViewController ()
+@interface MerchantDetailViewController (){
+    NSMutableArray *myMerchantsArray;
+    NSData *myEncodedMerchant;
+}
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 @property (nonatomic) NSDictionary *story;
@@ -49,7 +52,9 @@
      self.rateView.delegate = self;
      
      */
-    
+    myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
+    myEncodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:self.merchant];
+
     [self setTableHeaderView];
 
 }
@@ -199,7 +204,7 @@
             MerchantSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+            cell.favoriteButton.selected = ([myMerchantsArray containsObject:myEncodedMerchant])?YES:NO;
             return cell;
             break;
         }
@@ -358,7 +363,12 @@
 }
 
 -(IBAction)share:(id)sender{
-    
+    NSString *texttoshare = self.merchant.name; //this is your text string to share
+    UIImage *imagetoshare = [UIImage imageNamed:@"merchant-massage.png"]; //this is your image to share
+    NSArray *activityItems = @[texttoshare, imagetoshare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
 }
 
 -(IBAction)call:(id)sender{
@@ -368,11 +378,21 @@
 }
 
 -(IBAction)favorite:(id)sender{
-    NSMutableArray *myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
-    NSData *myEncodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:self.merchant];
-    [myMerchantsArray addObject:myEncodedMerchant];
+    
+    UIButton *senderButton = (UIButton *)sender;
+    if (senderButton.selected) {
+        [myMerchantsArray removeObject:myEncodedMerchant];
+    }
+    else {
+        [myMerchantsArray addObject:myEncodedMerchant];
+        
+    }
+    
+    senderButton.selected = !senderButton.selected;
+
     [[NSUserDefaults standardUserDefaults] setObject:myMerchantsArray forKey:MYMERCHANTSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.mainTableView reloadData];
     
 }
 

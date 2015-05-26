@@ -112,8 +112,8 @@
         cell.merchantAddress.text = deal.address;
         cell.merchantRatingLabel.text = deal.rating;
                 
-        if (deal.serviceNames.length>0) {
-            cell.merchantServicesLabel.text = deal.serviceNames;
+        if (deal.serviceNames.count>0) {
+            cell.merchantServicesLabel.text = [deal.serviceNames componentsJoinedByString:@","];
 
         }
         else{

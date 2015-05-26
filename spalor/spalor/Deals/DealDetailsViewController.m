@@ -23,6 +23,8 @@
     FeSpinnerTenDot *spinner;
     NSString *couponCode;
     UIImage *snapShotOfCell;
+    NSMutableArray *myDealsArray;
+
 }
 
 @end
@@ -33,7 +35,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSLog(@"Selected Deal %@",self.deal.name);
-    
+    myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,6 +114,10 @@
             identifier = @"socialCellIdentifier";
             DealSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupCellWithDeal:self.deal];
+            NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
+            
+            cell.favoriteButton.selected = ([myDealsArray containsObject:dealData])?YES:NO;
+
             return cell;
             break;
         }
@@ -177,18 +184,30 @@
 
 
 -(IBAction)favouriteDeal:(id)sender{
-    NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+    
+    UIButton *senderButton = (UIButton *)sender;
     NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
-    [myDealsArray addObject:dealData];
     
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    
+    if (senderButton.selected) {
+        [myDealsArray removeObject:dealData];
+    }
+    else{
+        [myDealsArray addObject:dealData];
+        
+    }
+    
     user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
     [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
     
     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.tableview reloadData];
+
+    
 }
 
 

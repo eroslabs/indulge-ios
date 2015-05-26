@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
+@class Merchant;
 
 @interface MerchantListCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
@@ -34,5 +35,5 @@
 @property (nonatomic, weak) IBOutlet UIImageView *serviceCategoryImageView8;
 @property (nonatomic, weak) IBOutlet UIImageView *serviceCategoryImageView9;
 
-
+-(void)setServiceCategoryImagesWithMerchant:(Merchant *)merchant;
 @end

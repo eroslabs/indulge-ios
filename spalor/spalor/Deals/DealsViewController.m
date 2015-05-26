@@ -24,6 +24,7 @@
     BOOL searching;
     NSArray *data;
     NSMutableDictionary *localFilterDict;
+    NSMutableArray *myDealsArray;
 }
 @end
 
@@ -33,6 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     searchText = @"";
+    myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
@@ -270,15 +273,7 @@
     for (NSString *key in [localFilterDict allKeys]) {
         NSLog(@"key %@ %@",key,localFilterDict[key]);
         
-        if ([localFilterDict[@"opennow"] isEqual:@(1)]) {
-//                if ([deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-//                    if (![self isMerchantOpen:deal.schedule]) {
-//                        return NO;
-//                    }
-//                }
-//                else{
-//                    return NO;
-//                }
+        if ([key isEqualToString:@"opennow"]) {
             if ([localFilterDict[key] isEqual:@(1)]) {
                 if ([deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
                     //Check if time falls between opening and closing
@@ -302,6 +297,30 @@
                     return NO;
                 }
             }
+            else{
+                if (![deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    //Check if time falls between opening and closing
+                    for (Schedule *schedule in deal.schedule) {
+                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[deal.finalWeekSchedule length]];
+                        int weekday = [self currentWeekday];
+                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
+                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                            if ([ichar isEqualToString:@"1"] && i == weekday) {
+                                if ([self isMerchantOpen:schedule]) {
+                                    return NO;
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                }
+                else{
+                    return NO;
+                }
+                
+            }
+
         }
         if([key isEqualToString:@"3.5+"]){
             
@@ -392,6 +411,9 @@
         DealListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         cell.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
         
+        NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:deal];
+
+        cell.favoriteButton.selected = ([myDealsArray containsObject:dealData])?YES:NO;
         cell.nameLabel.text = deal.name;
         cell.addressLabel.text = deal.address;
        
@@ -451,18 +473,26 @@
     UIButton *senderButton = (UIButton *)sender;
     int index = senderButton.tag;
     Deal *deal = arrayOfDeals[index];
-    NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
     NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:deal];
-    [myDealsArray addObject:dealData];
-    
+
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+
+    if (senderButton.selected) {
+        [myDealsArray removeObject:dealData];
+      }
+    else{
+        [myDealsArray addObject:dealData];
+
+    }
+    
     user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
     [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
     
     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.tableview reloadData];
 }
 
 -(IBAction)showFilterScreen:(id)sender{

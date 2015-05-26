@@ -25,6 +25,7 @@
     Merchant *selectedMerchant;
     Deal *selecteddeal;
     NSMutableDictionary *localFilterDict;
+    NSMutableArray *myMerchantsArray;
 }
 
 @end
@@ -38,10 +39,9 @@
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
-
+    myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
     [self setButtonsFromLocalFilters];
-    
 }
 
 -(void)setButtonsFromLocalFilters{
@@ -105,9 +105,7 @@
     
     CLLocation *myLocation = [[LocationHelper sharedInstance] getCurrentLocation];
     
-    
     NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
-    
     
     NSLog(@"filter Dict %@",filterDict);
     
@@ -132,6 +130,8 @@
                     
                     //Only put if there was no error
                     [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"MerchantResponse"];
+                    
+                    arrayOfMerchants = [self sortedMerchantArray:arrayOfMerchants];
                     
                 }
             }
@@ -158,6 +158,9 @@
     NSData *response = [[NSUserDefaults standardUserDefaults] objectForKey:@"MerchantResponse"];
     
     NSError *error = nil;
+    if (response == nil) {
+        return;
+    }
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
     
     NSLog(@"response string %@",responseDict);
@@ -171,7 +174,15 @@
         
         if (responseDict) {
             arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
+            if (arrayOfMerchants.count>0) {
+                // Now Apply sorting
+                
+                arrayOfMerchants = [self sortedMerchantArray:arrayOfMerchants];
+            }
         }
+        
+        
+        
         
         NSLog(@"array of merchants %@",arrayOfMerchants);
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -206,28 +217,33 @@
     if (merchantArray.count>0) {
         // Now Apply sorting
         
-        BOOL ascendingDistance = NO;
-        BOOL ascendingPrice = NO;
-
-        if ([localFilterDict[@"distance"] isEqual:@(1)]) {
-            //Ascending
-            ascendingDistance = YES;
-        }
-        
-        if ([localFilterDict[@"price"] isEqual:@(1)]) {
-            ascendingPrice = YES;
-        }
-        
-        NSSortDescriptor *distanceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distanceFromCurrentLocation"
-                                                                                  ascending:ascendingDistance
-                                                                                   selector:@selector(localizedStandardCompare:)];
-
-        NSSortDescriptor *priceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"luxuryRating"
-                                                                                 ascending:ascendingPrice
-                                                                                  selector:@selector(localizedStandardCompare:)];
-
-        merchantArray = [merchantArray sortedArrayUsingDescriptors:@[distanceSortDescriptor,priceSortDescriptor]];
+        merchantArray = [self sortedMerchantArray:merchantArray];
     }
+    return merchantArray;
+}
+
+-(NSMutableArray *)sortedMerchantArray:(NSMutableArray *)merchantArray{
+    BOOL ascendingDistance = NO;
+    BOOL ascendingPrice = NO;
+    
+    if ([localFilterDict[@"distance"] isEqual:@(1)]) {
+        //Ascending
+        ascendingDistance = YES;
+    }
+    
+    if ([localFilterDict[@"price"] isEqual:@(1)]) {
+        ascendingPrice = YES;
+    }
+    
+    NSSortDescriptor *distanceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"distanceFromCurrentLocation"
+                                                                             ascending:ascendingDistance
+                                                                              selector:@selector(localizedStandardCompare:)];
+    
+    NSSortDescriptor *priceSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"luxuryRating"
+                                                                          ascending:ascendingPrice
+                                                                           selector:@selector(localizedStandardCompare:)];
+    
+    merchantArray = [merchantArray sortedArrayUsingDescriptors:@[distanceSortDescriptor,priceSortDescriptor]];
     return merchantArray;
 }
 
@@ -276,7 +292,18 @@
 
 -(BOOL)isMerchantPassedFromLocalFilter:(Merchant *)merchant{
     
+    NSLog(@"keys %@",[localFilterDict allKeys]);
+    
+
+    
     for (NSString *key in [localFilterDict allKeys]) {
+        
+        
+        
+        NSLog(@"key %@",key);
+        
+        
+        
         if([key isEqualToString:@"opennow"]){
             if ([localFilterDict[key] isEqual:@(1)]) {
                 if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
@@ -289,7 +316,6 @@
                             if ([ichar isEqualToString:@"1"] && i == weekday) {
                                 if (![self isMerchantOpen:schedule]) {
                                     return NO;
-                                    
                                 }
                             }
                         }
@@ -301,15 +327,33 @@
                     return NO;
                 }
             }
-//            if ([localFilterDict[key] isEqual:@(2)]) {
-//                if ([merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-//                    return NO;
-//                }
-//            }
+            else{
+                if (![merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+                    //Check if time falls between opening and closing
+                    for (Schedule *schedule in merchant.schedule) {
+                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[merchant.finalWeekSchedule length]];
+                        int weekday = [self currentWeekday];
+                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
+                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+                            if ([ichar isEqualToString:@"1"] && i == weekday) {
+                                if ([self isMerchantOpen:schedule]) {
+                                    return NO;
+                                }
+                            }
+                        }
+                        
+                        
+                    }
+                }
+                else{
+                    return NO;
+                }
+                
+            }
             
         }
         if([key isEqualToString:@"3.5+"]){
-            if (merchant.rating.floatValue<3.5) {
+            if ([localFilterDict[key] isEqual:@(1)] && merchant.rating.floatValue<3.5) {
                 return NO;
             }
         }
@@ -379,16 +423,16 @@
     if([tableView isEqual:self.dealTableView]){
        //Two cells Services and Categories
         Deal *deal = selectedMerchant.deals[indexPath.row];
-        NSString *identifier =  (deal.serviceNames.length>0)?@"ServicesIdentifier":@"CategoriesIdentifier";
+        NSString *identifier =  (deal.serviceNames.count>0)?@"ServicesIdentifier":@"CategoriesIdentifier";
         if([identifier isEqualToString:@"ServicesIdentifier"]){
             MerchantServicesDealPopupCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell.servicesLabel.text = deal.serviceNames;
+            NSMutableString *serviceNameString = [NSMutableString new];
+            cell.servicesLabel.text = [deal.serviceNames componentsJoinedByString:@","];
             cell.serviceDetailsLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% Off",deal.percentOff]:[NSString stringWithFormat:@"%@ Rs Off",deal.flatOff];
             return cell;
         }
         else{
             MerchantCategoriesDealPopupCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            NSArray *categoriesArray = [deal.categoryIds componentsSeparatedByString:@","];
             //Set category Image Views here
             cell.serviceDetailsLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% Off",deal.percentOff]:[NSString stringWithFormat:@"%@ Rs Off",deal.flatOff];
             return cell;
@@ -427,20 +471,15 @@
     cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];
     [cell.callButton setImage:[UIImage imageNamed:@"merchant-listing-call.png"] forState:UIControlStateNormal];
     [cell.shareButton setImage:[UIImage imageNamed:@"merchant-share.png"] forState:UIControlStateNormal];
-    [cell.favoriteButton setImage:[UIImage imageNamed:@"merchant-listing-favourite.png"] forState:UIControlStateNormal];
+    
+    NSData *encodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:merchant];
+    cell.favoriteButton.selected = ([myMerchantsArray containsObject:encodedMerchant])?YES:NO;
+    [cell.favoriteButton addTarget:self action:@selector(favourite:) forControlEvents:UIControlEventTouchUpInside];
     [cell.dealsButton setImage:[UIImage imageNamed:@"merchant-listing-deal.png"] forState:UIControlStateNormal];
-
+    [cell.dealsButton addTarget:self action:@selector(favourite:) forControlEvents:UIControlEventTouchUpInside];
     cell.serviceCategorybackgroundImageView.image = [UIImage imageNamed:@"merchant-categories-bar.png"];
     
-    cell.serviceCategoryImageView1.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView2.image = [UIImage imageNamed:@"merchant-pt.png"];
-    cell.serviceCategoryImageView3.image = [UIImage imageNamed:@"merchant-nail.png"];
-    cell.serviceCategoryImageView4.image = [UIImage imageNamed:@"merchant-haircut-deal.png"];
-    cell.serviceCategoryImageView5.image = [UIImage imageNamed:@"merchant-makeup-deal.png"];
-    cell.serviceCategoryImageView6.image = [UIImage imageNamed:@"merchant-face.png"];
-    cell.serviceCategoryImageView7.image = [UIImage imageNamed:@"merchant-removal-deal.png"];
-    cell.serviceCategoryImageView8.image = [UIImage imageNamed:@"merchant-massage.png"];
-    cell.serviceCategoryImageView9.image = [UIImage imageNamed:@"merchant-massage.png"];
+    [cell setServiceCategoryImagesWithMerchant:merchant];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
@@ -457,8 +496,33 @@
     }
 }
 
-
 #pragma mark - User Actions
+
+-(IBAction)share:(id)sender{
+    NSString *texttoshare = @"MY TEXT"; //this is your text string to share
+    UIImage *imagetoshare = [UIImage imageNamed:@"merchant-massage.png"]; //this is your image to share
+    NSArray *activityItems = @[texttoshare, imagetoshare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
+}
+
+
+-(void)favourite:(UIButton *)senderButton{
+    Merchant *merchant = arrayOfMerchants[senderButton.tag];
+    NSData *myEncodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:merchant];
+    
+    if (senderButton.selected) {
+        [myMerchantsArray removeObject:myEncodedMerchant];
+    }
+    else {
+        [myMerchantsArray addObject:myEncodedMerchant];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:myMerchantsArray forKey:MYMERCHANTSSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.tableview reloadData];
+}
 
 -(IBAction)changeLocalFilter:(id)sender{
     UIButton *senderButton = (UIButton *)sender;
@@ -483,21 +547,15 @@
             break;
     }
     
+    
+    
     [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSMutableArray *newMerchantArray = [NSMutableArray new];
+    [self pickUpLocallyStoredMerchantResponse];
     
-    for (Merchant *merchant in arrayOfMerchants) {
-        BOOL check = [self isMerchantPassedFromLocalFilter:merchant];
-        
-        if (check) {
-            [newMerchantArray addObject:merchant];
-        }
-    }
-    
-    arrayOfMerchants = newMerchantArray;
-    [self.tableview reloadData];
+   
 }
 
 

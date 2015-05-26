@@ -43,6 +43,9 @@
         self.luxuryRating = [decoder decodeObjectForKey:@"luxuryRating"];
         self.schedule = [decoder decodeObjectForKey:@"schedules"];
         self.finalWeekSchedule = [decoder decodeObjectForKey:@"finalWeekString"];
+        self.categoryIds = [decoder decodeObjectForKey:@"categoryIds"];
+        self.serviceNames = [decoder decodeObjectForKey:@"serviceNames"];
+
     }
     return self;
 }
@@ -75,6 +78,9 @@
     [encoder encodeObject:_luxuryRating forKey:@"luxuryRating"];
     [encoder encodeObject:_schedule forKey:@"schedules"];
     [encoder encodeObject:_finalWeekSchedule forKey:@"finalWeekString"];
+    [encoder encodeObject:_categoryIds forKey:@"categoryIds"];
+    [encoder encodeObject:_serviceNames forKey:@"serviceNames"];
+
 }
 
 - (NSArray *)allPropertyNames
@@ -220,7 +226,7 @@
                 }
 
             }
-            else if (![dictionary[key] isKindOfClass:[NSString class]]) {
+            else if (![dictionary[key] isKindOfClass:[NSString class]] &&![dictionary[key] isKindOfClass:[NSArray class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];
             }
             else{

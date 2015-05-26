@@ -18,8 +18,12 @@
 
 #define TIMEOUTINTERVAL 60
 #define INDULGE_URL @"http://52.11.37.48"
+//#define INDULGE_URL @"http://192.168.0.4/indulge"
+
 #define INDULGE_API_VERSION 1.0
 #define INDULGE_API_VERSION_STRING @"1.0"
+#define PROFILE_PHOTO_PATH @"PROFILE_PHOTO"
+
 
 
 #endif

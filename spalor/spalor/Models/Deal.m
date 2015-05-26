@@ -182,7 +182,7 @@
                 }
                 [self setValue:string forKey:key];
             }
-            else if (![dictionary[key] isKindOfClass:[NSString class]]) {
+            else if (![dictionary[key] isKindOfClass:[NSString class]] && ![dictionary[key] isKindOfClass:[NSArray class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];
             }
             else{

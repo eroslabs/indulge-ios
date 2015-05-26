@@ -12,8 +12,16 @@
 #import "NetworkHelper.h"
 #import "UIImage+ImageEffects.h"
 #import "CustomTabbarController.h"
+#import "User.h"
+#import "NetworkHelper.h"
+#import "LoginHelper.h"
+#import "FeSpinnerTenDot.h"
 
-@interface LoginViewController ()
+@interface LoginViewController (){
+    User *user;
+    FeSpinnerTenDot *spinner;
+
+}
 
 @end
 
@@ -31,14 +39,14 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.loginView = [[FBLoginView alloc] initWithReadPermissions:
-                      @[@"public_profile", @"email", @"user_friends"]];
-    
-    self.loginView.center = self.view.center;
-    
-    self.loginView.frame = self.loginButton.frame;
-    
-    self.loginView.delegate = self;
+//    self.loginView = [[FBLoginView alloc] initWithReadPermissions:
+//                      @[@"public_profile", @"email", @"user_birthday"]];
+//    
+//    self.loginView.center = self.view.center;
+//    
+//    self.loginView.frame = self.loginButton.frame;
+//    
+//    self.loginView.delegate = self;
     
     GPPSignIn *signIn = [GPPSignIn sharedInstance];
     
@@ -57,6 +65,9 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     
     self.loginButton.layer.cornerRadius = 2.0f;
     self.loginButton.clipsToBounds = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loggedIn) name:USER_LOGIN_PASSED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginFailed) name:USER_LOGIN_FAILED object:nil];
 
 }
 
@@ -82,7 +93,6 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     if(authenticated)  // authenticated---> BOOL Value assign True only if Login Success
     {
         
-        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         self.navigationController.navigationBarHidden=YES;
@@ -92,6 +102,19 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         // Show Login email id fields
     }
     
+}
+
+-(IBAction)facebookLogin:(id)sender{
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+    [self.loaderContainerView addSubview:spinner];
+    self.loaderContainerView.hidden = NO;
+    [spinner showWhileExecutingSelector:@selector(loginToFacebook) onTarget:self withObject:nil];
+
+}
+
+-(void)loginToFacebook{
+    [[LoginHelper sharedInstance] connectWithFacebook];
+
 }
 
 -(void)loggedIn{
@@ -104,11 +127,21 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        [spinner dismiss];
+        self.loaderContainerView.hidden = YES;
+
         CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         self.navigationController.navigationBarHidden=YES;
         [self.navigationController pushViewController:obj animated:YES];
     }
 
+
+}
+
+-(void)userLoginFailed{
+    [spinner dismiss];
+    self.loaderContainerView.hidden = YES;
 
 }
 
@@ -127,9 +160,47 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 
 // Call method when user information has been fetched
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user {
-    self.profilePictureView.profileID = user.id;
-    self.nameLabel.text = user.name;
+                            user:(id<FBGraphUser>)guser {
+    self.profilePictureView.profileID = guser.id;
+    user = [[User alloc] init];
+    user.name = guser[@"name"];
+    user.gender = guser[@"gender"];
+    user.facebookId = guser[@"id"];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE]) {
+        NSLog(@"user %@",user);
+        [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
+
+    }
+    else{
+        
+        NSDictionary *userDict = @{@"name":guser[@"name"],@"facebook":guser[@"id"]};
+        
+        [[NetworkHelper sharedInstance] getArrayFromPostURL:@"user/save" parmeters:@{@"user":userDict} completionHandler:^(id response, NSString *url, NSError *error){
+            if (error == nil && response!=nil) {
+                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+                
+                NSLog(@"response string %@",responseDict);
+                user = [[User alloc] init];
+                user.userId = responseDict[@"user_id"];
+                user.name = guser[@"name"];
+                user.facebookId = guser[@"id"];
+                NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+                [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+                    self.navigationController.navigationBarHidden=YES;
+                    [self.navigationController pushViewController:obj animated:YES];
+                });
+                
+            }
+        }];
+
+    }
+    
     
     
 }
@@ -137,14 +208,13 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView{
-    
     [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
+
 
 }
 
 - (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
     self.profilePictureView.profileID = nil;
-    self.nameLabel.text = @"";
     //self.statusLabel.text= @"You're not logged in!";
 }
 
