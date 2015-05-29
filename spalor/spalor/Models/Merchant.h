@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *unitNumber;
 @property (nonatomic, strong) NSString *luxuryRating;
+@property (nonatomic, strong) NSString *recommendedService;
 @property (nonatomic, strong) NSString *finalWeekSchedule;
 
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;

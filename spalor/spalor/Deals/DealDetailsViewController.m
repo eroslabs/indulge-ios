@@ -201,7 +201,7 @@
     
     user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+    [user saveArchivedUser:archivedUser];
     
     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -250,7 +250,7 @@
         User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
         user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
         NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-        [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+        [user saveArchivedUser:archivedUser];
         
         [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -277,7 +277,7 @@
                 User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
                 user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
                 NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-                [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+                [user saveArchivedUser:archivedUser];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
                 NSLog(@"saving deal %@ %@",self.deal.name,self.deal.couponCode);

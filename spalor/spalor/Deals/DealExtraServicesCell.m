@@ -10,6 +10,7 @@
 
 @implementation DealExtraServicesCell
 -(DealExtraServicesCell *)setupCellWithDeal:(Deal *)deal{
+    self.extraservicesLabel.text = (deal.ccAccepted)?@"Credit Cards accepted!":@"Credit Cards NOT accepted";
     return self;
 }
 @end

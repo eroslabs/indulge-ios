@@ -10,6 +10,7 @@
 
 @implementation DealRecommendedCell
 -(DealRecommendedCell *)setupCellWithDeal:(Deal *)deal{
+    self.recommendedDealLabel.text = [NSString stringWithFormat:@"Recommended : %@",deal.recommendedService];
     return self;
 }
 @end

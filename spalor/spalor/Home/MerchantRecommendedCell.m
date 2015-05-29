@@ -10,6 +10,7 @@
 
 @implementation MerchantRecommendedCell
 -(MerchantRecommendedCell *)setupWithMerchant:(Merchant *)merchant{
+    self.recommendedLabel.text = [NSString stringWithFormat:@"Recommended : %@",merchant.recommendedService];
     return self;
 }
 @end

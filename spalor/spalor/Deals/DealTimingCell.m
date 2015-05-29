@@ -56,17 +56,36 @@
     
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    int weekday = [comps weekday];
+    int weekday = [comps weekday]-1;
+    SEL sel = @selector(characterAtIndex:);
+    
+    // using typeof to save my fingers from typing more
+
+    self.timingLabel.text = @"CLOSED";
+    
     for (Schedule *schedule in deal.schedule) {
-        [schedule.weekSchedule enumerateSubstringsInRange:[weekSchedule rangeOfString:weekSchedule]
-                                                  options:NSStringEnumerationByComposedCharacterSequences
-                                               usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-                                                   if([substring isEqualToString:@"1"] && substringRange.location == weekday){
-                                                       self.timingLabel.text = [NSString stringWithFormat:@"%@ to %@",schedule.openingTime,schedule.closingTime];
-                                                       
-                                                   }
-                                               }] ;
+        unichar (*charAtIdx)(id, SEL, NSUInteger) = (typeof(charAtIdx)) [schedule.weekSchedule methodForSelector:sel];
+
+        for (int i = 0; i < schedule.weekSchedule.length; i++) {
+            unichar c = charAtIdx(schedule.weekSchedule, sel, i);
+            // do something with C
+            NSLog(@"%C", c);
+            if ((c == '1') && i== weekday) {
+                NSArray *openingTime = [schedule.openingTime componentsSeparatedByString:@":"];
+                NSString *openingHrsString = openingTime[0];
+                
+                NSArray *closingTime = [schedule.closingTime componentsSeparatedByString:@":"];
+                NSString *closingHrsString = closingTime[0];
+                
+                NSString *openingTimeString = (openingHrsString.intValue > 12)?[NSString stringWithFormat:@"%d:%@ PM",openingHrsString.intValue-12,openingTime[1]]:[NSString stringWithFormat:@"%@:%@ AM",openingTime[0],openingTime[1]];
+                
+                NSString *closingTimeString = (closingHrsString.intValue > 12)?[NSString stringWithFormat:@"%d:%@ PM",closingHrsString.intValue-12,closingTime[1]]:[NSString stringWithFormat:@"%@:%@ AM",closingTime[0],closingTime[1]];
+                self.timingLabel.text = [NSString stringWithFormat:@"%@ to %@",openingTimeString,closingTimeString];
+                break;
+
+            }
         
+        }
     }
 
     //self.rateCardImageview.image = [UIImage imageNamed:@""];

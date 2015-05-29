@@ -65,8 +65,7 @@
                      
                      DLog(@" FB USER %@",guser);
                      NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-                     [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
-                     [[NSUserDefaults standardUserDefaults] synchronize];
+                     [user saveArchivedUser:archivedUser];
                      
                      [self userLoggedInwithFBUserObject:user];
                  }

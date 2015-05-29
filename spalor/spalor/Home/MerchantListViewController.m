@@ -38,7 +38,7 @@
     spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
-    self.dealOverlayView.alpha = 0;
+    [self.view bringSubviewToFront:self.dealOverlayView];
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
     myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
@@ -444,7 +444,7 @@
     NSString *identifier =  @"MerchantIdentifier";
     Merchant *merchant = arrayOfMerchants[indexPath.row];
     MerchantListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    cell.nameLabel.text = merchant.name;
+    cell.nameLabel.text = [merchant.name capitalizedString];
     cell.addressLabel.text = (merchant.address)?merchant.address:@"Sample Address";
     cell.averageRating.text = merchant.rating;
     if(merchant.distanceFromCurrentLocation.floatValue == 0.0){

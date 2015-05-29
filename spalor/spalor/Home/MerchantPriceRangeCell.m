@@ -11,7 +11,9 @@
 
 @implementation MerchantPriceRangeCell
 -(MerchantPriceRangeCell *)setupWithMerchant:(Merchant *)merchant{
-    self.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
+    
+    
+    self.priceRangeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"merchant-rupee%d.png",merchant.luxuryRating.intValue+1]];
     for(int i = 0 ;i < merchant.services.count ; i++){
         MerchantService *service = merchant.services[i];
         CGFloat priceValue = 0;

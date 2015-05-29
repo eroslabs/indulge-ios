@@ -192,6 +192,17 @@
 		13A073061AE4F04300754317 /* MerchantDeal.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A073051AE4F04300754317 /* MerchantDeal.m */; };
 		13A073091AE508D100754317 /* DealListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A073081AE508D100754317 /* DealListCell.m */; };
 		13A0730C1AE5099100754317 /* Deal.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A0730B1AE5099100754317 /* Deal.m */; };
+		13A4F6D81B16F9460077892E /* smiley-poker-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6D21B16F9460077892E /* smiley-poker-right@2x.png */; };
+		13A4F6D91B16F9460077892E /* smiley-poker-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6D31B16F9460077892E /* smiley-poker-left@2x.png */; };
+		13A4F6DA1B16F9460077892E /* smiley-sad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6D41B16F9460077892E /* smiley-sad@2x.png */; };
+		13A4F6DB1B16F9460077892E /* smiley-happy-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6D51B16F9460077892E /* smiley-happy-active@2x.png */; };
+		13A4F6DC1B16F9460077892E /* smiley-happy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6D61B16F9460077892E /* smiley-happy@2x.png */; };
+		13A4F6DD1B16F9460077892E /* smiley-sad-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6D71B16F9460077892E /* smiley-sad-active@2x.png */; };
+		13A4F6E31B1707640077892E /* category-3active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6DE1B1707640077892E /* category-3active@2x.png */; };
+		13A4F6E41B1707640077892E /* category-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6DF1B1707640077892E /* category-5@2x.png */; };
+		13A4F6E51B1707640077892E /* category-9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6E01B1707640077892E /* category-9@2x.png */; };
+		13A4F6E61B1707640077892E /* category-9active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6E11B1707640077892E /* category-9active@2x.png */; };
+		13A4F6E71B1707640077892E /* category-5active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6E21B1707640077892E /* category-5active@2x.png */; };
 		13A7BA9D1B034061004224E4 /* MyCouponCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */; };
 		13A7BAA01B0368B4004224E4 /* AllDealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */; };
 		13B021C21B06115A0091084E /* MyLookbookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B021C01B06115A0091084E /* MyLookbookCell.m */; };
@@ -219,19 +230,19 @@
 		13C1C7461AF39F2E0015F71E /* merchant--listing-location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13C1C7451AF39F2E0015F71E /* merchant--listing-location@2x.png */; };
 		13CD99EF1A834091005AB1F4 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CD99EE1A834091005AB1F4 /* LoginViewController.m */; };
 		13CE68A11AE8DF150085C7B0 /* hair-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68931AE8DF150085C7B0 /* hair-active@2x.png */; };
-		13CE68A21AE8DF150085C7B0 /* Makeup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68941AE8DF150085C7B0 /* Makeup@2x.png */; };
-		13CE68A31AE8DF150085C7B0 /* hair@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68951AE8DF150085C7B0 /* hair@2x.png */; };
-		13CE68A41AE8DF150085C7B0 /* nails@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68961AE8DF150085C7B0 /* nails@2x.png */; };
-		13CE68A51AE8DF150085C7B0 /* massage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68971AE8DF150085C7B0 /* massage@2x.png */; };
-		13CE68A61AE8DF150085C7B0 /* haircut@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68981AE8DF150085C7B0 /* haircut@2x.png */; };
-		13CE68A71AE8DF150085C7B0 /* gym@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68991AE8DF150085C7B0 /* gym@2x.png */; };
-		13CE68A81AE8DF150085C7B0 /* face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689A1AE8DF150085C7B0 /* face@2x.png */; };
-		13CE68A91AE8DF150085C7B0 /* hair-acitve@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689B1AE8DF150085C7B0 /* hair-acitve@2x.png */; };
-		13CE68AA1AE8DF150085C7B0 /* face-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689C1AE8DF150085C7B0 /* face-active@2x.png */; };
-		13CE68AB1AE8DF150085C7B0 /* makeup-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689D1AE8DF150085C7B0 /* makeup-active@2x.png */; };
-		13CE68AC1AE8DF150085C7B0 /* massage-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689E1AE8DF150085C7B0 /* massage-active@2x.png */; };
-		13CE68AD1AE8DF150085C7B0 /* haircut-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689F1AE8DF150085C7B0 /* haircut-active@2x.png */; };
-		13CE68AE1AE8DF150085C7B0 /* Gym-active.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68A01AE8DF150085C7B0 /* Gym-active.png */; };
+		13CE68A21AE8DF150085C7B0 /* category-8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68941AE8DF150085C7B0 /* category-8@2x.png */; };
+		13CE68A31AE8DF150085C7B0 /* category-6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68951AE8DF150085C7B0 /* category-6@2x.png */; };
+		13CE68A41AE8DF150085C7B0 /* category-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68961AE8DF150085C7B0 /* category-3@2x.png */; };
+		13CE68A51AE8DF150085C7B0 /* category-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68971AE8DF150085C7B0 /* category-1@2x.png */; };
+		13CE68A61AE8DF150085C7B0 /* category-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68981AE8DF150085C7B0 /* category-4@2x.png */; };
+		13CE68A71AE8DF150085C7B0 /* category-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68991AE8DF150085C7B0 /* category-7@2x.png */; };
+		13CE68A81AE8DF150085C7B0 /* category-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689A1AE8DF150085C7B0 /* category-2@2x.png */; };
+		13CE68A91AE8DF150085C7B0 /* category-6active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689B1AE8DF150085C7B0 /* category-6active@2x.png */; };
+		13CE68AA1AE8DF150085C7B0 /* category-2active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689C1AE8DF150085C7B0 /* category-2active@2x.png */; };
+		13CE68AB1AE8DF150085C7B0 /* category-8active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689D1AE8DF150085C7B0 /* category-8active@2x.png */; };
+		13CE68AC1AE8DF150085C7B0 /* category-1active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689E1AE8DF150085C7B0 /* category-1active@2x.png */; };
+		13CE68AD1AE8DF150085C7B0 /* category-4active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE689F1AE8DF150085C7B0 /* category-4active@2x.png */; };
+		13CE68AE1AE8DF150085C7B0 /* category-7active.png in Resources */ = {isa = PBXBuildFile; fileRef = 13CE68A01AE8DF150085C7B0 /* category-7active.png */; };
 		13D98FA01AF20209003FE631 /* MyDealCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13D98F9F1AF20209003FE631 /* MyDealCollectionViewCell.m */; };
 		13D98FA21AF20532003FE631 /* favourite-coupon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13D98FA11AF20532003FE631 /* favourite-coupon@2x.png */; };
 		13DAEAA51B0491A7001E5EB3 /* AllMerchantsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */; };
@@ -544,6 +555,17 @@
 		13A073081AE508D100754317 /* DealListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealListCell.m; path = Deals/DealListCell.m; sourceTree = "<group>"; };
 		13A0730A1AE5099100754317 /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deal.h; path = Models/Deal.h; sourceTree = "<group>"; };
 		13A0730B1AE5099100754317 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deal.m; path = Models/Deal.m; sourceTree = "<group>"; };
+		13A4F6D21B16F9460077892E /* smiley-poker-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-poker-right@2x.png"; sourceTree = "<group>"; };
+		13A4F6D31B16F9460077892E /* smiley-poker-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-poker-left@2x.png"; sourceTree = "<group>"; };
+		13A4F6D41B16F9460077892E /* smiley-sad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-sad@2x.png"; sourceTree = "<group>"; };
+		13A4F6D51B16F9460077892E /* smiley-happy-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-happy-active@2x.png"; sourceTree = "<group>"; };
+		13A4F6D61B16F9460077892E /* smiley-happy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-happy@2x.png"; sourceTree = "<group>"; };
+		13A4F6D71B16F9460077892E /* smiley-sad-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-sad-active@2x.png"; sourceTree = "<group>"; };
+		13A4F6DE1B1707640077892E /* category-3active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-3active@2x.png"; sourceTree = "<group>"; };
+		13A4F6DF1B1707640077892E /* category-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-5@2x.png"; sourceTree = "<group>"; };
+		13A4F6E01B1707640077892E /* category-9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-9@2x.png"; sourceTree = "<group>"; };
+		13A4F6E11B1707640077892E /* category-9active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-9active@2x.png"; sourceTree = "<group>"; };
+		13A4F6E21B1707640077892E /* category-5active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-5active@2x.png"; sourceTree = "<group>"; };
 		13A7BA9B1B034061004224E4 /* MyCouponCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCouponCollectionViewCell.h; path = Favorite/MyCouponCollectionViewCell.h; sourceTree = "<group>"; };
 		13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCouponCollectionViewCell.m; path = Favorite/MyCouponCollectionViewCell.m; sourceTree = "<group>"; };
 		13A7BA9E1B0368B4004224E4 /* AllDealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllDealsViewController.h; path = Deals/AllDealsViewController.h; sourceTree = "<group>"; };
@@ -579,19 +601,19 @@
 		13CD99ED1A834091005AB1F4 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
 		13CD99EE1A834091005AB1F4 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
 		13CE68931AE8DF150085C7B0 /* hair-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hair-active@2x.png"; sourceTree = "<group>"; };
-		13CE68941AE8DF150085C7B0 /* Makeup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Makeup@2x.png"; sourceTree = "<group>"; };
-		13CE68951AE8DF150085C7B0 /* hair@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hair@2x.png"; sourceTree = "<group>"; };
-		13CE68961AE8DF150085C7B0 /* nails@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nails@2x.png"; sourceTree = "<group>"; };
-		13CE68971AE8DF150085C7B0 /* massage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "massage@2x.png"; sourceTree = "<group>"; };
-		13CE68981AE8DF150085C7B0 /* haircut@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haircut@2x.png"; sourceTree = "<group>"; };
-		13CE68991AE8DF150085C7B0 /* gym@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gym@2x.png"; sourceTree = "<group>"; };
-		13CE689A1AE8DF150085C7B0 /* face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face@2x.png"; sourceTree = "<group>"; };
-		13CE689B1AE8DF150085C7B0 /* hair-acitve@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hair-acitve@2x.png"; sourceTree = "<group>"; };
-		13CE689C1AE8DF150085C7B0 /* face-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face-active@2x.png"; sourceTree = "<group>"; };
-		13CE689D1AE8DF150085C7B0 /* makeup-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "makeup-active@2x.png"; sourceTree = "<group>"; };
-		13CE689E1AE8DF150085C7B0 /* massage-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "massage-active@2x.png"; sourceTree = "<group>"; };
-		13CE689F1AE8DF150085C7B0 /* haircut-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "haircut-active@2x.png"; sourceTree = "<group>"; };
-		13CE68A01AE8DF150085C7B0 /* Gym-active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Gym-active.png"; sourceTree = "<group>"; };
+		13CE68941AE8DF150085C7B0 /* category-8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-8@2x.png"; sourceTree = "<group>"; };
+		13CE68951AE8DF150085C7B0 /* category-6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-6@2x.png"; sourceTree = "<group>"; };
+		13CE68961AE8DF150085C7B0 /* category-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-3@2x.png"; sourceTree = "<group>"; };
+		13CE68971AE8DF150085C7B0 /* category-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-1@2x.png"; sourceTree = "<group>"; };
+		13CE68981AE8DF150085C7B0 /* category-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-4@2x.png"; sourceTree = "<group>"; };
+		13CE68991AE8DF150085C7B0 /* category-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-7@2x.png"; sourceTree = "<group>"; };
+		13CE689A1AE8DF150085C7B0 /* category-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-2@2x.png"; sourceTree = "<group>"; };
+		13CE689B1AE8DF150085C7B0 /* category-6active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-6active@2x.png"; sourceTree = "<group>"; };
+		13CE689C1AE8DF150085C7B0 /* category-2active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-2active@2x.png"; sourceTree = "<group>"; };
+		13CE689D1AE8DF150085C7B0 /* category-8active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-8active@2x.png"; sourceTree = "<group>"; };
+		13CE689E1AE8DF150085C7B0 /* category-1active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-1active@2x.png"; sourceTree = "<group>"; };
+		13CE689F1AE8DF150085C7B0 /* category-4active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-4active@2x.png"; sourceTree = "<group>"; };
+		13CE68A01AE8DF150085C7B0 /* category-7active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category-7active.png"; sourceTree = "<group>"; };
 		13D98F9E1AF20209003FE631 /* MyDealCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDealCollectionViewCell.h; path = Favorite/MyDealCollectionViewCell.h; sourceTree = "<group>"; };
 		13D98F9F1AF20209003FE631 /* MyDealCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDealCollectionViewCell.m; path = Favorite/MyDealCollectionViewCell.m; sourceTree = "<group>"; };
 		13D98FA11AF20532003FE631 /* favourite-coupon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favourite-coupon@2x.png"; sourceTree = "<group>"; };
@@ -789,6 +811,12 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				13A4F6D21B16F9460077892E /* smiley-poker-right@2x.png */,
+				13A4F6D31B16F9460077892E /* smiley-poker-left@2x.png */,
+				13A4F6D41B16F9460077892E /* smiley-sad@2x.png */,
+				13A4F6D51B16F9460077892E /* smiley-happy-active@2x.png */,
+				13A4F6D61B16F9460077892E /* smiley-happy@2x.png */,
+				13A4F6D71B16F9460077892E /* smiley-sad-active@2x.png */,
 				133C126E1B148F5700F5048B /* facebooklogin@2x.png */,
 				133C126C1B148EBD00F5048B /* merchant-nail-deal@2x.png */,
 				133C12681B14799A00F5048B /* merchant-body@2x.png */,
@@ -842,20 +870,25 @@
 				136CCBD71AEF7015003F08EA /* deal-share@2x.png */,
 				137B94131AEE64A800BCB1E4 /* post_completion_screen@2x.png */,
 				137B940E1AEE5D7D00BCB1E4 /* coupon-background@2x.png */,
+				13A4F6DE1B1707640077892E /* category-3active@2x.png */,
+				13A4F6DF1B1707640077892E /* category-5@2x.png */,
+				13A4F6E01B1707640077892E /* category-9@2x.png */,
+				13A4F6E11B1707640077892E /* category-9active@2x.png */,
+				13A4F6E21B1707640077892E /* category-5active@2x.png */,
 				13CE68931AE8DF150085C7B0 /* hair-active@2x.png */,
-				13CE68941AE8DF150085C7B0 /* Makeup@2x.png */,
-				13CE68951AE8DF150085C7B0 /* hair@2x.png */,
-				13CE68961AE8DF150085C7B0 /* nails@2x.png */,
-				13CE68971AE8DF150085C7B0 /* massage@2x.png */,
-				13CE68981AE8DF150085C7B0 /* haircut@2x.png */,
-				13CE68991AE8DF150085C7B0 /* gym@2x.png */,
-				13CE689A1AE8DF150085C7B0 /* face@2x.png */,
-				13CE689B1AE8DF150085C7B0 /* hair-acitve@2x.png */,
-				13CE689C1AE8DF150085C7B0 /* face-active@2x.png */,
-				13CE689D1AE8DF150085C7B0 /* makeup-active@2x.png */,
-				13CE689E1AE8DF150085C7B0 /* massage-active@2x.png */,
-				13CE689F1AE8DF150085C7B0 /* haircut-active@2x.png */,
-				13CE68A01AE8DF150085C7B0 /* Gym-active.png */,
+				13CE68941AE8DF150085C7B0 /* category-8@2x.png */,
+				13CE68951AE8DF150085C7B0 /* category-6@2x.png */,
+				13CE68961AE8DF150085C7B0 /* category-3@2x.png */,
+				13CE68971AE8DF150085C7B0 /* category-1@2x.png */,
+				13CE68981AE8DF150085C7B0 /* category-4@2x.png */,
+				13CE68991AE8DF150085C7B0 /* category-7@2x.png */,
+				13CE689A1AE8DF150085C7B0 /* category-2@2x.png */,
+				13CE689B1AE8DF150085C7B0 /* category-6active@2x.png */,
+				13CE689C1AE8DF150085C7B0 /* category-2active@2x.png */,
+				13CE689D1AE8DF150085C7B0 /* category-8active@2x.png */,
+				13CE689E1AE8DF150085C7B0 /* category-1active@2x.png */,
+				13CE689F1AE8DF150085C7B0 /* category-4active@2x.png */,
+				13CE68A01AE8DF150085C7B0 /* category-7active.png */,
 				1388A19E1AE79D5100E330C1 /* border@2x.png */,
 				137FFBC21ADE407800C77706 /* deal-coupon@2x.png */,
 				1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */,
@@ -1352,8 +1385,8 @@
 				1337EE351ACBD35D00F31D14 /* merchant-share-active@2x.png in Resources */,
 				13E530871AD299B30046EAEB /* registration-divider@2x.png in Resources */,
 				1388A19F1AE79D5100E330C1 /* border@2x.png in Resources */,
-				13CE68A81AE8DF150085C7B0 /* face@2x.png in Resources */,
-				13CE68AB1AE8DF150085C7B0 /* makeup-active@2x.png in Resources */,
+				13CE68A81AE8DF150085C7B0 /* category-2@2x.png in Resources */,
+				13CE68AB1AE8DF150085C7B0 /* category-8active@2x.png in Resources */,
 				1337EE1C1ACBD35D00F31D14 /* merchant-deal-services@2x.png in Resources */,
 				1337EE421ACBD35D00F31D14 /* registration-age-active@2x.png in Resources */,
 				13C1C7461AF39F2E0015F71E /* merchant--listing-location@2x.png in Resources */,
@@ -1364,21 +1397,25 @@
 				1337EE3E1ACBD35D00F31D14 /* navbar-me-active@2x.png in Resources */,
 				1337EE401ACBD35D00F31D14 /* navbar-nearby-active@2x.png in Resources */,
 				13E67C3F1AE4CD6B00F96A36 /* Merchant.txt in Resources */,
+				13A4F6DB1B16F9460077892E /* smiley-happy-active@2x.png in Resources */,
 				1337EE361ACBD35D00F31D14 /* merchant-share@2x.png in Resources */,
 				13C0021E1AFB56010021D60E /* home-open-active@2x.png in Resources */,
 				136CCBD81AEF7015003F08EA /* deal-share@2x.png in Resources */,
 				13E9B6981AD3CF46006DE3D8 /* Location@2x.png in Resources */,
 				1337EE111ACBD35D00F31D14 /* header-rating-active@2x.png in Resources */,
+				13A4F6E71B1707640077892E /* category-5active@2x.png in Resources */,
 				13C002161AFB56010021D60E /* merchant-filter-rupee-up@2x.png in Resources */,
 				136399F71AF3680A006CB323 /* Filter-rupee-active2@2x.png in Resources */,
+				13A4F6D81B16F9460077892E /* smiley-poker-right@2x.png in Resources */,
 				131536381AD5211C00AF9195 /* merchant-default-button@2x.png in Resources */,
 				136399FC1AF3680A006CB323 /* Filter-rupee-active4@2x.png in Resources */,
 				138CAFE01B00CFA500A708A9 /* placeholder1@2x.png in Resources */,
 				136399F81AF3680A006CB323 /* Filter-rupee2@2x.png in Resources */,
-				13CE68A51AE8DF150085C7B0 /* massage@2x.png in Resources */,
+				13CE68A51AE8DF150085C7B0 /* category-1@2x.png in Resources */,
 				1347FD8B1ADBC96F007EF73D /* header-back-white@2x.png in Resources */,
+				13A4F6D91B16F9460077892E /* smiley-poker-left@2x.png in Resources */,
 				13E0CC3D1AF3A422007C4738 /* merchant-ratecard@2x.png in Resources */,
-				13CE68A41AE8DF150085C7B0 /* nails@2x.png in Resources */,
+				13CE68A41AE8DF150085C7B0 /* category-3@2x.png in Resources */,
 				13958F4B1AD7FCE700231794 /* filter-cost-selected@2x.png in Resources */,
 				1337EE051ACBD35D00F31D14 /* filter-both@2x.png in Resources */,
 				1337EE0E1ACBD35D00F31D14 /* header-filter@2x.png in Resources */,
@@ -1386,12 +1423,14 @@
 				1337EE321ACBD35D00F31D14 /* merchant-removal@2x.png in Resources */,
 				13958F4D1AD7FCE700231794 /* filter-cost@2x.png in Resources */,
 				1337EE1F1ACBD35D00F31D14 /* merchant-face-deal@2x.png in Resources */,
-				13CE68A31AE8DF150085C7B0 /* hair@2x.png in Resources */,
-				13CE68A61AE8DF150085C7B0 /* haircut@2x.png in Resources */,
+				13CE68A31AE8DF150085C7B0 /* category-6@2x.png in Resources */,
+				13CE68A61AE8DF150085C7B0 /* category-4@2x.png in Resources */,
 				1337EE2D1ACBD35D00F31D14 /* merchant-nail@2x.png in Resources */,
 				13639A021AF36961006CB323 /* Filter-athome@2x.png in Resources */,
 				1337EE3A1ACBD35D00F31D14 /* navbar-favourites-active@2x.png in Resources */,
+				13A4F6E51B1707640077892E /* category-9@2x.png in Resources */,
 				1337EE141ACBD35D00F31D14 /* header-rupee-active-up@2x.png in Resources */,
+				13A4F6DA1B16F9460077892E /* smiley-sad@2x.png in Resources */,
 				132275581AEF94E300F5D77F /* star_empty@2x.png in Resources */,
 				13E610391B05E00000B7D7FB /* merchant-haircut-deal@2x.png in Resources */,
 				13C002171AFB56010021D60E /* merchant-filter-distance-down@2x.png in Resources */,
@@ -1399,7 +1438,7 @@
 				1337EE3F1ACBD35D00F31D14 /* navbar-me@2x.png in Resources */,
 				1337EE1A1ACBD35D00F31D14 /* merchant-call@2x.png in Resources */,
 				13639A061AF36961006CB323 /* Filter-onsite@2x.png in Resources */,
-				13CE68AD1AE8DF150085C7B0 /* haircut-active@2x.png in Resources */,
+				13CE68AD1AE8DF150085C7B0 /* category-4active@2x.png in Resources */,
 				1337EE1E1ACBD35D00F31D14 /* merchant-edit@2x.png in Resources */,
 				137FFBC31ADE407800C77706 /* deal-coupon@2x.png in Resources */,
 				1337EE151ACBD35D00F31D14 /* header-rupee_up@2x.png in Resources */,
@@ -1410,9 +1449,10 @@
 				1337EE091ACBD35D00F31D14 /* filter-male-active@2x.png in Resources */,
 				1337EE181ACBD35D00F31D14 /* header_distance-active-up@2x.png in Resources */,
 				13CE68A11AE8DF150085C7B0 /* hair-active@2x.png in Resources */,
+				13A4F6E31B1707640077892E /* category-3active@2x.png in Resources */,
 				135B4C8A1A7F84DD00B64F30 /* Images.xcassets in Resources */,
 				1337EE2B1ACBD35D00F31D14 /* merchant-massage@2x.png in Resources */,
-				13CE68A91AE8DF150085C7B0 /* hair-acitve@2x.png in Resources */,
+				13CE68A91AE8DF150085C7B0 /* category-6active@2x.png in Resources */,
 				133C126B1B14799A00F5048B /* merchant-body-deal@2x.png in Resources */,
 				136399FA1AF3680A006CB323 /* Filter-rupee3@2x.png in Resources */,
 				13EC41711AD69031001FEDD7 /* home-banner@2x.png in Resources */,
@@ -1427,7 +1467,7 @@
 				1337EE121ACBD35D00F31D14 /* header-rating@2x.png in Resources */,
 				136399FB1AF3680A006CB323 /* Filter-rupee4@2x.png in Resources */,
 				1337EE0B1ACBD35D00F31D14 /* header-back@2x.png in Resources */,
-				13CE68A21AE8DF150085C7B0 /* Makeup@2x.png in Resources */,
+				13CE68A21AE8DF150085C7B0 /* category-8@2x.png in Resources */,
 				13639A051AF36961006CB323 /* Filter-onsite-active@2x.png in Resources */,
 				1398EE7F1AD649CB0037B793 /* merchant-rupee4@2x.png in Resources */,
 				1337EE1D1ACBD35D00F31D14 /* merchant-distance@2x.png in Resources */,
@@ -1452,7 +1492,7 @@
 				13E67C401AE4CD6B00F96A36 /* Deals.txt in Resources */,
 				13C0021D1AFB56010021D60E /* home-athome-active@2x.png in Resources */,
 				13E0CC371AF3A25D007C4738 /* Merchant-listing-item-call@2x.png in Resources */,
-				13CE68AE1AE8DF150085C7B0 /* Gym-active.png in Resources */,
+				13CE68AE1AE8DF150085C7B0 /* category-7active.png in Resources */,
 				1337EE281ACBD35D00F31D14 /* merchant-makeup-deal@2x.png in Resources */,
 				1337EE431ACBD35D00F31D14 /* registration-age@2x.png in Resources */,
 				1337EE391ACBD35D00F31D14 /* navbar-deals@2x.png in Resources */,
@@ -1466,9 +1506,11 @@
 				13C1C73F1AF39C430015F71E /* merchant-3.5-active@2x.png in Resources */,
 				1337EE071ACBD35D00F31D14 /* filter-female@2x.png in Resources */,
 				137B940F1AEE5D7D00BCB1E4 /* coupon-background@2x.png in Resources */,
+				13A4F6E61B1707640077892E /* category-9active@2x.png in Resources */,
 				138CAFDE1B00CD7700A708A9 /* placeholder@2x.png in Resources */,
 				1337EE441ACBD35D00F31D14 /* registration-email-active@2x.png in Resources */,
 				1337EE4C1ACBD35D00F31D14 /* registration-photo@2x.png in Resources */,
+				13A4F6E41B1707640077892E /* category-5@2x.png in Resources */,
 				13C002191AFB56010021D60E /* home-female-active@2x.png in Resources */,
 				13958F501AD7FCE700231794 /* filter-distance-selected@2x.png in Resources */,
 				13E0CC3B1AF3A28A007C4738 /* merchant-listing-fav@2x.png in Resources */,
@@ -1483,6 +1525,7 @@
 				1337EE3C1ACBD35D00F31D14 /* navbar-home-active@2x.png in Resources */,
 				1337EE3D1ACBD35D00F31D14 /* navbar-home@2x.png in Resources */,
 				13C0021C1AFB56010021D60E /* home-male@2x.png in Resources */,
+				13A4F6DC1B16F9460077892E /* smiley-happy@2x.png in Resources */,
 				13C002151AFB56010021D60E /* merchant-filter-rupee-down@2x.png in Resources */,
 				13E6103B1B05E01600B7D7FB /* merchant-haircut@2x.png in Resources */,
 				13E9B69A1AD3D0F5006DE3D8 /* Homepage-image@2x.png in Resources */,
@@ -1493,11 +1536,12 @@
 				1337EE371ACBD35D00F31D14 /* merchant-time@2x.png in Resources */,
 				1337EE161ACBD35D00F31D14 /* header-search@2x.png in Resources */,
 				1360CDB31AF8B55600245DD1 /* background@2x.png in Resources */,
+				13A4F6DD1B16F9460077892E /* smiley-sad-active@2x.png in Resources */,
 				13EC416F1AD68693001FEDD7 /* merchant-location@2x.png in Resources */,
-				13CE68A71AE8DF150085C7B0 /* gym@2x.png in Resources */,
+				13CE68A71AE8DF150085C7B0 /* category-7@2x.png in Resources */,
 				1337EE491ACBD35D00F31D14 /* registration-mobile@2x.png in Resources */,
 				1337EE481ACBD35D00F31D14 /* registration-mobile-active@2x.png in Resources */,
-				13CE68AC1AE8DF150085C7B0 /* massage-active@2x.png in Resources */,
+				13CE68AC1AE8DF150085C7B0 /* category-1active@2x.png in Resources */,
 				1337EE311ACBD35D00F31D14 /* merchant-removal-deal@2x.png in Resources */,
 				1337EE341ACBD35D00F31D14 /* merchant-service@2x.png in Resources */,
 				13C1C7441AF39D230015F71E /* 12@2x.png in Resources */,
@@ -1518,7 +1562,7 @@
 				1337EE041ACBD35D00F31D14 /* filter-both-active@2x.png in Resources */,
 				1360CDB51AF8B79E00245DD1 /* welcome@2x.png in Resources */,
 				1337EE261ACBD35D00F31D14 /* merchant-listing-favourite-active@2x.png in Resources */,
-				13CE68AA1AE8DF150085C7B0 /* face-active@2x.png in Resources */,
+				13CE68AA1AE8DF150085C7B0 /* category-2active@2x.png in Resources */,
 				1337EE0F1ACBD35D00F31D14 /* header-popularity-active@2x.png in Resources */,
 				1337EE0A1ACBD35D00F31D14 /* filter-male@2x.png in Resources */,
 				13C0021B1AFB56010021D60E /* home-male-active@2x.png in Resources */,

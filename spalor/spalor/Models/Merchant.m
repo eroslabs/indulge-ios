@@ -16,6 +16,7 @@
 - (id)initWithCoder:(NSCoder *)decoder {
     if (self = [super init]) {
         self.name = [decoder decodeObjectForKey:@"name"];
+        self.recommendedService = [decoder decodeObjectForKey:@"recommendedService"];
         self.ccAccepted = [decoder decodeObjectForKey:@"ccAccepted"];
         self.city = [decoder decodeObjectForKey:@"city"];
         self.country = [decoder decodeObjectForKey:@"country"];
@@ -53,6 +54,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     
     [encoder encodeObject:_name forKey:@"name"];
+    [encoder encodeObject:_recommendedService forKey:@"recommendedService"];
     [encoder encodeObject:_ccAccepted forKey:@"ccAccepted"];
     [encoder encodeObject:_city forKey:@"city"];
     [encoder encodeObject:_country forKey:@"country"];
@@ -113,19 +115,18 @@
         
         self.luxuryRating = [NSString stringWithFormat:@"%d",rndValue];
     }
+    self.recommendedService = @"";
     //if (![allProps containsObject:@"reviews"]) {
         //Add a dummy review
         
         NSDictionary *dummyReview = @{@"userId":@"1",@"merchantId":@"1",@"text":@"This is a good review",@"rating":@"3.5",@"name":@"manish"};
         self.reviews = [[NSMutableArray alloc] init];
-        //for (NSDictionary *reviewObject in dictionary[key]){
+    for (int i = 0 ; i<3 ; i++){
             Review *review = [[Review alloc] init];
             [review readFromDictionary:dummyReview];
         NSLog(@"review %@ %@ %@ %@ %@",review.name,review.userId,review.merchantId,review.rating,review.text);
             [self.reviews addObject:review];
-        //}
-    //}
-    
+    }
     self.image = @"";
     self.merchantImageUrls = [[NSMutableArray alloc] init];
     

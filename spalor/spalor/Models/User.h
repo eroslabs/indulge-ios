@@ -28,5 +28,6 @@
 
 
 - (void)readFromDictionary:(NSDictionary *)dictionary;
+- (void)saveArchivedUser:(NSData *)userData;
 
 @end

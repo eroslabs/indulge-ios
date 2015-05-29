@@ -33,22 +33,21 @@
 }
 
 -(void)setSelectedServicesString{
-    NSMutableString *selectedServiceNames = [[NSMutableString alloc] initWithString:@""];
     NSArray *selectedServiceIdsArray = [filterDict[@"services"] componentsSeparatedByString:@","];
+    NSMutableArray *selectedServiceNames = [[NSMutableArray alloc] initWithCapacity:selectedServiceIdsArray.count];
 
     for (ServiceCategory *category in arrayOfCategories) {
         
         for (Service *service in category.services) {
             
             if ([selectedServiceIdsArray containsObject:service.serviceId]) {
-                [selectedServiceNames appendFormat:service.name];
-                [selectedServiceNames appendFormat:@" "];
+                [selectedServiceNames addObject:service.name];
             }
         }
     }
     
-    if(selectedServiceNames.length > 0){
-        self.filterLabel.text = selectedServiceNames;
+    if(selectedServiceNames.count > 0){
+        self.filterLabel.text = [selectedServiceNames componentsJoinedByString:@", "];
     }
 }
 

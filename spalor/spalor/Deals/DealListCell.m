@@ -21,7 +21,7 @@
         
     }
     else{
-        self.distanceLabel.text = deal.distanceFromCurrentLocation;
+        self.distanceLabel.text = [NSString stringWithFormat:@"%@ m",deal.distanceFromCurrentLocation];
         
     }
     self.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];
@@ -37,15 +37,16 @@
     [_formatter setDateFormat:@"dd.MM.yyyy"];
     NSString *validTilldate=[_formatter stringFromDate:date];
     
-    [self setServiceCategoryImagesWithMerchant:deal];
+    [self setServiceCategoryImagesWithDeal:deal];
     
     self.validTillLabel.text = [NSString stringWithFormat:@"Valid till %@",validTilldate];
     return self;
 }
 
--(void)setServiceCategoryImagesWithMerchant:(Deal *)deal{
+-(void)setServiceCategoryImagesWithDeal:(Deal *)deal{
     
-    NSArray *categoryMap = @[@"merchant-massage",@"merchant-massage",@"merchant-nail",@"merchant-haircut",@"merchant-makeup",@"merchant-face",@"merchant-removal",@"merchant-massage",@"merchant-massage"];
+    NSArray *categoryMap = @[@"merchant-massage",@"merchant-makeup",@"merchant-nail",@"merchant-haircut",@"merchant-body",@"merchant-face",@"merchant-removal",@"merchant-pt",@"merchant-combo"];
+   
     for(int index = 0;index<8;index++){
         
         NSString *imageName = [NSString stringWithFormat:@"%@.png",categoryMap[index]];

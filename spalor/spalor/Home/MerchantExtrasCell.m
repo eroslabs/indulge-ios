@@ -10,6 +10,7 @@
 
 @implementation MerchantExtrasCell
 -(MerchantExtrasCell *)setupWithMerchant:(Merchant *)merchant{
+    self.extrasLabel.text = (merchant.ccAccepted)?@"Credit Cards accepted!":@"Credit Cards NOT accepted";
     return self;
 }
 @end

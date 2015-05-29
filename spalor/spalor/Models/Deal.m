@@ -16,7 +16,7 @@
     if (self = [super init]) {
     
         self.validTill = [decoder decodeObjectForKey:@"validTill"];
-        self.name = [decoder decodeObjectForKey:@"name"];
+        self.recommendedService = [decoder decodeObjectForKey:@"recommendedService"];
         self.image = [decoder decodeObjectForKey:@"image"];
         self.ccAccepted = [decoder decodeObjectForKey:@"ccAccepted"];
         self.name = [decoder decodeObjectForKey:@"name"];
@@ -32,7 +32,6 @@
         self.pincode = [decoder decodeObjectForKey:@"pincode"];
         self.rating = [decoder decodeObjectForKey:@"rating"];
         self.percentOff = [decoder decodeObjectForKey:@"percentOff"];
-        self.flatOff = [decoder decodeObjectForKey:@"flatOff"];
         self.geo = [decoder decodeObjectForKey:@"geo"];
         self.schedule = [decoder decodeObjectForKey:@"schedule"];
         self.couponCode = [decoder decodeObjectForKey:@"couponcode"];
@@ -49,10 +48,10 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     
     [encoder encodeObject:_validTill forKey:@"validTill"];
+    [encoder encodeObject:_recommendedService forKey:@"recommendedService"];
     [encoder encodeObject:_name forKey:@"name"];
     [encoder encodeObject:_image forKey:@"image"];
     [encoder encodeObject:_ccAccepted forKey:@"ccAccepted"];
-    [encoder encodeObject:_name forKey:@"name"];
     [encoder encodeObject:_services forKey:@"services"];
     [encoder encodeObject:_dealId forKey:@"dealId"];
     [encoder encodeObject:_flatOff forKey:@"flatOff"];
@@ -65,7 +64,6 @@
     [encoder encodeObject:_pincode forKey:@"pincode"];
     [encoder encodeObject:_rating forKey:@"rating"];
     [encoder encodeObject:_percentOff forKey:@"percentOff"];
-    [encoder encodeObject:_flatOff forKey:@"flatOff"];
     [encoder encodeObject:_geo forKey:@"geo"];
     [encoder encodeObject:_schedule forKey:@"schedule"];
     [encoder encodeObject:_couponCode forKey:@"couponcode"];
@@ -108,6 +106,7 @@
 
         self.luxuryRating = [NSString stringWithFormat:@"%d",rndValue];
     }
+    self.recommendedService = @"";
     
     for (NSString *key in allProps){
         
@@ -163,12 +162,12 @@
                 
                 self.schedule = [NSMutableArray new];
                 for (NSDictionary *scheduleObj in dictionary[key]) {
-                    Schedule *schedule = [[Schedule alloc] init];
-                    schedule.openingTime = [scheduleObj objectForKey:@"openingTime"];
-                    schedule.closingTime = [scheduleObj objectForKey:@"closingTime"];
-                    schedule.weekSchedule = [scheduleObj objectForKey:@"weekSchedule"];
+                    Schedule *object = [[Schedule alloc] init];
+                    object.openingTime = [scheduleObj objectForKey:@"openingTime"];
+                    object.closingTime = [scheduleObj objectForKey:@"closingTime"];
+                    object.weekSchedule = [scheduleObj objectForKey:@"weekSchedule"];
                     
-                    [self.schedule addObject:schedule];
+                    [self.schedule addObject:object];
                     
                 }
                 

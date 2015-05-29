@@ -12,7 +12,7 @@
 #import "Service.h"
 
 @interface FilterDetailViewController (){
-    int selectedCategory;
+    ServiceCategory *selectedCategory;
     NSMutableDictionary *selectedServicesDictionary;
     NSMutableString *selectedServiceids;
 
@@ -27,9 +27,6 @@
     // Do any additional setup after loading the view.
     selectedServicesDictionary = [NSMutableDictionary new];
     selectedServiceids = [[NSMutableString alloc] initWithString:@""];
-
-    selectedCategory = 0;
-
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -50,15 +47,17 @@
 
     for (ServiceCategory *category in self.arrayOfCategories) {
         
+        NSLog(@"category name %@ id %@",category.name,category.categoryId);
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
         [button setTitle:(category.name)?category.name:@"BLANK" forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@.png",category.name]] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",category.name]] forState:UIControlStateSelected];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"category-%@.png",category.categoryId]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"category-%@active.png",category.categoryId]] forState:UIControlStateSelected];
 
         button.frame = CGRectMake(lastX+button.frame.size.width+10,self.allCategoriesScrollView.bounds.origin.y,50,52);
         lastX += button.frame.size.width + 20;
-        button.tag = index;
+        button.tag = category.categoryId.intValue;
         [button addTarget:self action:@selector(changeSelectedCategory:) forControlEvents:UIControlEventTouchUpInside];
         self.allCategoriesScrollView.contentSize = CGSizeMake(lastX+button.frame.size.width+10, self.allCategoriesScrollView.contentSize.height);
         [self.allCategoriesScrollView addSubview:button];
@@ -70,7 +69,7 @@
                 int tag = service.serviceId.integerValue;
                 NSLog(@"putting %@ as selected for category %d",service.name,index);
                 
-                [self createandAddServiceButtonforServiceName:tag andIndex:serviceIndex fromCategory:index];
+                [self createandAddServiceButtonforServiceName:tag andIndex:serviceIndex fromCategory:category];
             }
             
             serviceIndex++;
@@ -78,13 +77,28 @@
         index++;
 
     }
+    
+    [self changeSelectedCategory:[self.allCategoriesScrollView viewWithTag:1]];
 
 }
 
 -(void)changeSelectedCategory:(UIButton *)button{
-    selectedCategory = button.tag;
-    button.selected = !button.selected;
+    
+    
+    for (ServiceCategory *category in self.arrayOfCategories) {
+        if (category.categoryId.intValue == button.tag) {
+            selectedCategory = category;
+        }
+    }
+    
+    for (UIButton *button in self.allCategoriesScrollView.subviews) {
+        if ([button isKindOfClass:[UIButton class]]) {
+            button.selected = (button.tag == selectedCategory.categoryId.intValue)?YES:NO;
+        }
+    }
+    
     [self.tableview reloadData];
+
 }
 
 
@@ -135,8 +149,7 @@
 }
 
 -(IBAction)selectCategory:(UIButton *)sender{
-    selectedCategory = sender.tag;
-    [self.tableview reloadData];
+    [self changeSelectedCategory:sender];
 }
 
 #pragma mark - Table View
@@ -146,9 +159,8 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    ServiceCategory *category = self.arrayOfCategories[selectedCategory];
-    NSLog(@"category %@ %d",category.name,category.services.count);
-    NSInteger numOfRows = category.services.count;
+    NSLog(@"category %@ %d",selectedCategory.name,selectedCategory.services.count);
+    NSInteger numOfRows = selectedCategory.services.count;
     return numOfRows;
 }
 
@@ -162,11 +174,18 @@
     NSString *identifier =  @"servicesCellIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    ServiceCategory *category = self.arrayOfCategories[selectedCategory];
+    ServiceCategory *category = selectedCategory;
     Service *service = category.services[indexPath.row];
-    if (service.name) {
-        cell.textLabel.text = service.name;
+    if (![service.name isKindOfClass:[NSNull class]]) {
+        cell.textLabel.text = [service.name capitalizedString];
     }
+    else{
+        cell.textLabel.text = @"Null Data From Server";
+    }
+    
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:13.0];
+
     cell.tag = service.serviceId.integerValue;
     return cell;
 }
@@ -188,10 +207,14 @@
 
 }
 
--(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndex:(int)index fromCategory:(int)categoryIndex{
+-(void)createandAddServiceButtonforServiceName:(NSInteger)serviceTag andIndex:(int)index fromCategory:(ServiceCategory *)category{
     
-    ServiceCategory *category = self.arrayOfCategories[categoryIndex];
     Service *service = category.services[index];
+    
+    if ([service.name isKindOfClass:[NSNull class]]) {
+        return;
+    }
+    
     int currentTotalButtons = [self numberOfbuttonsinScrollView:self.selectedServicesScrollView];
 
     [selectedServicesDictionary addEntriesFromDictionary:@{[@(serviceTag) stringValue]:@(currentTotalButtons)}];
@@ -249,8 +272,13 @@
     
     [self.selectedServicesScrollView addSubview:serviceButton];
     
-    self.selectedServicesScrollView.contentSize = CGSizeMake(serviceButton.frame.origin.x+serviceButton.frame.size.width, self.selectedServicesScrollView.contentSize.height);
+    [self.selectedServicesScrollView setContentOffset:CGPointMake(serviceButton.frame.origin.x+serviceButton.frame.size.width+10, 0)];
+    
+    self.selectedServicesScrollView.contentSize = CGSizeMake(serviceButton.frame.origin.x+serviceButton.frame.size.width+10, self.selectedServicesScrollView.contentSize.height);
+    
+
 }
+
 
 -(void)removeThisService:(UIButton *)sender{
     

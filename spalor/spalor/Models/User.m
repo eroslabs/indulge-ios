@@ -80,5 +80,13 @@
 
 }
 
+- (void)saveArchivedUserData:(NSData *)userData{
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYUSERSTORE];
+    [[NSUserDefaults standardUserDefaults] setObject:userData forKey:MYUSERSTORE];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
 
 @end

@@ -85,8 +85,7 @@
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
     user.looks = [NSString stringWithFormat:@"%lu",(unsigned long)myLookBookImagesArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
-    
+    [user saveArchivedUser:archivedUser];
     [[NSUserDefaults standardUserDefaults] setObject:myLookBookImagesArray forKey:MYLOOKBOOKSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [picker dismissViewControllerAnimated:YES completion:NULL];

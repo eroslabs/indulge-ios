@@ -488,7 +488,7 @@
     
     user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-    [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+    [user saveArchivedUser:archivedUser];
     
     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];

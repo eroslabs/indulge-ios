@@ -60,9 +60,8 @@
 
 - (void)readFromDictionary:(NSDictionary *)dictionary{
     
-    NSArray *allProps = [self allPropertyNames];
     
-    for (NSString *key in allProps){
+    for (NSString *key in [dictionary allKeys]){
         
         //NSLog(@"KEY %@",key);
         

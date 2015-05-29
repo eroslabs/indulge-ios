@@ -141,44 +141,107 @@
 
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    NSInteger numOfSections = 5;
+    return numOfSections;
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numOfRows = 10;
+    NSInteger numOfRows = 0;
+    
+    if(section == 0){
+        numOfRows = 5;
+    }
+    else if(section == 1){
+        numOfRows = self.merchant.deals.count;//This is deals
+    }
+    else if(section == 2){
+        numOfRows = 1;//This is for map
+    }
+    else if(section == 3){
+        numOfRows = self.merchant.reviews.count;//This is for reviews
+    }
+    else if(section == 4){
+        numOfRows = 1;//This is for extra services
+    }
+    else{
+        numOfRows = 0;//This for found a glitch
+        
+    }
+    
     return numOfRows;
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    switch (indexPath.row) {
+    NSString *sectionName;
+    switch (section)
+    {
         case 0:
-            return 160;
+            sectionName = NSLocalizedString(@"Info", @"Info");
             break;
         case 1:
-            return 79;
+            sectionName = NSLocalizedString(@"Deals", @"Deals");
             break;
         case 2:
-            return 100;
+            sectionName = NSLocalizedString(@"Directions", @"Directions");
             break;
         case 3:
-            return 100;
+            sectionName = NSLocalizedString(@"Reviews", @"Reviews");
             break;
         case 4:
-            return 60;
+            sectionName = NSLocalizedString(@"See all Reviews", @"See all Reviews");
             break;
-        case 5:
-            return 93;
+            // ...
+        default:
+            sectionName = NSLocalizedString(@"Found a glitch", @"Found a glitch"); ;
             break;
-        case 6:
+    }
+    return sectionName;
+}
+
+
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:{
+            switch(indexPath.row){
+                case 0:
+                    return 160;
+                    break;
+                case 1:
+                    return 79;
+                    break;
+                case 2:
+                    return 100;
+                    break;
+                case 3:
+                    return 100;
+                    break;
+                case 4:
+                    return 60;
+                    break;
+                case 5:
+                    return 93;
+                    break;
+            }
+        }
+        case 1:
             return 100;
             break;
-        case 7:
+        case 2:
             return 92;
             break;
-        case 8:
+        case 3:
             return 63;
             break;
-        case 9:
+        case 4:
             return 63;
+            break;
+        case 5:
+            return 1;
             break;
         default:
             break;
@@ -191,67 +254,73 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier;
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0:{
-            identifier = @"InfoCell";
-            MerchantInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return cell;
+            switch (indexPath.row) {
+                case 0:{
+                    identifier = @"InfoCell";
+                    MerchantInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    cell = [cell setupWithMerchant:self.merchant];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
+                    break;
+                }
+                case 1:{
+                    identifier = @"SocialCell";
+                    MerchantSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    cell = [cell setupWithMerchant:self.merchant];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.favoriteButton.selected = ([myMerchantsArray containsObject:myEncodedMerchant])?YES:NO;
+                    return cell;
+                    break;
+                }
+                case 2:{
+                    identifier = @"ScheduleCell";
+                    MerchantScheduleCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    cell = [cell setupWithMerchant:self.merchant];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    return cell;
+                    break;
+                }
+                case 3:{
+                    identifier = @"PriceRangeCell";
+                    MerchantPriceRangeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    cell = [cell setupWithMerchant:self.merchant];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    return cell;
+                    break;
+                }
+                case 4:{
+                    identifier = @"RecommendedCell";
+                    MerchantRecommendedCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    cell = [cell setupWithMerchant:self.merchant];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    return cell;
+                    break;
+                }
+            }
             break;
         }
+        
         case 1:{
-            identifier = @"SocialCell";
-            MerchantSocialCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.favoriteButton.selected = ([myMerchantsArray containsObject:myEncodedMerchant])?YES:NO;
-            return cell;
-            break;
+                    identifier = @"DealCell";
+                    MerchantDealCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    if(self.merchant.deals.count>0){
+                        cell = [cell setupWithMerchant:self.merchant.deals[0]];
+                    }
+                    else{
+                        cell = [cell setupWitDefault];
+                    }
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    
+                    return cell;
+                    break;
         }
+        
         case 2:{
-            identifier = @"ScheduleCell";
-            MerchantScheduleCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-            return cell;
-            break;
-        }
-        case 3:{
-            identifier = @"PriceRangeCell";
-            MerchantPriceRangeCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-            return cell;
-            break;
-        }
-        case 4:{
-            identifier = @"RecommendedCell";
-            MerchantRecommendedCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell = [cell setupWithMerchant:self.merchant];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-            return cell;
-
-            break;
-        }
-        case 5:{
-            identifier = @"DealCell";
-            MerchantDealCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if(self.merchant.deals.count>0){
-                cell = [cell setupWithMerchant:self.merchant.deals[0]];
-            }
-            else{
-                cell = [cell setupWitDefault];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-            return cell;
-            break;
-        }
-        case 6:{
             identifier = @"MapCell";
             MerchantMapCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
@@ -260,7 +329,7 @@
             return cell;
             break;
         }
-        case 7:{
+        case 3:{
             identifier = @"RatingCell";
             MerchantRatingCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (self.merchant.reviews.count == 0)
@@ -273,7 +342,7 @@
             return cell;
             break;
         }
-        case 8:{
+        case 4:{
             identifier = @"ExtrasCell";
             MerchantExtrasCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
@@ -282,7 +351,7 @@
             return cell;
             break;
         }
-        case 9:{
+        case 5:{
             identifier = @"ErrorCell";
             MerchantErrorCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             cell = [cell setupWithMerchant:self.merchant];
@@ -299,23 +368,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 7) {
-        // Open Reviews Segue
-        
-        //Commented if for testing
-        //if (self.merchant.reviews.count > 0)
-            [self performSegueWithIdentifier:@"AllReviews" sender:nil];
-    }
-    else if (indexPath.row == 9){
-        //Open Error segue
-        [self performSegueWithIdentifier:@"ReportError" sender:nil];
-
-    }
-    else if (indexPath.row == 0){
-        //Open Rating Segue
-        [self performSegueWithIdentifier:@"Rate" sender:nil];
-        
-    }
 }
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -325,6 +377,91 @@
         [(ParallaxHeaderView *)self.mainTableView.tableHeaderView layoutHeaderViewForScrollViewOffset:self.mainTableView.contentOffset];
     }
 }
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    
+    NSString *sectionName;
+    
+
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithRed:0.9254f green:0.9254f blue:0.9254f alpha:1.0f];
+
+    switch (section)
+    {
+        case 0:
+            sectionName = NSLocalizedString(@"", @"");
+            headerView.frame = CGRectMake(0, 0, 1, 1);
+            break;
+        case 1:
+            sectionName = NSLocalizedString(@"", @"");
+            headerView.frame = CGRectMake(0, 0, 1, 1);
+            break;
+        case 2:
+            sectionName = NSLocalizedString(@"Directions", @"Directions");
+            break;
+        case 3:{
+            sectionName = NSLocalizedString(@"Reviews", @"Reviews");
+            UIButton *viewAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            viewAllButton.tag = section;
+
+            [viewAllButton setTitle:@"Write Review" forState:UIControlStateNormal];
+            viewAllButton.frame = CGRectMake(tableView.frame.size.width - 100, 5, 100, 20);
+            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11.0];
+            [viewAllButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            [viewAllButton addTarget:self action:@selector(viewAll:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [headerView addSubview:viewAllButton];
+
+            break;
+        }
+        case 4:{
+            sectionName = NSLocalizedString(@"", @"");
+            UIButton *viewAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            viewAllButton.tag = section;
+
+            [viewAllButton setTitle:@"See All Reviews" forState:UIControlStateNormal];
+            viewAllButton.frame = CGRectMake(tableView.frame.size.width - 100, 5, 100, 20);
+            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11.0];
+            [viewAllButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            [viewAllButton addTarget:self action:@selector(viewAll:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [headerView addSubview:viewAllButton];
+
+            break;
+        }
+            // ...
+        default:{
+            sectionName = NSLocalizedString(@"", @"") ;
+            UIButton *viewAllButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            viewAllButton.tag = section;
+
+            [viewAllButton setTitle:@"Found a glitch" forState:UIControlStateNormal];
+            viewAllButton.frame = CGRectMake(tableView.frame.size.width - 100, 5, 100, 20);
+            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11.0];
+            [viewAllButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            [viewAllButton addTarget:self action:@selector(viewAll:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [headerView addSubview:viewAllButton];
+
+            break;
+        }
+    }
+
+    
+    
+    UILabel *myLabel = [[UILabel alloc] init];
+    myLabel.frame = CGRectMake(20, 5, 150, 20);
+    myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
+    
+    myLabel.text = sectionName;
+    [headerView addSubview:myLabel];
+
+    
+    return headerView;
+    
+}
+
 
 #pragma mark -
 #pragma mark - Segue
@@ -362,6 +499,37 @@
 
 
 #pragma mark - User Actions 
+
+
+-(IBAction)viewAll:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    switch (senderButton.tag)
+    {
+        case 3:{
+            //Show all looks
+            [self performSegueWithIdentifier:@"Rate" sender:nil];
+            
+            break;
+        }
+        case 4:{
+            //Show all looks
+            [self performSegueWithIdentifier:@"AllReviews" sender:nil];
+            
+            break;
+        }
+        case 5:{
+            //Show all deals
+            [self performSegueWithIdentifier:@"ReportError" sender:nil];
+            
+            break;
+        }
+        default:{
+            break;
+        }
+    }
+    
+}
+
 
 -(IBAction)redeem:(id)sender{
     [self performSegueWithIdentifier:@"ShowDealDetail" sender:nil];

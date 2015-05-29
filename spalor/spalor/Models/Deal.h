@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSString *homeService;
 @property (nonatomic, strong) NSString *luxuryRating;
 @property (nonatomic, strong) NSString *finalWeekSchedule;
+@property (nonatomic, strong) NSString *recommendedService;
 @property (nonatomic, strong) NSString *distanceFromCurrentLocation;
 
 //Relations
