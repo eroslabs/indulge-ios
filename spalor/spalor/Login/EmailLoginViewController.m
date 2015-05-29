@@ -35,7 +35,7 @@
                         User *user = [[User alloc] init];
                         [user readFromDictionary:userDict];
                         NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:user];
-                        [user saveArchivedUser:userData];
+                        [user saveArchivedUserData:userData];
                         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         dispatch_async(dispatch_get_main_queue(), ^{

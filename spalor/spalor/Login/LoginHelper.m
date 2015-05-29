@@ -36,6 +36,8 @@
 
 -(void)connectWithFacebook{
     //No token data so new install
+    [FBSession.activeSession closeAndClearTokenInformation];
+
     NSArray *permissions = @[@"email", @"user_birthday"];
     [self loginToFacebookWithPermissions:permissions];
 }
@@ -45,7 +47,6 @@
     
     if ([[FBSession activeSession] isOpen])
     {
-        
         [[FBRequest requestForMe] startWithCompletionHandler:
          ^(FBRequestConnection *connection,NSDictionary<FBGraphUser> *guser,NSError *error) {
              if (error == nil) {
@@ -57,15 +58,16 @@
                      //fbtoken = @"CAAIkq35CvdoBAFcd8YOHEZCvRoXWvS5NoaJ3iyGfQXv5NXMj4l538F2xIDNLSAvhfaPgJu2lNHTICQS8j5FSFv3ysFZA5LpUQFmGu7VizoRylFhZC9QjGhrXhrw93DTI1np8tyy3f323vAH73GyMlZBz66o1pZB0T0ZBg4SDBK4X40CgNyTM62fkkwt97bzimt23ZCmh1wZA0ZAuRBZAZBKgRE4mORZBMg96TsSgQD1A4wqKxQZDZD";
                      
                      NSString *fbtoken = FBSession.activeSession.accessTokenData.accessToken;
-                     user.facebookId = fbtoken;
+                     user.facebookId = guser[@"id"];
                      user.name = guser.name;
                      user.dob = guser[@"birthday"];
                      user.mail = guser[@"email"];
-                     user.gender = guser[@"gender"];
+                     
+                     user.gender = ([guser[@"gender"] isEqualToString:@"male"])?@"0":@"1";
                      
                      DLog(@" FB USER %@",guser);
                      NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-                     [user saveArchivedUser:archivedUser];
+                     [user saveArchivedUserData:archivedUser];
                      
                      [self userLoggedInwithFBUserObject:user];
                  }
@@ -107,6 +109,7 @@
                  }];
                  
              }
+
              else{
                  [FBSession.activeSession closeAndClearTokenInformation];
                  
@@ -247,6 +250,8 @@
             }
             else{
                 //Show Error Alert
+                [FBSession.activeSession closeAndClearTokenInformation];
+
                 [[NSNotificationCenter defaultCenter] postNotificationName:USER_LOGIN_FAILED object:nil];
 
             }
@@ -255,7 +260,9 @@
         }
         else{
             //Show Error alert
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGIN_FAILED" object:nil];
+            [FBSession.activeSession closeAndClearTokenInformation];
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_LOGIN_FAILED object:nil];
 
         }
     }];

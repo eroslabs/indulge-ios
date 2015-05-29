@@ -26,6 +26,9 @@
 
     }
     
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
+    self.profileImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.profileImageView.clipsToBounds = YES;
     
     NSString *urlString = (merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:STATIC_IMAGE_SOURCE];
 

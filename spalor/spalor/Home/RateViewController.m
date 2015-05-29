@@ -35,6 +35,16 @@
     [reviewDict addEntriesFromDictionary:@{@"merchantId":self.merchantId}];
     [reviewDict addEntriesFromDictionary:@{@"userId":@"8"}];
     [reviewDict addEntriesFromDictionary:@{@"rating":@(overallValue),@"cleanlinessRating":@(cleanlinessValue),@"serviceRating":@(serviceQualityValue)}];
+    
+    [self.overallSlider setThumbImage:[UIImage imageNamed:@"rate-roller.png"] forState:UIControlStateNormal];
+    [self.overallSlider setMinimumTrackImage:[UIImage imageNamed:@"rating-colorbar.png"] forState:UIControlStateNormal];
+    
+    [self.cleanlinessSlider setThumbImage:[UIImage imageNamed:@"rate-roller.png"] forState:UIControlStateNormal];
+    [self.cleanlinessSlider setMinimumTrackImage:[UIImage imageNamed:@"rating-colorbar.png"] forState:UIControlStateNormal];
+
+    [self.serviceQualitySlider setThumbImage:[UIImage imageNamed:@"rate-roller.png"] forState:UIControlStateNormal];
+    [self.serviceQualitySlider setMinimumTrackImage:[UIImage imageNamed:@"rating-colorbar.png"] forState:UIControlStateNormal];
+
 }
 
 - (void)didReceiveMemoryWarning {

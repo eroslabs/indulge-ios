@@ -142,7 +142,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSInteger numOfSections = 5;
+    NSInteger numOfSections = 6;
     return numOfSections;
 }
 
@@ -165,8 +165,8 @@
     else if(section == 4){
         numOfRows = 1;//This is for extra services
     }
-    else{
-        numOfRows = 0;//This for found a glitch
+    else if(section == 5){
+        numOfRows = 1;//This for found a glitch
         
     }
     
@@ -179,7 +179,7 @@
     switch (section)
     {
         case 0:
-            sectionName = NSLocalizedString(@"Info", @"Info");
+            return nil;
             break;
         case 1:
             sectionName = NSLocalizedString(@"Deals", @"Deals");
@@ -229,7 +229,7 @@
             }
         }
         case 1:
-            return 100;
+            return 94;
             break;
         case 2:
             return 92;
@@ -391,11 +391,10 @@
     {
         case 0:
             sectionName = NSLocalizedString(@"", @"");
-            headerView.frame = CGRectMake(0, 0, 1, 1);
+            return nil;
             break;
         case 1:
-            sectionName = NSLocalizedString(@"", @"");
-            headerView.frame = CGRectMake(0, 0, 1, 1);
+            sectionName = NSLocalizedString(@"Deals", @"Deals");
             break;
         case 2:
             sectionName = NSLocalizedString(@"Directions", @"Directions");
@@ -449,13 +448,15 @@
     }
 
     
-    
-    UILabel *myLabel = [[UILabel alloc] init];
-    myLabel.frame = CGRectMake(20, 5, 150, 20);
-    myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
-    
-    myLabel.text = sectionName;
-    [headerView addSubview:myLabel];
+    if (sectionName.length>0) {
+        UILabel *myLabel = [[UILabel alloc] init];
+        myLabel.frame = CGRectMake(20, 5, 150, 20);
+        myLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
+        
+        myLabel.text = sectionName;
+        [headerView addSubview:myLabel];
+    }
+   
 
     
     return headerView;

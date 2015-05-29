@@ -414,8 +414,8 @@
         NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:deal];
 
         cell.favoriteButton.selected = ([myDealsArray containsObject:dealData])?YES:NO;
-        cell.nameLabel.text = deal.name;
-        cell.addressLabel.text = deal.address;
+        cell.nameLabel.text = [deal.name uppercaseString];
+        cell.addressLabel.text = [deal.address uppercaseString];
        
         if(deal.distanceFromCurrentLocation.floatValue == 0.0){
             cell.distanceLabel.hidden = YES;
@@ -488,7 +488,7 @@
     
     user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-    [user saveArchivedUser:archivedUser];
+    [user saveArchivedUserData:archivedUser];
     
     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];

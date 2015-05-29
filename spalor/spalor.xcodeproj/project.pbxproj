@@ -111,6 +111,8 @@
 		133C126B1B14799A00F5048B /* merchant-body-deal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 133C12691B14799A00F5048B /* merchant-body-deal@2x.png */; };
 		133C126D1B148EBD00F5048B /* merchant-nail-deal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 133C126C1B148EBD00F5048B /* merchant-nail-deal@2x.png */; };
 		133C126F1B148F5700F5048B /* facebooklogin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 133C126E1B148F5700F5048B /* facebooklogin@2x.png */; };
+		1343F3C11B1839F700CBBB2C /* rating-colorbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1343F3C01B1839F700CBBB2C /* rating-colorbar@2x.png */; };
+		1343F3C31B183D7600CBBB2C /* rate-roller@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1343F3C21B183D7600CBBB2C /* rate-roller@2x.png */; };
 		1347FD8B1ADBC96F007EF73D /* header-back-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */; };
 		1347FD8E1ADBCC03007EF73D /* NearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */; };
 		134CED581AEA5CD7009C5714 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 134CED571AEA5CD7009C5714 /* MapKit.framework */; };
@@ -431,6 +433,8 @@
 		133C12691B14799A00F5048B /* merchant-body-deal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-body-deal@2x.png"; sourceTree = "<group>"; };
 		133C126C1B148EBD00F5048B /* merchant-nail-deal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-nail-deal@2x.png"; sourceTree = "<group>"; };
 		133C126E1B148F5700F5048B /* facebooklogin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebooklogin@2x.png"; sourceTree = "<group>"; };
+		1343F3C01B1839F700CBBB2C /* rating-colorbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rating-colorbar@2x.png"; sourceTree = "<group>"; };
+		1343F3C21B183D7600CBBB2C /* rate-roller@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-roller@2x.png"; sourceTree = "<group>"; };
 		1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-back-white@2x.png"; sourceTree = "<group>"; };
 		1347FD8C1ADBCC03007EF73D /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NearbyViewController.h; path = Nearby/NearbyViewController.h; sourceTree = "<group>"; };
 		1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NearbyViewController.m; path = Nearby/NearbyViewController.m; sourceTree = "<group>"; };
@@ -811,6 +815,8 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1343F3C21B183D7600CBBB2C /* rate-roller@2x.png */,
+				1343F3C01B1839F700CBBB2C /* rating-colorbar@2x.png */,
 				13A4F6D21B16F9460077892E /* smiley-poker-right@2x.png */,
 				13A4F6D31B16F9460077892E /* smiley-poker-left@2x.png */,
 				13A4F6D41B16F9460077892E /* smiley-sad@2x.png */,
@@ -1544,12 +1550,14 @@
 				13CE68AC1AE8DF150085C7B0 /* category-1active@2x.png in Resources */,
 				1337EE311ACBD35D00F31D14 /* merchant-removal-deal@2x.png in Resources */,
 				1337EE341ACBD35D00F31D14 /* merchant-service@2x.png in Resources */,
+				1343F3C31B183D7600CBBB2C /* rate-roller@2x.png in Resources */,
 				13C1C7441AF39D230015F71E /* 12@2x.png in Resources */,
 				13C0021F1AFB56010021D60E /* home-athome@2x.png in Resources */,
 				13FAE2421AB196E500A6540D /* GooglePlus.bundle in Resources */,
 				132BD2B51A88877F007F5D89 /* LICENSE in Resources */,
 				1337EE061ACBD35D00F31D14 /* filter-female-active@2x.png in Resources */,
 				13E0CC351AF3A22C007C4738 /* Merchant-listing-location.png in Resources */,
+				1343F3C11B1839F700CBBB2C /* rating-colorbar@2x.png in Resources */,
 				1337EE1B1ACBD35D00F31D14 /* merchant-camera@2x.png in Resources */,
 				13E610371B05DED300B7D7FB /* merchant-massage-deal@2x.png in Resources */,
 				13C0021A1AFB56010021D60E /* home-female@2x.png in Resources */,

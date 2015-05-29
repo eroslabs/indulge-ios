@@ -127,21 +127,27 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AUTHENTICATED"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        [spinner dismiss];
-        self.loaderContainerView.hidden = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [spinner dismiss];
+            self.loaderContainerView.hidden = YES;
+            
+            CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
+            self.navigationController.navigationBarHidden=YES;
+            [self.navigationController pushViewController:obj animated:YES];
+        });
 
-        CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-        self.navigationController.navigationBarHidden=YES;
-        [self.navigationController pushViewController:obj animated:YES];
+        
     }
 
 
 }
 
 -(void)userLoginFailed{
-    [spinner dismiss];
-    self.loaderContainerView.hidden = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [spinner dismiss];
+        self.loaderContainerView.hidden = YES;
+
+    });
 
 }
 

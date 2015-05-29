@@ -14,7 +14,7 @@
 #define MYDEALSSTORE @"MyDealsArray"
 #define MYDEALSIMAGESSTORE @"MyDealsImagesArray"
 #define MYMERCHANTSSTORE @"MyMerchantsArray"
-#define MYUSERSTORE @"MyMerchantsArray"
+#define MYUSERSTORE @"UserStore"
 #define MYLOCALFILTERSTORE @"MyLocalFilterStore"
 #define INDULGE_MERCHANT_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/merchant/"
 #define INDULGE_USER_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/user/"
