@@ -44,7 +44,7 @@
 
 //Images
 @property (nonatomic, strong) NSMutableArray *merchantImageUrls;
-@property (nonatomic, strong) NSMutableArray *rateCardImageUrls;
+@property (nonatomic, strong) NSMutableArray *menus;
 
 //Categories / Services
 @property (nonatomic, strong) NSMutableArray *categoryIds;

@@ -125,26 +125,42 @@
             
             NSLog(@"response string %@",responseDict);
                 
-            if (responseDict) {
-                arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
-                if (arrayOfMerchants.count>0) {
+            if (responseDict[@"error"]) {
+                dispatch_async (dispatch_get_main_queue(), ^{
+                    [spinner dismiss];
+                    [spinner removeFromSuperview];
+                    //Show Error Alert
+                    UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Redeem Error" message:responseDict[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [redeemError show];
+                    self.loaderContainerView.hidden = YES;
                     
-                    //Only put if there was no error
-                    [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"MerchantResponse"];
-                    
-                    arrayOfMerchants = [self sortedMerchantArray:arrayOfMerchants];
-                    
-                }
+                });
             }
-            
-            NSLog(@"array of merchants %@",arrayOfMerchants);
-            
+            else{
+                if (responseDict) {
+                    arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
+                    if (arrayOfMerchants.count>0) {
+                        
+                        //Only put if there was no error
+                        [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"MerchantResponse"];
+                        
+                        arrayOfMerchants = [self sortedMerchantArray:arrayOfMerchants];
+                        
+                    }
+                }
+                
+                NSLog(@"array of merchants %@",arrayOfMerchants);
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [spinner dismiss];
                     self.totalCountLabel.text = [NSString stringWithFormat:@"%lu Items",(unsigned long)arrayOfMerchants.count];
                     self.loaderContainerView.hidden = YES;
                     [self.tableview reloadData];
                 });
+            }
+
+                
+            
         }
         else{
             NSLog(@"error %@",[error localizedDescription]);
@@ -294,8 +310,6 @@
 -(BOOL)isMerchantPassedFromLocalFilter:(Merchant *)merchant{
     
     NSLog(@"keys %@",[localFilterDict allKeys]);
-    
-
     
     for (NSString *key in [localFilterDict allKeys]) {
         

@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.commentTextView.layer.borderColor = [UIColor brownColor].CGColor;
+    self.commentTextView.layer.cornerRadius = 4.0f;
     self.commentTextView.delegate = self;
     overallValue = (int) roundf(self.overallSlider.value);
     cleanlinessValue = (int) roundf(self.cleanlinessSlider.value);

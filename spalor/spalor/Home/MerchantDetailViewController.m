@@ -25,6 +25,7 @@
 #import "RateViewController.h"
 #import "ReportErrorViewController.h"
 #import "DealDetailsViewController.h"
+#import "RateCardsViewController.h"
 
 @interface MerchantDetailViewController (){
     NSMutableArray *myMerchantsArray;
@@ -484,6 +485,10 @@
         DealDetailsViewController *controller = (DealDetailsViewController *)segue.destinationViewController;
         controller.deal = self.merchant.deals[0];
     }
+    if ([segue.identifier isEqualToString:@"ShowRateCards"]) {
+        RateCardsViewController *controller = (RateCardsViewController *)segue.destinationViewController;
+        controller.imageUrls = self.merchant.menus;
+    }
 }
 
 
@@ -531,6 +536,13 @@
     
 }
 
+
+-(IBAction)showAllRateCards:(id)sender{
+    if (self.merchant.menus.count>0) {
+        [self performSegueWithIdentifier:@"ShowRateCards" sender:nil];
+    }
+
+}
 
 -(IBAction)redeem:(id)sender{
     [self performSegueWithIdentifier:@"ShowDealDetail" sender:nil];

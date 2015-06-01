@@ -7,6 +7,7 @@
 //
 
 #import "DealTimingCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation DealTimingCell
 -(DealTimingCell *)setupCellWithDeal:(Deal *)deal{
@@ -86,6 +87,13 @@
             }
         
         }
+    }
+
+    if (deal.menus.count>0) {
+        NSString *url = [NSURL URLWithString:deal.menus[0]];
+        [self.rateCardImageview setImageWithURL:url
+                               placeholderImage:[UIImage imageNamed:@""] options:SDWebImageProgressiveDownload ];
+        
     }
 
     //self.rateCardImageview.image = [UIImage imageNamed:@""];

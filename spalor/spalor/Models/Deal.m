@@ -41,6 +41,7 @@
         self.serviceNames = [decoder decodeObjectForKey:@"serviceNames"];
         self.categoryIds = [decoder decodeObjectForKey:@"categoryIds"];
         self.finalWeekSchedule = [decoder decodeObjectForKey:@"finalWeekSchedule"];
+        self.menus = [decoder decodeObjectForKey:@"menus"];
     }
     return self;
 }
@@ -73,6 +74,7 @@
     [encoder encodeObject:_serviceNames forKey:@"serviceNames"];
     [encoder encodeObject:_finalWeekSchedule forKey:@"finalWeekSchedule"];
     [encoder encodeObject:_distanceFromCurrentLocation forKey:@"distanceFromCurrentLocation"];
+    [encoder encodeObject:_menus forKey:@"menus"];
 }
 
 - (NSArray *)allPropertyNames
@@ -180,6 +182,12 @@
                     string = [string substringToIndex:[string length] - 3];
                 }
                 [self setValue:string forKey:key];
+            }
+            else if ([key isEqualToString:@"menus"]){
+                self.menus = [NSMutableArray new];
+                for (NSDictionary *menuObj in dictionary[key]) {
+                    [self.menus addObject:[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,menuObj[@"image"]]];
+                }
             }
             else if (![dictionary[key] isKindOfClass:[NSString class]] && ![dictionary[key] isKindOfClass:[NSArray class]]) {
                 [self setValue:[dictionary[key] stringValue] forKey:key];

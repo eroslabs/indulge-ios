@@ -37,6 +37,10 @@
     
     [errorDict addEntriesFromDictionary:@{@"wrongPhone":@(self.wrongPhoneButton.selected),@"wrongAddress":@(self.wrongAddressButton.selected),@"closedClosed":@(self.closedClosedButton.selected),@"wrongPricing":@(self.wrongPricingButton.selected),@"details":self.detailsTextView.text}];
 
+    self.detailsTextView.layer.borderColor = [UIColor brownColor].CGColor;
+    self.detailsTextView.layer.cornerRadius = 4.0f;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

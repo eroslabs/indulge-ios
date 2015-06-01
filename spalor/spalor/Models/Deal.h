@@ -40,6 +40,7 @@
 @property (nonatomic, strong) NSMutableArray *schedule;
 @property (nonatomic, strong) NSMutableArray *services;
 @property (nonatomic, strong) NSMutableArray *weekdaysArray;
+@property (nonatomic, strong) NSMutableArray *menus;
 
 //Categories / Services
 @property (nonatomic, strong) NSMutableArray *categoryIds;

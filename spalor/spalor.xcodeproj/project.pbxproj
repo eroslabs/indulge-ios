@@ -161,6 +161,8 @@
 		13779B761AEE66D50021795B /* AddNewLookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13779B751AEE66D50021795B /* AddNewLookViewController.m */; };
 		137ABA511AC1537E00540CF2 /* DealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137ABA501AC1537E00540CF2 /* DealsViewController.m */; };
 		137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137ABA531AC1539900540CF2 /* DealDetailsViewController.m */; };
+		137B3A631B1C3F9400FAE476 /* Check-tick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 137B3A611B1C3F9400FAE476 /* Check-tick@2x.png */; };
+		137B3A641B1C3F9400FAE476 /* Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 137B3A621B1C3F9400FAE476 /* Check@2x.png */; };
 		137B940F1AEE5D7D00BCB1E4 /* coupon-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 137B940E1AEE5D7D00BCB1E4 /* coupon-background@2x.png */; };
 		137B94121AEE60D100BCB1E4 /* RedeemDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137B94111AEE60D100BCB1E4 /* RedeemDealViewController.m */; };
 		137B94141AEE64A800BCB1E4 /* post_completion_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 137B94131AEE64A800BCB1E4 /* post_completion_screen@2x.png */; };
@@ -207,6 +209,8 @@
 		13A4F6E71B1707640077892E /* category-5active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A4F6E21B1707640077892E /* category-5active@2x.png */; };
 		13A7BA9D1B034061004224E4 /* MyCouponCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */; };
 		13A7BAA01B0368B4004224E4 /* AllDealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */; };
+		13A8A87E1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */; };
+		13A8A87F1B1C6E1E00D988C0 /* RateCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8A87D1B1C6E1E00D988C0 /* RateCardsViewController.m */; };
 		13B021C21B06115A0091084E /* MyLookbookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B021C01B06115A0091084E /* MyLookbookCell.m */; };
 		13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */; };
 		13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573D1AB8367E00811025 /* ParallaxHeaderView.m */; };
@@ -513,6 +517,8 @@
 		137ABA501AC1537E00540CF2 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealsViewController.m; path = Deals/DealsViewController.m; sourceTree = "<group>"; };
 		137ABA521AC1539900540CF2 /* DealDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealDetailsViewController.h; path = Deals/DealDetailsViewController.h; sourceTree = "<group>"; };
 		137ABA531AC1539900540CF2 /* DealDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealDetailsViewController.m; path = Deals/DealDetailsViewController.m; sourceTree = "<group>"; };
+		137B3A611B1C3F9400FAE476 /* Check-tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check-tick@2x.png"; sourceTree = "<group>"; };
+		137B3A621B1C3F9400FAE476 /* Check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check@2x.png"; sourceTree = "<group>"; };
 		137B940E1AEE5D7D00BCB1E4 /* coupon-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coupon-background@2x.png"; sourceTree = "<group>"; };
 		137B94101AEE60D100BCB1E4 /* RedeemDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RedeemDealViewController.h; path = Deals/RedeemDealViewController.h; sourceTree = "<group>"; };
 		137B94111AEE60D100BCB1E4 /* RedeemDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RedeemDealViewController.m; path = Deals/RedeemDealViewController.m; sourceTree = "<group>"; };
@@ -574,6 +580,10 @@
 		13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCouponCollectionViewCell.m; path = Favorite/MyCouponCollectionViewCell.m; sourceTree = "<group>"; };
 		13A7BA9E1B0368B4004224E4 /* AllDealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllDealsViewController.h; path = Deals/AllDealsViewController.h; sourceTree = "<group>"; };
 		13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllDealsViewController.m; path = Deals/AllDealsViewController.m; sourceTree = "<group>"; };
+		13A8A87A1B1C6E1E00D988C0 /* RateCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateCardCollectionViewCell.h; path = Home/RateCardCollectionViewCell.h; sourceTree = "<group>"; };
+		13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateCardCollectionViewCell.m; path = Home/RateCardCollectionViewCell.m; sourceTree = "<group>"; };
+		13A8A87C1B1C6E1E00D988C0 /* RateCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateCardsViewController.h; path = Home/RateCardsViewController.h; sourceTree = "<group>"; };
+		13A8A87D1B1C6E1E00D988C0 /* RateCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateCardsViewController.m; path = Home/RateCardsViewController.m; sourceTree = "<group>"; };
 		13B021C01B06115A0091084E /* MyLookbookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLookbookCell.m; path = Favorite/MyLookbookCell.m; sourceTree = "<group>"; };
 		13B021C11B06115A0091084E /* MyLookbookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLookbookCell.h; path = Favorite/MyLookbookCell.h; sourceTree = "<group>"; };
 		13BA57391AB835A100811025 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Extensions/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -815,6 +825,8 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				137B3A611B1C3F9400FAE476 /* Check-tick@2x.png */,
+				137B3A621B1C3F9400FAE476 /* Check@2x.png */,
 				1343F3C21B183D7600CBBB2C /* rate-roller@2x.png */,
 				1343F3C01B1839F700CBBB2C /* rating-colorbar@2x.png */,
 				13A4F6D21B16F9460077892E /* smiley-poker-right@2x.png */,
@@ -1141,6 +1153,10 @@
 				133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */,
 				133887F11B01F1250007E359 /* MerchantCategoriesDealPopupCell.h */,
 				133887F21B01F1250007E359 /* MerchantCategoriesDealPopupCell.m */,
+				13A8A87C1B1C6E1E00D988C0 /* RateCardsViewController.h */,
+				13A8A87D1B1C6E1E00D988C0 /* RateCardsViewController.m */,
+				13A8A87A1B1C6E1E00D988C0 /* RateCardCollectionViewCell.h */,
+				13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1551,6 +1567,8 @@
 				1337EE311ACBD35D00F31D14 /* merchant-removal-deal@2x.png in Resources */,
 				1337EE341ACBD35D00F31D14 /* merchant-service@2x.png in Resources */,
 				1343F3C31B183D7600CBBB2C /* rate-roller@2x.png in Resources */,
+				137B3A631B1C3F9400FAE476 /* Check-tick@2x.png in Resources */,
+				137B3A641B1C3F9400FAE476 /* Check@2x.png in Resources */,
 				13C1C7441AF39D230015F71E /* 12@2x.png in Resources */,
 				13C0021F1AFB56010021D60E /* home-athome@2x.png in Resources */,
 				13FAE2421AB196E500A6540D /* GooglePlus.bundle in Resources */,
@@ -1625,6 +1643,7 @@
 				13282BA91AF9F54A00D15961 /* User.m in Sources */,
 				13E530831AD25CD10046EAEB /* NSData+CommonCrypto.m in Sources */,
 				13E6103E1B05F10200B7D7FB /* MyLooksTableViewCell.m in Sources */,
+				13A8A87E1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m in Sources */,
 				136399EC1AF349B0006CB323 /* SuggestedTableViewCell.m in Sources */,
 				13E530821AD25CD10046EAEB /* NSData+Base64.m in Sources */,
 				134CED701AEA692F009C5714 /* MerchantInfoCell.m in Sources */,
@@ -1642,6 +1661,7 @@
 				13E67C431AE4D63200F96A36 /* MerchantListCell.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				1388A1A71AE7C49A00E330C1 /* Service.m in Sources */,
+				13A8A87F1B1C6E1E00D988C0 /* RateCardsViewController.m in Sources */,
 				132C9F141ADCF81700EB5F3F /* Schedule.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,
 				13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */,

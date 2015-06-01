@@ -18,6 +18,7 @@
 #import "FeSpinnerTenDot.h"
 #import "RedeemDealViewController.h"
 #import "User.h"
+#import "RateCardsViewController.h"
 
 @interface DealDetailsViewController (){
     FeSpinnerTenDot *spinner;
@@ -178,6 +179,12 @@
 
 #pragma mark - User Actions
 
+-(IBAction)showAllRateCards:(id)sender{
+    if (self.deal.menus.count>0) {
+        [self performSegueWithIdentifier:@"ShowRateCards" sender:nil];
+    }
+}
+
 -(IBAction)goBackToSearch:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -264,28 +271,44 @@
             dispatch_async (dispatch_get_main_queue(), ^{
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
                 NSLog(@"response Dict %@",responseDict);
-                [spinner dismiss];
-                [spinner removeFromSuperview];
-                //Push Segue
-                couponCode = responseDict[@"coupon"];
-                NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
-                self.deal.couponCode = couponCode;
-
-                NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
-                [myDealsArray addObject:dealData];
-                NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
-                User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
-                user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
-                NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-                [user saveArchivedUserData:archivedUser];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
-                NSLog(@"saving deal %@ %@",self.deal.name,self.deal.couponCode);
-                [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self hideRedeemConfirmation:YES];
-
-                [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+                if (responseDict[@"error"]) {
+                    dispatch_async (dispatch_get_main_queue(), ^{
+                        [spinner dismiss];
+                        [spinner removeFromSuperview];
+                        //Show Error Alert
+                        UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Redeem Error" message:responseDict[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [redeemError show];
+                        [self hideRedeemConfirmation:YES];
+                        
+                        //                //Temporary Push Segue
+                        //                couponCode = @"A123456789";
+                        //                [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+                    });
+                }
+                else{
+                    [spinner dismiss];
+                    [spinner removeFromSuperview];
+                    //Push Segue
+                    couponCode = responseDict[@"coupon"];
+                    NSMutableArray *myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+                    self.deal.couponCode = couponCode;
+                    
+                    NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
+                    [myDealsArray addObject:dealData];
+                    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+                    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+                    user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
+                    NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+                    [user saveArchivedUserData:archivedUser];
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
+                    NSLog(@"saving deal %@ %@",self.deal.name,self.deal.couponCode);
+                    [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [self hideRedeemConfirmation:YES];
+                    
+                    [self performSegueWithIdentifier:@"RedeemDeal" sender:nil];
+                }
             });
         }
         else{
@@ -335,6 +358,10 @@
         RedeemDealViewController *controller = (RedeemDealViewController *)[segue destinationViewController];
         controller.deal = self.deal;
         controller.couponCode = couponCode;
+    }
+    if ([segue.identifier isEqualToString:@"ShowRateCards"]) {
+        RateCardsViewController *controller = (RateCardsViewController *)segue.destinationViewController;
+        controller.imageUrls = self.deal.menus;
     }
 }
 

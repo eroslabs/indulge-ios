@@ -16,8 +16,8 @@
 #define MYMERCHANTSSTORE @"MyMerchantsArray"
 #define MYUSERSTORE @"UserStore"
 #define MYLOCALFILTERSTORE @"MyLocalFilterStore"
-#define INDULGE_MERCHANT_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/merchant/"
-#define INDULGE_USER_IMAGE_BASE_URL @"http://192.168.0.2/indulge/images/user/"
+#define INDULGE_MERCHANT_IMAGE_BASE_URL @"http://52.11.37.48/images/merchant/"
+#define INDULGE_USER_IMAGE_BASE_URL @"http://52.11.37.48/images/user/"
 #define STATIC_IMAGE_SOURCE @"http://cdn2.hubspot.net/hub/437669/file-2341591537-jpg/blog-files/salon-stock-photo.jpg"
 //#define STATIC_IMAGE_SOURCE @""
 

@@ -8,6 +8,8 @@
 
 #import "MerchantScheduleCell.h"
 #import "Schedule.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @implementation MerchantScheduleCell
 -(MerchantScheduleCell *)setupWithMerchant:(Merchant *)merchant{
@@ -87,7 +89,13 @@
             
         }
     }
-    self.ratecardImageView = [UIImage imageNamed:@""];
+    if (merchant.menus.count>0) {
+        NSString *url = [NSURL URLWithString:merchant.menus[0]];
+        [self.ratecardImageView setImageWithURL:url
+                               placeholderImage:[UIImage imageNamed:@""] options:SDWebImageProgressiveDownload ];
+
+    }
+
     return self;
 }
 @end

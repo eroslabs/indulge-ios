@@ -426,10 +426,10 @@
             cell.distanceLabel.text = deal.distanceFromCurrentLocation;
             cell.distanceBackgroundImageView.hidden = NO;
         }
+        [cell setServiceCategoryImagesWithDeal:deal];
         cell.favoriteButton.tag = indexPath.row;
         cell.averageRating.text = deal.rating;
         cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
-        
         
         double unixTimeStamp = [deal.validTill doubleValue];
         NSLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);

@@ -33,5 +33,5 @@
 @property (nonatomic, weak) IBOutlet UIImageView *serviceCategoryImageView9;
 
 -(DealListCell *)setupCellWithDeal:(Deal *)deal;
-
+-(void)setServiceCategoryImagesWithDeal:(Deal *)deal;
 @end
