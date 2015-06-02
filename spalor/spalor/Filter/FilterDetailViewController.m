@@ -10,12 +10,14 @@
 #import "UIColor+flat.h"
 #import "ServiceCategory.h"
 #import "Service.h"
+#import "SuggestedTableViewCell.h"
 
 @interface FilterDetailViewController (){
     ServiceCategory *selectedCategory;
     NSMutableDictionary *selectedServicesDictionary;
     NSMutableString *selectedServiceids;
-
+    NSMutableArray *servicesArray;
+    NSArray *filteredServicesArray;
 }
 
 @end
@@ -26,7 +28,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     selectedServicesDictionary = [NSMutableDictionary new];
+    [self setAutoSuggestHidden:YES];
     selectedServiceids = [[NSMutableString alloc] initWithString:@""];
+}
+
+-(void)setAutoSuggestHidden:(BOOL)hidden{
+    self.overlayView.hidden = hidden;
+    self.autoSuggestTableView.hidden = hidden;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -44,7 +52,8 @@
     int index = 0;
     int lastX = 10;
     NSArray *selectedServiceIdsArray = [selectedServiceids componentsSeparatedByString:@","];
-
+    servicesArray = [NSMutableArray new];
+    filteredServicesArray = [NSArray new];
     for (ServiceCategory *category in self.arrayOfCategories) {
         
         NSLog(@"category name %@ id %@",category.name,category.categoryId);
@@ -64,6 +73,8 @@
         
         int serviceIndex = 0;
         for (Service *service in category.services) {
+            
+            [servicesArray addObject:service];
             
             if ([selectedServiceIdsArray containsObject:service.serviceId]) {
                 int tag = service.serviceId.integerValue;
@@ -158,7 +169,9 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
+    if ([tableView isEqual:self.autoSuggestTableView]) {
+        return filteredServicesArray.count;
+    }
     NSLog(@"category %@ %d",selectedCategory.name,selectedCategory.services.count);
     NSInteger numOfRows = selectedCategory.services.count;
     return numOfRows;
@@ -166,11 +179,24 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([tableView isEqual:self.autoSuggestTableView]) {
+        return 44;
+    }
     return 62;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([tableView isEqual:self.autoSuggestTableView]) {
+        NSString *identifier =  @"suggestedCellIdentifier";
+
+        SuggestedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        Service *service = filteredServicesArray[indexPath.row];
+
+        cell.searchLabel.text = service.name;
+        return cell;
+    }
+    
     NSString *identifier =  @"servicesCellIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -194,10 +220,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     //Put in selected service view
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-    NSArray *serviceTags = [selectedServicesDictionary allKeys];
-    [self createandAddServiceButtonforServiceName:cell.tag andIndexPath:indexPath];
+    if ([tableView isEqual:self.autoSuggestTableView]) {
+        NSString *identifier =  @"suggestedCellIdentifier";
+        
+        SuggestedTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        Service *selectedservice = filteredServicesArray[indexPath.row];
+        [self addAsSelectedService:selectedservice];
+        [self hideFilter:nil];
+
+    }
+    else{
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        NSArray *serviceTags = [selectedServicesDictionary allKeys];
+        [self createandAddServiceButtonforServiceName:cell.tag andIndexPath:indexPath];
+    }
+    
+    
     
 }
 
@@ -211,13 +250,20 @@
     
     Service *service = category.services[index];
     
+    
+    [self addAsSelectedService:service];
+
+
+}
+
+-(void)addAsSelectedService:(Service *)service{
     if ([service.name isKindOfClass:[NSNull class]]) {
         return;
     }
     
     int currentTotalButtons = [self numberOfbuttonsinScrollView:self.selectedServicesScrollView];
-
-    [selectedServicesDictionary addEntriesFromDictionary:@{[@(serviceTag) stringValue]:@(currentTotalButtons)}];
+    
+    [selectedServicesDictionary addEntriesFromDictionary:@{[@(service.serviceId.intValue) stringValue]:@(currentTotalButtons)}];
     
     [self hideSelectedServicesView];
     
@@ -229,12 +275,13 @@
         }
         else
             [selectedServiceids appendFormat:[NSString stringWithFormat:@",%@",service.serviceId]];
-
+        
     }
     
+
     UIButton *serviceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [serviceButton setTitle:[NSString stringWithFormat:@"   %@   X   ",service.name] forState:UIControlStateNormal];
-
+    
     serviceButton.titleLabel.font = [UIFont fontWithName:@"Avenir Next Demi Bold" size:12.0f];
     serviceButton.layer.borderWidth = 3.0f;
     [serviceButton.layer setBorderColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]].CGColor];
@@ -275,7 +322,6 @@
     [self.selectedServicesScrollView setContentOffset:CGPointMake(serviceButton.frame.origin.x+serviceButton.frame.size.width+10, 0)];
     
     self.selectedServicesScrollView.contentSize = CGSizeMake(serviceButton.frame.origin.x+serviceButton.frame.size.width+10, self.selectedServicesScrollView.contentSize.height);
-    
 
 }
 
@@ -367,6 +413,35 @@
 }
 
 
+
+#pragma mark - Text Field Delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newString.length>0) {
+        [self setAutoSuggestHidden:NO];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[c] %@", newString];
+        filteredServicesArray = [servicesArray filteredArrayUsingPredicate:predicate];
+        [self.autoSuggestTableView reloadData];
+
+    }
+    else{
+        [self setAutoSuggestHidden:NO];
+    }
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    textField.text = @"";
+    [textField resignFirstResponder];
+    [self setAutoSuggestHidden:YES];
+    return YES;
+}
+
+
+-(IBAction)hideFilter:(id)sender{
+    [self.searchTextField resignFirstResponder];
+    self.searchTextField.text = @"";
+    [self setAutoSuggestHidden:YES];
+}
 
 - (IBAction)filterSearchTextField:(id)sender {
 }

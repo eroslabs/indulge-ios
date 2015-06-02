@@ -10,9 +10,12 @@
 #import "User.h"
 #import "Review.h"
 #import "NetworkHelper.h"
+#import "FeSpinnerTenDot.h"
+
 
 @interface RateViewController ()<UITextViewDelegate>{
     Review *currentReview;
+    FeSpinnerTenDot *spinner;
     int overallValue;
     int cleanlinessValue;
     int serviceQualityValue;
@@ -29,6 +32,9 @@
     // Do any additional setup after loading the view.
     self.commentTextView.layer.borderColor = [UIColor brownColor].CGColor;
     self.commentTextView.layer.cornerRadius = 4.0f;
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+    [self.loaderContainerView addSubview:spinner];
+
     self.commentTextView.delegate = self;
     overallValue = (int) roundf(self.overallSlider.value);
     cleanlinessValue = (int) roundf(self.cleanlinessSlider.value);

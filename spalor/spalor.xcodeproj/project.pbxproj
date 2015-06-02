@@ -185,6 +185,7 @@
 		13958F4E1AD7FCE700231794 /* filter-popularity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F461AD7FCE700231794 /* filter-popularity@2x.png */; };
 		13958F4F1AD7FCE700231794 /* filter-rating@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F471AD7FCE700231794 /* filter-rating@2x.png */; };
 		13958F501AD7FCE700231794 /* filter-distance-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13958F481AD7FCE700231794 /* filter-distance-selected@2x.png */; };
+		1396A96F1B1D8EA1003CF21C /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1396A96E1B1D8EA1003CF21C /* ChangePasswordViewController.m */; };
 		1398EE7F1AD649CB0037B793 /* merchant-rupee4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1398EE7B1AD649CB0037B793 /* merchant-rupee4@2x.png */; };
 		1398EE801AD649CB0037B793 /* merchant-rupee3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1398EE7C1AD649CB0037B793 /* merchant-rupee3@2x.png */; };
 		1398EE811AD649CB0037B793 /* merchant-rupee2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1398EE7D1AD649CB0037B793 /* merchant-rupee2@2x.png */; };
@@ -547,6 +548,8 @@
 		13958F461AD7FCE700231794 /* filter-popularity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-popularity@2x.png"; sourceTree = "<group>"; };
 		13958F471AD7FCE700231794 /* filter-rating@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-rating@2x.png"; sourceTree = "<group>"; };
 		13958F481AD7FCE700231794 /* filter-distance-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter-distance-selected@2x.png"; sourceTree = "<group>"; };
+		1396A96D1B1D8EA1003CF21C /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangePasswordViewController.h; path = Profile/ChangePasswordViewController.h; sourceTree = "<group>"; };
+		1396A96E1B1D8EA1003CF21C /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangePasswordViewController.m; path = Profile/ChangePasswordViewController.m; sourceTree = "<group>"; };
 		1398EE7B1AD649CB0037B793 /* merchant-rupee4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-rupee4@2x.png"; sourceTree = "<group>"; };
 		1398EE7C1AD649CB0037B793 /* merchant-rupee3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-rupee3@2x.png"; sourceTree = "<group>"; };
 		1398EE7D1AD649CB0037B793 /* merchant-rupee2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-rupee2@2x.png"; sourceTree = "<group>"; };
@@ -1102,6 +1105,8 @@
 			children = (
 				136747AB1AADB2C50039CCCC /* ProfileViewController.h */,
 				136747AC1AADB2C50039CCCC /* ProfileViewController.m */,
+				1396A96D1B1D8EA1003CF21C /* ChangePasswordViewController.h */,
+				1396A96E1B1D8EA1003CF21C /* ChangePasswordViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1661,6 +1666,7 @@
 				13E67C431AE4D63200F96A36 /* MerchantListCell.m in Sources */,
 				136747AD1AADB2C50039CCCC /* ProfileViewController.m in Sources */,
 				1388A1A71AE7C49A00E330C1 /* Service.m in Sources */,
+				1396A96F1B1D8EA1003CF21C /* ChangePasswordViewController.m in Sources */,
 				13A8A87F1B1C6E1E00D988C0 /* RateCardsViewController.m in Sources */,
 				132C9F141ADCF81700EB5F3F /* Schedule.m in Sources */,
 				13FAE2451AB1B4DA00A6540D /* HomeViewController.m in Sources */,

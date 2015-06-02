@@ -14,5 +14,6 @@
 @property (nonatomic, weak) IBOutlet UISlider *cleanlinessSlider;
 @property (nonatomic, weak) IBOutlet UISlider *serviceQualitySlider;
 @property (nonatomic, weak) IBOutlet UITextView *commentTextView;
+@property (nonatomic , weak) IBOutlet UIView *loaderContainerView;
 
 @end

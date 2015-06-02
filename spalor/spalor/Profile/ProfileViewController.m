@@ -12,6 +12,7 @@
 #import "NetworkHelper.h"
 #import "User.h"
 #import "MerchantRatingCell.h"
+#import "ChangePasswordViewController.h"
 
 @interface ProfileViewController (){
     User *user;
@@ -154,6 +155,14 @@
     return cell;
 }
 
+#pragma mark - Segue
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"ChangePassword"]){
+        ChangePasswordViewController *controller = (ChangePasswordViewController *)[segue destinationViewController];
+        controller.user = user;
+    }
+}
 
 
 

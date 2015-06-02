@@ -238,7 +238,9 @@
 }
 
 -(void)confirmDealRequest{
-    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+
     if (!self.deal.dealId) {
         [spinner dismiss];
         [spinner removeFromSuperview];
@@ -253,8 +255,6 @@
         NSData *dealData = [NSKeyedArchiver archivedDataWithRootObject:self.deal];
         [myDealsArray addObject:dealData];
         
-        NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
-        User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
         user.deals = [NSString stringWithFormat:@"%lu",(unsigned long)myDealsArray.count];
         NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
         [user saveArchivedUserData:archivedUser];
@@ -266,7 +266,7 @@
         return;
     }
     
-    [[NetworkHelper sharedInstance] getArrayFromGetUrl:[NSString stringWithFormat:@"user/redeem/%@",self.deal.dealId] withParameters:@{@"userEmail":@"manish@eroslabs.co"} completionHandler:^(id response, NSString *url, NSError *error){
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:[NSString stringWithFormat:@"user/redeem/%@",self.deal.dealId] withParameters:@{@"userEmail":user.mail} completionHandler:^(id response, NSString *url, NSError *error){
         if (error == nil && response!=nil) {
             dispatch_async (dispatch_get_main_queue(), ^{
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];

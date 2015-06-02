@@ -12,8 +12,12 @@
 @property NSArray *arrayOfCategories;
 @property (nonatomic, weak) IBOutlet UIScrollView *selectedServicesScrollView;
 @property (nonatomic, weak) IBOutlet UIScrollView *allCategoriesScrollView;
-
-- (IBAction)filterSearchTextField:(id)sender;
 @property (nonatomic, weak) IBOutlet UIView *allCategoriesView;
 @property (nonatomic, weak) IBOutlet UITableView *tableview;
+@property (nonatomic, weak) IBOutlet UITableView *autoSuggestTableView;
+@property (nonatomic, weak) IBOutlet UITextField *searchTextField;
+@property (nonatomic, weak) IBOutlet UIView *overlayView;
+
+- (IBAction)filterSearchTextField:(id)sender;
+- (IBAction)hideFilter:(id)sender;
 @end

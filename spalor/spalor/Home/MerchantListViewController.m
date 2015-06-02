@@ -483,6 +483,7 @@
                       placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload];
 
     cell.dealsButton.selected = (merchant.deals.count)?YES:NO;
+    cell.dealsButton.tag = indexPath.row;
     cell.distancebackgroundImageView.image = [UIImage imageNamed:@"merchant-location.png"];
     [cell.callButton setImage:[UIImage imageNamed:@"merchant-listing-call.png"] forState:UIControlStateNormal];
     [cell.shareButton setImage:[UIImage imageNamed:@"merchant-share.png"] forState:UIControlStateNormal];
