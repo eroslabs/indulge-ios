@@ -8,6 +8,7 @@
 
 #import "LocationHelper.h"
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -34,32 +35,55 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"locationEnabled"];
         //Show status
     }
-    else if(status != kCLAuthorizationStatusNotDetermined){
-        [self startUpdatingLocation];
+    if(IS_OS_8_OR_LATER) {
+        if ([self respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            
+            if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
+                [self requestWhenInUseAuthorization];
+                [self startUpdatingLocation];
+                
+            }
+            
+        }
+        
     }
+    else{
+        [self startUpdatingLocation];
+        
+    }
+
 }
 
+-(void)startLocationManager{
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    [delegate startLocationManager];
+}
+
+/*
 - (void)startLocationManager {
     if (self) {
         //[self stopUpdatingLocation];
-        self.distanceFilter = 100;
-        self.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         self.delegate = self;
-        
+        self.desiredAccuracy = kCLLocationAccuracyBest;
         NSLog(@"authorization status %d",[CLLocationManager authorizationStatus]);
         
         if(IS_OS_8_OR_LATER) {
             if ([self respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-                if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+                if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
                     [self requestWhenInUseAuthorization];
-                }
-                else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
                     [self startUpdatingLocation];
-
                 }
-                else{
-                    //location monitoring denied
-                }
+                
+//                if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+//                    [self requestWhenInUseAuthorization];
+//                }
+//                else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
+//                    [self startUpdatingLocation];
+//
+//                }
+//                else{
+//                    //location monitoring denied
+//                }
                 
             }
             
@@ -72,6 +96,7 @@
     }
     
 }
+ */
 
 - (void)stopLocationManager {
     self.delegate = nil;
@@ -80,14 +105,8 @@
 
 
 -(CLLocation *)getCurrentLocation{
-    CLLocation *myLocation = [NSKeyedUnarchiver unarchiveObjectWithFile:[self lastLocationPersistenceFilePath]];
-    if (myLocation) {
-        return myLocation;
-    }
-    else{
-        return nil;
-    }
-
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    return [delegate getCurrentLocation];
 }
 
 - (void)persistLastLocation:(CLLocation *)location {
@@ -113,6 +132,8 @@
         [self persistLastLocation:[locations lastObject]];
     }
 }
+
+
 
 -(BOOL)checkPermission {
     

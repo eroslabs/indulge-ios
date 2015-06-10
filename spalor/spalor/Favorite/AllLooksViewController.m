@@ -43,7 +43,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MyLooksTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myLooksCell"];
-    MyLook *lookObj = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataArray[indexPath.row]];
+    MyLook *lookObj = (MyLook *)self.dataArray[indexPath.row];
     [cell setupWithLookObject:lookObj];
     return cell;
 }

@@ -52,13 +52,17 @@
     [UITabBarItem.appearance setTitleTextAttributes:@{
                                                       NSForegroundColorAttributeName : [UIColor whiteColor] }     forState:UIControlStateSelected];
     
-    item0.selectedImage = [[UIImage imageNamed:@"navbar-home-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//    item0.selectedImage = [[UIImage imageNamed:@"navbar-home-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-    item1.selectedImage = [[UIImage imageNamed:@"navbar-nearby-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item0 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-home.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-home-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    item2.selectedImage = [[UIImage imageNamed:@"navbar-deals-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item3.selectedImage = [[UIImage imageNamed:@"navbar-favourites-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item4.selectedImage = [[UIImage imageNamed:@"navbar-me-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item1 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-nearby.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-nearby-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+    [item2 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-deals.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-deals-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+    [item3 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-favourites.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-favourites-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+    [item4 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-me.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-me-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 
     
 }

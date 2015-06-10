@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *merchantAddress;
 @property (nonatomic, weak) IBOutlet UILabel *validTillLabel;
 @property (nonatomic, weak) IBOutlet UILabel *discountLabel;
+@property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, weak) IBOutlet UILabel *merchantRatingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *merchantServicesLabel;
 

@@ -149,7 +149,7 @@
                     [self.services addObject:merchantService];
                 }
             }
-            else if ([key isEqualToString:@"finalWeekSchedule"]){
+            else if ([key isEqualToString:@"days"]){
                 self.weekdaysArray = [NSMutableArray new];
                 
                 for (int i=0; i < [dictionary[key] length]; i++) {
@@ -158,7 +158,7 @@
                         [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
                     }
                 }
-                self.finalWeekSchedule = dictionary[@"finalWeekSchedule"];
+                self.finalWeekSchedule = dictionary[@"days"];
             }
             else if ([key isEqualToString:@"schedule"]) {
                 
@@ -168,7 +168,6 @@
                     object.openingTime = [scheduleObj objectForKey:@"openingTime"];
                     object.closingTime = [scheduleObj objectForKey:@"closingTime"];
                     object.weekSchedule = [scheduleObj objectForKey:@"weekSchedule"];
-                    
                     [self.schedule addObject:object];
                     
                 }

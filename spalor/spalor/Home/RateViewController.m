@@ -32,8 +32,6 @@
     // Do any additional setup after loading the view.
     self.commentTextView.layer.borderColor = [UIColor brownColor].CGColor;
     self.commentTextView.layer.cornerRadius = 4.0f;
-    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
-    [self.loaderContainerView addSubview:spinner];
 
     self.commentTextView.delegate = self;
     overallValue = (int) roundf(self.overallSlider.value);
@@ -78,6 +76,12 @@
 #pragma mark - User Actions
 
 -(IBAction)submit:(id)sender{
+    [self submitReview];
+    
+
+}
+
+-(void)submitReview{
     [[NetworkHelper sharedInstance] getArrayFromPostURL:@"user/saveReview" parmeters:@{@"review":reviewDict} completionHandler:^(id response, NSString *url, NSError *error){
         if (error == nil && response!=nil) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
@@ -89,10 +93,19 @@
             user.reviews = [NSString stringWithFormat:@"%lu",(unsigned long)user.arrayOfReviews.count];
             NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
             [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
-
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Submitting Review" message:@"Try Again in Sometime" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            });
         }
     }];
-
 }
 
 -(IBAction)goBack:(id)sender{

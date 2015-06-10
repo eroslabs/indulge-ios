@@ -14,16 +14,13 @@
         self.closingTime = [decoder decodeObjectForKey:@"closingTime"];
         self.openingTime = [decoder decodeObjectForKey:@"openingTime"];
         self.weekSchedule = [decoder decodeObjectForKey:@"weekSchedule"];
-
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-    
     [encoder encodeObject:_closingTime forKey:@"closingTime"];
     [encoder encodeObject:_openingTime forKey:@"openingTime"];
     [encoder encodeObject:_weekSchedule forKey:@"weekSchedule"];
-
 }
 @end

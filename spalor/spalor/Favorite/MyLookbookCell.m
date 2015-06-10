@@ -7,14 +7,15 @@
 //
 
 #import "MyLookbookCell.h"
+#import "MyLook.h"
+
 
 @implementation MyLookbookCell
 -(void)setupCellWithMyLooksImagesArray:(NSArray *)imagesArray{
     
     int index = 0;
-    
-    for (NSData *imageData in imagesArray) {
-        UIImage *myImage = [UIImage imageWithData:imageData];
+    for (MyLook *look in imagesArray) {
+        UIImage *myImage = [UIImage imageWithData:look.imageData];
         UIImageView *myImageView = [[UIImageView alloc] initWithImage:myImage];
         myImageView.frame = CGRectMake(index*60 + 10, 5, 50, 50);
         index++;

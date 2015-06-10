@@ -72,21 +72,22 @@
     NSMutableArray *myLookBookImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE]];
     MyLook *look = [[MyLook alloc] init];
     look.imageData = UIImagePNGRepresentation(chosenImage);
-    look.merchantService = self.deal.serviceNames;
+    look.merchantService = @"";
+    //look.merchantService = self.deal.serviceNames;
     look.merchantName = self.deal.name;
     look.merchantAddress = self.deal.address;
     look.merchantRating = self.deal.rating;
     look.date = [NSDate date];
     
-    NSData *lookData = [NSKeyedArchiver archivedDataWithRootObject:look];
-    [myLookBookImagesArray addObject: lookData];
+    [myLookBookImagesArray addObject: look];
+    NSData *lookData = [NSKeyedArchiver archivedDataWithRootObject:myLookBookImagesArray];
+    [[NSUserDefaults standardUserDefaults] setObject:lookData forKey:MYLOOKBOOKSTORE];
 
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
     user.looks = [NSString stringWithFormat:@"%lu",(unsigned long)myLookBookImagesArray.count];
     NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
     [user saveArchivedUserData:archivedUser];
-    [[NSUserDefaults standardUserDefaults] setObject:myLookBookImagesArray forKey:MYLOOKBOOKSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

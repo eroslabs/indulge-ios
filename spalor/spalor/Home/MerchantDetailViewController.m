@@ -422,7 +422,7 @@
 
             [viewAllButton setTitle:@"See All Reviews" forState:UIControlStateNormal];
             viewAllButton.frame = CGRectMake(tableView.frame.size.width - 100, 5, 100, 20);
-            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11.0];
+            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:11.0];
             [viewAllButton setTitleColor:[UIColor colorWithRed:0.2705f green:0.6901f blue:0.6196f alpha:1.0f] forState:UIControlStateNormal];
             [viewAllButton addTarget:self action:@selector(viewAll:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -438,7 +438,7 @@
 
             [viewAllButton setTitle:@"Found a glitch" forState:UIControlStateNormal];
             viewAllButton.frame = CGRectMake(tableView.frame.size.width - 100, 5, 100, 20);
-            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:11.0];
+            viewAllButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Medium" size:11.0];
             [viewAllButton setTitleColor:[UIColor colorWithRed:0.2705f green:0.6901f blue:0.6196f alpha:1.0f] forState:UIControlStateNormal];
             [viewAllButton addTarget:self action:@selector(viewAll:) forControlEvents:UIControlEventTouchUpInside];
             

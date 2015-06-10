@@ -88,7 +88,7 @@
         MyCouponCollectionViewCell *cell = (MyCouponCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
         
         cell.backgroundImageView.image = [UIImage imageNamed:@"favourite-coupon.png"];
-        cell.couponCodeLabel.text = deal.name;
+        cell.couponCodeLabel.text = deal.couponCode;
         cell.merchantNameLabel.text = deal.name;
         NSMutableString *servicesString = [[NSMutableString alloc] initWithString:@""];
         for(MerchantService *service in deal.services){
@@ -128,7 +128,14 @@
         cell.merchantName.text = deal.name;
         cell.merchantAddress.text = deal.address;
         cell.merchantRatingLabel.text = deal.rating;
-        
+        if(deal.distanceFromCurrentLocation.floatValue == 0.0){
+            cell.distanceLabel.hidden = YES;
+            
+        }
+        else{
+            cell.distanceLabel.text = deal.distanceFromCurrentLocation;
+            
+        }
 //        if (deal.serviceNames.length>0) {
 //            cell.merchantServicesLabel.text = deal.serviceNames;
 //            

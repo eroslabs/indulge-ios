@@ -35,7 +35,8 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    myLookBookImagesArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE];
+    NSData *myLooksData = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOOKBOOKSTORE];
+    myLookBookImagesArray = [NSKeyedUnarchiver unarchiveObjectWithData:myLooksData];
     myDealsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE];
     myMerchantsArray = [[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE];
     [self.tableView reloadData];

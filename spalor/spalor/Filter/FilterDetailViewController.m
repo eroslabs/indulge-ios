@@ -419,7 +419,9 @@
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (newString.length>0) {
         [self setAutoSuggestHidden:NO];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name BEGINSWITH[c] %@", newString];
+        NSString *trimmedString = [newString stringByTrimmingCharactersInSet:
+                                   [NSCharacterSet whitespaceCharacterSet]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[c] %@ OR name BEGINSWITH[c] %@", trimmedString,trimmedString];
         filteredServicesArray = [servicesArray filteredArrayUsingPredicate:predicate];
         [self.autoSuggestTableView reloadData];
 

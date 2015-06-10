@@ -27,6 +27,6 @@
     self.merchantRatingLabel.text = look.merchantRating;
     self.merchantServiceLabel.text = look.merchantService;
     self.image.image = [UIImage imageWithData:look.imageData];
-    self.dateLabel.text = look.date;
+    //self.dateLabel.text = look.date;
 }
 @end

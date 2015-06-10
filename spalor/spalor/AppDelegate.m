@@ -27,7 +27,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     // Override point for customization after application launch.
     [FBLoginView class];
     [FBProfilePictureView class];
-    
+
 
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasLaunched"]){
         [[NSUserDefaults standardUserDefaults] setObject:@{@"hs":@"0",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"20000",@"gs":@"2"} forKey:@"filterDict"];
@@ -39,6 +39,20 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     }
     
     return YES;
+}
+
+-(void)startLocationManager{
+    if(self.locationManager == nil){
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+
+    }
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
 }
 
 -(void)setTabbarItems{
@@ -135,6 +149,83 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+#pragma mark - Location Manager Delegates
+
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if(status == kCLAuthorizationStatusDenied){
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"locationEnabled"];
+        //Show status
+    }
+    if(IS_OS_8_OR_LATER) {
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            
+            if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
+                [self.locationManager requestWhenInUseAuthorization];
+                [self.locationManager startUpdatingLocation];
+            }
+            
+        }
+        
+    }
+    else{
+        [self.locationManager startUpdatingLocation];
+        
+    }
+    
+}
+
+
+-(CLLocation *)getCurrentLocation{
+    CLLocation *lastSavedLocation = [NSKeyedUnarchiver unarchiveObjectWithFile:[self lastLocationPersistenceFilePath]];
+ 
+    if(lastSavedLocation == nil){
+        if(self.locationManager.location == nil){
+            return nil;
+        }
+        else{
+            return self.locationManager.location;
+        }
+    }
+    
+    return lastSavedLocation;
+}
+
+- (void)persistLastLocation:(CLLocation *)location {
+    BOOL success = [NSKeyedArchiver archiveRootObject:location
+                                               toFile:[self lastLocationPersistenceFilePath]];
+    if (!success) {
+        NSLog(@"Could not persist location for some reason!");
+    }
+    else{
+        NSLog(@"last location saved");
+    }
+}
+- (NSString *)lastLocationPersistenceFilePath {
+    NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"my_app_last_location"];
+    return filePath;
+}
+
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *currentLocation = [self getCurrentLocation];
+    CLLocation *fetchedLocation = [locations lastObject];
+    if(currentLocation == nil){
+        if([locations count]> 0) {
+            [self persistLastLocation:[locations lastObject]];
+        }
+    }
+    else if((currentLocation.coordinate.latitude == fetchedLocation.coordinate.latitude) && (currentLocation.coordinate.longitude == fetchedLocation.coordinate.longitude)){
+        // Do Nothing
+    }
+    else{
+        [self persistLastLocation:[locations lastObject]];
+
+    }
+    
 }
 
 
