@@ -108,6 +108,19 @@
 
         self.luxuryRating = [NSString stringWithFormat:@"%d",rndValue];
     }
+    
+    if ([[dictionary allKeys] containsObject:@"days"]){
+        self.weekdaysArray = [NSMutableArray new];
+        
+        for (int i=0; i < [dictionary[@"days"] length]; i++) {
+            NSString *ichar  = [NSString stringWithFormat:@"%c", [dictionary[@"days"] characterAtIndex:i]];
+            if ([ichar isEqualToString:@"1"]) {
+                [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
+            }
+        }
+        self.finalWeekSchedule = dictionary[@"days"];
+    }
+
     self.recommendedService = @"";
     
     for (NSString *key in allProps){
@@ -148,17 +161,6 @@
                     merchantService.image = service[@"image"];
                     [self.services addObject:merchantService];
                 }
-            }
-            else if ([key isEqualToString:@"days"]){
-                self.weekdaysArray = [NSMutableArray new];
-                
-                for (int i=0; i < [dictionary[key] length]; i++) {
-                    NSString *ichar  = [NSString stringWithFormat:@"%c", [dictionary[key] characterAtIndex:i]];
-                    if ([ichar isEqualToString:@"1"]) {
-                        [self.weekdaysArray addObject:[NSString stringWithFormat:@"%d",i]];
-                    }
-                }
-                self.finalWeekSchedule = dictionary[@"days"];
             }
             else if ([key isEqualToString:@"schedule"]) {
                 

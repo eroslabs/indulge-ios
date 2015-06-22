@@ -14,6 +14,7 @@
 @interface FilterViewController (){
     NSArray *arrayOfCategories;
     NSMutableDictionary *filterDict;
+    NSMutableDictionary *localFilterDict;
 }
 
 @end
@@ -28,6 +29,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
+    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
+    
 
     [self pickCategoriesFromLocalStorage];
 }
@@ -124,28 +127,28 @@
         self.button9.selected = NO;
     }
     
-    if ([filterDict[@"pt"] isEqualToString:@"500"]) {
+    if ([filterDict[@"lr"] isEqualToString:@"1"]) {
         self.button10.selected = YES;
     }
     else{
         self.button10.selected = NO;
     }
     
-    if ([filterDict[@"pt"] isEqualToString:@"1000"]) {
+    if ([filterDict[@"lr"] isEqualToString:@"2"]) {
         self.button11.selected = YES;
     }
     else{
         self.button11.selected = NO;
     }
     
-    if ([filterDict[@"pt"] isEqualToString:@"2000"]) {
+    if ([filterDict[@"lr"] isEqualToString:@"3"]) {
         self.button12.selected = YES;
     }
     else{
         self.button12.selected = NO;
     }
     
-    if ([filterDict[@"pt"] isEqualToString:@"20000"]) {
+    if ([filterDict[@"lr"] isEqualToString:@"4"]) {
         self.button13.selected = YES;
     }
     else{
@@ -285,7 +288,7 @@
 -(IBAction)changeButtonState:(id)sender{
     UIButton *senderButton = (UIButton *)sender;
 
-    //@{@"hs":@"0",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"pt":@"500"}
+    //@{@"hs":@"0",@"services":@"",@"page":@"0",@"limit":@"20",@"sort":@"distance",@"dir":@"asc",@"lr":@"500"}
     
     switch (senderButton.tag) {
         case 1:{
@@ -306,53 +309,77 @@
         }
             
         case 5:{
-            [filterDict addEntriesFromDictionary:@{@"hs":@"1"}];
+            if ([[filterDict objectForKey:@"hs"] isEqualToString:@"1"]) {
+                //Remove this if already present
+                [filterDict removeObjectForKey:@"hs"];
+                [localFilterDict removeObjectForKey:@"athome"];
+            }
+            else{
+                [filterDict addEntriesFromDictionary:@{@"hs":@"1"}];
+                [localFilterDict setObject:@(1) forKey:@"athome"];
+            }
+
             break;
         }
             
         case 6:{
-            [filterDict addEntriesFromDictionary:@{@"hs":@"0"}];
+            if ([[filterDict objectForKey:@"hs"] isEqualToString:@"0"]) {
+                //Remove this if already present
+                [filterDict removeObjectForKey:@"hs"];
+                [localFilterDict removeObjectForKey:@"athome"];
+            }
+            else{
+                [filterDict addEntriesFromDictionary:@{@"hs":@"0"}];
+                [localFilterDict setObject:@(0) forKey:@"athome"];
+            }
+
             break;
         }
 
             
         case 7:{
             [filterDict addEntriesFromDictionary:@{@"gs":@"0"}];
+            [localFilterDict setObject:@"male" forKey:@"gender"];
+
             break;
         }
 
             
         case 8:{
             [filterDict addEntriesFromDictionary:@{@"gs":@"1"}];
+            [localFilterDict setObject:@"female" forKey:@"gender"];
+
             break;
         
         }
             
         case 9:{
             [filterDict addEntriesFromDictionary:@{@"gs":@"2"}];
+            [localFilterDict removeObjectForKey:@"gender"];
+
             break;
             
         }
 
         case 10:{
-            [filterDict addEntriesFromDictionary:@{@"pt":@"500"}];
+            [filterDict addEntriesFromDictionary:@{@"lr":@"1"}];
             break;
             
         }
 
         case 11:{
-            [filterDict addEntriesFromDictionary:@{@"pt":@"1000"}];
+            [filterDict addEntriesFromDictionary:@{@"lr":@"2"}];
             break;
             
         }
             
         case 12:{
-            [filterDict addEntriesFromDictionary:@{@"pt":@"2000"}];
+            [filterDict addEntriesFromDictionary:@{@"lr":@"3"}];
             break;
             
         }
         case 13:{
-            [filterDict addEntriesFromDictionary:@{@"pt":@"20000"}];
+            [filterDict addEntriesFromDictionary:@{@"lr":@"4"}];
             break;
         }
             
@@ -365,10 +392,16 @@
 
 -(IBAction)saveFilter:(id)sender{
     [[NSUserDefaults standardUserDefaults] setObject:filterDict forKey:@"filterDict"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"filter dict %@",filterDict);
+    [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
     
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"filter dict %@",filterDict);
+    if (filterDict.count>0) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"refreshFilterChanged"];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 -(IBAction)closeFilter:(id)sender{

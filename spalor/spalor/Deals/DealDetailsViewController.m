@@ -60,7 +60,7 @@
 {
     switch (indexPath.row) {
         case 0:
-            return 160;
+            return 170;
             break;
         case 1:
             return 90;

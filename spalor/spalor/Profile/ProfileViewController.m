@@ -46,10 +46,10 @@
     
     self.ageandGenderLabel.text = [NSString stringWithFormat:@"%.0ld, %@",(long)ageinYears,user.gender];
     
-    self.reviewsLabel.text = user.reviews;
-    self.looksLabel.text = user.looks;
-    self.merchantsLabel.text = user.merchants;
-    self.dealsLabel.text = user.deals;
+    self.reviewsLabel.text = (user.reviews)?user.reviews:@"0";
+    self.looksLabel.text = (user.looks)?user.looks:@"0";
+    self.merchantsLabel.text = (user.merchants)?user.merchants:@"0";
+    self.dealsLabel.text = (user.deals)?user.deals:@"0";
     
     [self downLoadMyImage];
 
@@ -108,6 +108,7 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOOKBOOKSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYUSERSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOCALFILTERSTORE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"filterDict"];
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
 

@@ -14,6 +14,7 @@
 		1322755A1AEF94E300F5D77F /* star_half@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 132275571AEF94E300F5D77F /* star_half@2x.png */; };
 		132275601AEFA03700F5D77F /* MyDealsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1322755F1AEFA03700F5D77F /* MyDealsCell.m */; };
 		132275631AEFA04E00F5D77F /* MyServiceProviderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */; };
+		1322A28A1B37E0A300DBA450 /* DigitalRateCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1322A2891B37E0A300DBA450 /* DigitalRateCardsViewController.m */; };
 		1324E2071AE7823100C2FEBB /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1324E2061AE7823100C2FEBB /* LocationHelper.m */; };
 		13282BA61AF9EE1400D15961 /* myProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13282BA51AF9EE1400D15961 /* myProfile@2x.png */; };
 		13282BA91AF9F54A00D15961 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13282BA81AF9F54A00D15961 /* User.m */; };
@@ -133,6 +134,16 @@
 		134CED851AEA6D97009C5714 /* MerchantRatingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 134CED841AEA6D97009C5714 /* MerchantRatingCell.m */; };
 		134CED881AEA6E37009C5714 /* MerchantErrorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 134CED871AEA6E37009C5714 /* MerchantErrorCell.m */; };
 		134D307A1ABD74EA009516C7 /* FilterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 134D30791ABD74EA009516C7 /* FilterDetailViewController.m */; };
+		1359839F1B2AF2AC004FE922 /* navbar-home-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135983951B2AF2AC004FE922 /* navbar-home-active@2x.png */; };
+		135983A01B2AF2AC004FE922 /* navbar-home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135983961B2AF2AC004FE922 /* navbar-home@2x.png */; };
+		135983A11B2AF2AC004FE922 /* navbar-me-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135983971B2AF2AC004FE922 /* navbar-me-active@2x.png */; };
+		135983A21B2AF2AC004FE922 /* navbar-me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135983981B2AF2AC004FE922 /* navbar-me@2x.png */; };
+		135983A31B2AF2AC004FE922 /* navbar-deal-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 135983991B2AF2AC004FE922 /* navbar-deal-active@2x.png */; };
+		135983A41B2AF2AC004FE922 /* navbar-deal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1359839A1B2AF2AC004FE922 /* navbar-deal@2x.png */; };
+		135983A51B2AF2AC004FE922 /* navbar-nearby-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1359839B1B2AF2AC004FE922 /* navbar-nearby-active@2x.png */; };
+		135983A61B2AF2AC004FE922 /* navbar-nearby@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1359839C1B2AF2AC004FE922 /* navbar-nearby@2x.png */; };
+		135983A71B2AF2AC004FE922 /* navbar-favourite-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1359839D1B2AF2AC004FE922 /* navbar-favourite-active@2x.png */; };
+		135983A81B2AF2AC004FE922 /* navbar-favourite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1359839E1B2AF2AC004FE922 /* navbar-favourite@2x.png */; };
 		135B4C7C1A7F84DD00B64F30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 135B4C7B1A7F84DD00B64F30 /* main.m */; };
 		135B4C7F1A7F84DD00B64F30 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 135B4C7E1A7F84DD00B64F30 /* AppDelegate.m */; };
 		135B4C881A7F84DD00B64F30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 135B4C861A7F84DD00B64F30 /* Main.storyboard */; };
@@ -212,6 +223,7 @@
 		13A7BAA01B0368B4004224E4 /* AllDealsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */; };
 		13A8A87E1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */; };
 		13A8A87F1B1C6E1E00D988C0 /* RateCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8A87D1B1C6E1E00D988C0 /* RateCardsViewController.m */; };
+		13A9BE311B38129900163B5C /* TypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A9BE301B38129900163B5C /* TypeTableViewCell.m */; };
 		13B021C21B06115A0091084E /* MyLookbookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B021C01B06115A0091084E /* MyLookbookCell.m */; };
 		13BA573B1AB835A100811025 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */; };
 		13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13BA573D1AB8367E00811025 /* ParallaxHeaderView.m */; };
@@ -327,6 +339,8 @@
 		1322755F1AEFA03700F5D77F /* MyDealsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDealsCell.m; path = Favorite/MyDealsCell.m; sourceTree = "<group>"; };
 		132275611AEFA04E00F5D77F /* MyServiceProviderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyServiceProviderCell.h; path = Favorite/MyServiceProviderCell.h; sourceTree = "<group>"; };
 		132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyServiceProviderCell.m; path = Favorite/MyServiceProviderCell.m; sourceTree = "<group>"; };
+		1322A2881B37E0A300DBA450 /* DigitalRateCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DigitalRateCardsViewController.h; path = Home/DigitalRateCardsViewController.h; sourceTree = "<group>"; };
+		1322A2891B37E0A300DBA450 /* DigitalRateCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DigitalRateCardsViewController.m; path = Home/DigitalRateCardsViewController.m; sourceTree = "<group>"; };
 		1324E2051AE7823100C2FEBB /* LocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationHelper.h; path = LocationHelper/LocationHelper.h; sourceTree = "<group>"; };
 		1324E2061AE7823100C2FEBB /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationHelper.m; path = LocationHelper/LocationHelper.m; sourceTree = "<group>"; };
 		13282BA51AF9EE1400D15961 /* myProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myProfile@2x.png"; sourceTree = "<group>"; };
@@ -478,6 +492,16 @@
 		134CED871AEA6E37009C5714 /* MerchantErrorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantErrorCell.m; path = Home/MerchantErrorCell.m; sourceTree = "<group>"; };
 		134D30781ABD74EA009516C7 /* FilterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterDetailViewController.h; path = Filter/FilterDetailViewController.h; sourceTree = "<group>"; };
 		134D30791ABD74EA009516C7 /* FilterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterDetailViewController.m; path = Filter/FilterDetailViewController.m; sourceTree = "<group>"; };
+		135983951B2AF2AC004FE922 /* navbar-home-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-home-active@2x.png"; sourceTree = "<group>"; };
+		135983961B2AF2AC004FE922 /* navbar-home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-home@2x.png"; sourceTree = "<group>"; };
+		135983971B2AF2AC004FE922 /* navbar-me-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-me-active@2x.png"; sourceTree = "<group>"; };
+		135983981B2AF2AC004FE922 /* navbar-me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-me@2x.png"; sourceTree = "<group>"; };
+		135983991B2AF2AC004FE922 /* navbar-deal-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-deal-active@2x.png"; sourceTree = "<group>"; };
+		1359839A1B2AF2AC004FE922 /* navbar-deal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-deal@2x.png"; sourceTree = "<group>"; };
+		1359839B1B2AF2AC004FE922 /* navbar-nearby-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-nearby-active@2x.png"; sourceTree = "<group>"; };
+		1359839C1B2AF2AC004FE922 /* navbar-nearby@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-nearby@2x.png"; sourceTree = "<group>"; };
+		1359839D1B2AF2AC004FE922 /* navbar-favourite-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-favourite-active@2x.png"; sourceTree = "<group>"; };
+		1359839E1B2AF2AC004FE922 /* navbar-favourite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-favourite@2x.png"; sourceTree = "<group>"; };
 		135B4C761A7F84DD00B64F30 /* spalor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spalor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		135B4C7A1A7F84DD00B64F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		135B4C7B1A7F84DD00B64F30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -587,6 +611,8 @@
 		13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateCardCollectionViewCell.m; path = Home/RateCardCollectionViewCell.m; sourceTree = "<group>"; };
 		13A8A87C1B1C6E1E00D988C0 /* RateCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateCardsViewController.h; path = Home/RateCardsViewController.h; sourceTree = "<group>"; };
 		13A8A87D1B1C6E1E00D988C0 /* RateCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateCardsViewController.m; path = Home/RateCardsViewController.m; sourceTree = "<group>"; };
+		13A9BE2F1B38129900163B5C /* TypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeTableViewCell.h; path = Home/TypeTableViewCell.h; sourceTree = "<group>"; };
+		13A9BE301B38129900163B5C /* TypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TypeTableViewCell.m; path = Home/TypeTableViewCell.m; sourceTree = "<group>"; };
 		13B021C01B06115A0091084E /* MyLookbookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLookbookCell.m; path = Favorite/MyLookbookCell.m; sourceTree = "<group>"; };
 		13B021C11B06115A0091084E /* MyLookbookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLookbookCell.h; path = Favorite/MyLookbookCell.h; sourceTree = "<group>"; };
 		13BA57391AB835A100811025 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Extensions/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -828,6 +854,16 @@
 		1337EDB81ACBD35D00F31D14 /* Final Assets */ = {
 			isa = PBXGroup;
 			children = (
+				135983951B2AF2AC004FE922 /* navbar-home-active@2x.png */,
+				135983961B2AF2AC004FE922 /* navbar-home@2x.png */,
+				135983971B2AF2AC004FE922 /* navbar-me-active@2x.png */,
+				135983981B2AF2AC004FE922 /* navbar-me@2x.png */,
+				135983991B2AF2AC004FE922 /* navbar-deal-active@2x.png */,
+				1359839A1B2AF2AC004FE922 /* navbar-deal@2x.png */,
+				1359839B1B2AF2AC004FE922 /* navbar-nearby-active@2x.png */,
+				1359839C1B2AF2AC004FE922 /* navbar-nearby@2x.png */,
+				1359839D1B2AF2AC004FE922 /* navbar-favourite-active@2x.png */,
+				1359839E1B2AF2AC004FE922 /* navbar-favourite@2x.png */,
 				137B3A611B1C3F9400FAE476 /* Check-tick@2x.png */,
 				137B3A621B1C3F9400FAE476 /* Check@2x.png */,
 				1343F3C21B183D7600CBBB2C /* rate-roller@2x.png */,
@@ -1162,6 +1198,10 @@
 				13A8A87D1B1C6E1E00D988C0 /* RateCardsViewController.m */,
 				13A8A87A1B1C6E1E00D988C0 /* RateCardCollectionViewCell.h */,
 				13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */,
+				1322A2881B37E0A300DBA450 /* DigitalRateCardsViewController.h */,
+				1322A2891B37E0A300DBA450 /* DigitalRateCardsViewController.m */,
+				13A9BE2F1B38129900163B5C /* TypeTableViewCell.h */,
+				13A9BE301B38129900163B5C /* TypeTableViewCell.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1414,6 +1454,7 @@
 				1388A19F1AE79D5100E330C1 /* border@2x.png in Resources */,
 				13CE68A81AE8DF150085C7B0 /* category-2@2x.png in Resources */,
 				13CE68AB1AE8DF150085C7B0 /* category-8active@2x.png in Resources */,
+				135983A11B2AF2AC004FE922 /* navbar-me-active@2x.png in Resources */,
 				1337EE1C1ACBD35D00F31D14 /* merchant-deal-services@2x.png in Resources */,
 				1337EE421ACBD35D00F31D14 /* registration-age-active@2x.png in Resources */,
 				13C1C7461AF39F2E0015F71E /* merchant--listing-location@2x.png in Resources */,
@@ -1421,6 +1462,7 @@
 				1398EE811AD649CB0037B793 /* merchant-rupee2@2x.png in Resources */,
 				13E0CC391AF3A27E007C4738 /* Merchant-listing-fav-active@2x.png in Resources */,
 				13D98FA21AF20532003FE631 /* favourite-coupon@2x.png in Resources */,
+				135983A31B2AF2AC004FE922 /* navbar-deal-active@2x.png in Resources */,
 				1337EE3E1ACBD35D00F31D14 /* navbar-me-active@2x.png in Resources */,
 				1337EE401ACBD35D00F31D14 /* navbar-nearby-active@2x.png in Resources */,
 				13E67C3F1AE4CD6B00F96A36 /* Merchant.txt in Resources */,
@@ -1455,9 +1497,11 @@
 				1337EE2D1ACBD35D00F31D14 /* merchant-nail@2x.png in Resources */,
 				13639A021AF36961006CB323 /* Filter-athome@2x.png in Resources */,
 				1337EE3A1ACBD35D00F31D14 /* navbar-favourites-active@2x.png in Resources */,
+				135983A51B2AF2AC004FE922 /* navbar-nearby-active@2x.png in Resources */,
 				13A4F6E51B1707640077892E /* category-9@2x.png in Resources */,
 				1337EE141ACBD35D00F31D14 /* header-rupee-active-up@2x.png in Resources */,
 				13A4F6DA1B16F9460077892E /* smiley-sad@2x.png in Resources */,
+				135983A41B2AF2AC004FE922 /* navbar-deal@2x.png in Resources */,
 				132275581AEF94E300F5D77F /* star_empty@2x.png in Resources */,
 				13E610391B05E00000B7D7FB /* merchant-haircut-deal@2x.png in Resources */,
 				13C002171AFB56010021D60E /* merchant-filter-distance-down@2x.png in Resources */,
@@ -1488,6 +1532,7 @@
 				137B94141AEE64A800BCB1E4 /* post_completion_screen@2x.png in Resources */,
 				1337EE3B1ACBD35D00F31D14 /* navbar-favourites@2x.png in Resources */,
 				13E0CC331AF3A213007C4738 /* Merchant-listing-camera@2x.png in Resources */,
+				135983A21B2AF2AC004FE922 /* navbar-me@2x.png in Resources */,
 				13958F491AD7FCE700231794 /* filter-rating-selected@2x.png in Resources */,
 				13C1C7411AF39C430015F71E /* merchant-open@2x.png in Resources */,
 				1337EE081ACBD35D00F31D14 /* filter-gender@2x.png in Resources */,
@@ -1521,6 +1566,7 @@
 				13E0CC371AF3A25D007C4738 /* Merchant-listing-item-call@2x.png in Resources */,
 				13CE68AE1AE8DF150085C7B0 /* category-7active.png in Resources */,
 				1337EE281ACBD35D00F31D14 /* merchant-makeup-deal@2x.png in Resources */,
+				135983A01B2AF2AC004FE922 /* navbar-home@2x.png in Resources */,
 				1337EE431ACBD35D00F31D14 /* registration-age@2x.png in Resources */,
 				1337EE391ACBD35D00F31D14 /* navbar-deals@2x.png in Resources */,
 				1337EE2E1ACBD35D00F31D14 /* merchant-price@2x.png in Resources */,
@@ -1557,8 +1603,11 @@
 				13E6103B1B05E01600B7D7FB /* merchant-haircut@2x.png in Resources */,
 				13E9B69A1AD3D0F5006DE3D8 /* Homepage-image@2x.png in Resources */,
 				13F087711AD5561200D6E467 /* image@2x.png in Resources */,
+				135983A81B2AF2AC004FE922 /* navbar-favourite@2x.png in Resources */,
 				1337EE4A1ACBD35D00F31D14 /* registration-password-active@2x.png in Resources */,
 				1337EE191ACBD35D00F31D14 /* Icon in Resources */,
+				135983A61B2AF2AC004FE922 /* navbar-nearby@2x.png in Resources */,
+				135983A71B2AF2AC004FE922 /* navbar-favourite-active@2x.png in Resources */,
 				13E5307F1AD25CD10046EAEB /* .gitignore in Resources */,
 				1337EE371ACBD35D00F31D14 /* merchant-time@2x.png in Resources */,
 				1337EE161ACBD35D00F31D14 /* header-search@2x.png in Resources */,
@@ -1589,6 +1638,7 @@
 				13C1C7401AF39C430015F71E /* merchant-3.5@2x.png in Resources */,
 				1337EE331ACBD35D00F31D14 /* merchant-rupee@2x.png in Resources */,
 				1337EE271ACBD35D00F31D14 /* merchant-listing-favourite@2x.png in Resources */,
+				1359839F1B2AF2AC004FE922 /* navbar-home-active@2x.png in Resources */,
 				1337EE461ACBD35D00F31D14 /* registration-gender-active@2x.png in Resources */,
 				1337EE041ACBD35D00F31D14 /* filter-both-active@2x.png in Resources */,
 				1360CDB51AF8B79E00245DD1 /* welcome@2x.png in Resources */,
@@ -1620,6 +1670,7 @@
 			files = (
 				13D98FA01AF20209003FE631 /* MyDealCollectionViewCell.m in Sources */,
 				139B4C791AE621C80079F992 /* FeTenDot.m in Sources */,
+				1322A28A1B37E0A300DBA450 /* DigitalRateCardsViewController.m in Sources */,
 				13E4DC511AC95942003355C0 /* FavoriteMerchantsViewController.m in Sources */,
 				13BA573E1AB8367E00811025 /* ParallaxHeaderView.m in Sources */,
 				13BA57411AB8370D00811025 /* StoryCommentCell.m in Sources */,
@@ -1659,6 +1710,7 @@
 				133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */,
 				135B4C7C1A7F84DD00B64F30 /* main.m in Sources */,
 				13A0730C1AE5099100754317 /* Deal.m in Sources */,
+				13A9BE311B38129900163B5C /* TypeTableViewCell.m in Sources */,
 				1388A1A41AE7C47700E330C1 /* ServiceCategory.m in Sources */,
 				134CED6A1AEA68DE009C5714 /* DealRecommendedCell.m in Sources */,
 				13A073091AE508D100754317 /* DealListCell.m in Sources */,

@@ -26,11 +26,30 @@
     Deal *selecteddeal;
     NSMutableDictionary *localFilterDict;
     NSMutableArray *myMerchantsArray;
+    UIRefreshControl *refresh;
+    BOOL _isSearching;
 }
 
 @end
 
 @implementation MerchantListViewController
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"refreshFilterChanged"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"refreshFilterChanged"];
+        self.loaderContainerView.hidden = NO;
+        [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
+        [self.view bringSubviewToFront:self.dealOverlayView];
+    }
+    [self setButtonsFromLocalFilters];
+
+}
+
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,10 +58,24 @@
     [self.loaderContainerView addSubview:spinner];
     self.loaderContainerView.hidden = NO;
     [self.view bringSubviewToFront:self.dealOverlayView];
+    _isSearching = NO;
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
     myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
     localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
-    [self setButtonsFromLocalFilters];
+    
+    refresh = [[UIRefreshControl alloc] init];
+    refresh.tintColor = [UIColor grayColor];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh Merchants"];
+    [refresh addTarget:self action:@selector(refreshCalled) forControlEvents:UIControlEventValueChanged];
+    [self.tableview addSubview:refresh];
+ 
+
+}
+
+-(void)refreshCalled{
+    NSLog(@"refresh");
+    [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
+
 }
 
 -(void)setButtonsFromLocalFilters{
@@ -95,12 +128,19 @@
     }];
      */
     
+    if(_isSearching){
+        return;
+    }
+    
+    _isSearching = YES;
+    
     if(![[LocationHelper sharedInstance] checkPermission]){
         //Show location manager not enabled screen
         UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"Location Disabled!" message:@"Please enable location to get the restults" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [noLocationAlert show];
         [spinner dismiss];
         self.loaderContainerView.hidden = YES;
+        _isSearching = NO;
         return;
     }
     
@@ -130,10 +170,13 @@
                     [spinner dismiss];
                     [spinner removeFromSuperview];
                     //Show Error Alert
-                    UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Redeem Error" message:responseDict[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Error" message:responseDict[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
                     [redeemError show];
                     self.loaderContainerView.hidden = YES;
-                    
+                    _isSearching = NO;
+                    [refresh endRefreshing];
+
+
                 });
             }
             else{
@@ -155,7 +198,11 @@
                     [spinner dismiss];
                     self.totalCountLabel.text = [NSString stringWithFormat:@"%lu Items",(unsigned long)arrayOfMerchants.count];
                     self.loaderContainerView.hidden = YES;
+                    _isSearching = NO;
+
                     [self.tableview reloadData];
+                    [refresh endRefreshing];
+
                 });
             }
 
@@ -163,6 +210,11 @@
             
         }
         else{
+            [spinner dismiss];
+            self.loaderContainerView.hidden = YES;
+            _isSearching = NO;
+            [refresh endRefreshing];
+
             NSLog(@"error %@",[error localizedDescription]);
         }
     }];
@@ -343,31 +395,32 @@
                 }
             }
             else{
-                if (![merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-                    //Check if time falls between opening and closing
-                    for (Schedule *schedule in merchant.schedule) {
-                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[merchant.finalWeekSchedule length]];
-                        int weekday = [self currentWeekday];
-                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
-                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
-                            if ([ichar isEqualToString:@"1"] && i == weekday) {
-                                if ([self isMerchantOpen:schedule]) {
-                                    return NO;
-                                }
-                            }
-                        }
-                        
-                        
-                    }
-                }
-                else{
-                    return NO;
-                }
+//                if (![merchant.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+//                    //Check if time falls between opening and closing
+//                    for (Schedule *schedule in merchant.schedule) {
+//                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[merchant.finalWeekSchedule length]];
+//                        int weekday = [self currentWeekday];
+//                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
+//                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+//                            if ([ichar isEqualToString:@"1"] && i == weekday) {
+//                                if ([self isMerchantOpen:schedule]) {
+//                                    return NO;
+//                                }
+//                            }
+//                        }
+//                        
+//                        
+//                    }
+//                }
+//                else{
+//                    return NO;
+//                }
                 
             }
             
         }
         if([key isEqualToString:@"3.5+"]){
+            
             if ([localFilterDict[key] isEqual:@(1)] && merchant.rating.floatValue<3.5) {
                 return NO;
             }
@@ -467,17 +520,22 @@
         
     }
     else{
-        cell.distanceLabel.text = merchant.distanceFromCurrentLocation;
+        
+        NSString *distanceString = [NSString stringWithFormat:@"%.1f m",merchant.distanceFromCurrentLocation.doubleValue];
+        if(merchant.distanceFromCurrentLocation.doubleValue > 1000){
+            distanceString = [NSString stringWithFormat:@"%.1f km",merchant.distanceFromCurrentLocation.doubleValue/1000];
+        }
+        cell.distanceLabel.text = distanceString;
         cell.distancebackgroundImageView.hidden = NO;
     }
-    cell.priceRangeImageView.image = [UIImage imageNamed:@"merchant-rupee4.png"];
     
-    
-    NSString *urlString = (merchant.image.length)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:STATIC_IMAGE_SOURCE];
+    cell.priceRangeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"merchant-rupee%d.png",merchant.luxuryRating.intValue+1]];
+
+    NSString *urlString = (merchant.image.length>0)?[NSString stringWithFormat:@"%@%@",INDULGE_MERCHANT_IMAGE_BASE_URL,merchant.image]:[NSString stringWithFormat:STATIC_IMAGE_SOURCE];
     
     NSURL *url = [NSURL URLWithString:urlString];
 
-    NSLog(@"url %@",urlString);
+    NSLog(@"po %@",urlString);
     
     [cell.backgroundImageView setImageWithURL:url
                       placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload];
@@ -490,6 +548,7 @@
     
     NSData *encodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:merchant];
     cell.favoriteButton.selected = ([myMerchantsArray containsObject:encodedMerchant])?YES:NO;
+    cell.favoriteButton.tag = indexPath.row;
     [cell.favoriteButton addTarget:self action:@selector(favourite:) forControlEvents:UIControlEventTouchUpInside];
     [cell.dealsButton setImage:[UIImage imageNamed:@"merchant-listing-deal.png"] forState:UIControlStateNormal];
     [cell.dealsButton addTarget:self action:@selector(favourite:) forControlEvents:UIControlEventTouchUpInside];
@@ -548,6 +607,9 @@
 
 -(void)favourite:(UIButton *)senderButton{
     Merchant *merchant = arrayOfMerchants[senderButton.tag];
+    
+    NSLog(@"favourtied Merchant %@",merchant.name);
+    
     NSData *myEncodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:merchant];
     
     if (senderButton.selected) {
@@ -567,6 +629,10 @@
     senderButton.selected = !senderButton.selected;
     
     BOOL selected = senderButton.selected;
+    
+    if(localFilterDict == nil){
+        localFilterDict = [NSMutableDictionary new];
+    }
     
     switch (senderButton.tag) {
         case 1:

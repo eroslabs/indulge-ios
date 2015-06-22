@@ -25,26 +25,50 @@
     NSArray *data;
     NSMutableDictionary *localFilterDict;
     NSMutableArray *myDealsArray;
+    UIRefreshControl *refresh;
+    BOOL _isSearching;
 }
 @end
 
 @implementation DealsViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     searchText = @"";
     myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
+    
+    _isSearching = NO;
 
-    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
-    [self.loaderContainerView addSubview:spinner];
-    self.loaderContainerView.hidden = NO;
     localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
     
     NSLog(@"local filter %@",localFilterDict);
     [self setButtonsFromLocalFilters];
     
+    refresh = [[UIRefreshControl alloc] init];
+    refresh.tintColor = [UIColor grayColor];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh Deals"];
+    [refresh addTarget:self action:@selector(refreshCalled) forControlEvents:UIControlEventValueChanged];
+    [self.tableview addSubview:refresh];
+    
+
 }
+
+
+-(void)loadNewDealsWithSpinner{
+    spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+    self.loaderContainerView.hidden = NO;
+    [self.loaderContainerView addSubview:spinner];
+    [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+
+}
+
+-(void)refreshCalled{
+    NSLog(@"refresh");
+    [self loadNewDealsWithSpinner];
+}
+
 
 -(void)setButtonsFromLocalFilters{
     
@@ -76,22 +100,36 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
+    searchText = @"";
     searching = NO;
-    if (arrayOfDeals.count == 0) {
-        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"refreshFilterChanged"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"refreshFilterChanged"];
+        [self loadNewDealsWithSpinner];
+    }
+    else if (arrayOfDeals.count == 0) {
+        [self loadNewDealsWithSpinner];
+
+
     }
     
 }
 
 -(void)searchForNewDeals{
     
+    if(_isSearching){
+        return;
+    }
+    
+    _isSearching = YES;
+    
     if(![[LocationHelper sharedInstance] checkPermission]){
         //Show location manager not enabled screen
         UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"Location Disabled!" message:@"Please enable location to get the restults" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [noLocationAlert show];
         [spinner dismiss];
+        [refresh endRefreshing];
         self.loaderContainerView.hidden = YES;
+        _isSearching = NO;
         return;
     }
     
@@ -121,6 +159,7 @@
             
             if (responseDict) {
                 arrayOfDeals = [self captureAllMerchantsFromResponseDict:responseDict];
+            
                 if (arrayOfDeals.count>0) {
                    
                     //Only put if there was no error
@@ -134,11 +173,21 @@
                 searching = NO;
                 self.loaderContainerView.hidden = YES;
                 [self.tableview reloadData];
+                _isSearching = NO;
+                [refresh endRefreshing];
+                
+
+
             });
             
         }
         else{
             NSLog(@"error %@",[error localizedDescription]);
+            [spinner dismiss];
+            searching = NO;
+            self.loaderContainerView.hidden = YES;
+            _isSearching = NO;
+
         }
     }];
 
@@ -298,26 +347,26 @@
                 }
             }
             else{
-                if (![deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
-                    //Check if time falls between opening and closing
-                    for (Schedule *schedule in deal.schedule) {
-                        NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[deal.finalWeekSchedule length]];
-                        int weekday = [self currentWeekday];
-                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
-                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
-                            if ([ichar isEqualToString:@"1"] && i == weekday) {
-                                if ([self isMerchantOpen:schedule]) {
-                                    return NO;
-                                }
-                            }
-                        }
-                        
-                        
-                    }
-                }
-                else{
-                    return NO;
-                }
+//                if (![deal.weekdaysArray containsObject:[NSString stringWithFormat:@"%d",[self currentWeekday]]]) {
+//                    int weekday = [self currentWeekday];
+//
+//                    //Check if time falls between opening and closing
+//                    for (Schedule *schedule in deal.schedule) {
+//                        for (int i=0; i < [schedule.weekSchedule length]; i++) {
+//                            NSString *ichar  = [NSString stringWithFormat:@"%c", [schedule.weekSchedule characterAtIndex:i]];
+//                            if ([ichar isEqualToString:@"1"] && i == weekday) {
+//                                if ([self isMerchantOpen:schedule]) {
+//                                    return NO;
+//                                }
+//                            }
+//                        }
+//                        
+//                        
+//                    }
+//                }
+//                else{
+//                    return NO;
+//                }
                 
             }
 
@@ -332,11 +381,7 @@
                     return NO;
                 }
             }
-            else{
-                if (deal.rating.floatValue>3.5) {
-                    return NO;
-                }
-            }
+            
         }
         if([key isEqualToString:@"gender"]){
             if ([localFilterDict[key] isEqualToString:@"male"]) {
@@ -423,7 +468,12 @@
             
         }
         else{
-            cell.distanceLabel.text = deal.distanceFromCurrentLocation;
+            NSString *distanceString = [NSString stringWithFormat:@"%.1f m",deal.distanceFromCurrentLocation.doubleValue];
+            if(deal.distanceFromCurrentLocation.doubleValue > 1000){
+                distanceString = [NSString stringWithFormat:@"%.1f km",deal.distanceFromCurrentLocation.doubleValue/1000];
+            }
+            cell.distanceLabel.text = distanceString;
+
             cell.distanceBackgroundImageView.hidden = NO;
         }
         [cell setServiceCategoryImagesWithDeal:deal];
@@ -458,7 +508,7 @@
     if (searching) {
         SuggestedTableViewCell *cell = (SuggestedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
         searchText = [cell.searchLabel.text stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
-        [spinner showWhileExecutingSelector:@selector(searchForNewDeals) onTarget:self withObject:nil];
+        [self loadNewDealsWithSpinner];
     }
     else{
         selectedDeal = arrayOfDeals[indexPath.row];

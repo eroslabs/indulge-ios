@@ -19,7 +19,13 @@
         
     }
     else{
-        self.distanceLabel.text = deal.distanceFromCurrentLocation;
+        
+        NSString *distanceString = [NSString stringWithFormat:@"%.1f m",deal.distanceFromCurrentLocation.doubleValue];
+        if(deal.distanceFromCurrentLocation.doubleValue > 1000){
+            distanceString = [NSString stringWithFormat:@"%.1f km",deal.distanceFromCurrentLocation.doubleValue/1000];
+        }
+        self.distanceLabel.text = distanceString;
+
         
     }
     self.backgroundImageView.image = [UIImage imageNamed:@"deal-coupon.png"];

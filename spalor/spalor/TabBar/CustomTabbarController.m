@@ -58,9 +58,9 @@
     
     [item1 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-nearby.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-nearby-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    [item2 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-deals.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-deals-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [item2 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-deal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-deal-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    [item3 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-favourites.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-favourites-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [item3 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-favourite.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-favourite-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     [item4 initWithTitle:@"" image:[[UIImage imageNamed:@"navbar-me.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"navbar-me-active.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 
@@ -91,8 +91,15 @@
 
 // called when a new view is selected by the user (but not programatically)
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+    NSMutableDictionary *filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
+
+    for (NSString *key in [filterDict allKeys]) {
+        if (![key isEqualToString:@"hs"] && ![key isEqualToString:@"gs"]) {
+            [filterDict removeObjectForKey:key];
+        }
+    }
     
-    
+    [[NSUserDefaults standardUserDefaults] setObject:filterDict forKey:@"filterDict"];
 }
 
 

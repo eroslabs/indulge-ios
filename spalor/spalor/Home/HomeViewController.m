@@ -28,6 +28,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self setButtonsFromLocalFilters];
+}
+
 -(void)viewDidLoad{
     [super viewDidLoad];
     //[[NetworkHelper sharedInstance] formRequestwithemail:@"vikas@eroslabs.co"];
@@ -55,16 +60,16 @@
 -(void)setButtonsFromLocalFilters{
     
     if ([localFilterDict[@"athome"] isEqual:@(1)]) {
-        self.filterButton1.selected = YES;
-    }
-    else{
-        self.filterButton1.selected = NO;
-    }
-    if([localFilterDict[@"opennow"] isEqual:@(1)]){
         self.filterButton2.selected = YES;
     }
     else{
         self.filterButton2.selected = NO;
+    }
+    if([localFilterDict[@"opennow"] isEqual:@(1)]){
+        self.filterButton1.selected = YES;
+    }
+    else{
+        self.filterButton1.selected = NO;
     }
     if([localFilterDict[@"gender"] isEqual:@"male"]){
         self.filterButton3.selected = YES;
@@ -99,6 +104,8 @@
         self.filterButton3.alpha = onState;
         self.filterButton4.alpha = onState;
 
+        [self setButtonsFromLocalFilters];
+        
         self.goBackFromSearchButton.alpha = onState;
         self.locationSearchBackgroundImageView.alpha = onState;
         self.locationSearchTextField.alpha = onState;
@@ -269,24 +276,38 @@
     senderButton.selected = !senderButton.selected;
     
     BOOL selected = senderButton.selected;
-    
+    NSMutableDictionary *filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
+
+    NSString * defaultbooleanStringForHomeService =  @"0";
+    [filterDict addEntriesFromDictionary:@{@"hs":defaultbooleanStringForHomeService}];
+
+
     switch (senderButton.tag) {
         case 1:
             [localFilterDict addEntriesFromDictionary:@{@"opennow":@(selected)}];
             break;
-        case 2:
+        case 2:{
+            NSString * booleanString = (selected) ? @"1" : @"0";
             [localFilterDict addEntriesFromDictionary:@{@"athome":@(selected)}];
+            [filterDict addEntriesFromDictionary:@{@"hs":booleanString}];
             break;
-        case 3:
+        }
+        case 3:{
             [localFilterDict addEntriesFromDictionary:@{@"gender":@"male"}];
+            [filterDict addEntriesFromDictionary:@{@"gs":@"0"}];
+
             break;
-        case 4:
+        }
+        case 4:{
             [localFilterDict addEntriesFromDictionary:@{@"gender":@"female"}];
+            [filterDict addEntriesFromDictionary:@{@"gs":@"1"}];
+
             break;
+        }
         default:
             break;
     }
-    
+    [[NSUserDefaults standardUserDefaults] setObject:filterDict forKey:@"filterDict"];
     [[NSUserDefaults standardUserDefaults] setObject:localFilterDict forKey:MYLOCALFILTERSTORE];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

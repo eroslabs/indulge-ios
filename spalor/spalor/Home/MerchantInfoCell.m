@@ -22,9 +22,24 @@
 
     }
     else{
-        self.distanceLabel.text = merchant.distanceFromCurrentLocation;
+        
+        NSString *distanceString = [NSString stringWithFormat:@"%.1f m",merchant.distanceFromCurrentLocation.doubleValue];
+        if(merchant.distanceFromCurrentLocation.doubleValue > 1000){
+            distanceString = [NSString stringWithFormat:@"%.1f km",merchant.distanceFromCurrentLocation.doubleValue/1000];
+        }
+        self.distanceLabel.text = distanceString;
+        
 
     }
+    
+    self.rateView.hidden = NO;
+    self.rateView.notSelectedImage = [UIImage imageNamed:@"star_empty.png"];
+    self.rateView.halfSelectedImage = [UIImage imageNamed:@"star_half.png"];
+    self.rateView.fullSelectedImage = [UIImage imageNamed:@"star.png"];
+    self.rateView.rating = merchant.rating.floatValue;
+    self.rateView.editable = NO;
+    self.rateView.maxRating = 5;
+
     
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width/2;
     self.profileImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;

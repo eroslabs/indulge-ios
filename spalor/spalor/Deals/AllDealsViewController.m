@@ -133,7 +133,12 @@
             
         }
         else{
-            cell.distanceLabel.text = deal.distanceFromCurrentLocation;
+            NSString *distanceString = [NSString stringWithFormat:@"%.1f m",deal.distanceFromCurrentLocation.doubleValue];
+            if(deal.distanceFromCurrentLocation.doubleValue > 1000){
+                distanceString = [NSString stringWithFormat:@"%.1f km",deal.distanceFromCurrentLocation.doubleValue/1000];
+            }
+            cell.distanceLabel.text = distanceString;
+            
             
         }
 //        if (deal.serviceNames.length>0) {

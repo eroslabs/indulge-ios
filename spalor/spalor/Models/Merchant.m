@@ -148,13 +148,14 @@
                 location.lon = [dictionary[key] objectForKey:@"lon"];
                 CLLocation *merchantlocation = [[CLLocation alloc] initWithLatitude:location.lat.floatValue longitude:location.lon.floatValue];
                 double distanceofmerchant = [[LocationHelper sharedInstance] distanceInmeteresFrom:merchantlocation];
+              
                 
                 if(distanceofmerchant == -1.0){
                     self.distanceFromCurrentLocation = [NSString stringWithFormat:@"0"];
 
                 }
                 else{
-                    self.distanceFromCurrentLocation = [NSString stringWithFormat:@"%.2f",distanceofmerchant];
+                    self.distanceFromCurrentLocation = [NSString stringWithFormat:@"%.1f",distanceofmerchant];
                 }
                 
                 [self setValue:location forKey:key];
@@ -195,6 +196,10 @@
                     merchantService.price = service[@"price"];
                     merchantService.image = service[@"image"];
                     merchantService.categoryId = service[@"categoryId"];
+                    merchantService.type = service[@"name"];
+                    merchantService.categoryName = service[@"categoryName"];
+                    merchantService.serviceName = service[@"serviceName"];
+                    merchantService.gender = service[@"gender"];
                     [self.services addObject:merchantService];
                 }
             }

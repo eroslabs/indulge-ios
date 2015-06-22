@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Merchant.h"
+#import "RateView.h"
 
 @interface MerchantInfoCell : UITableViewCell
 @property (nonatomic,weak) IBOutlet UILabel *nameLabel;
@@ -15,6 +16,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *averageRatingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *distanceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *profileImageView;
-
+@property (nonatomic, weak) IBOutlet RateView *rateView;
 -(MerchantInfoCell *)setupWithMerchant:(Merchant *)merchant;
 @end

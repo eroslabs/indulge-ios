@@ -17,6 +17,10 @@
         self.name = [decoder decodeObjectForKey:@"name"];
         self.price = [decoder decodeObjectForKey:@"price"];
         self.image = [decoder decodeObjectForKey:@"image"];
+        self.categoryName = [decoder decodeObjectForKey:@"categoryName"];
+        self.type = [decoder decodeObjectForKey:@"type"];
+        self.serviceName = [decoder decodeObjectForKey:@"serviceName"];
+        self.gender = [decoder decodeObjectForKey:@"gender"];
 
     }
     return self;
@@ -30,6 +34,10 @@
     [encoder encodeObject:_name forKey:@"name"];
     [encoder encodeObject:_price forKey:@"price"];
     [encoder encodeObject:_image forKey:@"image"];
+    [encoder encodeObject:_categoryName forKey:@"categoryName"];
+    [encoder encodeObject:_type forKey:@"type"];
+    [encoder encodeObject:_serviceName forKey:@"serviceName"];
+    [encoder encodeObject:_gender forKey:@"gender"];
     
 }
 @end

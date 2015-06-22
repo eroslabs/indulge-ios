@@ -40,8 +40,9 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     NSMutableDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
-    [selectedServiceids appendFormat:filterDict[@"services"]];
-    
+    if([[filterDict allKeys] containsObject:@"services"]){
+        [selectedServiceids appendFormat:filterDict[@"services"]];
+    }
     [self setAllCategories];
     [self hideSelectedServicesView];
 }

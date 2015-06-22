@@ -17,6 +17,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *amountOffLabel;
 @property (nonatomic, weak) IBOutlet UILabel *validTillLabel;
 
+@property (nonatomic, weak) IBOutlet UILabel *serviceNameLabel1;
+@property (nonatomic, weak) IBOutlet UILabel *serviceNameLabel2;
+@property (nonatomic, weak) IBOutlet UILabel *serviceNameLabel3;
+
+
 @property (nonatomic, weak) IBOutlet UIButton *shareButton;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
 @property (nonatomic, weak) IBOutlet UIImageView *distanceBackgroundImageView;

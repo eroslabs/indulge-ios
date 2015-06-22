@@ -92,8 +92,13 @@
     if (merchant.menus.count>0) {
         NSString *url = [NSURL URLWithString:merchant.menus[0]];
         [self.ratecardImageView setImageWithURL:url
-                               placeholderImage:[UIImage imageNamed:@""] options:SDWebImageProgressiveDownload ];
+                               placeholderImage:[UIImage imageNamed:@"welcome.png"] options:SDWebImageProgressiveDownload ];
 
+    }
+    else{
+        if (merchant.services.count > 0) {
+            self.ratecardImageView.image = [UIImage imageNamed:@"welcome.png"];
+        }
     }
 
     return self;
