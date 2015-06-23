@@ -51,7 +51,7 @@
 
 -(void)setServiceCategoryImagesWithDeal:(Deal *)deal{
     
-    NSArray *categoryMap = @[@"merchant-massage",@"merchant-makeup",@"merchant-nail",@"merchant-haircut",@"merchant-body",@"merchant-face",@"merchant-removal",@"merchant-pt",@"merchant-combo"];
+    NSArray *categoryMap = @[@"deal-massage",@"deal-makeup",@"deal-nail",@"deal-haircut",@"deal-body",@"deal-face",@"deal-removal",@"deal-fitness",@"deal-combo"];
    
     self.serviceCategoryImageView1.hidden = YES;
     self.serviceCategoryImageView2.hidden = YES;

@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "NSData+NSData_AES256.h"
 #import "AESCrypt.h"
+#import "User.h"
 
 @interface NetworkHelper()
 @property(nonatomic, strong)NSOperationQueue *queueManager;
@@ -44,8 +45,9 @@ NSString * APIRequestID()
 }
 
 
--(NSURLRequest *)formRequestwithemail:(NSString *)emailId andURLString:(NSString *)urlString{
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+-(NSMutableURLRequest *)formRequestwithemail:(NSString *)emailId andURLString:(NSString *)urlString{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+    
     NSString *token = APIRequestID();
     [request setValue:token forHTTPHeaderField:@"token"];
     [request setValue:emailId forHTTPHeaderField:@"email"];
@@ -80,10 +82,28 @@ NSString * APIRequestID()
         [urlString appendString:[NSString stringWithFormat:@"&_auth_token=%@",authToken]];
     }
     
-    NSURL *URL = [NSURL URLWithString:urlString];
     DLog(@"url string %@",urlString);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+    NSMutableURLRequest *request = nil;
+    
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    
+    
+    if(user.mail!=nil){
+        
+        request = [self formRequestwithemail:user.mail andURLString:urlString];
+
+    }
+        
+    else{
+        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                          cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+
+    }
+    
+    
+    
     [request setHTTPMethod:@"PUT"];
     [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody: data];
@@ -118,10 +138,24 @@ NSString * APIRequestID()
     }
 
     
-    NSURL *URL = [NSURL URLWithString:urlString];
-    DLog(@"url string %@",urlString);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+    NSMutableURLRequest *request = nil;
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+    
+    
+    if(user.mail!=nil){
+        
+        request = [self formRequestwithemail:user.mail andURLString:urlString];
+        
+    }
+    
+    else{
+        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                          cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+        
+    }
+
     [request setHTTPMethod:@"POST"];
     [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
     
@@ -152,10 +186,24 @@ NSString * APIRequestID()
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/%@?",INDULGE_URL,url];
 
     
-    NSURL *URL = [NSURL URLWithString:urlString];
-    DLog(@"url string %@",urlString);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+    NSMutableURLRequest *request = nil;
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+
+    
+    if(user.mail!=nil){
+        
+        request = [self formRequestwithemail:user.mail andURLString:urlString];
+        
+    }
+    
+    else{
+        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                          cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+        
+    }
+
     [request setHTTPMethod:@"POST"];
     [request setValue: @"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody: dataFromDict];
@@ -189,14 +237,26 @@ NSString * APIRequestID()
         index++;
     }
     
-    NSURL *URL = [NSURL URLWithString:urlString];
-    DLog(@"url string %@",urlString);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL
-                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+    NSMutableURLRequest *request = nil;
+    
+    
+    NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
+    User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
+
+    if(user.mail!=nil){
+        
+        request = [self formRequestwithemail:user.mail andURLString:urlString];
+        
+    }
+    
+    else{
+        request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                          cachePolicy:NSURLRequestReloadIgnoringCacheData  timeoutInterval:TIMEOUTINTERVAL];
+        
+        
+    }
+
     [request setHTTPMethod:@"GET"];
-    
-    
-    
     [request setValue: @"application/json" forHTTPHeaderField:@"accept"];
 
     if(!self.queueManager) {

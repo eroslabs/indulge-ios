@@ -170,8 +170,11 @@
                     [spinner dismiss];
                     [spinner removeFromSuperview];
                     //Show Error Alert
-                    UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Error" message:responseDict[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                    [redeemError show];
+                    if ([responseDict[@"error"] isKindOfClass:[NSString class]]) {
+                        UIAlertView *redeemError = [[UIAlertView alloc] initWithTitle:@"Error" message:responseDict[@"error"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                        [redeemError show];
+
+                    }
                     self.loaderContainerView.hidden = YES;
                     _isSearching = NO;
                     [refresh endRefreshing];

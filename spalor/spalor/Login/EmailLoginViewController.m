@@ -70,7 +70,7 @@
         CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
         self.navigationController.navigationBarHidden=YES;
         [self.navigationController pushViewController:obj animated:YES];
-
+        
     }
     
     
