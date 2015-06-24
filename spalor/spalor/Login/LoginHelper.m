@@ -233,9 +233,33 @@
 // Show the user the logged-in UI
 - (void)userLoggedInwithFBUserObject:(User *)user
 {
+    NSDictionary *userDict = nil;
     
+    if (user.dob.length>0) {
+        
+        if (user.facebookId.length>0) {
+            userDict = @{@"name":user.name,@"facebook":user.facebookId,@"gender":user.gender,@"dob":user.dob,@"mail":user.mail};
+
+        }
+        else{
+            userDict = @{@"name":user.name,@"google":user.googleId,@"gender":user.gender,@"dob":user.dob,@"mail":user.mail};
+
+        }
+
+    }
+    else{
+        
+        if (user.facebookId.length>0) {
+            userDict = @{@"name":user.name,@"facebook":user.facebookId,@"gender":user.gender,@"mail":user.mail};
+            
+        }
+        else{
+            userDict = @{@"name":user.name,@"google":user.googleId,@"gender":user.gender,@"mail":user.mail};
+            
+        }
+
+    }
    
-    NSDictionary *userDict = @{@"name":user.name,@"facebook":user.facebookId,@"gender":user.gender,@"dob":user.dob,@"mail":user.mail};
     
     [[NetworkHelper sharedInstance] getArrayFromPostURL:@"user/save" parmeters:@{@"user":userDict} completionHandler:^(id response, NSString *url, NSError *error){
         if (error == nil && response!=nil) {

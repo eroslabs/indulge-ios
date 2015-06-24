@@ -41,10 +41,16 @@
     self.nameLabel.text = user.name;
     self.emailLabel.text = user.mail;
     
-    NSDate *birthdate = [NSDate dateWithTimeIntervalSince1970:[user.dob doubleValue]];
-    NSInteger ageinYears = [self ageFromBirthday:birthdate];
+    if (user.dob.length>0) {
+        NSDate *birthdate = [NSDate dateWithTimeIntervalSince1970:[user.dob doubleValue]];
+        NSInteger ageinYears = [self ageFromBirthday:birthdate];
+        self.ageandGenderLabel.text = [NSString stringWithFormat:@"%.0ld, %@",(long)ageinYears,([user.gender isEqualToString:@"0"])?@"Male":@"Female"];
+    }
+    else{
+        self.ageandGenderLabel.text = [NSString stringWithFormat:@"%@",([user.gender isEqualToString:@"0"])?@"Male":@"Female"];
+
+    }
     
-    self.ageandGenderLabel.text = [NSString stringWithFormat:@"%.0ld, %@",(long)ageinYears,user.gender];
     
     self.reviewsLabel.text = (user.reviews)?user.reviews:@"0";
     self.looksLabel.text = (user.looks)?user.looks:@"0";

@@ -18,9 +18,8 @@
 #import "FeSpinnerTenDot.h"
 
 @interface LoginViewController (){
-    User *user;
     FeSpinnerTenDot *spinner;
-
+    GPPSignIn *signIn;
 }
 
 @end
@@ -48,7 +47,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 //    
 //    self.loginView.delegate = self;
     
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
+    signIn = [GPPSignIn sharedInstance];
     
     signIn.shouldFetchGooglePlusUser = YES;
     //signIn.shouldFetchGoogleUserEmail = YES;  // Uncomment to get the user's email
@@ -57,7 +56,10 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     signIn.clientID = kClientId;
     
     // Uncomment one of these two statements for the scope you chose in the previous step
-    signIn.scopes = @[ kGTLAuthScopePlusLogin ];  // "https://www.googleapis.com/auth/plus.login" scope
+    signIn.scopes = @[ kGTLAuthScopePlusLogin,
+                       kGTLAuthScopePlusMe,
+                       kGTLAuthScopePlusUserinfoEmail,
+                       kGTLAuthScopePlusUserinfoProfile ];  // "https://www.googleapis.com/auth/plus.login" scope
     //signIn.scopes = @[ @"profile" ];            // "profile" scope
     
     // Optional: declare signIn.actions, see "app activities"
@@ -151,120 +153,117 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 
 }
 
+#pragma mark - GPS SignIn Delegate
+
+- (void)didDisconnectWithError:(NSError *)error{
+    [self userLoginFailed];
+}
+
 - (void)finishedWithAuth: (GTMOAuth2Authentication *)auth
                    error: (NSError *) error {
-    NSLog(@"Received error %@ and auth object %@",error, auth);
     if (error) {
         //Show Error Alert
-    }
-    else{
-        
-        [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
+        NSLog(@"Received error %@ and auth object %@",[error localizedDescription], auth);
 
     }
+    else {
+        spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+        [self.loaderContainerView addSubview:spinner];
+        self.loaderContainerView.hidden = NO;
+        [spinner show];
+        
+        NSLog(@"GPS %@",signIn.userEmail);
+        //[self refreshInterfaceBasedOnSignIn];
+        
+        GTLQueryPlus *query = [GTLQueryPlus queryForPeopleGetWithUserId:@"me"];
+        
+        // 1. Create a |GTLServicePlus| instance to send a request to Google+.
+        GTLServicePlus* plusService = [[GTLServicePlus alloc] init] ;
+        plusService.retryEnabled = YES;
+        
+        // 2. Set a valid |GTMOAuth2Authentication| object as the authorizer.
+        [plusService setAuthorizer:[GPPSignIn sharedInstance].authentication];
+        
+        // 3. Use the "v1" version of the Google+ API.*
+        plusService.apiVersion = @"v1";
+        [plusService executeQuery:query
+                completionHandler:^(GTLServiceTicket *ticket,
+                                    GTLPlusPerson *person,
+                                    NSError *error) {
+                    if (error) {
+                        //Handle Error
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                            [alert show];
+                            [self userLoginFailed];
+                        });
+                    } else {
+                        
+                        NSArray * userEmails = person.emails;
+                        NSString * email = ((GTLPlusPersonEmailsItem *)[userEmails objectAtIndex:0]).value;
+
+                        NSLog(@"Email= %@", signIn.authentication.userEmail);
+                        NSLog(@"GoogleID=%@", person.identifier);
+                        NSLog(@"User Name=%@", [person.name.givenName stringByAppendingFormat:@" %@", person.name.familyName]);
+                        NSLog(@"Gender=%@", person.gender);
+                        
+                        if (email.length == 0) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to retrieve email" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                [alert show];
+                                [self userLoginFailed];
+                                return ;
+                            });
+                        }
+                        
+                        
+                        User *user = [[User alloc] init];
+                        user.name = [person.name.givenName stringByAppendingFormat:@" %@", person.name.familyName];
+                        
+                        user.gender = ([person.gender isEqualToString:@"male"])?@"0":@"1";;
+                        
+                        user.mail = email;
+                        
+                        user.googleId = person.identifier;
+                        
+                        
+                        
+                        NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+                        [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[LoginHelper sharedInstance] userLoggedInwithFBUserObject:user];
+                        });
+
+                        
+                        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:person.image.url]];
+                        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
+                            
+                            if (error == nil) {
+                                
+                                user.imageData = data;
+                                NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
+                                [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
+                                [[NSUserDefaults standardUserDefaults] synchronize];
+                                
+                                
+                                
+                            }
+                        }];
+
+                    }
+                }];
+    }
+    
+//    else{
+//        NSLog(@"Received auth object %@", auth);
+//
+//        [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
+//
+//    }
 }
 
-// Call method when user information has been fetched
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)guser {
-    self.profilePictureView.profileID = guser.id;
-    user = [[User alloc] init];
-    user.name = guser[@"name"];
-    user.gender = guser[@"gender"];
-    user.facebookId = guser[@"id"];
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE]) {
-        NSLog(@"user %@",user);
-        [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
 
-    }
-    else{
-        
-        NSDictionary *userDict = @{@"name":guser[@"name"],@"facebook":guser[@"id"]};
-        
-        [[NetworkHelper sharedInstance] getArrayFromPostURL:@"user/save" parmeters:@{@"user":userDict} completionHandler:^(id response, NSString *url, NSError *error){
-            if (error == nil && response!=nil) {
-                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
-                
-                NSLog(@"response string %@",responseDict);
-                user = [[User alloc] init];
-                user.userId = responseDict[@"user_id"];
-                user.name = guser[@"name"];
-                user.facebookId = guser[@"id"];
-                NSData *archivedUser = [NSKeyedArchiver archivedDataWithRootObject:user];
-                [[NSUserDefaults standardUserDefaults] setObject:archivedUser forKey:MYUSERSTORE];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    CustomTabbarController *obj=(CustomTabbarController *)[storyboard instantiateViewControllerWithIdentifier:@"TABBAR"];
-                    self.navigationController.navigationBarHidden=YES;
-                    [self.navigationController pushViewController:obj animated:YES];
-                });
-                
-            }
-        }];
-
-    }
-    
-    
-    
-}
-
-
-
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView{
-    [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
-
-
-}
-
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    self.profilePictureView.profileID = nil;
-    //self.statusLabel.text= @"You're not logged in!";
-}
-
-// Handle possible errors that can occur during login
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
-    NSString *alertMessage, *alertTitle;
-    
-    // If the user should perform an action outside of you app to recover,
-    // the SDK will provide a message for the user, you just need to surface it.
-    // This conveniently handles cases like Facebook password change or unverified Facebook accounts.
-    if ([FBErrorUtility shouldNotifyUserForError:error]) {
-        alertTitle = @"Facebook error";
-        alertMessage = [FBErrorUtility userMessageForError:error];
-        
-        // This code will handle session closures that happen outside of the app
-        // You can take a look at our error handling guide to know more about it
-        // https://developers.facebook.com/docs/ios/errors
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
-        alertTitle = @"Session Error";
-        alertMessage = @"Your current session is no longer valid. Please log in again.";
-        
-        // If the user has cancelled a login, we will do nothing.
-        // You can also choose to show the user a message if cancelling login will result in
-        // the user not being able to complete a task they had initiated in your app
-        // (like accessing FB-stored information or posting to Facebook)
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-        NSLog(@"user cancelled login");
-        
-        // For simplicity, this sample handles other errors with a generic message
-        // You can checkout our error handling guide for more detailed information
-        // https://developers.facebook.com/docs/ios/errors
-    } else {
-        alertTitle  = @"Something went wrong";
-        alertMessage = @"Please try again later.";
-        NSLog(@"Unexpected error:%@", error);
-    }
-    
-    if (alertMessage) {
-        [[[UIAlertView alloc] initWithTitle:alertTitle
-                                    message:alertMessage
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-    }
-}
 
 @end

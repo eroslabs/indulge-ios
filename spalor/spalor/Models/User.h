@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *mail;
 @property (nonatomic, strong) NSString *gender;
 @property (nonatomic, strong) NSString *dob;
+@property (nonatomic, strong) NSString *age;
 @property (nonatomic, strong) NSString *facebookId;
 @property (nonatomic, strong) NSString *googleId;
 @property (nonatomic, strong) NSString *rating;
