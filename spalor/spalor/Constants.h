@@ -19,7 +19,7 @@
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-#define TIMEOUTINTERVAL 60
+#define TIMEOUTINTERVAL 30
 #define INDULGE_URL @"http://52.25.40.54"
 //#define INDULGE_URL @"http://192.168.0.4/indulge"
 
