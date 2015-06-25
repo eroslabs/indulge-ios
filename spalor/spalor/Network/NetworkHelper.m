@@ -268,6 +268,8 @@ NSString * APIRequestID()
         self.queueManager = [NSOperationQueue new];
     }
     
+    NSLog(@"url %@",urlString);
+    
     [NSURLConnection sendAsynchronousRequest:request queue:self.queueManager completionHandler:^(NSURLResponse *response,NSData *data,NSError *connectionError){
         block(data,urlString,connectionError);
         

@@ -282,6 +282,10 @@
 		13E0CC391AF3A27E007C4738 /* Merchant-listing-fav-active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E0CC381AF3A27E007C4738 /* Merchant-listing-fav-active@2x.png */; };
 		13E0CC3B1AF3A28A007C4738 /* merchant-listing-fav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E0CC3A1AF3A28A007C4738 /* merchant-listing-fav@2x.png */; };
 		13E0CC3D1AF3A422007C4738 /* merchant-ratecard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E0CC3C1AF3A422007C4738 /* merchant-ratecard@2x.png */; };
+		13E283C01B3BF8390008FF78 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E283BD1B3BF8390008FF78 /* WYPopoverController.m */; };
+		13E283C11B3BF8390008FF78 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E283BF1B3BF8390008FF78 /* WYStoryboardPopoverSegue.m */; };
+		13E283C51B3BF8F10008FF78 /* CityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E283C31B3BF8F10008FF78 /* CityTableViewController.m */; };
+		13E283C61B3BF8F10008FF78 /* CityTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13E283C41B3BF8F10008FF78 /* CityTableViewController.xib */; };
 		13E30DB71AC53B9600BE38D7 /* RateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB41AC53B9600BE38D7 /* RateViewController.m */; };
 		13E30DB81AC53B9600BE38D7 /* ReportErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */; };
 		13E30DBC1AC573A000BE38D7 /* NetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */; };
@@ -690,6 +694,13 @@
 		13E0CC381AF3A27E007C4738 /* Merchant-listing-fav-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merchant-listing-fav-active@2x.png"; sourceTree = "<group>"; };
 		13E0CC3A1AF3A28A007C4738 /* merchant-listing-fav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-listing-fav@2x.png"; sourceTree = "<group>"; };
 		13E0CC3C1AF3A422007C4738 /* merchant-ratecard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "merchant-ratecard@2x.png"; sourceTree = "<group>"; };
+		13E283BC1B3BF8390008FF78 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
+		13E283BD1B3BF8390008FF78 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
+		13E283BE1B3BF8390008FF78 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		13E283BF1B3BF8390008FF78 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		13E283C21B3BF8F10008FF78 /* CityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityTableViewController.h; path = Home/CityTableViewController.h; sourceTree = "<group>"; };
+		13E283C31B3BF8F10008FF78 /* CityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityTableViewController.m; path = Home/CityTableViewController.m; sourceTree = "<group>"; };
+		13E283C41B3BF8F10008FF78 /* CityTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CityTableViewController.xib; path = Home/CityTableViewController.xib; sourceTree = "<group>"; };
 		13E30DB31AC53B9600BE38D7 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateViewController.h; path = Home/RateViewController.h; sourceTree = "<group>"; };
 		13E30DB41AC53B9600BE38D7 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateViewController.m; path = Home/RateViewController.m; sourceTree = "<group>"; };
 		13E30DB51AC53B9600BE38D7 /* ReportErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportErrorViewController.h; path = Home/ReportErrorViewController.h; sourceTree = "<group>"; };
@@ -1112,6 +1123,7 @@
 		135B4C781A7F84DD00B64F30 /* spalor */ = {
 			isa = PBXGroup;
 			children = (
+				13E283BB1B3BF8390008FF78 /* WYPopoverController */,
 				13385DD11AF790F000E361DD /* TabBar */,
 				1324E2041AE781E500C2FEBB /* LocationHelper */,
 				1388A9D41AE6807000852B30 /* Rating */,
@@ -1232,6 +1244,9 @@
 				1322A2891B37E0A300DBA450 /* DigitalRateCardsViewController.m */,
 				13A9BE2F1B38129900163B5C /* TypeTableViewCell.h */,
 				13A9BE301B38129900163B5C /* TypeTableViewCell.m */,
+				13E283C21B3BF8F10008FF78 /* CityTableViewController.h */,
+				13E283C31B3BF8F10008FF78 /* CityTableViewController.m */,
+				13E283C41B3BF8F10008FF78 /* CityTableViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1355,6 +1370,17 @@
 				130818021B12F40C00F31B3E /* LoginHelper.m */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		13E283BB1B3BF8390008FF78 /* WYPopoverController */ = {
+			isa = PBXGroup;
+			children = (
+				13E283BC1B3BF8390008FF78 /* WYPopoverController.h */,
+				13E283BD1B3BF8390008FF78 /* WYPopoverController.m */,
+				13E283BE1B3BF8390008FF78 /* WYStoryboardPopoverSegue.h */,
+				13E283BF1B3BF8390008FF78 /* WYStoryboardPopoverSegue.m */,
+			);
+			path = WYPopoverController;
 			sourceTree = "<group>";
 		};
 		13E30DB91AC5736900BE38D7 /* Network Utility */ = {
@@ -1670,6 +1696,7 @@
 				135D603D1B396269009B86D5 /* deal-massage@2x.png in Resources */,
 				13E0CC351AF3A22C007C4738 /* Merchant-listing-location.png in Resources */,
 				1343F3C11B1839F700CBBB2C /* rating-colorbar@2x.png in Resources */,
+				13E283C61B3BF8F10008FF78 /* CityTableViewController.xib in Resources */,
 				1337EE1B1ACBD35D00F31D14 /* merchant-camera@2x.png in Resources */,
 				13E610371B05DED300B7D7FB /* merchant-massage-deal@2x.png in Resources */,
 				13C0021A1AFB56010021D60E /* home-female@2x.png in Resources */,
@@ -1747,6 +1774,7 @@
 				1388A9DA1AE680DF00852B30 /* RateView.m in Sources */,
 				137ABA541AC1539900540CF2 /* DealDetailsViewController.m in Sources */,
 				134CED671AEA68C0009C5714 /* DealPriceCell.m in Sources */,
+				13E283C01B3BF8390008FF78 /* WYPopoverController.m in Sources */,
 				133008EC1ACD172C009FFC77 /* EmailLoginViewController.m in Sources */,
 				135B4C7C1A7F84DD00B64F30 /* main.m in Sources */,
 				13A0730C1AE5099100754317 /* Deal.m in Sources */,
@@ -1773,7 +1801,9 @@
 				13E530841AD25CD10046EAEB /* NSString+Base64.m in Sources */,
 				138BB5301AEE0E2800177C08 /* MerchantExtrasCell.m in Sources */,
 				13BA57441AB83BAF00811025 /* MerchantDetailViewController.m in Sources */,
+				13E283C51B3BF8F10008FF78 /* CityTableViewController.m in Sources */,
 				133008EF1ACD1F41009FFC77 /* ForgotPasswordViewController.m in Sources */,
+				13E283C11B3BF8390008FF78 /* WYStoryboardPopoverSegue.m in Sources */,
 				13779B761AEE66D50021795B /* AddNewLookViewController.m in Sources */,
 				133887F31B01F1250007E359 /* MerchantCategoriesDealPopupCell.m in Sources */,
 				133887F01B01F10C0007E359 /* MerchantServicesDealPopupCell.m in Sources */,

@@ -42,6 +42,7 @@
         [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
         [self.view bringSubviewToFront:self.dealOverlayView];
     }
+    
     [self setButtonsFromLocalFilters];
 
 }

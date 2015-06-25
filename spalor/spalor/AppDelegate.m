@@ -38,6 +38,8 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         [self loadCategories];
     }
     
+    [self loadStates];
+    
     return YES;
 }
 
@@ -97,6 +99,31 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
             NSLog(@"error %@",[error localizedDescription]);
         }
         
+    }];
+    
+    
+    
+}
+
+-(void)loadStates{
+
+    [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/loadStates" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error) {
+        if (!error) {
+            NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+            
+            NSLog(@"response string %@",responseDict);
+            NSMutableArray *data = [NSMutableArray new];
+
+            for(NSDictionary *stateObj in responseDict[@"states"]){
+                if([[stateObj objectForKey:@"status"] isEqual:@(1)]){
+                    [data addObject:stateObj];
+                }
+            }
+            
+            if(data.count>0){
+                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"STATELIST"];
+            }
+        }
     }];
 }
 

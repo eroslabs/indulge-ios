@@ -13,11 +13,15 @@
 #import "MerchantListViewController.h"
 #import "LocationHelper.h"
 #import "SuggestedTableViewCell.h"
+#import "WYPopoverController.h"
+#import "CityTableViewController.h"
 
-@interface HomeViewController (){
+@interface HomeViewController ()<WYPopoverControllerDelegate>{
     NSString *searchText;
     NSMutableArray *data;
     NSMutableDictionary *localFilterDict;
+    WYPopoverController* popoverController;
+    CityTableViewController *controller;
     BOOL searching;
 }
 @end
@@ -54,7 +58,19 @@
     //@{@"s":@"abc",@"hs":@"1",@"gs":@"1",@"services":@[@"1",@"2",@"3",@"4",@"5"],@"pf":@"0",@"pt":@"2000",@"point":@[@"34.5,34.5"],@"pr":@{@"page":@"0",@"size":@""}}
     localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
     [self setButtonsFromLocalFilters];
+    
+    controller = [[CityTableViewController alloc] initWithNibName:@"CityTableViewController" bundle:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citySelected:) name:@"citySelected" object:nil];
 
+}
+
+-(void)citySelected:(NSNotification *)notification{
+    
+    NSDictionary *stateObj = [notification userInfo];
+    self.locationSearchTextField.text = stateObj[@"stateName"];
+    self.locationLabel.text = stateObj[@"stateName"];
+    [popoverController dismissPopoverAnimated:YES];
 }
 
 -(void)setButtonsFromLocalFilters{
@@ -196,9 +212,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SuggestedTableViewCell *cell = (SuggestedTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    if (searching) {
-        searchText = cell.searchLabel.text;
-    }
+    searchText = cell.searchLabel.text;
     if (searchText.length > 0) {
         [self performSegueWithIdentifier:@"ShowMerchantList" sender:nil];
     }
@@ -240,31 +254,73 @@
         [self searchStateOn:YES];
         
     }
-    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-
-    if (newString.length > 0) {
-        [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/suggestMerchant" withParameters:@{@"s":newString} completionHandler:^(id response, NSString *url, NSError *error) {
-            if (!error) {
-                NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+    
+    if([textField isEqual:self.searchTextField]){
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if(![self.locationSearchTextField.text isEqualToString:@"Current Location"]){
+            NSString *appendedNewString = [NSString stringWithFormat:@"%@,%@",newString,self.locationSearchTextField.text];
+            newString = appendedNewString;
+        }
+        if (newString.length > 0) {
+            
+            newString = [newString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/suggestMerchant" withParameters:@{@"s":newString} completionHandler:^(id response, NSString *url, NSError *error) {
+                if (!error) {
+                    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+                    
+                    NSLog(@"response string %@",responseDict);
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        searching = YES;
+                        data = responseDict[@"result"];
+                        [self.tableView reloadData];
+                        
+                    });
+                }
+                else{
+                    NSLog(@"error %@",[error localizedDescription]);
+                }
+                //return data;
                 
-                NSLog(@"response string %@",responseDict);
+            }];
             
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    searching = YES;
-                    data = responseDict[@"result"];
-                    [self.tableView reloadData];
- 
-                });
-            }
-            //return data;
-            
-        }];
+        }
+        else{
+            searching = NO;
+            [self.tableView reloadData];
+        }
 
     }
-    else{
-        searching = NO;
-        [self.tableView reloadData];
-    }
+//    else if ([textField isEqual:self.locationSearchTextField]){
+//        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//        
+//        if (newString.length > 0) {
+//            [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/loadStates" withParameters:@{@"s":newString} completionHandler:^(id response, NSString *url, NSError *error) {
+//                if (!error) {
+//                    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
+//                    
+//                    NSLog(@"response string %@",responseDict);
+//                    
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        searching = YES;
+//                        data = responseDict[@"result"];
+//                        [self.tableView reloadData];
+//                        
+//                    });
+//                }
+//                //return data;
+//                
+//            }];
+//            
+//        }
+//        else{
+//            searching = NO;
+//            [self.tableView reloadData];
+//        }
+//
+//    }
+//    
     
     return YES;
 }
@@ -359,7 +415,13 @@
     if([segue.identifier isEqualToString:@"ShowMerchantList"]) {
         
         MerchantListViewController *controller = (MerchantListViewController *)segue.destinationViewController;
-        controller.searchText  = [searchText stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
+        if(![self.locationSearchTextField.text isEqualToString:@"Current Location"]){
+            controller.searchText  = [NSString stringWithFormat:@"%@ , %@",[searchText stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet],self.locationSearchTextField.text];
+ 
+        }
+        else{
+            controller.searchText = [searchText stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
+        }
     }
 }
 
@@ -368,6 +430,27 @@
 
 -(void)didSelectText:(NSString *)text{
     //Perform segue with search text
+}
+
+
+#pragma mark - City Popover
+- (IBAction)showPopover:(id)sender
+{
+    UIButton *senderButton = (UIButton *)sender;
+    popoverController = [[WYPopoverController alloc] initWithContentViewController:controller];
+    popoverController.delegate = self;
+    [popoverController presentPopoverFromRect:senderButton.bounds inView:self.view permittedArrowDirections:WYPopoverArrowDirectionAny animated:YES];
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
+{
+    popoverController.delegate = nil;
+    popoverController = nil;
 }
 
 
