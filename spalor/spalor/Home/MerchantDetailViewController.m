@@ -600,6 +600,9 @@
     
 }
 
+-(IBAction)scrollToLocationCell:(id)sender{
+    [self.mainTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewRowAnimationTop animated:YES];
+}
 
 
 @end

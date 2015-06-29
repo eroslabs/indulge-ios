@@ -17,6 +17,7 @@
         self.merchantService = [decoder decodeObjectForKey:@"merchantService"];
         self.imageData = [decoder decodeObjectForKey:@"imageData"];
         self.date = [decoder decodeObjectForKey:@"date"];
+        self.merchant = [decoder decodeObjectForKey:@"merchant"];
     }
     return self;
 }
@@ -29,5 +30,6 @@
     [encoder encodeObject:_merchantService forKey:@"merchantService"];
     [encoder encodeObject:_imageData forKey:@"imageData"];
     [encoder encodeObject:_date forKey:@"date"];
+    [encoder encodeObject:_merchant forKey:@"merchant"];
 }
 @end

@@ -18,6 +18,8 @@
 #define MYDEALSIMAGESSTORE @"MyDealsImagesArray"
 #define MYMERCHANTSSTORE @"MyMerchantsArray"
 #define STATELIST @"STATELIST"
+#define CATEGORYRESPONSE @"CategoryResponse"
+#define CATEGORYUPDATEDATE @"CategoryUpdateDate"
 
 #define MYUSERSTORE @"UserStore"
 #define MYLOCALFILTERSTORE @"MyLocalFilterStore"

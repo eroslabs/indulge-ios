@@ -150,7 +150,7 @@
     NSMutableDictionary *filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
     [filterDict addEntriesFromDictionary:@{@"services":selectedServiceids}];
     
-    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"refreshFilterChanged"];
     [[NSUserDefaults standardUserDefaults] setObject:filterDict forKey:@"filterDict"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popViewControllerAnimated:YES];
@@ -287,7 +287,8 @@
     serviceButton.layer.borderWidth = 3.0f;
     [serviceButton.layer setBorderColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"border.png"]].CGColor];
     [serviceButton sizeToFit];
-    serviceButton.titleLabel.textColor = [UIColor colorWithHexCode:@"45B09E"];
+    //serviceButton.titleLabel.textColor = [UIColor colorWithHexCode:@"45B09E"];
+    [serviceButton setTitleColor:[UIColor colorWithHexCode:@"45B09E"] forState:UIControlStateNormal];
     
     if(currentTotalButtons == 0){
         

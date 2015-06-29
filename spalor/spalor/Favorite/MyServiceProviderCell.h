@@ -14,6 +14,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *addressLabel;
 @property (nonatomic, weak) IBOutlet UILabel *ratingLabel;
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UIButton *callButton;
+@property (nonatomic, weak) IBOutlet UIButton *shareButton;
 
 -(void)setupCellWithMerchant:(Merchant *)merchant;
 @end

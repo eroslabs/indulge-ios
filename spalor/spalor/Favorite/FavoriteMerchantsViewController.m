@@ -156,6 +156,7 @@
         Merchant *myMerchant = [NSKeyedUnarchiver unarchiveObjectWithData:myMerchantsArray[indexPath.row]];
         DLog(@"myMerchant %@",myMerchant.name);
         [cell setupCellWithMerchant:myMerchant];
+        cell.callButton.tag = indexPath.row;
         return cell;
 
     }
@@ -245,6 +246,27 @@
         }
     }
 
+}
+
+#pragma mark - User Actions
+
+-(IBAction)callMerchant:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    Merchant *myMerchant = [NSKeyedUnarchiver unarchiveObjectWithData:myMerchantsArray[senderButton.tag]];
+    NSString *cleanedString = [[myMerchant.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+    [[UIApplication sharedApplication] openURL:telURL];
+    
+}
+
+-(IBAction)callMerchantFromDealCell:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    NSData *data = [myDealsArray objectAtIndex:senderButton.tag];    
+    Deal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSString *cleanedString = [[deal.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+    [[UIApplication sharedApplication] openURL:telURL];
+    
 }
 
 @end

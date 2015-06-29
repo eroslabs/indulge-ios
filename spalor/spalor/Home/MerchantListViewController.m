@@ -38,6 +38,10 @@
     [super viewDidAppear:animated];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"refreshFilterChanged"]) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"refreshFilterChanged"];
+        if(spinner == nil){
+            spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+            [self.loaderContainerView addSubview:spinner];
+        }
         self.loaderContainerView.hidden = NO;
         [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
         [self.view bringSubviewToFront:self.dealOverlayView];
@@ -62,7 +66,7 @@
     _isSearching = NO;
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
     myMerchantsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYMERCHANTSSTORE]];
-    localFilterDict = [[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE];
+    localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
     
     refresh = [[UIRefreshControl alloc] init];
     refresh.tintColor = [UIColor grayColor];
@@ -75,6 +79,13 @@
 
 -(void)refreshCalled{
     DLog(@"refresh");
+    if(spinner == nil){
+        spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+        [self.loaderContainerView addSubview:spinner];
+
+    }
+    self.loaderContainerView.hidden = NO;
+
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
 
 }

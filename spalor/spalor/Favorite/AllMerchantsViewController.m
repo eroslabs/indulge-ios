@@ -45,6 +45,7 @@
     Merchant *myMerchant = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataArray[indexPath.row]];
     DLog(@"myMerchant %@",myMerchant.name);
     [cell setupCellWithMerchant:myMerchant];
+    cell.callButton.tag = indexPath.row;
     return cell;
 }
 
@@ -56,6 +57,16 @@
 
 -(IBAction)goBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(IBAction)callMerchant:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    Merchant *merchant = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataArray[senderButton.tag]];
+    NSString *cleanedString = [[merchant.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+    [[UIApplication sharedApplication] openURL:telURL];
+    
 }
 
 @end

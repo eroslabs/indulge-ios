@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class MyLook;
+#import "MyLook.h"
 
 @interface MyLooksTableViewCell : UITableViewCell
 @property (nonatomic, weak) IBOutlet UIImageView *image;
@@ -17,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *merchantNameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *merchantAddressLabel;
 @property (nonatomic, weak) IBOutlet UILabel *merchantRatingLabel;
-
+@property (nonatomic, weak) IBOutlet UIButton *callButton;
+@property (nonatomic, weak) IBOutlet UIButton *shareButton;
 -(void)setupWithLookObject:(MyLook *)look;
 @end

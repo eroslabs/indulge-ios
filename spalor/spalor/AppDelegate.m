@@ -35,7 +35,25 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
 
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasLaunched"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
+    NSData *categoryData = [[NSUserDefaults standardUserDefaults] objectForKey:CATEGORYRESPONSE];
+    
+    if(categoryData == nil){
         [self loadCategories];
+    }
+    else{
+        NSDictionary *dictionary;
+        
+        @try {
+            dictionary = [NSKeyedUnarchiver unarchiveObjectWithData: categoryData];
+            DLog(@"categories %@",categoriesDict);
+
+        }
+        @catch (NSException *exception) {
+            //....
+            [self loadCategories];
+        }
     }
     
     [self loadStates];
@@ -91,9 +109,9 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
             
             DLog(@"response string %@",responseDict);
             
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
+            [[NSUserDefaults standardUserDefaults] setObject:response forKey:CATEGORYRESPONSE];
             
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"CategoryUpdateDate"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:CATEGORYUPDATEDATE];
         }
         else{
             DLog(@"error %@",[error localizedDescription]);

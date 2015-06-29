@@ -104,6 +104,11 @@
     searching = NO;
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"refreshFilterChanged"]) {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"refreshFilterChanged"];
+        if(spinner == nil){
+            spinner = [[FeSpinnerTenDot alloc] initWithView:self.loaderContainerView withBlur:NO];
+            [self.loaderContainerView addSubview:spinner];
+        }
+        self.loaderContainerView.hidden = NO;
         [self loadNewDealsWithSpinner];
     }
     else if (arrayOfDeals.count == 0) {

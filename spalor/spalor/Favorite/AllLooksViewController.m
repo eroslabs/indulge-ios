@@ -44,6 +44,8 @@
 {
     MyLooksTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myLooksCell"];
     MyLook *lookObj = (MyLook *)self.dataArray[indexPath.row];
+    cell.callButton.tag = indexPath.row;
+    cell.shareButton.tag = indexPath.row;
     [cell setupWithLookObject:lookObj];
     return cell;
 }
@@ -53,6 +55,26 @@
 
 -(IBAction)goBack:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction)callMerchant:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+     MyLook *lookObj = (MyLook *)self.dataArray[senderButton.tag];
+    NSString *cleanedString = [[lookObj.merchant.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
+    [[UIApplication sharedApplication] openURL:telURL];
+
+}
+
+-(IBAction)shareMerchant:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    MyLook *lookObj = (MyLook *)self.dataArray[senderButton.tag];
+    NSString *texttoshare = lookObj.merchant.name; //this is your text string to share
+    UIImage *imagetoshare = [UIImage imageNamed:@"merchant-massage.png"]; //this is your image to share
+    NSArray *activityItems = @[texttoshare, imagetoshare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
 }
 
 @end

@@ -237,6 +237,11 @@
     [spinner showWhileExecutingSelector:@selector(confirmDealRequest) onTarget:self withObject:nil];
 }
 
+-(IBAction)scrollToLocationCell:(id)sender{
+//    [self.tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewRowAnimationTop animated:YES];
+}
+
+
 -(void)confirmDealRequest{
     NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
     User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];

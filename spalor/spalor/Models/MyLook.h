@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Merchant.h"
 
 @interface MyLook : NSObject
 @property (nonatomic, strong) NSData *imageData;
@@ -15,4 +16,5 @@
 @property (nonatomic, strong) NSString *merchantRating;
 @property (nonatomic, strong) NSString *merchantService;
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) Merchant *merchant;
 @end

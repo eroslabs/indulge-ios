@@ -79,7 +79,7 @@
             [servicesString appendFormat:@", "];
         }
         cell.merchantServicesLabel.text = servicesString;
-        
+        cell.callButton.tag = indexPath.section;
         double unixTimeStamp = [deal.validTill doubleValue];
         NSTimeInterval _interval=unixTimeStamp;
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];

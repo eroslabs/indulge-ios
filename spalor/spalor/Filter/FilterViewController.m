@@ -177,15 +177,20 @@
 
 -(void)pickCategoriesFromLocalStorage{
     NSError *error = nil;
-    NSData *categoryData = [[NSUserDefaults standardUserDefaults] objectForKey:@"CategoryResponse"];
-    NSDate *date1 = [[NSUserDefaults standardUserDefaults] objectForKey:@"CategoryUpdateDate"];
+    NSData *categoryData = [[NSUserDefaults standardUserDefaults] objectForKey:CATEGORYRESPONSE];
+    NSDate *date1 = [[NSUserDefaults standardUserDefaults] objectForKey:CATEGORYUPDATEDATE];
     NSDate *date2 = [NSDate date];
+    
+    if(date1 == nil){
+        [self loadCategories];
+        return;
+    }
     
     NSInteger days = [self daysBetweenDate:date1 andDate:date2];
     
     if (days>=10) {
         [self loadCategories];
-        //return;
+        return;
     }
     
     NSDictionary *categoryDict = [NSJSONSerialization JSONObjectWithData:categoryData options:NSJSONReadingAllowFragments error:&error];
@@ -209,9 +214,9 @@
             
             DLog(@"response string %@",responseDict);
             
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
+            [[NSUserDefaults standardUserDefaults] setObject:response forKey:CATEGORYRESPONSE];
             
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"CategoryUpdateDate"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:CATEGORYUPDATEDATE];
             dispatch_async(dispatch_get_main_queue(), ^{
 
             if (responseDict) {

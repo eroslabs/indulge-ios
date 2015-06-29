@@ -8,7 +8,7 @@
 
 #ifndef spalor_Constants_h
 #define spalor_Constants_h
-#define DEBUGMODE
+//#define DEBUGMODE
 
 #ifdef DEBUGMODE
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)

@@ -116,6 +116,8 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOCALFILTERSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"filterDict"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:STATELIST];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:CATEGORYRESPONSE];
+    
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
 
