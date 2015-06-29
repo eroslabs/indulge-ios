@@ -94,7 +94,7 @@
        
         }
         else{
-            NSLog(@"error %@",[error localizedDescription]);
+            DLog(@"error %@",[error localizedDescription]);
         }
     }];
 }
@@ -115,6 +115,7 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYUSERSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:MYLOCALFILTERSTORE];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"filterDict"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:STATELIST];
 
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATED"];
 

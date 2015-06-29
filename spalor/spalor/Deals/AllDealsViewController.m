@@ -46,7 +46,7 @@
         else{
             double timeStampFromJSON = deal.validTill.doubleValue; // or whatever from your JSON
             double dif = timeStampFromJSON - [[NSDate date] timeIntervalSince1970];
-            NSLog(@"dif: %f", dif);
+            DLog(@"dif: %f", dif);
             if(dif>0){
                 [activeDealsArray addObject:deal];
             }
@@ -81,7 +81,7 @@
     Deal *deal = (showActiveDeals)?activeDealsArray[indexPath.row]:pastDealsArray[indexPath.row];
     
     if(deal.couponCode.length>0){
-        NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
+        DLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
         
         static NSString *cellIdentifier = @"myCouponsCell";
         
@@ -111,7 +111,7 @@
         
     }
     else{
-        NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
+        DLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
         
         static NSString *cellIdentifier = @"myDealsCell";
         

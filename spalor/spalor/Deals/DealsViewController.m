@@ -43,7 +43,7 @@
 
     localFilterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:MYLOCALFILTERSTORE]];
     
-    NSLog(@"local filter %@",localFilterDict);
+    DLog(@"local filter %@",localFilterDict);
     [self setButtonsFromLocalFilters];
     
     refresh = [[UIRefreshControl alloc] init];
@@ -65,7 +65,7 @@
 }
 
 -(void)refreshCalled{
-    NSLog(@"refresh");
+    DLog(@"refresh");
     [self loadNewDealsWithSpinner];
 }
 
@@ -137,7 +137,7 @@
     
     NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
 
-    NSLog(@"filter Dict %@",filterDict);
+    DLog(@"filter Dict %@",filterDict);
     
     NSMutableDictionary *paramDict = [NSMutableDictionary new];
     
@@ -153,7 +153,7 @@
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
             
             
             
@@ -182,7 +182,7 @@
             
         }
         else{
-            NSLog(@"error %@",[error localizedDescription]);
+            DLog(@"error %@",[error localizedDescription]);
             [spinner dismiss];
             searching = NO;
             self.loaderContainerView.hidden = YES;
@@ -199,16 +199,16 @@
     NSError *error = nil;
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
     
-    NSLog(@"response string %@",responseDict);
+    DLog(@"response string %@",responseDict);
     
 
     
     if(error) {  //Handle error
-        NSLog(@"error %@",[error localizedDescription]);
+        DLog(@"error %@",[error localizedDescription]);
         
     }
     else{
-        NSLog(@"response string %@",responseDict);
+        DLog(@"response string %@",responseDict);
         
         if (responseDict) {
             arrayOfDeals = [self captureAllMerchantsFromResponseDict:responseDict];
@@ -276,7 +276,7 @@
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
     int weekday = [comps weekday];
-    NSLog(@"current week day %d",weekday);
+    DLog(@"current week day %d",weekday);
     
     return weekday;
 }
@@ -299,7 +299,7 @@
     NSInteger currentHr = [dateComps hour];
     NSInteger currentHrForClosingCheck = (currentHr>12)?(currentHr-12):currentHr;
 
-    NSLog(@"current hr %d current min %d closinghr %d closing min %d openinghr %d openingmin %d",currentHr,currentMin,closingHr.integerValue,closingMin.integerValue,openingHr.integerValue,openingMin.integerValue);
+    DLog(@"current hr %d current min %d closinghr %d closing min %d openinghr %d openingmin %d",currentHr,currentMin,closingHr.integerValue,closingMin.integerValue,openingHr.integerValue,openingMin.integerValue);
     
     if (currentHrForClosingCheck > closingHr.integerValue) {
         return NO;
@@ -320,7 +320,7 @@
 -(BOOL)isDealPassedFromLocalFilter:(Deal *)deal{
     
     for (NSString *key in [localFilterDict allKeys]) {
-        NSLog(@"key %@ %@",key,localFilterDict[key]);
+        DLog(@"key %@ %@",key,localFilterDict[key]);
         
         if ([key isEqualToString:@"opennow"]) {
             if ([localFilterDict[key] isEqual:@(1)]) {
@@ -373,7 +373,7 @@
         }
         if([key isEqualToString:@"3.5+"]){
             
-            NSLog(@"deal rating %f",deal.rating.floatValue);
+            DLog(@"deal rating %f",deal.rating.floatValue);
             
             if ([localFilterDict[key] isEqual:@(1)]) {
                 //
@@ -482,7 +482,7 @@
         cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
         
         double unixTimeStamp = [deal.validTill doubleValue];
-        NSLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);
+        DLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);
         
         NSTimeInterval _interval=unixTimeStamp;
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
@@ -623,7 +623,7 @@
             if (!error) {
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
                 
-                NSLog(@"response string %@",responseDict);
+                DLog(@"response string %@",responseDict);
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     searching = YES;

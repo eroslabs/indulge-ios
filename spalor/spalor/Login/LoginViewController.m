@@ -163,7 +163,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
                    error: (NSError *) error {
     if (error) {
         //Show Error Alert
-        NSLog(@"Received error %@ and auth object %@",[error localizedDescription], auth);
+        DLog(@"Received error %@ and auth object %@",[error localizedDescription], auth);
 
     }
     else {
@@ -172,7 +172,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         self.loaderContainerView.hidden = NO;
         [spinner show];
         
-        NSLog(@"GPS %@",signIn.userEmail);
+        DLog(@"GPS %@",signIn.userEmail);
         //[self refreshInterfaceBasedOnSignIn];
         
         GTLQueryPlus *query = [GTLQueryPlus queryForPeopleGetWithUserId:@"me"];
@@ -202,10 +202,10 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
                         NSArray * userEmails = person.emails;
                         NSString * email = ((GTLPlusPersonEmailsItem *)[userEmails objectAtIndex:0]).value;
 
-                        NSLog(@"Email= %@", signIn.authentication.userEmail);
-                        NSLog(@"GoogleID=%@", person.identifier);
-                        NSLog(@"User Name=%@", [person.name.givenName stringByAppendingFormat:@" %@", person.name.familyName]);
-                        NSLog(@"Gender=%@", person.gender);
+                        DLog(@"Email= %@", signIn.authentication.userEmail);
+                        DLog(@"GoogleID=%@", person.identifier);
+                        DLog(@"User Name=%@", [person.name.givenName stringByAppendingFormat:@" %@", person.name.familyName]);
+                        DLog(@"Gender=%@", person.gender);
                         
                         if (email.length == 0) {
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -257,7 +257,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     }
     
 //    else{
-//        NSLog(@"Received auth object %@", auth);
+//        DLog(@"Received auth object %@", auth);
 //
 //        [self performSelector:@selector(loggedIn) withObject:nil afterDelay:2.0f];
 //

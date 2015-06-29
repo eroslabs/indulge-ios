@@ -38,8 +38,8 @@
 
 -(void)fillCityList{
 
-    NSArray *stateList = [[NSUserDefaults standardUserDefaults] objectForKey:@"STATELIST"];
-    
+    NSData *encodedStateList = [[NSUserDefaults standardUserDefaults] objectForKey:STATELIST];
+    NSArray *stateList = [NSKeyedUnarchiver unarchiveObjectWithData:encodedStateList];
     if(stateList.count>0){
         [data addObjectsFromArray:stateList];
         [self.tableView reloadData];
@@ -49,16 +49,28 @@
             if (!error) {
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
                 
-                NSLog(@"response string %@",responseDict);
+                DLog(@"response string %@",responseDict);
                 
                 for(NSDictionary *stateObj in responseDict[@"states"]){
                     if([[stateObj objectForKey:@"status"] isEqual:@(1)]){
-                        [data addObject:stateObj];
+                        NSArray *citiesArray = stateObj[@"cities"];
+                        if (citiesArray.count>0) {
+                            for (NSDictionary *cityObj in citiesArray) {
+                                if ([cityObj[@"status"] isEqual:@(1)]) {
+                                    [data addObject:cityObj];
+//                                    cityName
+//                                    lat
+//                                    lng
+//                                    status
+                                }
+                            }
+                        }
                     }
                 }
                 
                 if(data.count>0){
-                    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"STATELIST"];
+                    NSData *encodedStateList = [NSKeyedArchiver archivedDataWithRootObject:data];
+                    [[NSUserDefaults standardUserDefaults] setObject:encodedStateList forKey:STATELIST];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
                         
@@ -96,7 +108,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.textLabel.text = [data[indexPath.row] objectForKey:@"stateName"];
+    cell.textLabel.text = [data[indexPath.row] objectForKey:@"cityName"];
     // Configure the cell...
     
     return cell;
@@ -143,8 +155,8 @@
 // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Push the view controller.
-    NSDictionary *stateObj = [data objectAtIndex:indexPath.row];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"citySelected" object:nil userInfo:@{@"stateName":stateObj[@"stateName"]}];
+    NSDictionary *cityObj = [data objectAtIndex:indexPath.row];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"citySelected" object:nil userInfo:@{@"city":cityObj}];
 }
 
 

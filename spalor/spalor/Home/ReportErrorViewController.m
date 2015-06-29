@@ -77,7 +77,7 @@
         if (error == nil && response!=nil) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
             
         }
     }];

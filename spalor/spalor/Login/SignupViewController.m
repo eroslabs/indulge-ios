@@ -79,7 +79,7 @@
         if (error == nil && response!=nil) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
             user = [[User alloc] init];
             user.userId = responseDict[@"user_id"];
             user.name = userDict[@"name"];
@@ -104,7 +104,7 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     
-    NSLog(@"Index = %d - Title = %@", buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
+    DLog(@"Index = %d - Title = %@", buttonIndex, [actionSheet buttonTitleAtIndex:buttonIndex]);
     
     //0 is camera and 1 is gallery
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -267,7 +267,7 @@ static const char base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi
     }
     
     selected = textField.tag;
-    NSLog(@"selected %d",selected);
+    DLog(@"selected %d",selected);
     FormInputCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0]];
     cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",imagesArray[selected]]];
     cell.cellInputTextField.textColor = [UIColor colorWithRed:0.4431f green:0.3725f blue:0.3450f alpha:1.0f];

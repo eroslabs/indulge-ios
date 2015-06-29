@@ -22,7 +22,7 @@
 
         }
         
-        NSLog(@"service %@ %.2f",service.name,priceValue);
+        DLog(@"service %@ %.2f",service.name,priceValue);
 
         if(i==0)
             self.deal1.text = [NSString stringWithFormat:@"%@ at %.2f",service.name,priceValue];

@@ -63,7 +63,7 @@
     
     for (NSString *key in [dictionary allKeys]){
         
-        //NSLog(@"KEY %@",key);
+        //DLog(@"KEY %@",key);
         
         if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
             
@@ -75,7 +75,7 @@
             }
             else if ([key isEqualToString:@"services"]) {
                 
-                //NSLog(@"Services %@",dictionary[key]);
+                //DLog(@"Services %@",dictionary[key]);
                 
                 self.services = [[NSMutableArray alloc] init];
                 for (NSDictionary *service in dictionary[key]){

@@ -43,7 +43,7 @@
     NSString *reuseId = @"MyServiceProviderCell";//This is your favorite Merchants
     MyServiceProviderCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
     Merchant *myMerchant = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataArray[indexPath.row]];
-    NSLog(@"myMerchant %@",myMerchant.name);
+    DLog(@"myMerchant %@",myMerchant.name);
     [cell setupCellWithMerchant:myMerchant];
     return cell;
 }

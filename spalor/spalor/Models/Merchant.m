@@ -126,7 +126,7 @@
     for (int i = 0 ; i<3 ; i++){
             Review *review = [[Review alloc] init];
             [review readFromDictionary:dummyReview];
-        NSLog(@"review %@ %@ %@ %@ %@",review.name,review.userId,review.merchantId,review.rating,review.text);
+        DLog(@"review %@ %@ %@ %@ %@",review.name,review.userId,review.merchantId,review.rating,review.text);
             [self.reviews addObject:review];
     }
     self.image = @"";
@@ -138,7 +138,7 @@
     
     for (NSString *key in allProps){
         
-        //NSLog(@"KEY %@",key);
+        //DLog(@"KEY %@",key);
         
         if (dictionary[key] && ![dictionary[key] isMemberOfClass:[NSNull class]]) {
             

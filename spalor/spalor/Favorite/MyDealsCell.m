@@ -20,7 +20,7 @@
 //    for (NSData *imageData in imagesArray) {
 //        UIView *couponView = [[UIView alloc] init];
 //        UIImage *myImage = [UIImage imageWithData:imageData];
-//        NSLog(@"image data %@",imageData);
+//        DLog(@"image data %@",imageData);
 //        UIImageView *myImageView = [[UIImageView alloc] initWithImage:myImage];
 //        myImageView.backgroundColor = [UIColor colorWithRed:index*0.055f green:index*0.055f blue:index*0.055f alpha:1];
 //        couponView.frame = CGRectMake(index*210 + 20, 20, 190, self.scrollView.frame.size.height-10);
@@ -64,7 +64,7 @@
     Deal *deal = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     if(deal.couponCode.length>0){
-        NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
+        DLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
         
         static NSString *cellIdentifier = @"myCouponsCell";
         
@@ -94,7 +94,7 @@
 
     }
     else{
-        NSLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
+        DLog(@"favourite deal %@ %@",deal.name,deal.couponCode);
         
         static NSString *cellIdentifier = @"myDealsCell";
         

@@ -42,7 +42,7 @@
 
 - (void)readFromDictionary:(NSDictionary *)dictionary{
     
-    NSLog(@"user Dict %@",dictionary);
+    DLog(@"user Dict %@",dictionary);
     
     for(NSString *key in [dictionary allKeys]){
         if([key isEqualToString:@"dob"]){

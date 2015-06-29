@@ -350,7 +350,7 @@
 		132275561AEF94E300F5D77F /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		132275571AEF94E300F5D77F /* star_half@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_half@2x.png"; sourceTree = "<group>"; };
 		1322755E1AEFA03700F5D77F /* MyDealsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDealsCell.h; path = Favorite/MyDealsCell.h; sourceTree = "<group>"; };
-		1322755F1AEFA03700F5D77F /* MyDealsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDealsCell.m; path = Favorite/MyDealsCell.m; sourceTree = "<group>"; };
+		1322755F1AEFA03700F5D77F /* MyDealsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = MyDealsCell.m; path = Favorite/MyDealsCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		132275611AEFA04E00F5D77F /* MyServiceProviderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyServiceProviderCell.h; path = Favorite/MyServiceProviderCell.h; sourceTree = "<group>"; };
 		132275621AEFA04E00F5D77F /* MyServiceProviderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyServiceProviderCell.m; path = Favorite/MyServiceProviderCell.m; sourceTree = "<group>"; };
 		1322A2881B37E0A300DBA450 /* DigitalRateCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DigitalRateCardsViewController.h; path = Home/DigitalRateCardsViewController.h; sourceTree = "<group>"; };
@@ -359,9 +359,9 @@
 		1324E2061AE7823100C2FEBB /* LocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationHelper.m; path = LocationHelper/LocationHelper.m; sourceTree = "<group>"; };
 		13282BA51AF9EE1400D15961 /* myProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myProfile@2x.png"; sourceTree = "<group>"; };
 		13282BA71AF9F54A00D15961 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		13282BA81AF9F54A00D15961 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
+		13282BA81AF9F54A00D15961 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = User.m; path = Models/User.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		132BD1911A88867E007F5D89 /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = Login/SignupViewController.h; sourceTree = "<group>"; };
-		132BD1921A88867E007F5D89 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = Login/SignupViewController.m; sourceTree = "<group>"; };
+		132BD1921A88867E007F5D89 /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SignupViewController.m; path = Login/SignupViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		132BD1961A88877E007F5D89 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		132BD1971A88877E007F5D89 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		132BD1981A88877E007F5D89 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
@@ -456,7 +456,7 @@
 		1337EE011ACBD35D00F31D14 /* registration-photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registration-photo@2x.png"; sourceTree = "<group>"; };
 		1337EE021ACBD35D00F31D14 /* registration-profile-active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registration-profile-active@2x.png"; sourceTree = "<group>"; };
 		1337EE031ACBD35D00F31D14 /* registration-profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "registration-profile@2x.png"; sourceTree = "<group>"; };
-		13385DD21AF7910400E361DD /* CustomTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomTabbarController.m; path = TabBar/CustomTabbarController.m; sourceTree = "<group>"; };
+		13385DD21AF7910400E361DD /* CustomTabbarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CustomTabbarController.m; path = TabBar/CustomTabbarController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13385DD31AF7910400E361DD /* CustomTabbarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomTabbarController.h; path = TabBar/CustomTabbarController.h; sourceTree = "<group>"; };
 		133887EE1B01F10C0007E359 /* MerchantServicesDealPopupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantServicesDealPopupCell.h; path = Home/MerchantServicesDealPopupCell.h; sourceTree = "<group>"; };
 		133887EF1B01F10C0007E359 /* MerchantServicesDealPopupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantServicesDealPopupCell.m; path = Home/MerchantServicesDealPopupCell.m; sourceTree = "<group>"; };
@@ -470,7 +470,7 @@
 		1343F3C21B183D7600CBBB2C /* rate-roller@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rate-roller@2x.png"; sourceTree = "<group>"; };
 		1347FD8A1ADBC96F007EF73D /* header-back-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header-back-white@2x.png"; sourceTree = "<group>"; };
 		1347FD8C1ADBCC03007EF73D /* NearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NearbyViewController.h; path = Nearby/NearbyViewController.h; sourceTree = "<group>"; };
-		1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NearbyViewController.m; path = Nearby/NearbyViewController.m; sourceTree = "<group>"; };
+		1347FD8D1ADBCC03007EF73D /* NearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NearbyViewController.m; path = Nearby/NearbyViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		134CED571AEA5CD7009C5714 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		134CED591AEA67F3009C5714 /* DealInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealInfoCell.h; path = Deals/DealInfoCell.h; sourceTree = "<group>"; };
 		134CED5A1AEA67F3009C5714 /* DealInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealInfoCell.m; path = Deals/DealInfoCell.m; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 		134CED621AEA68AA009C5714 /* DealTimingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealTimingCell.h; path = Deals/DealTimingCell.h; sourceTree = "<group>"; };
 		134CED631AEA68AA009C5714 /* DealTimingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealTimingCell.m; path = Deals/DealTimingCell.m; sourceTree = "<group>"; };
 		134CED651AEA68C0009C5714 /* DealPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealPriceCell.h; path = Deals/DealPriceCell.h; sourceTree = "<group>"; };
-		134CED661AEA68C0009C5714 /* DealPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealPriceCell.m; path = Deals/DealPriceCell.m; sourceTree = "<group>"; };
+		134CED661AEA68C0009C5714 /* DealPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DealPriceCell.m; path = Deals/DealPriceCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		134CED681AEA68DE009C5714 /* DealRecommendedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealRecommendedCell.h; path = Deals/DealRecommendedCell.h; sourceTree = "<group>"; };
 		134CED691AEA68DE009C5714 /* DealRecommendedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealRecommendedCell.m; path = Deals/DealRecommendedCell.m; sourceTree = "<group>"; };
 		134CED6B1AEA68F2009C5714 /* DealExtraServicesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealExtraServicesCell.h; path = Deals/DealExtraServicesCell.h; sourceTree = "<group>"; };
@@ -520,7 +520,7 @@
 		135B4C7A1A7F84DD00B64F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		135B4C7B1A7F84DD00B64F30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		135B4C7D1A7F84DD00B64F30 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		135B4C7E1A7F84DD00B64F30 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		135B4C7E1A7F84DD00B64F30 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		135B4C871A7F84DD00B64F30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		135B4C891A7F84DD00B64F30 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		135B4C8C1A7F84DD00B64F30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -556,16 +556,16 @@
 		13639A011AF36961006CB323 /* Filter-onsite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Filter-onsite@2x.png"; sourceTree = "<group>"; };
 		1364B9AC1AF0EAB900A4ECA8 /* IndulgeHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndulgeHeader.pch; sourceTree = "<group>"; };
 		136747AB1AADB2C50039CCCC /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = Profile/ProfileViewController.h; sourceTree = "<group>"; };
-		136747AC1AADB2C50039CCCC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = Profile/ProfileViewController.m; sourceTree = "<group>"; };
+		136747AC1AADB2C50039CCCC /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ProfileViewController.m; path = Profile/ProfileViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		136CCBD71AEF7015003F08EA /* deal-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deal-share@2x.png"; sourceTree = "<group>"; };
 		136CCBD91AEF8747003F08EA /* Review.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Review.h; path = Models/Review.h; sourceTree = "<group>"; };
-		136CCBDA1AEF8747003F08EA /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Review.m; path = Models/Review.m; sourceTree = "<group>"; };
+		136CCBDA1AEF8747003F08EA /* Review.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Review.m; path = Models/Review.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13779B741AEE66D50021795B /* AddNewLookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddNewLookViewController.h; path = Deals/AddNewLookViewController.h; sourceTree = "<group>"; };
-		13779B751AEE66D50021795B /* AddNewLookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddNewLookViewController.m; path = Deals/AddNewLookViewController.m; sourceTree = "<group>"; };
+		13779B751AEE66D50021795B /* AddNewLookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AddNewLookViewController.m; path = Deals/AddNewLookViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		137ABA4F1AC1537E00540CF2 /* DealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealsViewController.h; path = Deals/DealsViewController.h; sourceTree = "<group>"; };
-		137ABA501AC1537E00540CF2 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealsViewController.m; path = Deals/DealsViewController.m; sourceTree = "<group>"; };
+		137ABA501AC1537E00540CF2 /* DealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DealsViewController.m; path = Deals/DealsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		137ABA521AC1539900540CF2 /* DealDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealDetailsViewController.h; path = Deals/DealDetailsViewController.h; sourceTree = "<group>"; };
-		137ABA531AC1539900540CF2 /* DealDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealDetailsViewController.m; path = Deals/DealDetailsViewController.m; sourceTree = "<group>"; };
+		137ABA531AC1539900540CF2 /* DealDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DealDetailsViewController.m; path = Deals/DealDetailsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		137B3A611B1C3F9400FAE476 /* Check-tick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check-tick@2x.png"; sourceTree = "<group>"; };
 		137B3A621B1C3F9400FAE476 /* Check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Check@2x.png"; sourceTree = "<group>"; };
 		137B940E1AEE5D7D00BCB1E4 /* coupon-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coupon-background@2x.png"; sourceTree = "<group>"; };
@@ -575,13 +575,13 @@
 		137FFBC21ADE407800C77706 /* deal-coupon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deal-coupon@2x.png"; sourceTree = "<group>"; };
 		1388A19E1AE79D5100E330C1 /* border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "border@2x.png"; sourceTree = "<group>"; };
 		1388A1A21AE7C47700E330C1 /* ServiceCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServiceCategory.h; path = Models/ServiceCategory.h; sourceTree = "<group>"; };
-		1388A1A31AE7C47700E330C1 /* ServiceCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServiceCategory.m; path = Models/ServiceCategory.m; sourceTree = "<group>"; };
+		1388A1A31AE7C47700E330C1 /* ServiceCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ServiceCategory.m; path = Models/ServiceCategory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1388A1A51AE7C49A00E330C1 /* Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Service.h; path = Models/Service.h; sourceTree = "<group>"; };
-		1388A1A61AE7C49A00E330C1 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Service.m; path = Models/Service.m; sourceTree = "<group>"; };
+		1388A1A61AE7C49A00E330C1 /* Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Service.m; path = Models/Service.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		1388A9D81AE680DF00852B30 /* RateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateView.h; path = Rating/RateView.h; sourceTree = "<group>"; };
 		1388A9D91AE680DF00852B30 /* RateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateView.m; path = Rating/RateView.m; sourceTree = "<group>"; };
 		138960771ADBBE4D005685E7 /* MerchantListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantListViewController.h; path = Home/MerchantListViewController.h; sourceTree = "<group>"; };
-		138960781ADBBE4D005685E7 /* MerchantListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantListViewController.m; path = Home/MerchantListViewController.m; sourceTree = "<group>"; };
+		138960781ADBBE4D005685E7 /* MerchantListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = MerchantListViewController.m; path = Home/MerchantListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		138BB52E1AEE0E2800177C08 /* MerchantExtrasCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantExtrasCell.h; path = Home/MerchantExtrasCell.h; sourceTree = "<group>"; };
 		138BB52F1AEE0E2800177C08 /* MerchantExtrasCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantExtrasCell.m; path = Home/MerchantExtrasCell.m; sourceTree = "<group>"; };
 		138CAFD91B008C8600A708A9 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
@@ -613,9 +613,9 @@
 		13A073041AE4F04300754317 /* MerchantDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MerchantDeal.h; path = Models/MerchantDeal.h; sourceTree = "<group>"; };
 		13A073051AE4F04300754317 /* MerchantDeal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MerchantDeal.m; path = Models/MerchantDeal.m; sourceTree = "<group>"; };
 		13A073071AE508D100754317 /* DealListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DealListCell.h; path = Deals/DealListCell.h; sourceTree = "<group>"; };
-		13A073081AE508D100754317 /* DealListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DealListCell.m; path = Deals/DealListCell.m; sourceTree = "<group>"; };
+		13A073081AE508D100754317 /* DealListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DealListCell.m; path = Deals/DealListCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13A0730A1AE5099100754317 /* Deal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deal.h; path = Models/Deal.h; sourceTree = "<group>"; };
-		13A0730B1AE5099100754317 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Deal.m; path = Models/Deal.m; sourceTree = "<group>"; };
+		13A0730B1AE5099100754317 /* Deal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Deal.m; path = Models/Deal.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13A4F6D21B16F9460077892E /* smiley-poker-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-poker-right@2x.png"; sourceTree = "<group>"; };
 		13A4F6D31B16F9460077892E /* smiley-poker-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-poker-left@2x.png"; sourceTree = "<group>"; };
 		13A4F6D41B16F9460077892E /* smiley-sad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smiley-sad@2x.png"; sourceTree = "<group>"; };
@@ -630,7 +630,7 @@
 		13A7BA9B1B034061004224E4 /* MyCouponCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyCouponCollectionViewCell.h; path = Favorite/MyCouponCollectionViewCell.h; sourceTree = "<group>"; };
 		13A7BA9C1B034061004224E4 /* MyCouponCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyCouponCollectionViewCell.m; path = Favorite/MyCouponCollectionViewCell.m; sourceTree = "<group>"; };
 		13A7BA9E1B0368B4004224E4 /* AllDealsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllDealsViewController.h; path = Deals/AllDealsViewController.h; sourceTree = "<group>"; };
-		13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllDealsViewController.m; path = Deals/AllDealsViewController.m; sourceTree = "<group>"; };
+		13A7BA9F1B0368B4004224E4 /* AllDealsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AllDealsViewController.m; path = Deals/AllDealsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13A8A87A1B1C6E1E00D988C0 /* RateCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateCardCollectionViewCell.h; path = Home/RateCardCollectionViewCell.h; sourceTree = "<group>"; };
 		13A8A87B1B1C6E1E00D988C0 /* RateCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateCardCollectionViewCell.m; path = Home/RateCardCollectionViewCell.m; sourceTree = "<group>"; };
 		13A8A87C1B1C6E1E00D988C0 /* RateCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateCardsViewController.h; path = Home/RateCardsViewController.h; sourceTree = "<group>"; };
@@ -640,7 +640,7 @@
 		13B021C01B06115A0091084E /* MyLookbookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyLookbookCell.m; path = Favorite/MyLookbookCell.m; sourceTree = "<group>"; };
 		13B021C11B06115A0091084E /* MyLookbookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyLookbookCell.h; path = Favorite/MyLookbookCell.h; sourceTree = "<group>"; };
 		13BA57391AB835A100811025 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Extensions/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Extensions/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		13BA573A1AB835A100811025 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = "UIImage+ImageEffects.m"; path = "Extensions/UIImage+ImageEffects.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13BA573C1AB8367E00811025 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Home/ParallaxHeaderView.h; sourceTree = "<group>"; };
 		13BA573D1AB8367E00811025 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = Home/ParallaxHeaderView.m; sourceTree = "<group>"; };
 		13BA573F1AB8370D00811025 /* StoryCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryCommentCell.h; path = Home/StoryCommentCell.h; sourceTree = "<group>"; };
@@ -685,7 +685,7 @@
 		13D98F9F1AF20209003FE631 /* MyDealCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDealCollectionViewCell.m; path = Favorite/MyDealCollectionViewCell.m; sourceTree = "<group>"; };
 		13D98FA11AF20532003FE631 /* favourite-coupon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favourite-coupon@2x.png"; sourceTree = "<group>"; };
 		13DAEAA31B0491A7001E5EB3 /* AllMerchantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllMerchantsViewController.h; path = Favorite/AllMerchantsViewController.h; sourceTree = "<group>"; };
-		13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllMerchantsViewController.m; path = Favorite/AllMerchantsViewController.m; sourceTree = "<group>"; };
+		13DAEAA41B0491A7001E5EB3 /* AllMerchantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AllMerchantsViewController.m; path = Favorite/AllMerchantsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13DAEAA61B0491BC001E5EB3 /* AllLooksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllLooksViewController.h; path = Favorite/AllLooksViewController.h; sourceTree = "<group>"; };
 		13DAEAA71B0491BC001E5EB3 /* AllLooksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllLooksViewController.m; path = Favorite/AllLooksViewController.m; sourceTree = "<group>"; };
 		13E0CC321AF3A213007C4738 /* Merchant-listing-camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Merchant-listing-camera@2x.png"; sourceTree = "<group>"; };
@@ -699,15 +699,15 @@
 		13E283BE1B3BF8390008FF78 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
 		13E283BF1B3BF8390008FF78 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
 		13E283C21B3BF8F10008FF78 /* CityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityTableViewController.h; path = Home/CityTableViewController.h; sourceTree = "<group>"; };
-		13E283C31B3BF8F10008FF78 /* CityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityTableViewController.m; path = Home/CityTableViewController.m; sourceTree = "<group>"; };
+		13E283C31B3BF8F10008FF78 /* CityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CityTableViewController.m; path = Home/CityTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13E283C41B3BF8F10008FF78 /* CityTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CityTableViewController.xib; path = Home/CityTableViewController.xib; sourceTree = "<group>"; };
 		13E30DB31AC53B9600BE38D7 /* RateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RateViewController.h; path = Home/RateViewController.h; sourceTree = "<group>"; };
-		13E30DB41AC53B9600BE38D7 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RateViewController.m; path = Home/RateViewController.m; sourceTree = "<group>"; };
+		13E30DB41AC53B9600BE38D7 /* RateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = RateViewController.m; path = Home/RateViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13E30DB51AC53B9600BE38D7 /* ReportErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportErrorViewController.h; path = Home/ReportErrorViewController.h; sourceTree = "<group>"; };
-		13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportErrorViewController.m; path = Home/ReportErrorViewController.m; sourceTree = "<group>"; };
-		13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkHelper.m; path = Network/NetworkHelper.m; sourceTree = "<group>"; };
+		13E30DB61AC53B9600BE38D7 /* ReportErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ReportErrorViewController.m; path = Home/ReportErrorViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		13E30DBA1AC573A000BE38D7 /* NetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = NetworkHelper.m; path = Network/NetworkHelper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		13E30DBB1AC573A000BE38D7 /* NetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkHelper.h; path = Network/NetworkHelper.h; sourceTree = "<group>"; };
-		13E30DBF1AC9215E00BE38D7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		13E30DBF1AC9215E00BE38D7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Constants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		13E4DC4F1AC95942003355C0 /* FavoriteMerchantsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteMerchantsViewController.h; path = Favorite/FavoriteMerchantsViewController.h; sourceTree = "<group>"; };
 		13E4DC501AC95942003355C0 /* FavoriteMerchantsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteMerchantsViewController.m; path = Favorite/FavoriteMerchantsViewController.m; sourceTree = "<group>"; };
 		13E530701AD256480046EAEB /* NSData+NSData_AES256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NSData_AES256.h"; path = "Extensions/NSData+NSData_AES256.h"; sourceTree = "<group>"; };
@@ -1946,6 +1946,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: manish nath (PS5A9S9F9P)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDK",
@@ -1958,6 +1959,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = spalor;
+				PROVISIONING_PROFILE = "1bb0a233-6874-4988-8d84-8e396ee1ac3c";
 			};
 			name = Debug;
 		};
@@ -1965,6 +1967,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: manish nath (PS5A9S9F9P)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FacebookSDK",
@@ -1977,6 +1980,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = spalor;
+				PROVISIONING_PROFILE = "1bb0a233-6874-4988-8d84-8e396ee1ac3c";
 			};
 			name = Release;
 		};

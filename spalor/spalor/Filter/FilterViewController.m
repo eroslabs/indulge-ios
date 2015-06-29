@@ -57,7 +57,7 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     filterDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"]];
-    NSLog(@"filterDict %@",filterDict);
+    DLog(@"filterDict %@",filterDict);
     
     [self setFilterButtonStates];
     [self setSelectedServicesString];
@@ -207,7 +207,7 @@
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
             
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
             
@@ -223,7 +223,7 @@
             
         }
         else{
-            NSLog(@"error %@",[error localizedDescription]);
+            DLog(@"error %@",[error localizedDescription]);
             //Pick locally stored categories
             
         }
@@ -242,10 +242,10 @@
         ServiceCategory *category = [[ServiceCategory alloc] init];
         [category readFromDictionary:categoryDict];
         
-        //NSLog(@"category %@ %d",category.name,category.services.count);
+        //DLog(@"category %@ %d",category.name,category.services.count);
         
 //        for(Service *service in category.services){
-//            NSLog(@"service %@",service.name);
+//            DLog(@"service %@",service.name);
 //        }
 //        
         [categoryArray addObject:category];
@@ -396,7 +396,7 @@
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    NSLog(@"filter dict %@",filterDict);
+    DLog(@"filter dict %@",filterDict);
     if (filterDict.count>0) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"refreshFilterChanged"];
     }

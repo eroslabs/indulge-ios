@@ -29,7 +29,7 @@
                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
                     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-                    NSLog(@"response Dict %@",responseDict);
+                    DLog(@"response Dict %@",responseDict);
                     NSDictionary *userDict = responseDict[@"user"];
                     if(userDict){
                         User *user = [[User alloc] init];

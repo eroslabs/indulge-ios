@@ -301,7 +301,7 @@
     
     [[NetworkHelper sharedInstance] getArrayFromPutURL:@"device_info" parmeters:params completionHandler:^(id response, NSString *url, NSError *error){
         
-        NSLog(@"response %@",response);
+        DLog(@"response %@",response);
         
     }];
 }

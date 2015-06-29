@@ -133,7 +133,7 @@
             if (!error) {
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
                 
-                NSLog(@"response string %@",responseDict);
+                DLog(@"response string %@",responseDict);
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     searching = YES;

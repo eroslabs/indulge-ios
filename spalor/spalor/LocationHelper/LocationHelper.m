@@ -65,7 +65,7 @@
         //[self stopUpdatingLocation];
         self.delegate = self;
         self.desiredAccuracy = kCLLocationAccuracyBest;
-        NSLog(@"authorization status %d",[CLLocationManager authorizationStatus]);
+        DLog(@"authorization status %d",[CLLocationManager authorizationStatus]);
         
         if(IS_OS_8_OR_LATER) {
             if ([self respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
@@ -113,10 +113,10 @@
     BOOL success = [NSKeyedArchiver archiveRootObject:location
                                                toFile:[self lastLocationPersistenceFilePath]];
     if (!success) {
-        NSLog(@"Could not persist location for some reason!");
+        DLog(@"Could not persist location for some reason!");
     }
     else{
-        NSLog(@"last location saved");
+        DLog(@"last location saved");
     }
 }
 - (NSString *)lastLocationPersistenceFilePath {

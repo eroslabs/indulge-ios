@@ -71,7 +71,7 @@
         for (int i = 0; i < schedule.weekSchedule.length; i++) {
             unichar c = charAtIdx(schedule.weekSchedule, sel, i);
             // do something with C
-            NSLog(@"%C", c);
+            DLog(@"%C", c);
             if ((c == '1') && i== weekday) {
                 NSArray *openingTime = [schedule.openingTime componentsSeparatedByString:@":"];
                 NSString *openingHrsString = openingTime[0];

@@ -57,7 +57,7 @@
     filteredServicesArray = [NSArray new];
     for (ServiceCategory *category in self.arrayOfCategories) {
         
-        NSLog(@"category name %@ id %@",category.name,category.categoryId);
+        DLog(@"category name %@ id %@",category.name,category.categoryId);
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -79,7 +79,7 @@
             
             if ([selectedServiceIdsArray containsObject:service.serviceId]) {
                 int tag = service.serviceId.integerValue;
-                NSLog(@"putting %@ as selected for category %d",service.name,index);
+                DLog(@"putting %@ as selected for category %d",service.name,index);
                 
                 [self createandAddServiceButtonforServiceName:tag andIndex:serviceIndex fromCategory:category];
             }
@@ -173,7 +173,7 @@
     if ([tableView isEqual:self.autoSuggestTableView]) {
         return filteredServicesArray.count;
     }
-    NSLog(@"category %@ %d",selectedCategory.name,selectedCategory.services.count);
+    DLog(@"category %@ %d",selectedCategory.name,selectedCategory.services.count);
     NSInteger numOfRows = selectedCategory.services.count;
     return numOfRows;
 }

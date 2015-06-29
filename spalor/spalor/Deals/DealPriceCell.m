@@ -13,7 +13,7 @@
 -(DealPriceCell *)setupCellWithDeal:(Deal *)deal{
     for(int i = 0 ;i < deal.services.count ; i++){
         MerchantService *service = deal.services[i];
-        NSLog(@"service %@ %.2%f",service.name,service.price.floatValue);
+        DLog(@"service %@ %.2%f",service.name,service.price.floatValue);
         self.priceRangeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"merchant-rupee%d.png",deal.luxuryRating.intValue+1]];
 
         if(i==0)

@@ -86,7 +86,7 @@
         if (error == nil && response!=nil) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
             NSData *userData = [[NSUserDefaults standardUserDefaults] objectForKey:MYUSERSTORE];
             User *user = (User *)[NSKeyedUnarchiver unarchiveObjectWithData:userData];
             [user.arrayOfReviews addObject:currentReview];
@@ -117,7 +117,7 @@
 }
 
 -(IBAction)overallChanged:(UISlider *)sender{
-    NSLog(@"slider value = %f", sender.value);
+    DLog(@"slider value = %f", sender.value);
     overallValue = (int) roundf(sender.value);
     [reviewDict addEntriesFromDictionary:@{@"rating":@(overallValue),@"cleanlinessRating":@(cleanlinessValue),@"serviceRating":@(serviceQualityValue)}];
 

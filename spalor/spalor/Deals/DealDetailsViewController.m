@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"Selected Deal %@",self.deal.name);
+    DLog(@"Selected Deal %@",self.deal.name);
     myDealsArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYDEALSSTORE]];
 
 }
@@ -63,7 +63,7 @@
             return 170;
             break;
         case 1:
-            return 90;
+            return 80;
             break;
         case 2:
             return 63;
@@ -270,7 +270,7 @@
         if (error == nil && response!=nil) {
             dispatch_async (dispatch_get_main_queue(), ^{
                 NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:nil];
-                NSLog(@"response Dict %@",responseDict);
+                DLog(@"response Dict %@",responseDict);
                 if (responseDict[@"error"]) {
                     dispatch_async (dispatch_get_main_queue(), ^{
                         [spinner dismiss];
@@ -305,7 +305,7 @@
                     [user saveArchivedUserData:archivedUser];
                     
                     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
-                    NSLog(@"saving deal %@ %@",self.deal.name,self.deal.couponCode);
+                    DLog(@"saving deal %@ %@",self.deal.name,self.deal.couponCode);
                     [[NSUserDefaults standardUserDefaults] setObject:myDealsArray forKey:MYDEALSSTORE];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     [self hideRedeemConfirmation:YES];

@@ -74,7 +74,7 @@
 }
 
 -(void)refreshCalled{
-    NSLog(@"refresh");
+    DLog(@"refresh");
     [spinner showWhileExecutingSelector:@selector(searchForNewMerchants) onTarget:self withObject:nil];
 
 }
@@ -116,7 +116,7 @@
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
         }
     }];
     [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"search/loadSearches" withParameters:@{} completionHandler:^(id response, NSString *url, NSError *error){
@@ -124,7 +124,7 @@
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
         }
     }];
      */
@@ -149,13 +149,17 @@
     
     NSDictionary *filterDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"filterDict"];
     
-    NSLog(@"filter Dict %@",filterDict);
+    DLog(@"filter Dict %@",filterDict);
     
     NSMutableDictionary *paramDict = [NSMutableDictionary new];
     
     [paramDict addEntriesFromDictionary:@{@"s":self.searchText}];
     [paramDict addEntriesFromDictionary:filterDict];
-    if(myLocation){
+    
+    if (self.searchCityDictionary.count>0) {
+        [paramDict addEntriesFromDictionary:self.searchCityDictionary];
+    }
+    else if(myLocation){
         [paramDict addEntriesFromDictionary:@{@"lat":[NSString stringWithFormat:@"%f",myLocation.coordinate.latitude],@"lon":[NSString stringWithFormat:@"%f",myLocation.coordinate.longitude]}];
     }
     
@@ -164,7 +168,7 @@
             if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
                 
             if (responseDict[@"error"]) {
                 dispatch_async (dispatch_get_main_queue(), ^{
@@ -196,7 +200,7 @@
                     }
                 }
                 
-                NSLog(@"array of merchants %@",arrayOfMerchants);
+                DLog(@"array of merchants %@",arrayOfMerchants);
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [spinner dismiss];
@@ -219,7 +223,7 @@
             _isSearching = NO;
             [refresh endRefreshing];
 
-            NSLog(@"error %@",[error localizedDescription]);
+            DLog(@"error %@",[error localizedDescription]);
         }
     }];
      
@@ -236,14 +240,14 @@
     }
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
     
-    NSLog(@"response string %@",responseDict);
+    DLog(@"response string %@",responseDict);
     
     if(error) {  //Handle error
-        NSLog(@"error %@",[error localizedDescription]);
+        DLog(@"error %@",[error localizedDescription]);
         
     }
     else{
-        NSLog(@"response string %@",responseDict);
+        DLog(@"response string %@",responseDict);
         
         if (responseDict) {
             arrayOfMerchants = [self captureAllMerchantsFromResponseDict:responseDict];
@@ -257,7 +261,7 @@
         
         
         
-        NSLog(@"array of merchants %@",arrayOfMerchants);
+        DLog(@"array of merchants %@",arrayOfMerchants);
         dispatch_async(dispatch_get_main_queue(), ^{
             [spinner dismiss];
             self.totalCountLabel.text = [NSString stringWithFormat:@"%lu Items",(unsigned long)arrayOfMerchants.count];
@@ -279,7 +283,7 @@
         [merchant readFromDictionary:merchantDict];
         
         BOOL check = [self isMerchantPassedFromLocalFilter:merchant];
-        NSLog(@"merchant %@",merchant.name);
+        DLog(@"merchant %@",merchant.name);
         
         if (check) {
             [merchantArray addObject:merchant];
@@ -345,7 +349,7 @@
     
     NSInteger currentHrForClosingCheck = (currentHr>12)?(currentHr-12):currentHr;
     
-    NSLog(@"current hr %d current min %d closinghr %d closing min %d openinghr %d openingmin %d",currentHr,currentMin,closingHr.integerValue,closingMin.integerValue,openingHr.integerValue,openingMin.integerValue);
+    DLog(@"current hr %d current min %d closinghr %d closing min %d openinghr %d openingmin %d",currentHr,currentMin,closingHr.integerValue,closingMin.integerValue,openingHr.integerValue,openingMin.integerValue);
     
     if (currentHrForClosingCheck > closingHr.integerValue) {
         return NO;
@@ -365,13 +369,13 @@
 
 -(BOOL)isMerchantPassedFromLocalFilter:(Merchant *)merchant{
     
-    NSLog(@"keys %@",[localFilterDict allKeys]);
+    DLog(@"keys %@",[localFilterDict allKeys]);
     
     for (NSString *key in [localFilterDict allKeys]) {
         
         
         
-        NSLog(@"key %@",key);
+        DLog(@"key %@",key);
         
         
         
@@ -539,10 +543,10 @@
     
     NSURL *url = [NSURL URLWithString:urlString];
 
-    NSLog(@"po %@",urlString);
+    DLog(@"po %@",urlString);
     
     [cell.backgroundImageView setImageWithURL:url
-                      placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageProgressiveDownload];
+                      placeholderImage:[UIImage imageNamed:@"placeholder1.png"] options:SDWebImageLowPriority];
 
     cell.dealsButton.selected = (merchant.deals.count)?YES:NO;
     cell.dealsButton.tag = indexPath.row;
@@ -612,7 +616,7 @@
 -(void)favourite:(UIButton *)senderButton{
     Merchant *merchant = arrayOfMerchants[senderButton.tag];
     
-    NSLog(@"favourtied Merchant %@",merchant.name);
+    DLog(@"favourtied Merchant %@",merchant.name);
     
     NSData *myEncodedMerchant = [NSKeyedArchiver archivedDataWithRootObject:merchant];
     

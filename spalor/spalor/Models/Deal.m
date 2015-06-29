@@ -125,7 +125,7 @@
     
     for (NSString *key in allProps){
         
-        //NSLog(@"KEY %@",key);
+        //DLog(@"KEY %@",key);
         if ([key isEqualToString:@"dealId"]) {
             [self setValue:dictionary[@"id"] forKey:key];
         }

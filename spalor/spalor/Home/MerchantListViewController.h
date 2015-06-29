@@ -10,6 +10,7 @@
 
 @interface MerchantListViewController : UIViewController
 @property (nonatomic , strong) NSString *searchText;
+@property (nonatomic , strong) NSDictionary *searchCityDictionary;
 @property (nonatomic , weak) IBOutlet UITableView *tableview;
 @property (nonatomic , weak) IBOutlet UIView *loaderContainerView;
 @property (nonatomic , weak) IBOutlet UILabel *totalCountLabel;

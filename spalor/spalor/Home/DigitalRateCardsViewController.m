@@ -99,7 +99,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Table Cell Data");
+    DLog(@"Table Cell Data");
     NSArray *keys = [servicesDictionary allKeys];
     
     NSArray *serviceCategory = servicesDictionary[keys[indexPath.section]];

@@ -89,14 +89,14 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
+            DLog(@"response string %@",responseDict);
             
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:@"CategoryResponse"];
             
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"CategoryUpdateDate"];
         }
         else{
-            NSLog(@"error %@",[error localizedDescription]);
+            DLog(@"error %@",[error localizedDescription]);
         }
         
     }];
@@ -111,19 +111,35 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         if (!error) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
-            NSLog(@"response string %@",responseDict);
             NSMutableArray *data = [NSMutableArray new];
-
+            DLog(@"response string %@",responseDict);
+            
             for(NSDictionary *stateObj in responseDict[@"states"]){
                 if([[stateObj objectForKey:@"status"] isEqual:@(1)]){
-                    [data addObject:stateObj];
+                    NSArray *citiesArray = stateObj[@"cities"];
+                    if (citiesArray.count>0) {
+                        for (NSDictionary *cityObj in citiesArray) {
+                            if ([cityObj[@"status"] isEqual:@(1)]) {
+                                [data addObject:cityObj];
+                                //                                    cityName
+                                //                                    lat
+                                //                                    lng
+                                //                                    status
+                            }
+                        }
+                    }
                 }
             }
             
             if(data.count>0){
-                [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"STATELIST"];
+                NSData *encodedData = [NSKeyedArchiver archivedDataWithRootObject:data];
+                [[NSUserDefaults standardUserDefaults] setObject:encodedData forKey:STATELIST];
+               
             }
+            
         }
+        //return data;
+        
     }];
 }
 
@@ -223,10 +239,10 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
     BOOL success = [NSKeyedArchiver archiveRootObject:location
                                                toFile:[self lastLocationPersistenceFilePath]];
     if (!success) {
-        NSLog(@"Could not persist location for some reason!");
+        DLog(@"Could not persist location for some reason!");
     }
     else{
-        NSLog(@"last location saved");
+        DLog(@"last location saved");
     }
 }
 - (NSString *)lastLocationPersistenceFilePath {

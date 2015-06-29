@@ -34,7 +34,7 @@
     self.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
     
     double unixTimeStamp = [deal.validTill doubleValue];
-    NSLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);
+    DLog(@"unix time stamp %@ %f",deal.validTill,unixTimeStamp);
     
     NSTimeInterval _interval=unixTimeStamp;
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];

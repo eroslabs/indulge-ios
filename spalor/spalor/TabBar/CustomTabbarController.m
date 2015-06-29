@@ -125,7 +125,7 @@
     {
         if(animated)
         {
-            NSLog(@"HIDDEN - ANIMATED");
+            DLog(@"HIDDEN - ANIMATED");
             self.isHidden = YES;
             [UIView animateWithDuration:0.2
                              animations:^{
@@ -145,7 +145,7 @@
         }
         else
         {
-            NSLog(@"HIDDEN");
+            DLog(@"HIDDEN");
             self.isHidden = YES;
             
             contentView.frame = self.view.bounds;
@@ -164,7 +164,7 @@
                                        0);
         if(animated)
         {
-            NSLog(@"NOT HIDDEN - ANIMATED");
+            DLog(@"NOT HIDDEN - ANIMATED");
             self.isHidden = NO;
             
             [UIView animateWithDuration:0.2
@@ -182,7 +182,7 @@
         }
         else
         {
-            NSLog(@"NOT HIDDEN");
+            DLog(@"NOT HIDDEN");
             self.isHidden = NO;
             
             contentView.frame = CGRectMake(self.view.bounds.origin.x,
@@ -200,7 +200,7 @@
 
 - (void)setTabBarHidden:(BOOL)hidden animated:(BOOL)animated withCompletionBlock:(void (^)(void))completion
 {
-    NSLog(@"setTabBarHidden:%d animated:%d", hidden, animated);
+    DLog(@"setTabBarHidden:%d animated:%d", hidden, animated);
     
     if ( [self.view.subviews count] < 2)
 		return;
@@ -221,7 +221,7 @@
     {
         if(animated)
         {
-            NSLog(@"HIDDEN - ANIMATED");
+            DLog(@"HIDDEN - ANIMATED");
             self.isHidden = YES;
             [UIView animateWithDuration:0.2
                              animations:^{
@@ -245,7 +245,7 @@
         }
         else
         {
-            NSLog(@"HIDDEN");
+            DLog(@"HIDDEN");
             self.isHidden = YES;
             
             contentView.frame = self.view.bounds;
@@ -267,7 +267,7 @@
                                        0);
         if(animated)
         {
-            NSLog(@"NOT HIDDEN - ANIMATED");
+            DLog(@"NOT HIDDEN - ANIMATED");
             self.isHidden = NO;
             
             [UIView animateWithDuration:0.2
@@ -288,7 +288,7 @@
         }
         else
         {
-            NSLog(@"NOT HIDDEN");
+            DLog(@"NOT HIDDEN");
             self.isHidden = NO;
             
             contentView.frame = CGRectMake(self.view.bounds.origin.x,
@@ -309,7 +309,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     [self playSound];
-    NSLog(@"tab changed");
+    DLog(@"tab changed");
     //[self setTabBarHidden:NO animated:NO];
 }
 
