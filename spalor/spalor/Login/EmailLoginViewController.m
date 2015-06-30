@@ -13,7 +13,6 @@
 #import "CustomTabbarController.h"
 #import "User.h"
 
-
 @implementation EmailLoginViewController
 #pragma mark -
 
@@ -22,6 +21,11 @@
 
     if (userName.length>0 && pass.length>0) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        User *user = [[User alloc] init];
+        user.mail = userName;
+        NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:user];
+        [user saveArchivedUserData:userData];
+        
         [[NetworkHelper sharedInstance] getArrayFromGetUrl:@"user/login" withParameters:@{@"userEmail":userName,@"passPhrase":pass} completionHandler:^(id response, NSString *url, NSError *error){
             
             if (error == nil && response!=nil) {
@@ -114,18 +118,19 @@
     FormInputCell *cell = [tableView dequeueReusableCellWithIdentifier:@"formCell"];
     //cell.textLabel.text = @"Sample";
     if(indexPath.row == 0){
-        cell.cellInputTextField.placeholder = @"USERNAME";
+        cell.cellInputTextField.placeholder = @"EMAILID";
         cell.cellIconImageView.image = [UIImage imageNamed:@"registration-profile.png"];
         cell.cellInputTextField.returnKeyType = UIReturnKeyNext;
         cell.cellInputTextField.tag = -1;
         cell.cellInputTextField.delegate = self;
-
+        cell.cellInputTextField.secureTextEntry = NO;
     }
     else{
         cell.cellInputTextField.placeholder = @"PASSWORD";
         cell.cellIconImageView.image = [UIImage imageNamed:@"registration-mobile.png"];
         cell.cellInputTextField.returnKeyType = UIReturnKeyGo;
         cell.cellInputTextField.tag = -2;
+        cell.cellInputTextField.secureTextEntry = YES;
         cell.cellInputTextField.delegate = self;
 
     }

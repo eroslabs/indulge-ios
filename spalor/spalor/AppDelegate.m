@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.m
 //  spalor
@@ -263,6 +264,7 @@ static NSString * const kClientId = @"93816802333-n1e12l22i9o96ggukhjdh05ldes373
         DLog(@"last location saved");
     }
 }
+
 - (NSString *)lastLocationPersistenceFilePath {
     NSString *filePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"my_app_last_location"];
     return filePath;

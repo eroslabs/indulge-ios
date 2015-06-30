@@ -19,6 +19,7 @@
     NSInteger selected;
     NSMutableDictionary *userDict;
     User *user;
+    CGFloat originY;
 }
 @end
 
@@ -35,8 +36,9 @@
     self.profileImageView.clipsToBounds = YES;
     userDict = [NSMutableDictionary new];
     selected = -1;
-    dataSourceArray = @[@"Full Name",@"Email",@"Mobile Number",@"Password",@"Confirm Password",@"Age",@"Gender"];
+    dataSourceArray = @[@"Full Name",@"Email",@"Mobile Number",@"Password",@"Confirm Password",@"DOB (dd/mm/yyyy)",@"Gender"];
     imagesArray = @[@"registration-profile",@"registration-email",@"registration-mobile",@"registration-password",@"registration-password",@"registration-age",@"registration-gender"];
+    originY = self.tableView.frame.origin.y;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,11 +77,29 @@
         return;
     }
     
+    user = [[User alloc] init];
+    user.name = userDict[@"name"];
+    user.mail = userDict[@"mail"];
+    user.dob = userDict[@"dob"];
+    user.rating = userDict[@"rating"];
+    user.mobile = userDict[@"mobile"];
+    
+    NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:user];
+    [user saveArchivedUserData:userData];
+
     [[NetworkHelper sharedInstance] getArrayFromPostURL:@"user/save" parmeters:@{@"user":userDict} completionHandler:^(id response, NSString *url, NSError *error){
         if (error == nil && response!=nil) {
             NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingAllowFragments error:&error];
             
             DLog(@"response string %@",responseDict);
+            NSString *errorMessage = responseDict[@"error"];
+            if (errorMessage.length>0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                    [alert show];
+                    return;
+                });
+            }
             user = [[User alloc] init];
             user.userId = responseDict[@"user_id"];
             user.name = userDict[@"name"];
@@ -98,6 +118,12 @@
                 [self.navigationController pushViewController:obj animated:YES];
             });
 
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            });
         }
     }];
 }
@@ -220,6 +246,23 @@ static const char base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi
         cell.cellInputTextField.placeholder = dataSourceArray[indexPath.row];
         cell.cellInputTextField.tag = indexPath.row;
         cell.cellInputTextField.delegate = self;
+        if ([cell.cellInputTextField.placeholder isEqualToString:@"Password"] || [cell.cellInputTextField.placeholder isEqualToString:@"Confirm Password"]) {
+            cell.cellInputTextField.secureTextEntry = YES;
+        }
+        else{
+            cell.cellInputTextField.secureTextEntry = NO;
+            
+        }
+
+        cell.cellInputTextField.keyboardType = UIKeyboardTypeAlphabet;
+
+        if ([cell.cellInputTextField.placeholder isEqualToString:@"Mobile Number"]) {
+            cell.cellInputTextField.keyboardType = UIKeyboardTypeNumberPad;
+        }
+        else if([cell.cellInputTextField.placeholder isEqualToString:@"Email"]){
+            cell.cellInputTextField.keyboardType = UIKeyboardTypeEmailAddress;
+        }
+       
         if (indexPath.row == selected) {
             cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",imagesArray[indexPath.row]]];
             cell.cellInputTextField.textColor = [UIColor colorWithRed:0.4431f green:0.3725f blue:0.3450f alpha:1.0f];
@@ -271,20 +314,33 @@ static const char base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi
     FormInputCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0]];
     cell.cellIconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@-active.png",imagesArray[selected]]];
     cell.cellInputTextField.textColor = [UIColor colorWithRed:0.4431f green:0.3725f blue:0.3450f alpha:1.0f];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:selected inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//    CGRect rectToScroll = CGRectMake(cell.frame.origin.x, cell.frame.origin.y+150, 1, 1);
+//    [self.tableView scrollRectToVisible:cell.bounds animated:YES];
     //[self.tableView reloadData];
+
+//    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+//        // Load resources for iOS 6.1 or earlier
+//        cell = (FormInputCell *) textField.superview.superview;
+//        
+//    } else {
+//        // Load resources for iOS 7 or later
+//        cell = (FormInputCell *) textField.superview.superview.superview;
+//        // TextField -> UITableVieCellContentView -> (in iOS 7!)ScrollView -> Cell!
+//    }
+    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     selected = textField.tag;
     NSString *finalText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    dataSourceArray = @[@"Full Name",@"Email",@"Mobile Number",@"Password",@"Confirm Password",@"Age",@"Gender"];
 
     switch (selected) {
         case 0:{
             if ([finalText isEqualToString:@""]) {
                 [userDict removeObjectForKey:@"name"];
             }
+            textField.text = [textField.text capitalizedString];
             [userDict addEntriesFromDictionary:@{@"name":finalText}];
             break;
         }
@@ -327,6 +383,13 @@ static const char base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi
             if ([finalText isEqualToString:@""]) {
                 [userDict removeObjectForKey:@"gender"];
             }
+            if ([finalText caseInsensitiveCompare:@"male"]) {
+                finalText = @"0";
+            }
+            else{
+                finalText = @"1";
+            }
+            
             [userDict addEntriesFromDictionary:@{@"gender":finalText}];
             break;
         }
@@ -336,12 +399,98 @@ static const char base64EncodingTable[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghi
     return YES;
 }
 
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-//    
-//    selected = -1;
-//    [self.tableView reloadData];
-//    [textField resignFirstResponder];
-//    return YES;
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    selected = -1;
+    [self.tableView reloadData];
+    [textField resignFirstResponder];
+    FormInputCell *cell;
+    cell = (FormInputCell *) textField.superview.superview.superview;
+    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    return YES;
+}
+
+#pragma mark - Keyboard Show or Hide
+
+//#define kOFFSET_FOR_KEYBOARD 80.0
+//
+//-(void)keyboardWillShow {
+//    // Animate the current view out of the way
+//    if (self.tableView.frame.origin.y >= originY)
+//    {
+//        [self setViewMovedUp:YES];
+//    }
+//    else if (self.tableView.frame.origin.y < 0)
+//    {
+//        [self setViewMovedUp:NO];
+//    }
 //}
+//
+//-(void)keyboardWillHide {
+//    if (self.tableView.frame.origin.y >= originY)
+//    {
+//        [self setViewMovedUp:YES];
+//    }
+//    else if (self.tableView.frame.origin.y < 0)
+//    {
+//        [self setViewMovedUp:NO];
+//    }
+//}
+//
+//
+////method to move the view up/down whenever the keyboard is shown/dismissed
+//-(void)setViewMovedUp:(BOOL)movedUp
+//{
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+//    
+//    CGRect rect = self.tableView.frame;
+//    if (movedUp)
+//    {
+//        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+//        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+//        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+//        rect.size.height += kOFFSET_FOR_KEYBOARD;
+//    }
+//    else
+//    {
+//        // revert back to the normal state.
+//        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+//        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+//    }
+//    self.tableView.frame = rect;
+//    
+//    [UIView commitAnimations];
+//}
+//
+//
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    // register for keyboard notifications
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillShow)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillHide)
+//                                                 name:UIKeyboardWillHideNotification
+//                                               object:nil];
+//}
+//
+//- (void)viewWillDisappear:(BOOL)animated
+//{
+//    [super viewWillDisappear:animated];
+//    // unregister for keyboard notifications while not visible.
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillShowNotification
+//                                                  object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillHideNotification
+//                                                  object:nil];
+//}
+
 
 @end

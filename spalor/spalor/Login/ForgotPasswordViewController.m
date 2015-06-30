@@ -64,12 +64,18 @@
     cell.cellInputTextField.placeholder = @"Enter your Email Address";
     
     cell.cellIconImageView.image = [UIImage imageNamed:@"registration-profile.png"];
-    
+    cell.cellInputTextField.delegate = self;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
 }
+
+#pragma mark - Textfield Delegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [textField resignFirstResponder];
+}
+
 
 @end
