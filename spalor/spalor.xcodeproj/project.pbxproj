@@ -1939,11 +1939,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/spalor/IndulgeHeader.pch";
 				INFOPLIST_FILE = spalor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = spalor;
-				PROVISIONING_PROFILE = "de5a4a5b-f84a-4525-95b6-7408285837d2";
+				PROVISIONING_PROFILE = "1bb0a233-6874-4988-8d84-8e396ee1ac3c";
 			};
 			name = Debug;
 		};
@@ -1960,11 +1960,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/spalor/IndulgeHeader.pch";
 				INFOPLIST_FILE = spalor/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = spalor;
-				PROVISIONING_PROFILE = "de5a4a5b-f84a-4525-95b6-7408285837d2";
+				PROVISIONING_PROFILE = "1bb0a233-6874-4988-8d84-8e396ee1ac3c";
 			};
 			name = Release;
 		};

@@ -483,6 +483,7 @@
         }
         [cell setServiceCategoryImagesWithDeal:deal];
         cell.favoriteButton.tag = indexPath.row;
+        cell.shareButton.tag = indexPath.row;
         cell.averageRating.text = deal.rating;
         cell.amountOffLabel.text = (deal.percentOff)?[NSString stringWithFormat:@"%@%% off",deal.percentOff]:[NSString stringWithFormat:@"%@Rs off",deal.flatOff];
         
@@ -523,6 +524,18 @@
 }
 
 #pragma mark - User Actions
+
+-(IBAction)shareDeal:(id)sender{
+    UIButton *senderButton = (UIButton *)sender;
+    int index = senderButton.tag;
+    Deal *deal = arrayOfDeals[index];
+    NSString *texttoshare = deal.name; //this is your text string to share
+    UIImage *imagetoshare = [UIImage imageNamed:@"merchant-massage.png"]; //this is your image to share
+    NSArray *activityItems = @[texttoshare, imagetoshare];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
+}
 
 -(IBAction)favouriteDeal:(id)sender{
     UIButton *senderButton = (UIButton *)sender;

@@ -141,13 +141,13 @@
             
             
         }
-//        if (deal.serviceNames.length>0) {
-//            cell.merchantServicesLabel.text = deal.serviceNames;
-//            
-//        }
-//        else{
-//            //Put category Image Views
-//        }
+        
+        NSMutableString *servicesString = [NSMutableString new];
+        for (MerchantService *service in deal.services) {
+            [servicesString appendFormat:@"%@ ",service.name];
+        }
+        
+        cell.merchantServicesLabel.text  = servicesString;
         
         double unixTimeStamp = [deal.validTill doubleValue];
         NSTimeInterval _interval=unixTimeStamp;

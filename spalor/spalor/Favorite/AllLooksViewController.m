@@ -60,7 +60,7 @@
 -(IBAction)callMerchant:(id)sender{
     UIButton *senderButton = (UIButton *)sender;
      MyLook *lookObj = (MyLook *)self.dataArray[senderButton.tag];
-    NSString *cleanedString = [[lookObj.merchant.phone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
+    NSString *cleanedString = [[lookObj.merchantPhone componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"0123456789-+()"] invertedSet]] componentsJoinedByString:@""];
     NSURL *telURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", cleanedString]];
     [[UIApplication sharedApplication] openURL:telURL];
 
@@ -69,7 +69,7 @@
 -(IBAction)shareMerchant:(id)sender{
     UIButton *senderButton = (UIButton *)sender;
     MyLook *lookObj = (MyLook *)self.dataArray[senderButton.tag];
-    NSString *texttoshare = lookObj.merchant.name; //this is your text string to share
+    NSString *texttoshare = lookObj.merchantName; //this is your text string to share
     UIImage *imagetoshare = [UIImage imageNamed:@"merchant-massage.png"]; //this is your image to share
     NSArray *activityItems = @[texttoshare, imagetoshare];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];

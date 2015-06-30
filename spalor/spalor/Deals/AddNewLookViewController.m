@@ -72,11 +72,16 @@
     NSMutableArray *myLookBookImagesArray = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] arrayForKey:MYLOOKBOOKSTORE]];
     MyLook *look = [[MyLook alloc] init];
     look.imageData = UIImagePNGRepresentation(chosenImage);
-    look.merchantService = @"";
-    //look.merchantService = self.deal.serviceNames;
+    NSMutableString *servicesString = [NSMutableString new];
+    for (MerchantService *service in self.deal.services) {
+        [servicesString appendFormat:@"%@ ",service.name];
+    }
+    
+    look.merchantService = servicesString;
     look.merchantName = self.deal.name;
     look.merchantAddress = self.deal.address;
     look.merchantRating = self.deal.rating;
+    look.merchantPhone = self.deal.phone;
     look.date = [NSDate date];
     
     [myLookBookImagesArray addObject: look];

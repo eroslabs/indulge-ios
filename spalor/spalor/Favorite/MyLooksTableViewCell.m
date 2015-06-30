@@ -26,10 +26,12 @@
     self.merchantRatingLabel.text = look.merchantRating;
     self.merchantServiceLabel.text = look.merchantService;
     self.image.image = [UIImage imageWithData:look.imageData];
-    NSString *dateString = [NSDateFormatter localizedStringFromDate:look.date
-                                                          dateStyle:NSDateFormatterShortStyle
-                                                          timeStyle:NSDateFormatterFullStyle];
+    
+    NSDateFormatter* df = [[NSDateFormatter alloc]init];
+    [df setDateFormat:@"MM/dd/yyyy"];
+    NSString *result = [df stringFromDate:look.date];
+    
 
-    self.dateLabel.text = dateString;
+    self.dateLabel.text = result;
 }
 @end

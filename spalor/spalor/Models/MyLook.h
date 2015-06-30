@@ -16,5 +16,5 @@
 @property (nonatomic, strong) NSString *merchantRating;
 @property (nonatomic, strong) NSString *merchantService;
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) Merchant *merchant;
+@property (nonatomic, strong) NSString *merchantPhone;
 @end
